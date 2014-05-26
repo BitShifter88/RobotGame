@@ -14,7 +14,7 @@ namespace Macalania.YunaEngine.Rooms
         public ContentManager Content { get; set; }
         public Camera Camera { get; set; }
 
-        public void Room()
+        public Room()
         {
             GameObjects = new List<GameObject>();
             Camera = new Camera();

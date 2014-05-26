@@ -1,0 +1,7 @@
+Turrent front size:
+
+10 + 20 * slots  + 10
+
+Turrent sides:
+
+15 + 20 * slots + 15

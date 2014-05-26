@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker", "Macalania.RobotGame\Macalania.RobotGame\Macalania.Probototaker.csproj", "{FAD1F102-3921-4D7B-9DFD-8B056EA34E13}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.RobotGameContent", "Macalania.RobotGame\Macalania.RobotGameContent\Macalania.RobotGameContent.contentproj", "{9A9E3F01-486D-4824-9AEA-4B670E35E11A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.YunaEngine", "Macalania.YunaEngine\Macalania.YunaEngine.csproj", "{866E3A3A-1C3C-4A8C-9478-1253E89C1226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker", "Macalania.Probototaker\Macalania.Probototaker\Macalania.Probototaker.csproj", "{373B5976-F661-49A4-A194-19736EAE041B}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Macalania.ProbototakerContent", "Macalania.Probototaker\Macalania.ProbototakerContent\Macalania.ProbototakerContent.contentproj", "{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,16 +15,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FAD1F102-3921-4D7B-9DFD-8B056EA34E13}.Debug|x86.ActiveCfg = Debug|x86
-		{FAD1F102-3921-4D7B-9DFD-8B056EA34E13}.Debug|x86.Build.0 = Debug|x86
-		{FAD1F102-3921-4D7B-9DFD-8B056EA34E13}.Release|x86.ActiveCfg = Release|x86
-		{FAD1F102-3921-4D7B-9DFD-8B056EA34E13}.Release|x86.Build.0 = Release|x86
-		{9A9E3F01-486D-4824-9AEA-4B670E35E11A}.Debug|x86.ActiveCfg = Debug|x86
-		{9A9E3F01-486D-4824-9AEA-4B670E35E11A}.Release|x86.ActiveCfg = Release|x86
 		{866E3A3A-1C3C-4A8C-9478-1253E89C1226}.Debug|x86.ActiveCfg = Debug|x86
 		{866E3A3A-1C3C-4A8C-9478-1253E89C1226}.Debug|x86.Build.0 = Debug|x86
 		{866E3A3A-1C3C-4A8C-9478-1253E89C1226}.Release|x86.ActiveCfg = Release|x86
 		{866E3A3A-1C3C-4A8C-9478-1253E89C1226}.Release|x86.Build.0 = Release|x86
+		{373B5976-F661-49A4-A194-19736EAE041B}.Debug|x86.ActiveCfg = Debug|x86
+		{373B5976-F661-49A4-A194-19736EAE041B}.Debug|x86.Build.0 = Debug|x86
+		{373B5976-F661-49A4-A194-19736EAE041B}.Release|x86.ActiveCfg = Release|x86
+		{373B5976-F661-49A4-A194-19736EAE041B}.Release|x86.Build.0 = Release|x86
+		{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}.Debug|x86.ActiveCfg = Debug|x86
+		{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

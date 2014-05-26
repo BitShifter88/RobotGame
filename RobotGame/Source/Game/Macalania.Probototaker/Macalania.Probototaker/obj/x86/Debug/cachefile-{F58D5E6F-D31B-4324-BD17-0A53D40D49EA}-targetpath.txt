@@ -1,0 +1,4 @@
+Content\Textures\Tanks\Turrets\turretStarter.xnb
+Content\Textures\Tanks\MainGuns\mainGunStarter.xnb
+Content\Textures\Tanks\Tracks\tracksStarter.xnb
+Content\Textures\Tanks\Hulls\hullStarter.xnb
