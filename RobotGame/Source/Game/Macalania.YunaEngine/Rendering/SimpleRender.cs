@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Macalania.YunaEngine.Rendering
 {
-    class SimpleRender : IRender
+    public class SimpleRender : IRender
     {
         private SpriteBatch _batch;
 

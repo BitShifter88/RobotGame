@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Tracks
 {
-    class Track
+    class Track : TankComponent
     {
     }
 }

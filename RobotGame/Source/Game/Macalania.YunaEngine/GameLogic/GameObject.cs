@@ -1,4 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Rendering;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -7,8 +9,10 @@ using System.Text;
 
 namespace Macalania.YunaEngine.GameLogic
 {
-    class GameObject
+    public class GameObject
     {
+        public Vector2 Position { get; set; }
+
         public virtual void Inizialize()
         {
         }
@@ -18,10 +22,10 @@ namespace Macalania.YunaEngine.GameLogic
         public virtual void Unload()
         {
         }
-        public virtual void Update()
+        public virtual void Update(double dt)
         {
         }
-        public virtual void Draw(Camera camera)
+        public virtual void Draw(IRender render, Camera camera)
         {
         }
     }

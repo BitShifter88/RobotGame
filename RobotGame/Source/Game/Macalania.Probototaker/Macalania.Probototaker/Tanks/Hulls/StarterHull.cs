@@ -10,9 +10,10 @@ namespace Macalania.Probototaker.Tanks.Hulls
 {
     class StarterHull : Hull
     {
-        public void Load(ContentManager content)
+        public override void Load(ContentManager content)
         {
-            CompSprite = new Sprite(content.Load<Texture2D>("Texture/Tanks/Hulls/hullStarter"));
+            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Hulls/hullStarter"));
+            base.Load(content);
         }
     }
 }

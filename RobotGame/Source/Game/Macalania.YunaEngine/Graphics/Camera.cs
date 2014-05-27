@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Macalania.YunaEngine.Graphics
 {
-    class Camera
+    public class Camera
     {
         public Vector2 Position { get; set; }
         public float Zoom { get; set; }

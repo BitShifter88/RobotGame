@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Rendering;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Macalania.YunaEngine.Rooms
 {
-    class Room
+    public class Room
     {
         public List<GameObject> GameObjects { get; set; }
         public ContentManager Content { get; set; }
@@ -36,6 +37,7 @@ namespace Macalania.YunaEngine.Rooms
         public virtual void Load(IServiceProvider serviceProvider)
         {
             Content = new ContentManager(serviceProvider);
+            Content.RootDirectory = "Content";
 
             foreach (GameObject obj in GameObjects)
             {
@@ -55,20 +57,22 @@ namespace Macalania.YunaEngine.Rooms
             GameObjects.Clear();
         }
 
-        public virtual void Update(float dt)
+        public virtual void Update(double dt)
         {
             foreach (GameObject obj in GameObjects)
             {
-                obj.Update();
+                obj.Update(dt);
             }
         }
 
-        public virtual void Draw()
+        public virtual void Draw(IRender render)
         {
+            render.Begin();
             foreach (GameObject obj in GameObjects)
             {
-                obj.Draw(Camera);
+                obj.Draw(render, Camera);
             }
+            render.End();
         }
     }
 }

@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Macalania.Probototaker.Tanks.Tracks
+namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 {
-    class StarterTrack : Track
+    class StarterMainGun : MainGun
     {
+        public StarterMainGun()
+        {
+            Size = 2;
+        }
         public override void Load(ContentManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Tracks/tracksStarter"));
+            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/mainGunStarter"));
             base.Load(content);
         }
     }

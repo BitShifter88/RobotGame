@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Macalania.YunaEngine.Rendering
 {
-    interface IRender
+    public interface IRender
     {
         void Begin();
         void Draw(Texture2D texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer);

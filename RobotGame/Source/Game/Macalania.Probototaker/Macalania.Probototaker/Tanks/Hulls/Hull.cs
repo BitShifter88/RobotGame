@@ -8,6 +8,11 @@ namespace Macalania.Probototaker.Tanks.Hulls
 {
     class Hull : TankComponent
     {
-        
+        public override void Update(double dt)
+        {
+            base.Update(dt);
+
+            Sprite.Rotation = Tank.BodyRotation;
+        }
     }
 }
