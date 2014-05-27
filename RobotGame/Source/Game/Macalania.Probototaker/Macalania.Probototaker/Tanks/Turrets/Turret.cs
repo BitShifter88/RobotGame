@@ -18,6 +18,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
         public Plugin[] Left { get; protected set; }
         public Plugin[] Right { get; protected set; }
 
+        public int ExtraPixelsTop { get; protected set; }
+        public int ExtraPixelsSide { get; set; }
+        public int ExtraPixelsButtom { get; set; }
+
         public Turret()
         {
             Plugins = new List<Plugin>();
@@ -43,11 +47,37 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return true;
         }
 
+        public bool AddPluginLeftSide(Plugin plugin, int startIndex)
+        {
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                if (Left[i] != null)
+                    return false;
+            }
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                Left[i] = plugin;
+            }
+
+            SetPluginOriginLeft(plugin, startIndex);
+
+            Plugins.Add(plugin);
+
+            return true;
+        }
+        private void SetPluginOriginLeft(Plugin plugin, int startIndex)
+        {
+            Vector2 origin = new Vector2();
+            origin.X = Sprite.Texture.Width / 2 + plugin.Sprite.Texture.Width;
+            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * 20;
+            plugin.Sprite.Origin = origin;
+        }
+
         private void SetPluginOriginTop(Plugin plugin)
         {
             Vector2 origin = new Vector2();
+            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2;
             origin.Y = plugin.Sprite.Texture.Height + Sprite.Texture.Height / 2;
-            origin.X = (Sprite.Texture.Width - 20) / 2;
             plugin.Sprite.Origin = origin;
         }
 
@@ -59,7 +89,6 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
             foreach (Plugin p in Plugins)
             {
-                p.Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
                 p.Update(dt);
             }
         }
@@ -72,6 +101,23 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
             foreach (Plugin p in Top)
             {
+                if (p == null)
+                    continue;
+                if (drawn.Contains(p))
+                    continue;
+                else
+                {
+                    p.Draw(render, camera);
+                    drawn.Add(p);
+                }
+            }
+
+            drawn.Clear();
+
+            foreach (Plugin p in Left)
+            {
+                                if (p == null)
+                    continue;
                 if (drawn.Contains(p))
                     continue;
                 else

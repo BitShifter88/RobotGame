@@ -17,6 +17,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
             Buttom = new Plugin[2];
             Left = new Plugin[3];
             Right = new Plugin[3];
+
+            ExtraPixelsButtom = 20;
+            ExtraPixelsSide = 10;
+            ExtraPixelsTop = 20;
         }
 
         public override void Load(ContentManager content)

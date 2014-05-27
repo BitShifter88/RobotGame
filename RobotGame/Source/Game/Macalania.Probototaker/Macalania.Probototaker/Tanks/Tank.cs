@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Macalania.Probototaker.Tanks
 {
@@ -26,6 +27,7 @@ namespace Macalania.Probototaker.Tanks
         public float BodyRotation { get; set; }
         public float TurretRotation { get; set; }
 
+
         public Tank()
         {
             Position = new Vector2(200, 200);
@@ -38,7 +40,7 @@ namespace Macalania.Probototaker.Tanks
 
         private Vector2 GetTurretDirection()
         {
-            return new Vector2((float)Math.Cos((double)TurretRotation), (float)Math.Sin((double)TurretRotation));
+            return new Vector2((float)Math.Cos((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)));
         }
 
         public void SetHull(Hull hull)
@@ -66,19 +68,36 @@ namespace Macalania.Probototaker.Tanks
             Position -= GetBodyDirection();
         }
 
+        int counter = 0;
         public void MoveTurretTowardsPoint(Vector2 point)
         {
+            Vector2 turretRotation = GetTurretDirection();
             Vector2 pointDir = Position - point;
             pointDir.Normalize();
-            TurretRotation += 0.01f;
+
+            float angle = (float)MathHelper.ToDegrees((float)Math.Acos((float)Vector2.Dot(pointDir, turretRotation)));
+
+            Vector2 turretRotationAfterExtra = new Vector2((float)Math.Cos((double)TurretRotation + 0.01f + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + 0.01f + BodyRotation + MathHelper.ToRadians(90)));
+            float angleAfterExtra = (float)MathHelper.ToDegrees((float)Math.Acos((float)Vector2.Dot(pointDir, turretRotationAfterExtra)));
+
+            if (angleAfterExtra > angle)
+            {
+                if (angle > 0.3f)
+                TurretRotation -= 0.01f;
+            }
+            else
+            {
+                if (angle > 0.3f)
+                TurretRotation += 0.01f;
+            }
         }
 
         public void RotateBody(RotationDirection dir)
         {
             if (dir == RotationDirection.ClockWise)
-                BodyRotation += 0.1f;
+                BodyRotation += 0.03f;
             else
-                BodyRotation -= 0.1f;
+                BodyRotation -= 0.03f;
         }
         public void Update(double dt)
         {
