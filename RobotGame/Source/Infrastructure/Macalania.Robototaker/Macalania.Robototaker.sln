@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.MainFrame", "Macalania.Robototaker.MainFrame\Macalania.Robototaker.MainFrame.csproj", "{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.GameServer", "Macalania.Robototaker.GameServer\Macalania.Robototaker.GameServer.csproj", "{12A96794-694C-458C-8D41-A07E1FA880DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Log", "Macalania.Robototaker.Log\Macalania.Robototaker.Log.csproj", "{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frame.Network", "Frame.Network\Frame.Network.csproj", "{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Protocol", "Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj", "{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12A96794-694C-458C-8D41-A07E1FA880DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A96794-694C-458C-8D41-A07E1FA880DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A96794-694C-458C-8D41-A07E1FA880DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A96794-694C-458C-8D41-A07E1FA880DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

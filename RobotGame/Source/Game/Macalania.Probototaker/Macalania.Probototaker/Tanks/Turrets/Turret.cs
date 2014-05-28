@@ -47,6 +47,25 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return true;
         }
 
+        public bool AddPluginRightSide(Plugin plugin, int startIndex)
+        {
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                if (Right[i] != null)
+                    return false;
+            }
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                Right[i] = plugin;
+            }
+
+            SetPluginOriginRight(plugin, startIndex);
+
+            Plugins.Add(plugin);
+
+            return true;
+        }
+
         public bool AddPluginLeftSide(Plugin plugin, int startIndex)
         {
             for (int i = startIndex; i < startIndex + plugin.Size; i++)
@@ -65,6 +84,16 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
             return true;
         }
+
+        private void SetPluginOriginRight(Plugin plugin, int startIndex)
+        {
+            Vector2 origin = new Vector2();
+            origin.X = -(Sprite.Texture.Width / 2);
+            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * 20;
+            plugin.Sprite.Origin = origin;
+        }
+
+
         private void SetPluginOriginLeft(Plugin plugin, int startIndex)
         {
             Vector2 origin = new Vector2();
@@ -116,7 +145,20 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
             foreach (Plugin p in Left)
             {
-                                if (p == null)
+                if (p == null)
+                    continue;
+                if (drawn.Contains(p))
+                    continue;
+                else
+                {
+                    p.Draw(render, camera);
+                    drawn.Add(p);
+                }
+            }
+
+            foreach (Plugin p in Right)
+            {
+                if (p == null)
                     continue;
                 if (drawn.Contains(p))
                     continue;

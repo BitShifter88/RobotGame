@@ -1,6 +1,8 @@
 ﻿using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Hulls;
+using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Plugins.MainGuns;
+using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.GameLogic;
@@ -56,6 +58,26 @@ namespace Macalania.Probototaker
             smg.SetTank(_tank);
             t.AddPluginTop(smg, 0);
 
+            AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
+            ap1.Load(content);
+            ap1.SetTank(_tank);
+            t.AddPluginLeftSide(ap1, 0);
+
+            AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
+            ap2.Load(content);
+            ap2.SetTank(_tank);
+            t.AddPluginLeftSide(ap2, 1);
+
+            AmorPlugin ap3 = new AmorPlugin(PluginDirection.Left);
+            ap3.Load(content);
+            ap3.SetTank(_tank);
+            t.AddPluginLeftSide(ap3, 2);
+
+            RocketStarterPlugin r = new RocketStarterPlugin(PluginDirection.Right);
+            r.Load(content);
+            r.SetTank(_tank);
+            t.AddPluginRightSide(r, 0);
+           
             _tank.SetTurret(t);
         }
         private void HandleInput()

@@ -83,7 +83,8 @@
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\StarterMainGun.cs" />
-    <Compile Include="Tanks\Plugins\Mic\AmorPluginLeft.cs" />
+    <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
     <Compile Include="Tanks\Plugins\Plugin.cs" />
     <Compile Include="Tanks\Tank.cs" />
     <Compile Include="Tanks\TankComponent.cs" />

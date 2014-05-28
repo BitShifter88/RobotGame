@@ -43,7 +43,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="Textures\Tanks\Tracks\tracksStarter.png">
       <Name>tracksStarter</Name>
@@ -54,6 +53,20 @@
   <ItemGroup>
     <Compile Include="Textures\Tanks\Hulls\hullStarter.png">
       <Name>hullStarter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Tanks\Misc\amorStarterLeft.png">
+      <Name>amorStarterLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Tanks\Misc\rocketStarterRight.png">
+      <Name>rocketStarterRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

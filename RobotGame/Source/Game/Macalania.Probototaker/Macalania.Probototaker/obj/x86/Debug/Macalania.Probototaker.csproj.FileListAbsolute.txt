@@ -10,3 +10,5 @@ C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Proboto
 C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Macalania.YunaEngine.pdb
 C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\Macalania.Probototaker.exe
 C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\Macalania.Probototaker.pdb
+C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterLeft.xnb
+C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterRight.xnb

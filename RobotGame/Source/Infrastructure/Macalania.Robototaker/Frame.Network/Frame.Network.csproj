@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Frame.Network</RootNamespace>
+    <AssemblyName>Frame.Network</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\Client.cs" />
+    <Compile Include="Client\ClientUdp.cs" />
+    <Compile Include="Common\BinaryHelper.cs" />
+    <Compile Include="Common\BytePacker.cs" />
+    <Compile Include="Common\ConnectionTcp.cs" />
+    <Compile Include="Common\ConnectionClosedEventArgs.cs" />
+    <Compile Include="Client\ServerConnectionUdp.cs" />
+    <Compile Include="Common\Message.cs" />
+    <Compile Include="Common\MessageReader.cs" />
+    <Compile Include="Common\NewConnectionEventArgs.cs" />
+    <Compile Include="Common\NewMessageReceivedEventArgs.cs" />
+    <Compile Include="Client\NewUdpServerConnectionEventArgs.cs" />
+    <Compile Include="Client\NewUdpServerMessageReceivedEventArgs.cs" />
+    <Compile Include="Client\UdpServerConnectionClosedEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Cryptography.cs" />
+    <Compile Include="Security\UPnP.cs" />
+    <Compile Include="Security\WakeOnLan.cs" />
+    <Compile Include="ServerLog.cs" />
+    <Compile Include="Server\ClientConnectionUdp.cs" />
+    <Compile Include="Server\NewUdpClientMessageReceivedEventArgs.cs" />
+    <Compile Include="Server\NewUdpClientConnectionEventArgs.cs" />
+    <Compile Include="Server\ServerTcp.cs" />
+    <Compile Include="Server\ServerGateTcp.cs" />
+    <Compile Include="Server\ServerPort.cs" />
+    <Compile Include="Server\ServerUdp.cs" />
+    <Compile Include="Server\UdpClientConnectionClosedEventArgs.cs" />
+    <Compile Include="SmartConnect\IPResolver.cs" />
+    <Compile Include="SmartConnect\ResolvedSmartIP.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
