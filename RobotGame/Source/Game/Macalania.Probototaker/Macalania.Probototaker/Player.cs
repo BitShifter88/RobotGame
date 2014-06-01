@@ -61,7 +61,7 @@ namespace Macalania.Probototaker
             //mg1.SetTank(t1);
             //t.AddPluginTop(mg1, 0);
 
-            SprayMainGun smgg = new SprayMainGun();
+            SprayMainGun smgg = new SprayMainGun(t);
             smgg.Load(content);
             smgg.SetTank(t1);
             t.AddPluginTop(smgg,0);
@@ -81,10 +81,15 @@ namespace Macalania.Probototaker
             ap2.SetTank(t1);
             t.AddPluginLeftSide(ap2, 1);
 
-            AmorPlugin ap3 = new AmorPlugin(PluginDirection.Left);
-            ap3.Load(content);
-            ap3.SetTank(t1);
-            t.AddPluginLeftSide(ap3, 2);
+            //AmorPlugin ap3 = new AmorPlugin(PluginDirection.Left);
+            //ap3.Load(content);
+            //ap3.SetTank(t1);
+            //t.AddPluginLeftSide(ap3, 2);
+
+            ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
+            sp.Load(content);
+            sp.SetTank(t1);
+            t.AddPluginLeftSide(sp, 2);
 
             ArtileryStarter art = new ArtileryStarter();
             art.Load(content);

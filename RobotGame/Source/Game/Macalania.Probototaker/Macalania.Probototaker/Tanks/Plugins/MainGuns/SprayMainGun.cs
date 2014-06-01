@@ -1,4 +1,6 @@
-﻿using Macalania.Probototaker.Projectiles;
+﻿using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Projectiles;
+using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Microsoft.Xna.Framework;
@@ -14,10 +16,13 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
     class SprayMainGun: MainGun
     {
         float TimeSinceLastBustShoot = 0;
-        float BurstTimeInterval = 30;
+        float BurstTimeInterval = 20;
+        int burstShots = 0;
+        Turret _turret;
 
-        public SprayMainGun()
+        public SprayMainGun(Turret turret)
         {
+            _turret = turret;
             Size = 3;
             ProjectileStartPosition = new Vector2(0, 0);
             RateOfFire = 500;
@@ -32,6 +37,25 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         public override void Update(double dt)
         {
             base.Update(dt);
+
+            if (burstShots > 0 && TimeSinceLastBustShoot >= BurstTimeInterval)
+            {
+                float height = (_turret.Sprite.Texture.Height / 2) + Sprite.Texture.Height + ProjectileStartPosition.Y;
+                float width = (_turret.ExtraPixelsTop / 2) + PluginPosition * Globals.PluginPixelWidth + Globals.PluginPixelWidth * Size / 2;
+                width = width - _turret.Sprite.Texture.Width / 2;
+                width = -width;
+
+                Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
+
+                ShellStarter ss = new ShellStarter(Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
+                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+                ShotFired();
+
+                burstShots--;
+                TimeSinceLastBustShoot = 0;
+            }
+
+            TimeSinceLastBustShoot += (float)dt;
         }
 
         public override void Fire(Vector2 position, Vector2 direction)
@@ -40,11 +64,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (TimeSinceLastFire > RateOfFire)
             {
-                ShellStarter ss = new ShellStarter(Tank, position, direction, 0.5f);
-
-                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
-                
-                ShotFired();
+                burstShots = 5;
             }
         }
     }

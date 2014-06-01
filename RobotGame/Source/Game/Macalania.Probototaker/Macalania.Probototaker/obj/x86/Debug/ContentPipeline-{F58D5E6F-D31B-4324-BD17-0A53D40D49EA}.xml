@@ -109,6 +109,15 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\SprayMainGun.xnb</Output>
       <Time>2014-06-01T20:02:58.1704953+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\shieldLeft.png</Source>
+      <Name>Textures\Tanks\Misc\shieldLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldLeft.xnb</Output>
+      <Time>2014-06-01T22:12:25.1897815+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>

@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Globals.cs" />
     <Compile Include="Network\GameNetwork.cs" />
+    <Compile Include="Network\GameRandom.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Projectiles\ShellStarter.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ArtileryStarter.cs" />
     <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs" />
     <Compile Include="Tanks\Plugins\Plugin.cs" />
     <Compile Include="Tanks\Tank.cs" />
     <Compile Include="Tanks\TankComponent.cs" />
