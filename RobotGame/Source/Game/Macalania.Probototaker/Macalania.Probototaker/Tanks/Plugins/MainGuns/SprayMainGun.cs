@@ -11,19 +11,27 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 {
-    class MiniMainGun : MainGun
+    class SprayMainGun: MainGun
     {
-        public MiniMainGun()
+        float TimeSinceLastBustShoot = 0;
+        float BurstTimeInterval = 30;
+
+        public SprayMainGun()
         {
-            Size = 1;
+            Size = 3;
             ProjectileStartPosition = new Vector2(0, 0);
-            RateOfFire = 150;
-            CoolDownRate = 0.03f;
+            RateOfFire = 500;
+            CoolDownRate = 1f;
         }
         public override void Load(ContentManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/MiniMainGun"));
+            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/SprayMainGun"));
             base.Load(content);
+        }
+
+        public override void Update(double dt)
+        {
+            base.Update(dt);
         }
 
         public override void Fire(Vector2 position, Vector2 direction)

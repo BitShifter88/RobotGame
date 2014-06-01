@@ -17,6 +17,7 @@ namespace Macalania.Probototaker.Tanks.Plugins
     {
         public int Size { get; protected set; }
         public int PluginPosition { get; set; }
+        public Vector2 OriginOfset { get; set; }
 
         public void SetOriginFromTurret(Vector2 origin)
         {

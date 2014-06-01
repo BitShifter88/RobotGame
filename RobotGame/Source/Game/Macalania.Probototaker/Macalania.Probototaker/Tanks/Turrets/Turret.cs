@@ -66,6 +66,28 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return true;
         }
 
+        public bool AddPluginButtom(Plugin plugin, int startIndex)
+        {
+            // Cheks if there are open slots for the plugin
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                if (Buttom[i] != null)
+                    return false;
+            }
+            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            {
+                Buttom[i] = plugin;
+            }
+
+            SetPluginOriginButtom(plugin, startIndex);
+
+            Plugins.Add(plugin);
+
+            plugin.PluginPosition = startIndex;
+
+            return true;
+        }
+
         public bool AddPluginRightSide(Plugin plugin, int startIndex)
         {
             for (int i = startIndex; i < startIndex + plugin.Size; i++)
@@ -106,6 +128,18 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return true;
         }
 
+        private void SetPluginOriginButtom(Plugin plugin, int startIndex)
+        {
+            Vector2 origin = new Vector2();
+            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2 - startIndex * Globals.PluginPixelWidth;
+            origin.Y = Sprite.Texture.Height / 2;
+            origin.Y = -origin.Y;
+
+            origin += plugin.OriginOfset;
+
+            plugin.Sprite.Origin = origin;
+        }
+
         private void SetPluginOriginRight(Plugin plugin, int startIndex)
         {
             Vector2 origin = new Vector2();
@@ -137,7 +171,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
             foreach (MainGun mg in mgs)
             {
-                mg.Fire(this);
+                mg.FireRequest(this);
             }
         }
 
@@ -157,48 +191,12 @@ namespace Macalania.Probototaker.Tanks.Turrets
         {
             base.Draw(render, camera);
 
-            List<Plugin> drawn = new List<Plugin>();
-
-            foreach (Plugin p in Top)
+            foreach (Plugin p in Plugins)
             {
-                if (p == null)
-                    continue;
-                if (drawn.Contains(p))
-                    continue;
-                else
-                {
-                    p.Draw(render, camera);
-                    drawn.Add(p);
-                }
+                p.Draw(render, camera);
             }
 
-            drawn.Clear();
 
-            foreach (Plugin p in Left)
-            {
-                if (p == null)
-                    continue;
-                if (drawn.Contains(p))
-                    continue;
-                else
-                {
-                    p.Draw(render, camera);
-                    drawn.Add(p);
-                }
-            }
-
-            foreach (Plugin p in Right)
-            {
-                if (p == null)
-                    continue;
-                if (drawn.Contains(p))
-                    continue;
-                else
-                {
-                    p.Draw(render, camera);
-                    drawn.Add(p);
-                }
-            }
 
         }
     }

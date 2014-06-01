@@ -17,6 +17,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         {
             Size = 2;
             ProjectileStartPosition = new Vector2(0, 0);
+            RateOfFire = 500;
+            CoolDownRate = 1;
         }
         public override void Load(ContentManager content)
         {
@@ -24,13 +26,24 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             base.Load(content);
         }
 
-        public override void SpawnProjectile(Vector2 position, Vector2 direction)
+        public override void Update(double dt)
         {
-            base.SpawnProjectile(position, direction);
+            base.Update(dt);
 
-            ShellStarter ss = new ShellStarter(Tank, position, direction, 1f);
+        }
 
-            YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+        public override void Fire(Vector2 position, Vector2 direction)
+        {
+            base.Fire(position, direction);
+
+            if (TimeSinceLastFire > RateOfFire)
+            {
+                ShellStarter ss = new ShellStarter(Tank, position, direction, 1f);
+
+                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+                TimeSinceLastFire = 0;
+                ShotFired();
+            }
         }
     }
 }

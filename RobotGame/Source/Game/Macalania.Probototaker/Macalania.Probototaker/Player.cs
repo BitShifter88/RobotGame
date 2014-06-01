@@ -51,15 +51,20 @@ namespace Macalania.Probototaker
             t.Load(content);
             t.SetTank(t1);
 
-            StarterMainGun smg = new StarterMainGun();
-            smg.Load(content);
-            smg.SetTank(t1);
-            t.AddPluginTop(smg, 1);
+            //StarterMainGun smg = new StarterMainGun();
+            //smg.Load(content);
+            //smg.SetTank(t1);
+            //t.AddPluginTop(smg, 1);
 
-            MiniMainGun mg1 = new MiniMainGun();
-            mg1.Load(content);
-            mg1.SetTank(t1);
-            t.AddPluginTop(mg1, 0);
+            //MiniMainGun mg1 = new MiniMainGun();
+            //mg1.Load(content);
+            //mg1.SetTank(t1);
+            //t.AddPluginTop(mg1, 0);
+
+            SprayMainGun smgg = new SprayMainGun();
+            smgg.Load(content);
+            smgg.SetTank(t1);
+            t.AddPluginTop(smgg,0);
 
             //MiniMainGun mg2 = new MiniMainGun();
             //mg2.Load(content);
@@ -80,6 +85,11 @@ namespace Macalania.Probototaker
             ap3.Load(content);
             ap3.SetTank(t1);
             t.AddPluginLeftSide(ap3, 2);
+
+            ArtileryStarter art = new ArtileryStarter();
+            art.Load(content);
+            art.SetTank(t1);
+            t.AddPluginButtom(art, 0);
 
             RocketStarterPlugin r = new RocketStarterPlugin(PluginDirection.Right);
             r.Load(content);
@@ -105,7 +115,7 @@ namespace Macalania.Probototaker
             if (KeyboardInput.IsKeyDown(Keys.S))
                 _tank.Backwards();
 
-            if (MouseInput.IsLeftMouseClicked())
+            if (MouseInput.IsLeftMousePressed())
             {
                 _tank.FireMainGun();
             }

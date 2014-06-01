@@ -8,3 +8,5 @@ Content\Textures\Misc\loading.xnb
 Content\Textures\Projectiles\bullet.xnb
 Content\Textures\Tanks\MainGuns\MiniMainGun.xnb
 Content\Textures\Tanks\Turrets\turretBig.xnb
+Content\Textures\Tanks\Misc\artilery.xnb
+Content\Textures\Tanks\MainGuns\SprayMainGun.xnb
