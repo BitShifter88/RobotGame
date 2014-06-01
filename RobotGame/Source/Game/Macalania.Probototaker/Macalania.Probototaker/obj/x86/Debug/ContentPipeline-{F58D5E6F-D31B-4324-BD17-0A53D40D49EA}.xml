@@ -55,6 +55,42 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterRight.xnb</Output>
       <Time>2014-05-28T01:43:29.2281235+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Misc\loading.png</Source>
+      <Name>Textures\Misc\loading</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Misc\loading.xnb</Output>
+      <Time>2014-05-28T11:54:51.7429513+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Projectiles\bullet.png</Source>
+      <Name>Textures\Projectiles\bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\bullet.xnb</Output>
+      <Time>2014-05-31T17:54:53.9670872+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\MainGuns\MiniMainGun.png</Source>
+      <Name>Textures\Tanks\MainGuns\MiniMainGun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MiniMainGun.xnb</Output>
+      <Time>2014-06-01T15:18:53.8606428+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Turrets\turretBig.png</Source>
+      <Name>Textures\Tanks\Turrets\turretBig</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBig.xnb</Output>
+      <Time>2014-06-01T16:36:10.1173726+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>

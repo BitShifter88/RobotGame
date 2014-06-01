@@ -1,10 +1,12 @@
 ﻿using Frame.Network.Common;
 using Frame.Network.Server;
+using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Macalania.Robototaker.GameServer
@@ -13,6 +15,8 @@ namespace Macalania.Robototaker.GameServer
     {
         ServerUdp _server;
         Simulation _world;
+        List<PotentialPlayer> _potPlayers = new List<PotentialPlayer>();
+        Mutex _connectionMutex = new Mutex();
 
         public void StartServer()
         {
@@ -31,10 +35,38 @@ namespace Macalania.Robototaker.GameServer
 
             RobotProt header = (RobotProt)mr.ReadByte();
 
+            if (header == RobotProt.PlayerIdentification)
+            {
+                PlayerIdentification(mr, e.Connection);
+            }
+
             //if (header == RobotProt.UserInput)
             //{
             //    UserInput(mr, e.Connection);
             //}
+        }
+
+        private void PlayerIdentification(MessageReader mr, ClientConnectionUdp connection)
+        {
+            string username = mr.ReadString();
+            string sessionId = mr.ReadString();
+
+            _connectionMutex.WaitOne();
+            bool potPlayerFound = false;
+            for (int i = 0; i < _potPlayers.Count; i++)
+            {
+                if (_potPlayers[i].Connection.Id == connection.Id)
+                {
+
+                    potPlayerFound = true;
+                    break;
+                }
+            }
+            if (potPlayerFound == false)
+            {
+                ServerLog.E("Player identification did not match a valid connection", LogType.Security);
+            }
+            _connectionMutex.ReleaseMutex();
         }
 
         private void UserInput(MessageReader mr, ClientConnectionUdp connection)
@@ -90,10 +122,25 @@ namespace Macalania.Robototaker.GameServer
 
         private void OnNewConnection(object sender, NewUdpClientConnectionEventArgs e)
         {
+            _connectionMutex.WaitOne();
+            _potPlayers.Add(new PotentialPlayer() { Connection = e.Connection });
+            _connectionMutex.ReleaseMutex();
         }
 
         private void OnConnectionClosed(object sender, UdpClientConnectionClosedEventArgs e)
         {
+            _connectionMutex.WaitOne();
+
+            // If the closed connection was a potential player. The potational player should be removed from the list of potential players
+            for (int i = 0 ; i < _potPlayers.Count; i++)
+            {
+                if (_potPlayers[i].Connection.Id == e.Connection.Id)
+                {
+                    _potPlayers.Remove(_potPlayers[i]);
+                    break;
+                }
+            }
+            _connectionMutex.ReleaseMutex();
         }
     }
 }

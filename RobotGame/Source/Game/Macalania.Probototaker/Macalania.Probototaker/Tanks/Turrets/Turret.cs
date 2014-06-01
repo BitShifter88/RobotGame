@@ -1,5 +1,6 @@
 ﻿
 using Macalania.Probototaker.Tanks.Plugins;
+using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
 using Microsoft.Xna.Framework;
@@ -22,9 +23,25 @@ namespace Macalania.Probototaker.Tanks.Turrets
         public int ExtraPixelsSide { get; set; }
         public int ExtraPixelsButtom { get; set; }
 
+
         public Turret()
         {
             Plugins = new List<Plugin>();
+        }
+
+        private List<MainGun> GetMainGuns()
+        {
+            List<MainGun> mainGuns = new List<MainGun>();
+
+            foreach (Plugin p in Plugins)
+            {
+                if (p.GetType().IsSubclassOf(typeof(MainGun)))
+                {
+                    mainGuns.Add((MainGun)p);
+                }
+            }
+
+            return mainGuns;
         }
 
         public bool AddPluginTop(Plugin plugin, int startIndex)
@@ -40,9 +57,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
                 Top[i] = plugin;
             }
 
-            SetPluginOriginTop(plugin);
+            SetPluginOriginTop(plugin, startIndex);
 
             Plugins.Add(plugin);
+
+            plugin.PluginPosition = startIndex;
 
             return true;
         }
@@ -62,6 +81,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
             SetPluginOriginRight(plugin, startIndex);
 
             Plugins.Add(plugin);
+            plugin.PluginPosition = startIndex;
 
             return true;
         }
@@ -81,6 +101,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
             SetPluginOriginLeft(plugin, startIndex);
 
             Plugins.Add(plugin);
+            plugin.PluginPosition = startIndex;
 
             return true;
         }
@@ -89,7 +110,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
         {
             Vector2 origin = new Vector2();
             origin.X = -(Sprite.Texture.Width / 2);
-            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * 20;
+            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * Globals.PluginPixelWidth;
             plugin.Sprite.Origin = origin;
         }
 
@@ -98,16 +119,26 @@ namespace Macalania.Probototaker.Tanks.Turrets
         {
             Vector2 origin = new Vector2();
             origin.X = Sprite.Texture.Width / 2 + plugin.Sprite.Texture.Width;
-            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * 20;
+            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * Globals.PluginPixelWidth;
             plugin.Sprite.Origin = origin;
         }
 
-        private void SetPluginOriginTop(Plugin plugin)
+        private void SetPluginOriginTop(Plugin plugin, int startIndex)
         {
             Vector2 origin = new Vector2();
-            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2;
+            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2 - startIndex * Globals.PluginPixelWidth;
             origin.Y = plugin.Sprite.Texture.Height + Sprite.Texture.Height / 2;
             plugin.Sprite.Origin = origin;
+        }
+
+        public void FireMainGun()
+        {
+            List<MainGun> mgs = GetMainGuns();
+
+            foreach (MainGun mg in mgs)
+            {
+                mg.Fire(this);
+            }
         }
 
         public override void Update(double dt)

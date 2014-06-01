@@ -24,11 +24,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             base.Load(content);
         }
 
-        public override void Update(double dt)
-        {
-            base.Update(dt);
 
-            Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
-        }
     }
 }

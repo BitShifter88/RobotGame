@@ -1,4 +1,5 @@
-﻿using Macalania.Robototaker.GameServer;
+﻿
+using Macalania.Robototaker.GameServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

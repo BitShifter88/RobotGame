@@ -38,9 +38,14 @@ namespace Macalania.Probototaker.Tanks
             return new Vector2((float)Math.Cos((double)BodyRotation - MathHelper.ToRadians(90)), (float)Math.Sin((double)BodyRotation - MathHelper.ToRadians(90)));
         }
 
-        private Vector2 GetTurretDirection()
+        public  Vector2 GetTurretDirection()
         {
             return new Vector2((float)Math.Cos((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)));
+        }
+
+        public float GetTurrentBodyRotation()
+        {
+            return TurretRotation + BodyRotation + MathHelper.ToRadians(180);
         }
 
         public void SetHull(Hull hull)
@@ -56,6 +61,11 @@ namespace Macalania.Probototaker.Tanks
         public void SetTurret(Turret turret)
         {
             Turret = turret;
+        }
+
+        public void FireMainGun()
+        {
+            Turret.FireMainGun();
         }
 
         public void Forward()
@@ -75,20 +85,20 @@ namespace Macalania.Probototaker.Tanks
             Vector2 pointDir = Position - point;
             pointDir.Normalize();
 
-            float angle = (float)MathHelper.ToDegrees((float)Math.Acos((float)Vector2.Dot(pointDir, turretRotation)));
+            float angle = (float)Math.Acos((float)Vector2.Dot(pointDir, turretRotation));
 
             Vector2 turretRotationAfterExtra = new Vector2((float)Math.Cos((double)TurretRotation + 0.01f + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + 0.01f + BodyRotation + MathHelper.ToRadians(90)));
-            float angleAfterExtra = (float)MathHelper.ToDegrees((float)Math.Acos((float)Vector2.Dot(pointDir, turretRotationAfterExtra)));
+            float angleAfterExtra = (float)Math.Acos((float)Vector2.Dot(pointDir, turretRotationAfterExtra));
 
             if (angleAfterExtra > angle)
             {
-                if (angle > 0.3f)
-                TurretRotation -= 0.01f;
+                if (angle > 0.005f)
+                    TurretRotation -= 0.01f;
             }
             else
             {
-                if (angle > 0.3f)
-                TurretRotation += 0.01f;
+                if (angle > 0.005f)
+                    TurretRotation += 0.01f;
             }
         }
 

@@ -12,13 +12,21 @@ namespace Macalania.YunaEngine.Rooms
     public class Room
     {
         public List<GameObject> GameObjects { get; set; }
+        public List<GameObject> ToBeAdded { get; set; }
         public ContentManager Content { get; set; }
         public Camera Camera { get; set; }
+        public YunaGameEngine Engine { get; set; }
 
-        public Room()
+        public Room(YunaGameEngine engine)
         {
+            Engine = engine;
             GameObjects = new List<GameObject>();
+            ToBeAdded = new List<GameObject>();
             Camera = new Camera();
+        }
+
+        public virtual void Inizialize()
+        {
         }
 
         public virtual void AddGameObject(GameObject obj)
@@ -31,7 +39,7 @@ namespace Macalania.YunaEngine.Rooms
         {
             obj.Inizialize();
             obj.Load(Content);
-            GameObjects.Add(obj);
+            ToBeAdded.Add(obj);
         }
 
         public virtual void Load(IServiceProvider serviceProvider)
@@ -63,6 +71,11 @@ namespace Macalania.YunaEngine.Rooms
             {
                 obj.Update(dt);
             }
+            foreach(GameObject obj in ToBeAdded)
+            {
+                GameObjects.Add(obj);
+            }
+            ToBeAdded.Clear();
         }
 
         public virtual void Draw(IRender render)

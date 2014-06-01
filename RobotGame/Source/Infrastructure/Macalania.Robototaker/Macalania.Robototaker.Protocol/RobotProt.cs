@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Macalania.Robototaker.Protocol
 {
-    public enum RobotProt
+    public enum RobotProt : byte
     {
+        PlayerIdentification = 0,
     }
 }

@@ -12,6 +12,7 @@
     <AssemblyName>Frame.Network</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -58,7 +61,6 @@
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\UPnP.cs" />
     <Compile Include="Security\WakeOnLan.cs" />
-    <Compile Include="ServerLog.cs" />
     <Compile Include="Server\ClientConnectionUdp.cs" />
     <Compile Include="Server\NewUdpClientMessageReceivedEventArgs.cs" />
     <Compile Include="Server\NewUdpClientConnectionEventArgs.cs" />
@@ -69,6 +71,12 @@
     <Compile Include="Server\UdpClientConnectionClosedEventArgs.cs" />
     <Compile Include="SmartConnect\IPResolver.cs" />
     <Compile Include="SmartConnect\ResolvedSmartIP.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Macalania.Robototaker.Log\Macalania.Robototaker.Log.csproj">
+      <Project>{4b88b8af-fef4-413c-bb2c-0ab0bb53c5d8}</Project>
+      <Name>Macalania.Robototaker.Log</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

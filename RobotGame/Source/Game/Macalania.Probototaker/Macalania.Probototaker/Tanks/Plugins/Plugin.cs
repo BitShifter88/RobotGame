@@ -16,10 +16,17 @@ namespace Macalania.Probototaker.Tanks.Plugins
     class Plugin : TankComponent
     {
         public int Size { get; protected set; }
+        public int PluginPosition { get; set; }
 
         public void SetOriginFromTurret(Vector2 origin)
         {
 
+        }
+
+        public override void Update(double dt)
+        {
+            base.Update(dt);
+            Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
         }
     }
 }

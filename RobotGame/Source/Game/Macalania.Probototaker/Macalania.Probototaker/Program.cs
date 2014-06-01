@@ -1,21 +1,26 @@
+using Macalania.Probototaker.Rooms;
+using Macalania.YunaEngine;
 using System;
 
 namespace Macalania.Probototaker
 {
-#if WINDOWS || XBOX
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        static YunaGameEngine _engine;
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using ( _engine = new YunaGameEngine())
             {
-                game.Run();
+                _engine.EngineStarted += new YunaGameEngine.EngineStartedEventHandler(OnEngineStart);
+                _engine.Run();
             }
         }
+
+        static void OnEngineStart()
+        {
+            LoadGameRoom room = new LoadGameRoom(_engine);
+            _engine.SetActiveRoom(room, true);
+        }
     }
-#endif
 }
 

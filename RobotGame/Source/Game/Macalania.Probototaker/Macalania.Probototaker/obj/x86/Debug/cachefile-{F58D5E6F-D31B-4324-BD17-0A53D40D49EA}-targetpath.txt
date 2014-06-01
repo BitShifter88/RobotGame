@@ -4,3 +4,7 @@ Content\Textures\Tanks\Tracks\tracksStarter.xnb
 Content\Textures\Tanks\Hulls\hullStarter.xnb
 Content\Textures\Tanks\Misc\amorStarterLeft.xnb
 Content\Textures\Tanks\Misc\rocketStarterRight.xnb
+Content\Textures\Misc\loading.xnb
+Content\Textures\Projectiles\bullet.xnb
+Content\Textures\Tanks\MainGuns\MiniMainGun.xnb
+Content\Textures\Tanks\Turrets\turretBig.xnb

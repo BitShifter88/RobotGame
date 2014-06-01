@@ -74,6 +74,8 @@
     <Compile Include="Rendering\IRender.cs" />
     <Compile Include="Rendering\SimpleRender.cs" />
     <Compile Include="Rooms\Room.cs" />
+    <Compile Include="YunaGameEngine.cs" />
+    <Compile Include="YunaMath.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collision\" />
