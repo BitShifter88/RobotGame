@@ -1,6 +1,7 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +18,8 @@ namespace Macalania.Probototaker.Effects
         float _haveExistedIn = 0;
         float _lifeSpan = 200;
 
-        public Explosion(Vector2 position)
+        public Explosion(Room room, Vector2 position)
+            : base(room)
         {
             Position = position;
         }

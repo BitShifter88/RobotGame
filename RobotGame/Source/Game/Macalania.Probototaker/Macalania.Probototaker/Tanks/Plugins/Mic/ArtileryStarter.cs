@@ -42,7 +42,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 ReloadRockets();
                 _firstUpdate = false;
             }
-            base.Update(dt);
+            
 
             for (int i = 0; i < _rockets.Length; i++)
             {
@@ -69,6 +69,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                     _fireringRockets = false;
             }
             _currentFire -= (float)dt;
+
+            base.Update(dt);
         }
 
         private bool IsAllRocketsFired()
@@ -122,7 +124,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                ArtileryProjectile rocket2 = new ArtileryProjectile(Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
+                ArtileryProjectile rocket2 = new ArtileryProjectile(YunaGameEngine.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 10 * i, Sprite.Origin.Y);

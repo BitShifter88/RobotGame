@@ -37,7 +37,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
         public override void Update(double dt)
         {
-            base.Update(dt);
+            
 
             if (burstShots > 0 && TimeSinceLastBustShoot >= BurstTimeInterval)
             {
@@ -48,7 +48,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
                 Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
 
-                ShellStarter ss = new ShellStarter(Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
+                ShellStarter ss = new ShellStarter(YunaGameEngine.Instance.GetActiveRoom(), Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 ShotFired();
 
@@ -57,6 +57,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             }
 
             TimeSinceLastBustShoot += (float)dt;
+
+            base.Update(dt);
         }
 
         public override void Fire(Vector2 position, Vector2 direction)

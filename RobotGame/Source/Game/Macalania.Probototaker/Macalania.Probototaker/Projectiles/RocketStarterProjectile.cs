@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,8 +13,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     class RocketStarterProjectile : Rocket
     {
-        public RocketStarterProjectile(Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(tankSource, position, direction, speed)
+        public RocketStarterProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
+            : base(room, tankSource, position, direction, speed)
         {
 
         }

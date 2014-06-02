@@ -14,7 +14,7 @@ namespace Macalania.YunaEngine
             return Vector2.Transform(point,
             Matrix.CreateRotationZ(radians));
         }
-        public Texture2D CreateCircleTexture(int radius, GraphicsDevice device)
+        public static Texture2D CreateCircleTexture(int radius, GraphicsDevice device)
         {
             int outerRadius = radius * 2 + 2; // So circle doesn't go out of bounds
             Texture2D texture = new Texture2D(device, outerRadius, outerRadius);

@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -13,6 +14,12 @@ namespace Macalania.YunaEngine.GameLogic
     {
         public Vector2 Position { get; set; }
         public bool Destroy { get; set; }
+        public Room Room { get; set; }
+
+        public GameObject(Room room)
+        {
+            Room = room;
+        }
 
         public void DestroyGameObject()
         {

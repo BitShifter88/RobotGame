@@ -27,16 +27,20 @@ namespace Macalania.Probototaker.Tanks
             Tank = tank;
         }
 
+        public virtual bool CheckCollision(Sprite s)
+        {
+            return Sprite.CheckCollision(s, Sprite);
+        }
+
         public virtual void Update(double dt)
         {
             Sprite.Position = Tank.Position;
-            
+            Sprite.Update(dt);
         }
 
         public virtual void Load(ContentManager content)
         {
             Sprite.SetOriginCenter();
-            Sprite.CalculateBoundingSphere();
         }
 
 

@@ -39,7 +39,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (TimeSinceLastFire > RateOfFire)
             {
-                ShellStarter ss = new ShellStarter(Tank, position, direction, 1f);
+                ShellStarter ss = new ShellStarter(YunaGameEngine.Instance.GetActiveRoom(), Tank, position, direction, 1f);
 
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 TimeSinceLastFire = 0;

@@ -3,6 +3,7 @@ using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,8 +16,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     class ArtileryProjectile : Rocket
     {
-        public ArtileryProjectile(Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(tankSource, position, direction, speed)
+        public ArtileryProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
+            : base(room, tankSource, position, direction, speed)
         {
             Imprecition = GameRandom.GetRandomFloat(0.0005f);
             if (GameRandom.GetRandoBool())
@@ -27,10 +28,14 @@ namespace Macalania.Probototaker.Projectiles
         {
             base.Explode();
 
-            Explosion e = new Explosion(Position);
+            Explosion e = new Explosion(Room, Position);
             YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
         }
 
+        public override void OnCollisionWithTank(Tank tank, TankComponent component)
+        {
+            
+        }
 
         public override void Update(double dt)
         {

@@ -1,6 +1,7 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +18,8 @@ namespace Macalania.Probototaker.Tanks
         Tank _tank;
         public float Duration { get; set; }
 
-        public Shield(Tank tank, float duration)
+        public Shield(Room room, Tank tank, float duration)
+            : base(room)
         {
             _tank = tank;
             Duration = duration;

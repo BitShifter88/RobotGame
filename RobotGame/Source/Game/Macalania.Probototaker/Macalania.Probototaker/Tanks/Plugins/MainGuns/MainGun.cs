@@ -20,7 +20,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
         public override void Update(double dt)
         {
-            base.Update(dt);
+            
 
             Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
             TimeSinceLastFire += (float)dt;
@@ -38,6 +38,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (GunHeat <= 0)
                 Overheated = false;
+
+            base.Update(dt);
         }
 
         public virtual void FireRequest(Turret turret)

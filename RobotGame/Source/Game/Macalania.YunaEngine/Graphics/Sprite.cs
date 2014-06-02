@@ -11,12 +11,16 @@ namespace Macalania.YunaEngine.Graphics
     public class Sprite
     {
         public BoundingSphere BoundingSphere { get; set; }
+        public BoundingSphere RelativeBoundingSphere { get; set; }
+
+        public Texture2D BoundingSphereTexture { get; set; }
 
         public Sprite(Texture2D texture)
         {
             Texture = texture;
             Scale = 1;
             Color = Color.White;
+            CalculateBoundingSphere();
         }
 
         public Texture2D Texture { get; set; }
@@ -32,18 +36,52 @@ namespace Macalania.YunaEngine.Graphics
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
         }
 
+        public void Update(double dt)
+        {
+            CalculateRelativeBoundingSphere();
+        }
+
         public void Draw(IRender render, Camera camera)
         {
             render.Draw(Texture, Position, new Rectangle(0, 0, Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, DepthLayer);
+
+            if (YunaSettings.DrawBoundingSpheres)
+                render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
 
         public void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
+            BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
+        }
+
+        public void CalculateRelativeBoundingSphere()
+        {
+            Vector2 center = -Origin;
+            center += new Vector2(Texture.Width / 2, Texture.Height / 2);
+            center = YunaMath.RotateVector2(center, Rotation);
+            
+            center += Position;
+
+            RelativeBoundingSphere = new BoundingSphere(new Vector3(center.X, center.Y, 0), BoundingSphere.Radius);
+        }
+
+        public static bool CheckCollision(Sprite a, Sprite b)
+        {
+            if (Sprite.BoundingSphereCollision(a, b))
+            {
+                    return true;
+            }
+
+            return false;
         }
 
         static bool BoundingSphereCollision(Sprite a, Sprite b)
         {
+            if (a.RelativeBoundingSphere.Intersects(b.RelativeBoundingSphere))
+            {
+                return true;
+            }
             return false;
         }
 

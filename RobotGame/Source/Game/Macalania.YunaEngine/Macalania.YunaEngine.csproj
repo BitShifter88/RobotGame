@@ -76,6 +76,7 @@
     <Compile Include="Rooms\Room.cs" />
     <Compile Include="YunaGameEngine.cs" />
     <Compile Include="YunaMath.cs" />
+    <Compile Include="YunaSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collision\" />

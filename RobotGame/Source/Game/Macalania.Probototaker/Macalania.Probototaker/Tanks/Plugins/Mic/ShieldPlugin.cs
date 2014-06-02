@@ -35,7 +35,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (success)
             {
-                Shield s = new Shield(Tank, 3000);
+                Shield s = new Shield(YunaGameEngine.Instance.GetActiveRoom(), Tank, 3000);
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
             }
 

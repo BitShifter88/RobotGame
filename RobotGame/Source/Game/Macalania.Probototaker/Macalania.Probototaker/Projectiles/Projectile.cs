@@ -1,7 +1,9 @@
-﻿using Macalania.Probototaker.Tanks;
+﻿using Macalania.Probototaker.Rooms;
+using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     class Projectile : GameObject
     {
-        public Projectile(Tank source, Vector2 position, Vector2 direction, float speed)
+        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed)
+            : base(room)
         {
             Source = source;
             Position = position;
@@ -28,7 +31,30 @@ namespace Macalania.Probototaker.Projectiles
         {
             Position += Direction * Speed * (float)dt;
             Sprite.Position = Position;
+
+            Sprite.Update(dt);
             base.Update(dt);
+
+            GameRoom gameRoom = (GameRoom)Room;
+
+            List<Tank> tanks = gameRoom.GetTanks();
+
+            foreach (Tank t in tanks)
+            {
+                if (Source == t)
+                    continue;
+                TankComponent collidingComponent = t.IsColliding(Sprite);
+                if (collidingComponent != null)
+                {
+                    OnCollisionWithTank(t, collidingComponent);
+                }
+            }
+            
+        }
+
+        public virtual void OnCollisionWithTank(Tank tank, TankComponent component)
+        {
+            DestroyGameObject();
         }
 
         public override void Draw(IRender render, Camera camera)

@@ -2,8 +2,10 @@
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
+using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ namespace Macalania.Probototaker.Tanks
         ClockWise,
     }
 
-    class Tank
+    class Tank : GameObject
     {
         public Vector2 Position { get; private set; }
         public Hull Hull { get; private set; }
@@ -29,8 +31,10 @@ namespace Macalania.Probototaker.Tanks
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
         public float CurrentHp { get; set; }
+        //public BoundingSphere BoundingSphere { get; set; }
 
-        public Tank(Vector2 position)
+        public Tank(Room room, Vector2 position)
+            : base(room)
         {
             Position = position;
         }
@@ -39,7 +43,31 @@ namespace Macalania.Probototaker.Tanks
         {
             CurrentPower = GetMaxPower();
             CurrentHp = GetMaxHp();
+            //CalculateBoundingSphere();
         }
+
+        public TankComponent IsColliding(Sprite s)
+        {
+            if (Hull.CheckCollision(s))
+                return Hull;
+            if (Turret.CheckCollision(s))
+                return Turret;
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                if (p.CheckCollision(s))
+                    return p;
+            }
+
+            return null;
+        }
+
+        //private void CalculateBoundingSphere()
+        //{
+        //    BoundingSphere b = BoundingSphere.CreateMerged(Turret.Sprite.RelativeBoundingSphere, Hull.Sprite.RelativeBoundingSphere);
+
+        //    BoundingSphere = b;
+        //}
 
         private Vector2 GetBodyDirection()
         {
@@ -117,7 +145,7 @@ namespace Macalania.Probototaker.Tanks
             else
                 BodyRotation -= 0.03f;
         }
-        public void Update(double dt)
+        public override void Update(double dt)
         {
             Hull.Update(dt);
             Turret.Update(dt);
@@ -173,7 +201,7 @@ namespace Macalania.Probototaker.Tanks
             return maxHp;
         }
 
-        public void Draw(IRender render, Camera camera)
+        public override void Draw(IRender render, Camera camera)
         {
             Hull.Draw(render, camera);
             Turret.Draw(render, camera);

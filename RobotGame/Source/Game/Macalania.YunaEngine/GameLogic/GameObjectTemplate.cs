@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ namespace Macalania.YunaEngine.GameLogic
 {
     class GameObjectTemplate : GameObject
     {
+        public GameObjectTemplate(Room room)
+            : base(room)
+        {
+        }
+
         public override void Inizialize()
         {
             base.Inizialize();
