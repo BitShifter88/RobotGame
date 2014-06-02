@@ -13,6 +13,7 @@ namespace Macalania.Probototaker.Tanks.Tracks
         public override void Load(ContentManager content)
         {
             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Tracks/tracksStarter"));
+            Sprite.DepthLayer = 0.1f;
             base.Load(content);
         }
     }

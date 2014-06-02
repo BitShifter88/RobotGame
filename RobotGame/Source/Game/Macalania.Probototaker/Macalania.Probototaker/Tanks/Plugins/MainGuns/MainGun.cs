@@ -33,6 +33,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             {
                 GunHeat -= (float)dt * CoolDownRate / 2;
             }
+            if (GunHeat < 0)
+                GunHeat = 0;
 
             if (GunHeat <= 0)
                 Overheated = false;

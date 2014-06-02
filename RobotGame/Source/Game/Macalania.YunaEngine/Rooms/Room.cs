@@ -67,6 +67,19 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void Update(double dt)
         {
+            List<GameObject> objToDestroy = new List<GameObject>();
+
+            foreach (GameObject obj in GameObjects)
+            {
+                if (obj.Destroy)
+                    objToDestroy.Add(obj);
+            }
+            foreach (GameObject obj in objToDestroy)
+            {
+                obj.Unload();
+                GameObjects.Remove(obj);
+            }
+
             foreach (GameObject obj in GameObjects)
             {
                 obj.Update(dt);

@@ -8,23 +8,24 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class AmorPlugin : Plugin
+    class BatteryPlugin : Plugin
     {
         private PluginDirection _dir;
 
-        public AmorPlugin(PluginDirection dir)
+        public BatteryPlugin(PluginDirection dir)
         {
             _dir = dir;
             Size = 1;
+
+            StoredPower = 500;
         }
         public override void Load(ContentManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/amorStarterLeft"));
+                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/battery"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
-
 
     }
 }

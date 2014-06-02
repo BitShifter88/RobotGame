@@ -27,6 +27,10 @@ namespace Macalania.YunaEngine
             graphics.PreferMultiSampling = true;
             Content.RootDirectory = "Content";
             Instance = this;
+
+            graphics.PreferredBackBufferHeight = 700;
+            graphics.PreferredBackBufferWidth = 1000;
+
             this.IsMouseVisible = true;
         }
 

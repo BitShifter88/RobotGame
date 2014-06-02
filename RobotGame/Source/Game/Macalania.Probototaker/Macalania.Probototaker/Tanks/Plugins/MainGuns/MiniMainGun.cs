@@ -23,6 +23,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         public override void Load(ContentManager content)
         {
             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/MiniMainGun"));
+            Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
 

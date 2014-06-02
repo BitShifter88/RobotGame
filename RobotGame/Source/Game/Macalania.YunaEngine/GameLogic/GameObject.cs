@@ -12,6 +12,12 @@ namespace Macalania.YunaEngine.GameLogic
     public class GameObject
     {
         public Vector2 Position { get; set; }
+        public bool Destroy { get; set; }
+
+        public void DestroyGameObject()
+        {
+            Destroy = true;
+        }
 
         public virtual void Inizialize()
         {

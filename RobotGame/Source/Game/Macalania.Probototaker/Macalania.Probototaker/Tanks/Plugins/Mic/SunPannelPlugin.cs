@@ -8,23 +8,26 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class AmorPlugin : Plugin
+    class SunPannelPlugin : Plugin
     {
         private PluginDirection _dir;
 
-        public AmorPlugin(PluginDirection dir)
+        public SunPannelPlugin(PluginDirection dir)
         {
             _dir = dir;
             Size = 1;
         }
+        public override void Update(double dt)
+        {
+            Tank.AddPower((float)dt * 0.01f);
+            base.Update(dt);
+        }
         public override void Load(ContentManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/amorStarterLeft"));
+                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/sunPannel"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
-
-
     }
 }

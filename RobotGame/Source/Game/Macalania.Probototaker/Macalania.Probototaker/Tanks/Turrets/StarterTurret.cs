@@ -22,11 +22,13 @@ namespace Macalania.Probototaker.Tanks.Turrets
             ExtraPixelsButtom = 20;
             ExtraPixelsSide = 10;
             ExtraPixelsTop = 20;
+            StoredPower = 500;
         }
 
         public override void Load(ContentManager content)
         {
             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Turrets/turretStarter"));
+            Sprite.DepthLayer = 0.2f;
             base.Load(content);
         }
     }

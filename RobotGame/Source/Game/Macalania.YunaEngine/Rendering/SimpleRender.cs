@@ -18,7 +18,7 @@ namespace Macalania.YunaEngine.Rendering
 
         public void Begin()
         {
-            _batch.Begin();
+            _batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
         }
 
         public void Draw(Texture2D texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer)

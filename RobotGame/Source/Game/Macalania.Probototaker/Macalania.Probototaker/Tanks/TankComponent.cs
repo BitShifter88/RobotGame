@@ -14,6 +14,8 @@ namespace Macalania.Probototaker.Tanks
         public Sprite Sprite { get; set; }
         public Tank Tank { get; private set; }
 
+        public float StoredPower { get; set; }
+
         public Vector2 GetDim()
         {
             return new Vector2(Sprite.Texture.Width, Sprite.Texture.Height);

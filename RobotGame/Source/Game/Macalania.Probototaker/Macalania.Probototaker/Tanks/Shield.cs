@@ -15,22 +15,32 @@ namespace Macalania.Probototaker.Tanks
     {
         Sprite _sprite;
         Tank _tank;
+        public float Duration { get; set; }
 
-        public Shield(Tank tank)
+        public Shield(Tank tank, float duration)
         {
             _tank = tank;
+            Duration = duration;
         }
 
         public override void Load(ContentManager content)
         {
             _sprite = new Sprite(content.Load<Texture2D>("Textures/Effects/shieldsphere"));
-
+            _sprite.Color = new Color(255, 255, 255, 100);
+            _sprite.SetOriginCenter();
+            _sprite.Position = _tank.Position;
+            _sprite.DepthLayer = 0.9f;
             base.Load(content);
         }
 
         public override void Update(double dt)
         {
             _sprite.Position = _tank.Position;
+            Duration -= (float)dt;
+
+            if (Duration <= 0)
+                DestroyGameObject();
+
             base.Update(dt);
         }
 

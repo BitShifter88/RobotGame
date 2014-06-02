@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Tanks.Hulls;
+using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.Graphics;
@@ -26,11 +27,16 @@ namespace Macalania.Probototaker.Tanks
         public Turret Turret { get; private set; }
         public float BodyRotation { get; set; }
         public float TurretRotation { get; set; }
-
+        public float CurrentPower { get; set; }
 
         public Tank()
         {
             Position = new Vector2(200, 200);
+        }
+
+        public void ReadyTank()
+        {
+            CurrentPower = GetMaxPower();
         }
 
         private Vector2 GetBodyDirection()
@@ -114,6 +120,40 @@ namespace Macalania.Probototaker.Tanks
             Hull.Update(dt);
             Turret.Update(dt);
             Track.Update(dt);
+        }
+
+        public bool DoesTankHaveEnoughPower(float value)
+        {
+            if (CurrentPower < value)
+                return false;
+            return true;
+        }
+
+        public void UsePower(float amount)
+        {
+            CurrentPower -= amount;
+        }
+
+        public void AddPower(float amount)
+        {
+            CurrentPower += amount;
+            if (CurrentPower > GetMaxPower())
+                CurrentPower = GetMaxPower();
+        }
+
+        public float GetMaxPower()
+        {
+            float maxPower = 0;
+            maxPower += Hull.StoredPower;
+            maxPower += Turret.StoredPower;
+            maxPower += Track.StoredPower;
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                maxPower += p.StoredPower;
+            }
+
+            return maxPower;
         }
 
         public void Draw(IRender render, Camera camera)

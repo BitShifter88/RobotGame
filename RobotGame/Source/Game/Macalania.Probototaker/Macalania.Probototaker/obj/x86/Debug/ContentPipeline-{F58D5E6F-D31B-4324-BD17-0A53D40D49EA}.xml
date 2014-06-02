@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterRight.xnb</Output>
-      <Time>2014-05-28T01:43:29.2281235+02:00</Time>
+      <Time>2014-06-02T00:09:01.0476426+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Misc\loading.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\artilery.xnb</Output>
-      <Time>2014-06-01T19:16:16.3462088+02:00</Time>
+      <Time>2014-06-02T01:21:44.8977812+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Tanks\MainGuns\SprayMainGun.png</Source>
@@ -117,6 +117,51 @@
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldLeft.xnb</Output>
       <Time>2014-06-01T22:12:25.1897815+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Effects\shieldsphere.png</Source>
+      <Name>Textures\Effects\shieldsphere</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\shieldsphere.xnb</Output>
+      <Time>2014-06-01T22:59:25.2693861+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\battery.png</Source>
+      <Name>Textures\Tanks\Misc\battery</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\battery.xnb</Output>
+      <Time>2014-06-01T22:31:22.2106648+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\sunPannel.png</Source>
+      <Name>Textures\Tanks\Misc\sunPannel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\sunPannel.xnb</Output>
+      <Time>2014-06-01T23:06:33.5777744+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Projectiles\rocketStarterProjectile.png</Source>
+      <Name>Textures\Projectiles\rocketStarterProjectile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\rocketStarterProjectile.xnb</Output>
+      <Time>2014-06-02T00:07:58.3226775+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Projectiles\artileryProjectile.png</Source>
+      <Name>Textures\Projectiles\artileryProjectile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\artileryProjectile.xnb</Output>
+      <Time>2014-06-02T01:24:33.2616607+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
