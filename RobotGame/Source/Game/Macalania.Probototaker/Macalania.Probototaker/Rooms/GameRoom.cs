@@ -19,6 +19,9 @@ namespace Macalania.Probototaker.Rooms
             Player player = new Player();
             AddGameObject(player);
 
+            OtherPlayer op = new OtherPlayer();
+            AddGameObject(op);
+
             base.Inizialize();
         }
     }

@@ -31,18 +31,36 @@ namespace Macalania.Probototaker.Tanks.Plugins
         {
             base.Update(dt);
             Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
-            Cooldown -= (float)dt;
+            if (Cooldown != 0)
+                Cooldown -= (float)dt;
             if (Cooldown < 0)
+            {
                 Cooldown = 0;
+                OnReady();
+            }
         }
 
-        public virtual void Activate()
+        public virtual void OnReady()
+        {
+        }
+
+        protected bool IsActivationValid()
         {
             if (Tank.DoesTankHaveEnoughPower(PowerUsage) && Cooldown == 0)
+                return true;
+            return false;
+        }
+
+        public virtual bool Activate(Vector2 point, Tank target)
+        {
+            if (IsActivationValid())
             {
                 Tank.UsePower(PowerUsage);
                 Cooldown = MaxCooldown;
+                return true;
             }
+
+            return false;
         }
     }
 }

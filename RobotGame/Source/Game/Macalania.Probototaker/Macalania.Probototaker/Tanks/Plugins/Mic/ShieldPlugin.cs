@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -28,15 +29,17 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             base.Load(content);
         }
 
-        public override void Activate()
+        public override bool Activate(Vector2 point, Tank target)
         {
-            if (Cooldown == 0 && Tank.DoesTankHaveEnoughPower(PowerUsage))
+            bool success = base.Activate(point, target);
+
+            if (success)
             {
                 Shield s = new Shield(Tank, 3000);
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
             }
 
-            base.Activate();
+            return success;
         }
     }
 }

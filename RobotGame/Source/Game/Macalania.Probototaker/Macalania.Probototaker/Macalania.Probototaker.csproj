@@ -78,12 +78,15 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\Explosion.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
+    <Compile Include="OtherPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Projectiles\ArtileryProjectile.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
+    <Compile Include="Projectiles\Rocket.cs" />
     <Compile Include="Projectiles\RocketStarterProjectile.cs" />
     <Compile Include="Projectiles\ShellStarter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\SuperArtillery.cs" />
     <Compile Include="Tanks\Plugins\Plugin.cs" />
     <Compile Include="Tanks\Shield.cs" />
     <Compile Include="Tanks\Tank.cs" />

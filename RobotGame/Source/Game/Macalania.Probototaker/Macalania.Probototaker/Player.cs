@@ -24,6 +24,7 @@ namespace Macalania.Probototaker
         Tank _tank;
         ShieldPlugin sp;
         RocketStarterPlugin r;
+        ArtileryStarter art;
 
         public Player()
         {
@@ -37,7 +38,7 @@ namespace Macalania.Probototaker
         {
             base.Load(content);
 
-            Tank t1 = new Tank();
+            Tank t1 = new Tank(new Vector2(100, 600));
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);
@@ -115,10 +116,11 @@ namespace Macalania.Probototaker
             sp.SetTank(t1);
             t.AddPluginLeftSide(sp, 2);
 
-            ArtileryStarter art = new ArtileryStarter();
+            art = new ArtileryStarter();
             art.Load(content);
             art.SetTank(t1);
             t.AddPluginButtom(art, 0);
+
 
             r = new RocketStarterPlugin(PluginDirection.Right);
             r.SetTank(t1);
@@ -152,11 +154,13 @@ namespace Macalania.Probototaker
             }
             if (MouseInput.IsRightMouseClicked())
             {
-                r.Fire();
+                r.Activate(Vector2.Zero, null);
             }
 
             if (KeyboardInput.IsKeyClicked(Keys.NumPad1))
-                sp.Activate();
+                sp.Activate(Vector2.Zero, null);
+            if (KeyboardInput.IsKeyClicked(Keys.NumPad2))
+                art.Activate(new Vector2(MouseInput.X, MouseInput.Y), null);
 
             _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
         }

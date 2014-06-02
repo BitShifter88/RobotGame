@@ -10,19 +10,12 @@ using System.Text;
 
 namespace Macalania.Probototaker.Projectiles
 {
-    class RocketStarterProjectile : Projectile
+    class RocketStarterProjectile : Rocket
     {
-        public bool Flying { get; set; }
-
         public RocketStarterProjectile(Tank tankSource, Vector2 position, Vector2 direction, float speed)
             : base(tankSource, position, direction, speed)
         {
 
-        }
-
-        public void Ignite()
-        {
-            Flying = true;
         }
 
         public override void Update(double dt)

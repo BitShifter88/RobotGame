@@ -15,6 +15,7 @@ namespace Macalania.Probototaker.Tanks
         public Tank Tank { get; private set; }
 
         public float StoredPower { get; set; }
+        public float StoredHp { get; set; }
 
         public Vector2 GetDim()
         {
@@ -29,12 +30,16 @@ namespace Macalania.Probototaker.Tanks
         public virtual void Update(double dt)
         {
             Sprite.Position = Tank.Position;
+            
         }
 
         public virtual void Load(ContentManager content)
         {
             Sprite.SetOriginCenter();
+            Sprite.CalculateBoundingSphere();
         }
+
+
 
         public virtual void Draw(IRender render, Camera camera)
         {

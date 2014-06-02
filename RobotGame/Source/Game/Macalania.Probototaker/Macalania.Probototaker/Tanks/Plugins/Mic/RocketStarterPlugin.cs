@@ -22,6 +22,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             _dir = dir;
             Size = 3;
+            MaxCooldown = 3000;
         }
         public override void Load(ContentManager content)
         {
@@ -51,6 +52,13 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             }
         }
 
+        public override void OnReady()
+        {
+            ReloadRocket();
+
+            base.OnReady();
+        }
+
         private void ReloadRocket()
         {
             _rocket = new RocketStarterProjectile(Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
@@ -58,19 +66,24 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rocket.Sprite.Origin = Sprite.Origin;
         }
 
-        public void Fire()
+        public override bool Activate(Vector2 point, Tank target)
         {
-            _rocket.Ignite();
-            _rocket.Sprite.SetOriginCenter();
-            _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
-            Vector2 p = new Vector2(Tank.Turret.Sprite.Texture.Width / 2 + _rocket.Sprite.Texture.Width/2, 0);
-            p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
-            _rocket.Position = p + Tank.Position;
+            bool success = base.Activate(point, target);
 
-            _rocket.Direction = -Tank.GetTurretDirection();
-            _rocket = null;
+            if (success)
+            {
+                _rocket.Ignite(Tank.Position, 1300);
+                _rocket.Sprite.SetOriginCenter();
+                _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
+                Vector2 p = new Vector2(Tank.Turret.Sprite.Texture.Width / 2 + _rocket.Sprite.Texture.Width / 2, 0);
+                p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
+                _rocket.Position = p + Tank.Position;
 
-            ReloadRocket();
+                _rocket.Direction = -Tank.GetTurretDirection();
+                _rocket = null;
+            }
+
+            return success;
         }
     }
 }

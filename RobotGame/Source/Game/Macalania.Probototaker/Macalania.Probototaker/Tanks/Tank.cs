@@ -28,15 +28,17 @@ namespace Macalania.Probototaker.Tanks
         public float BodyRotation { get; set; }
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
+        public float CurrentHp { get; set; }
 
-        public Tank()
+        public Tank(Vector2 position)
         {
-            Position = new Vector2(200, 200);
+            Position = position;
         }
 
         public void ReadyTank()
         {
             CurrentPower = GetMaxPower();
+            CurrentHp = GetMaxHp();
         }
 
         private Vector2 GetBodyDirection()
@@ -154,6 +156,21 @@ namespace Macalania.Probototaker.Tanks
             }
 
             return maxPower;
+        }
+
+        public float GetMaxHp()
+        {
+            float maxHp = 0;
+            maxHp += Hull.StoredHp;
+            maxHp += Turret.StoredHp;
+            maxHp += Track.StoredHp;
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                maxHp += p.StoredHp;
+            }
+
+            return maxHp;
         }
 
         public void Draw(IRender render, Camera camera)

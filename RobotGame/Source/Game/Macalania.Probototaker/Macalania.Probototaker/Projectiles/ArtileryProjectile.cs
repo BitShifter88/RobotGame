@@ -1,4 +1,7 @@
-﻿using Macalania.Probototaker.Tanks;
+﻿using Macalania.Probototaker.Effects;
+using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Tanks;
+using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -10,20 +13,24 @@ using System.Text;
 
 namespace Macalania.Probototaker.Projectiles
 {
-    class ArtileryProjectile : Projectile
+    class ArtileryProjectile : Rocket
     {
-        public bool Flying { get; set; }
-
         public ArtileryProjectile(Tank tankSource, Vector2 position, Vector2 direction, float speed)
             : base(tankSource, position, direction, speed)
         {
-
+            Imprecition = GameRandom.GetRandomFloat(0.0005f);
+            if (GameRandom.GetRandoBool())
+                Imprecition = -Imprecition;
         }
 
-        public void Ignite()
+        public override void Explode()
         {
-            Flying = true;
+            base.Explode();
+
+            Explosion e = new Explosion(Position);
+            YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
         }
+
 
         public override void Update(double dt)
         {
@@ -31,6 +38,9 @@ namespace Macalania.Probototaker.Projectiles
             {
                 base.Update(dt);
                 Speed += (float)dt * 0.003f;
+
+                Direction = YunaMath.RotateVector2(Direction, Imprecition * (float)dt);
+                Sprite.Rotation += Imprecition * (float) dt;
             }
             else
                 Sprite.Position = Position;

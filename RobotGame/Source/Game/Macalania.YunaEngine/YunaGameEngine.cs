@@ -28,8 +28,8 @@ namespace Macalania.YunaEngine
             Content.RootDirectory = "Content";
             Instance = this;
 
-            graphics.PreferredBackBufferHeight = 700;
-            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferWidth = 1300;
 
             this.IsMouseVisible = true;
         }

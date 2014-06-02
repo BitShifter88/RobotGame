@@ -23,6 +23,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
             ExtraPixelsSide = 10;
             ExtraPixelsTop = 20;
             StoredPower = 500;
+            StoredHp = 500;
         }
 
         public override void Load(ContentManager content)

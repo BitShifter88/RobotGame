@@ -163,6 +163,24 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\artileryProjectile.xnb</Output>
       <Time>2014-06-02T01:24:33.2616607+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Effects\explosion.png</Source>
+      <Name>Textures\Effects\explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\explosion.xnb</Output>
+      <Time>2014-06-02T19:18:26.9283338+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\superArtillery.png</Source>
+      <Name>Textures\Tanks\Misc\superArtillery</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\superArtillery.xnb</Output>
+      <Time>2014-06-02T21:17:56.9673131+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>

@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class ArtileryStarter : Plugin
+    class SuperArtillery: Plugin
     {
         ArtileryProjectile[] _rockets;
         bool _firstUpdate = true;
@@ -21,7 +21,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         float _currentFire = 0;
         Vector2 _target;
 
-        public ArtileryStarter()
+        public SuperArtillery()
         {
             Size = 1;
             _rockets = new ArtileryProjectile[6];
@@ -30,7 +30,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         }
         public override void Load(ContentManager content)
         {
-             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/artilery"));
+             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/superArtillery"));
              Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }

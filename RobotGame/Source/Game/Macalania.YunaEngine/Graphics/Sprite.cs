@@ -10,6 +10,8 @@ namespace Macalania.YunaEngine.Graphics
 {
     public class Sprite
     {
+        public BoundingSphere BoundingSphere { get; set; }
+
         public Sprite(Texture2D texture)
         {
             Texture = texture;
@@ -33,6 +35,16 @@ namespace Macalania.YunaEngine.Graphics
         public void Draw(IRender render, Camera camera)
         {
             render.Draw(Texture, Position, new Rectangle(0, 0, Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, DepthLayer);
+        }
+
+        public void CalculateBoundingSphere()
+        {
+            BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
+        }
+
+        static bool BoundingSphereCollision(Sprite a, Sprite b)
+        {
+            return false;
         }
 
         static bool PerPixelCollision(Sprite a, Sprite b)
