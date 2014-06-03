@@ -23,6 +23,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _dir = dir;
             Size = 3;
             MaxCooldown = 3000;
+            ComponentMaxHp = 100;
         }
         public override void Load(ContentManager content)
         {
@@ -30,6 +31,13 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/rocketStarterRight"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
+        }
+
+        public override void OnTankDestroy()
+        {
+            if (_rocket != null)
+                _rocket.Explode();
+            base.OnTankDestroy();
         }
 
         public override void Update(double dt)

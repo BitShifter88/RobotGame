@@ -1,4 +1,6 @@
-﻿using Macalania.YunaEngine.GameLogic;
+﻿using Macalania.Probototaker.Rooms;
+using Macalania.Probototaker.Tanks;
+using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
@@ -14,37 +16,46 @@ namespace Macalania.Probototaker.Effects
 {
     class Explosion : GameObject
     {
-        Sprite _sprite;
+        
         float _haveExistedIn = 0;
         float _lifeSpan = 200;
+        float _damage;
+        float _range;
 
-        public Explosion(Room room, Vector2 position)
+        public Explosion(Room room, Vector2 position, float damage, float range)
             : base(room)
         {
             Position = position;
+            _damage = damage;
+            _range = range;
+
+            OnExplosion();
         }
 
-        public override void Load(ContentManager content)
+        private void OnExplosion()
         {
-            _sprite = new Sprite(content.Load<Texture2D>("Textures/Effects/explosion"));
-            _sprite.SetOriginCenter();
-            _sprite.DepthLayer = 0.5f;
-            base.Load(content);
+            List<Tank> tanks = ((GameRoom)Room).GetTanks();
+
+            foreach (Tank tank in tanks)
+            {
+                float dist = Vector2.Distance(tank.Position, Position);
+                if (dist < _range)
+                {
+                    float damage = (1 - (dist / _range)) * _damage;
+                    tank.DamageTank(damage, 0);
+                }
+            }
         }
 
         public override void Update(double dt)
         {
-            _sprite.Position = Position;
+            
             _haveExistedIn += (float)dt;
             if (_haveExistedIn >= _lifeSpan)
                 DestroyGameObject();
             base.Update(dt);
         }
 
-        public override void Draw(IRender render, Camera camera)
-        {
-            _sprite.Draw(render, camera);
-            base.Draw(render, camera);
-        }
+
     }
 }

@@ -28,7 +28,7 @@ namespace Macalania.Probototaker.Projectiles
         {
             base.Explode();
 
-            Explosion e = new Explosion(Room, Position);
+            SmallExplosion e = new SmallExplosion(Room, Position);
             YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
         }
 

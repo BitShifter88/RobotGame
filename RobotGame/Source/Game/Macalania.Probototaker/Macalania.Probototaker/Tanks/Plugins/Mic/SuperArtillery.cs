@@ -27,6 +27,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets = new ArtileryProjectile[6];
             OriginOfset = new Vector2(0, 30);
             MaxCooldown = 5000;
+            ComponentMaxHp = 100;
         }
         public override void Load(ContentManager content)
         {

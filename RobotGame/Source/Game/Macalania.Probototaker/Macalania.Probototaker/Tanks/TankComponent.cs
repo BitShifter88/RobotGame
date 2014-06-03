@@ -9,6 +9,12 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks
 {
+    public enum TankComponentType
+    {
+        Other,
+        Amor
+    }
+
     class TankComponent
     {
         public Sprite Sprite { get; set; }
@@ -16,6 +22,10 @@ namespace Macalania.Probototaker.Tanks
 
         public float StoredPower { get; set; }
         public float StoredHp { get; set; }
+        public float ComponentMaxHp { get; set; }
+        public float ComponentCurrentHp { get; set; }
+        public TankComponentType CompType { get; set; }
+        public bool IsDestroyed { get; set; }
 
         public Vector2 GetDim()
         {
@@ -25,6 +35,29 @@ namespace Macalania.Probototaker.Tanks
         public void SetTank(Tank tank)
         {
             Tank = tank;
+        }
+
+        public virtual void Damage(float amount)
+        {
+            ComponentCurrentHp -= amount;
+            CheckDamage();
+        }
+
+        private void CheckDamage()
+        {
+            if (ComponentCurrentHp <= 0)
+            {
+                OnComponentDestroy();
+            }
+        }
+
+        public virtual void OnTankDestroy()
+        {
+        }
+
+        protected virtual void OnComponentDestroy()
+        {
+            IsDestroyed = true;
         }
 
         public virtual bool CheckCollision(Sprite s)
@@ -43,7 +76,10 @@ namespace Macalania.Probototaker.Tanks
             Sprite.SetOriginCenter();
         }
 
-
+        public void Ready()
+        {
+            ComponentCurrentHp = ComponentMaxHp;
+        }
 
         public virtual void Draw(IRender render, Camera camera)
         {

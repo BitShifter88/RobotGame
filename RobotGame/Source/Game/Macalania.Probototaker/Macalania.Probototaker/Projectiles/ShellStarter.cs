@@ -16,7 +16,7 @@ namespace Macalania.Probototaker.Projectiles
         public ShellStarter(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
             : base(room, tankSource, position, direction, speed)
         {
-
+            Damage = new Damage() { TankDamage = 100, AmorPenetration = 10, ComponentDamage = 10 };
         }
 
         public override void Load(ContentManager content)
@@ -24,6 +24,18 @@ namespace Macalania.Probototaker.Projectiles
             Sprite = new Sprite(content.Load<Texture2D>("Textures/Projectiles/bullet"));
             Sprite.SetOriginCenter();
             base.Load(content);
+        }
+
+        public override void OnCollisionWithTank(Tank tank, TankComponent component)
+        {
+            if (component.CompType == TankComponentType.Amor && component.IsDestroyed == false)
+            {
+
+            }
+            else
+            {
+                base.OnCollisionWithTank(tank, component);
+            }
         }
     }
 }

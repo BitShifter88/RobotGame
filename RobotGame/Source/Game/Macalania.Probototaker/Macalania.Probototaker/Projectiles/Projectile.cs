@@ -26,14 +26,12 @@ namespace Macalania.Probototaker.Projectiles
         public Sprite Sprite { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
+        public Damage Damage { get; set; }
 
         public override void Update(double dt)
         {
             Position += Direction * Speed * (float)dt;
             Sprite.Position = Position;
-
-            Sprite.Update(dt);
-            base.Update(dt);
 
             GameRoom gameRoom = (GameRoom)Room;
 
@@ -49,12 +47,16 @@ namespace Macalania.Probototaker.Projectiles
                     OnCollisionWithTank(t, collidingComponent);
                 }
             }
-            
+            base.Update(dt);
+
+            Sprite.Update(dt);
         }
 
         public virtual void OnCollisionWithTank(Tank tank, TankComponent component)
         {
             DestroyGameObject();
+            component.Damage(Damage.ComponentDamage);
+            tank.DamageTank(Damage.TankDamage, Damage.AmorPenetration);
         }
 
         public override void Draw(IRender render, Camera camera)

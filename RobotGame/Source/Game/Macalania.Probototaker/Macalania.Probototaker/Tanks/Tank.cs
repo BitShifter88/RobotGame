@@ -31,6 +31,8 @@ namespace Macalania.Probototaker.Tanks
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
         public float CurrentHp { get; set; }
+        public float MaxHp { get; set; }
+        public bool Dead { get; set; }
         //public BoundingSphere BoundingSphere { get; set; }
 
         public Tank(Room room, Vector2 position)
@@ -39,10 +41,42 @@ namespace Macalania.Probototaker.Tanks
             Position = position;
         }
 
+        public void DamageTank(float amount, float amorPenetration)
+        {
+            CurrentHp -= amount;
+            CheckIfDead();
+        }
+
+        private void CheckIfDead()
+        {
+            if (Dead)
+                return;
+            if (CurrentHp <= 0)
+                OnDead();
+        }
+
+        public void OnDead()
+        {
+            Dead = true;
+            Turret.OnTankDestroy();
+            Hull.OnTankDestroy();
+
+            DestroyGameObject();
+        }
+
         public void ReadyTank()
         {
             CurrentPower = GetMaxPower();
             CurrentHp = GetMaxHp();
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                p.Ready();
+            }
+
+            MaxHp = GetMaxHp();
+            CurrentHp = MaxHp;
+
             //CalculateBoundingSphere();
         }
 

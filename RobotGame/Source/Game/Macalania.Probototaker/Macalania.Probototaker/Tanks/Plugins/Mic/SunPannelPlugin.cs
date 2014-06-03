@@ -16,6 +16,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             _dir = dir;
             Size = 1;
+            ComponentMaxHp = 100;
         }
         public override void Update(double dt)
         {

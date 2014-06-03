@@ -1,4 +1,5 @@
-﻿using Macalania.YunaEngine.GameLogic;
+﻿using Macalania.Probototaker.Tanks;
+using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Macalania.Probototaker.Tanks
+namespace Macalania.Probototaker.Effects
 {
     class Shield : GameObject
     {
@@ -44,6 +45,8 @@ namespace Macalania.Probototaker.Tanks
                 DestroyGameObject();
 
             base.Update(dt);
+
+            _sprite.Update(dt);
         }
 
         public override void Draw(IRender render, Camera camera)

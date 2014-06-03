@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Macalania.Probototaker.Effects;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
@@ -20,6 +21,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             Size = 1;
             MaxCooldown = 500;
             PowerUsage = 400;
+            ComponentMaxHp = 100;
         }
         public override void Load(ContentManager content)
         {

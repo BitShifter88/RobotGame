@@ -27,6 +27,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets = new ArtileryProjectile[6];
             OriginOfset = new Vector2(0, 30);
             MaxCooldown = 5000;
+            ComponentMaxHp = 100;
         }
         public override void Load(ContentManager content)
         {
@@ -55,8 +56,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (_fireringRockets && _currentFire <= 0)
             {
+                // Find the next rocket to fire
                 int rocketToFire = GameRandom.GetRandomInt(0, 5);
-
                 while (_rockets[rocketToFire] == null)
                 {
                     rocketToFire = GameRandom.GetRandomInt(0, 5);
@@ -71,6 +72,20 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _currentFire -= (float)dt;
 
             base.Update(dt);
+        }
+
+        public override void OnTankDestroy()
+        {
+            for (int i = 0; i < _rockets.Length; i++)
+            {
+                if (_rockets[i] != null)
+                {
+                    Rocket r = _rockets[i];
+                    FireRocket(i);
+                    r.Explode();
+                }
+            }
+                base.OnTankDestroy();
         }
 
         private bool IsAllRocketsFired()

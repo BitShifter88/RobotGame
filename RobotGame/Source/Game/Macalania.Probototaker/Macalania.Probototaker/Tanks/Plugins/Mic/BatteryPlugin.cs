@@ -18,6 +18,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             Size = 1;
 
             StoredPower = 500;
+            ComponentMaxHp = 100;
         }
         public override void Load(ContentManager content)
         {

@@ -78,7 +78,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Damage.cs" />
     <Compile Include="Effects\Explosion.cs" />
+    <Compile Include="Effects\SmallExplosion.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
@@ -109,7 +111,7 @@
     <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\SuperArtillery.cs" />
     <Compile Include="Tanks\Plugins\Plugin.cs" />
-    <Compile Include="Tanks\Shield.cs" />
+    <Compile Include="Effects\Shield.cs" />
     <Compile Include="Tanks\Tank.cs" />
     <Compile Include="Tanks\TankComponent.cs" />
     <Compile Include="Tanks\Tracks\StarterTrack.cs" />

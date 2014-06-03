@@ -165,6 +165,15 @@ namespace Macalania.Probototaker.Tanks.Turrets
             plugin.Sprite.Origin = origin;
         }
 
+        public override void OnTankDestroy()
+        {
+            foreach (Plugin p in Plugins)
+            {
+                p.OnTankDestroy();
+            }
+            base.OnTankDestroy();
+        }
+
         public void FireMainGun()
         {
             List<MainGun> mgs = GetMainGuns();
