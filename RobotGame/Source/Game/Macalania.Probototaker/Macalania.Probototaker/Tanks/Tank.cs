@@ -82,16 +82,18 @@ namespace Macalania.Probototaker.Tanks
 
         public TankComponent IsColliding(Sprite s)
         {
-            if (Hull.CheckCollision(s))
-                return Hull;
-            if (Turret.CheckCollision(s))
-                return Turret;
 
             foreach (Plugin p in Turret.Plugins)
             {
                 if (p.CheckCollision(s))
                     return p;
             }
+
+            if (Hull.CheckCollision(s))
+                return Hull;
+            if (Turret.CheckCollision(s))
+                return Turret;
+
 
             return null;
         }

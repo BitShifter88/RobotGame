@@ -107,6 +107,7 @@
     <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ArtileryStarter.cs" />
     <Compile Include="Tanks\Plugins\Mic\BatteryPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\RocketBattery.cs" />
     <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs" />

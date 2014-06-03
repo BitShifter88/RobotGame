@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class ArtileryStarter : Plugin
+    class ArtileryStarter : RocketBattery
     {
         ArtileryProjectile[] _rockets;
         bool _firstUpdate = true;

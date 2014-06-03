@@ -7,6 +7,6 @@ namespace Macalania.YunaEngine
 {
     class YunaSettings
     {
-        public static bool DrawBoundingSpheres = true;
+        public static bool DrawBoundingSpheres = false;
     }
 }
