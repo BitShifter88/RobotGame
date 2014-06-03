@@ -154,7 +154,7 @@ namespace Macalania.Probototaker
             {
                 _tank.FireMainGun();
             }
-            if (MouseInput.IsRightMouseClicked())
+            if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
             {
                 r.Activate(Vector2.Zero, null);
             }

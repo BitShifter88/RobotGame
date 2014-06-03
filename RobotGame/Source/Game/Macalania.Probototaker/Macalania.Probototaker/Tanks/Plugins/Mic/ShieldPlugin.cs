@@ -27,6 +27,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             if (_dir == PluginDirection.Left)
                 Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/shieldLeft"));
+            if (_dir == PluginDirection.Buttom)
+                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/shieldBottom"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }

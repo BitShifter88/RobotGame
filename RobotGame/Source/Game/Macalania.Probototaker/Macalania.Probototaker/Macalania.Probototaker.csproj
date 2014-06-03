@@ -97,6 +97,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Rooms\GameRoom.cs" />
     <Compile Include="Rooms\LoadGameRoom.cs" />
+    <Compile Include="TankGenerator.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs" />
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />

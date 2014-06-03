@@ -18,3 +18,6 @@ Content\Textures\Projectiles\rocketStarterProjectile.xnb
 Content\Textures\Projectiles\artileryProjectile.xnb
 Content\Textures\Effects\explosion.xnb
 Content\Textures\Tanks\Misc\superArtillery.xnb
+Content\Textures\Tanks\Misc\amorStarterRight.xnb
+Content\Textures\Tanks\Misc\amorStarterBottom.xnb
+Content\Textures\Tanks\Misc\shieldBottom.xnb

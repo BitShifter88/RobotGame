@@ -140,12 +140,12 @@ namespace Macalania.Probototaker.Tanks
 
         public void Forward()
         {
-            Position += GetBodyDirection();
+            Position += GetBodyDirection() * 3;
         }
 
         public void Backwards()
         {
-            Position -= GetBodyDirection();
+            Position -= GetBodyDirection() * 3;
         }
 
         int counter = 0;

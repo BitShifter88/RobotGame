@@ -181,6 +181,33 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\superArtillery.xnb</Output>
       <Time>2014-06-02T21:17:56.9673131+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\amorStarterRight.png</Source>
+      <Name>Textures\Tanks\Misc\amorStarterRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterRight.xnb</Output>
+      <Time>2014-06-03T18:44:27.390709+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\amorStarterBottom.png</Source>
+      <Name>Textures\Tanks\Misc\amorStarterBottom</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterBottom.xnb</Output>
+      <Time>2014-06-03T18:45:53.6461621+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\shieldBottom.png</Source>
+      <Name>Textures\Tanks\Misc\shieldBottom</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldBottom.xnb</Output>
+      <Time>2014-06-03T18:49:15.0797409+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>
