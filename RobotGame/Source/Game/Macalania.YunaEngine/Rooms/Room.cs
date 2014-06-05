@@ -1,6 +1,7 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Macalania.YunaEngine.Rooms
     {
         public List<GameObject> GameObjects { get; set; }
         public List<GameObject> ToBeAdded { get; set; }
-        public ContentManager Content { get; set; }
+        public ResourceManager Content { get; set; }
         public Camera Camera { get; set; }
         public YunaGameEngine Engine { get; set; }
 
@@ -35,6 +36,12 @@ namespace Macalania.YunaEngine.Rooms
             GameObjects.Add(obj);
         }
 
+        protected virtual void RemoveGameObject(GameObject obj)
+        {
+            obj.Unload();
+            GameObjects.Remove(obj);
+        }
+
         public virtual void AddGameObjectWhileRunning(GameObject obj)
         {
             obj.Inizialize();
@@ -44,8 +51,7 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void Load(IServiceProvider serviceProvider)
         {
-            Content = new ContentManager(serviceProvider);
-            Content.RootDirectory = "Content";
+            Content = new ResourceManager(new ContentManager(serviceProvider));
 
             foreach (GameObject obj in GameObjects)
             {
@@ -67,6 +73,31 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void Update(double dt)
         {
+            DestroyGameObjects();
+            UpdateGameObjects(dt);
+            AddGameObjects();
+            DestroyGameObjects();
+        }
+
+        private void UpdateGameObjects(double dt)
+        {
+            foreach (GameObject obj in GameObjects)
+            {
+                obj.Update(dt);
+            }
+        }
+
+        private void AddGameObjects()
+        {
+            foreach (GameObject obj in ToBeAdded)
+            {
+                GameObjects.Add(obj);
+            }
+            ToBeAdded.Clear();
+        }
+
+        private void DestroyGameObjects()
+        {
             List<GameObject> objToDestroy = new List<GameObject>();
 
             foreach (GameObject obj in GameObjects)
@@ -76,19 +107,8 @@ namespace Macalania.YunaEngine.Rooms
             }
             foreach (GameObject obj in objToDestroy)
             {
-                obj.Unload();
-                GameObjects.Remove(obj);
+                RemoveGameObject(obj);
             }
-
-            foreach (GameObject obj in GameObjects)
-            {
-                obj.Update(dt);
-            }
-            foreach(GameObject obj in ToBeAdded)
-            {
-                GameObjects.Add(obj);
-            }
-            ToBeAdded.Clear();
         }
 
         public virtual void Draw(IRender render)

@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS,SERVER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -73,6 +73,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\IRender.cs" />
     <Compile Include="Rendering\SimpleRender.cs" />
+    <Compile Include="Resources\ResourceManager.cs" />
+    <Compile Include="Resources\YunaTexture.cs" />
     <Compile Include="Rooms\Room.cs" />
     <Compile Include="YunaGameEngine.cs" />
     <Compile Include="YunaMath.cs" />

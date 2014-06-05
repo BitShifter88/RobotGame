@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -8,11 +9,11 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Tracks
 {
-    class StarterTrack : Track
+    public class StarterTrack : Track
     {
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Tracks/tracksStarter"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Tracks/tracksStarter"));
             Sprite.DepthLayer = 0.1f;
             base.Load(content);
         }

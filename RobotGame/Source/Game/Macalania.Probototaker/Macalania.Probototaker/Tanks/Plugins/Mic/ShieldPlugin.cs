@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Macalania.Probototaker.Effects;
+using Macalania.YunaEngine.Resources;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class ShieldPlugin : Plugin
+    public class ShieldPlugin : Plugin
     {
         private PluginDirection _dir;
 
@@ -23,12 +24,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             PowerUsage = 400;
             ComponentMaxHp = 100;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/shieldLeft"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/shieldLeft"));
             if (_dir == PluginDirection.Buttom)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/shieldBottom"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/shieldBottom"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
@@ -39,7 +40,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (success)
             {
-                Shield s = new Shield(YunaGameEngine.Instance.GetActiveRoom(), Tank, 3000);
+                Shield s = new Shield(YunaGameEngine.Instance.GetActiveRoom(), Tank, 6000, 200);
                 YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
             }
 

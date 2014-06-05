@@ -103,20 +103,42 @@ namespace Frame.Network.Client
 
         private void HandleDatagram(byte[] recieveBuffer)
         {
-            byte[] header = new byte[1];
+            if (recieveBuffer.Length < 5)
+            {
+                Console.WriteLine("Recieved a package that was less then 5 bytes.");
+                return;
+            }
+
+            byte[] header = new byte[5];
             byte[] messageBytes = new byte[recieveBuffer.Length - 1];
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 header[i] = recieveBuffer[i];
             }
 
-            for (int i = 1; i < recieveBuffer.Length; i++)
+            for (int i = 5; i < recieveBuffer.Length; i++)
             {
-                messageBytes[i - 1] = recieveBuffer[i];
+                messageBytes[i - 5] = recieveBuffer[i];
             }
 
-            AirUdpProt protHeader = (AirUdpProt)header[0];
+            int recieverId;
+            AirUdpProt protHeader;
+            using (MemoryStream memStream = new MemoryStream(header))
+            {
+                using (BinaryReader br = new BinaryReader(memStream))
+                {
+                    protHeader = (AirUdpProt)br.ReadByte();
+                    recieverId = br.ReadInt32();
+                }
+            }
+
+            if (protHeader != AirUdpProt.HandShacke && recieverId != Id)
+            {
+                Console.WriteLine("Recieved message that was not for me");
+                return;
+            }
+
             Message message = new Message(messageBytes);
 
             if (protHeader == AirUdpProt.Unsafe)
@@ -162,6 +184,7 @@ namespace Frame.Network.Client
         public void Close()
         {
             Message message = new Message();
+            message.Write(Id);
             SendMessage(message, AirUdpProt.Disconnected);
 
             Thread.Sleep(1);

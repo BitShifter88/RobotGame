@@ -48,6 +48,10 @@
     <Compile Include="Simulation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj">
+      <Project>{5c659a89-db6c-4336-bc9d-e2c375ca6ffd}</Project>
+      <Name>Macalania.Probototaker.ServerLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Frame.Network\Frame.Network.csproj">
       <Project>{a4fbb6a1-cf29-49ce-9145-d72d89aad5b3}</Project>
       <Name>Frame.Network</Name>

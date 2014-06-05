@@ -208,6 +208,24 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldBottom.xnb</Output>
       <Time>2014-06-03T18:49:15.0797409+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Tanks\Misc\starterAttackRocket.png</Source>
+      <Name>Textures\Tanks\Misc\starterAttackRocket</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\starterAttackRocket.xnb</Output>
+      <Time>2014-06-05T14:15:51.5102323+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Projectiles\attackRocketProjectile.png</Source>
+      <Name>Textures\Projectiles\attackRocketProjectile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\attackRocketProjectile.xnb</Output>
+      <Time>2014-06-05T13:03:23.0370463+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>

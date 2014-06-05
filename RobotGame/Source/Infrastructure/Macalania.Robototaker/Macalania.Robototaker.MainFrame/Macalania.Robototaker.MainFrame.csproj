@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj">
+      <Project>{5c659a89-db6c-4336-bc9d-e2c375ca6ffd}</Project>
+      <Name>Macalania.Probototaker.ServerLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Macalania.Robototaker.GameServer\Macalania.Robototaker.GameServer.csproj">
       <Project>{12a96794-694c-458c-8d41-a07e1fa880df}</Project>
       <Name>Macalania.Robototaker.GameServer</Name>

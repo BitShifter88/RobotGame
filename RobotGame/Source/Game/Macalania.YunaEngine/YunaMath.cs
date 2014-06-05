@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Macalania.YunaEngine.Resources;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Macalania.YunaEngine
             return Vector2.Transform(point,
             Matrix.CreateRotationZ(radians));
         }
-        public static Texture2D CreateCircleTexture(int radius, GraphicsDevice device)
+        public static YunaTexture CreateCircleTexture(int radius, GraphicsDevice device)
         {
             int outerRadius = radius * 2 + 2; // So circle doesn't go out of bounds
             Texture2D texture = new Texture2D(device, outerRadius, outerRadius);
@@ -38,7 +39,8 @@ namespace Macalania.YunaEngine
             }
 
             texture.SetData(data);
-            return texture;
+
+            return new YunaTexture(texture);
         }
     }
 }

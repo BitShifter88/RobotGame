@@ -14,6 +14,7 @@ namespace Macalania.Robototaker.MainFrame
         {
             GameServerManager gsm = new GameServerManager();
             gsm.StartServer();
+
         }
     }
 }

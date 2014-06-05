@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Macalania.YunaEngine.Resources;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Macalania.YunaEngine.Rendering
     public interface IRender
     {
         void Begin();
-        void Draw(Texture2D texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer);
+        void Draw(YunaTexture texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer);
         void End();
     }
 }

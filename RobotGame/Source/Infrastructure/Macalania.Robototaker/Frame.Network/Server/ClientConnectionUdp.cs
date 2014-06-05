@@ -62,6 +62,8 @@ namespace Frame.Network.Server
         public int Ping { get; set; }
         public bool Connected { get; set; }
         const int _pingTimeout = 30;
+
+        Mutex _pingMutex = new Mutex();
         
 
         public ClientConnectionUdp(IPEndPoint endPoint)
@@ -82,10 +84,20 @@ namespace Frame.Network.Server
 
         public void PingAnswer(int id)
         {
-            _pings[id].PingStopwatch.Stop();
-            Ping = (int)_pings[id].PingStopwatch.ElapsedMilliseconds / 2;
+            _pingMutex.WaitOne();
 
-            _pings.Remove(id);
+            if (_pings.ContainsKey(id) == true)
+            {
+                _pings[id].PingStopwatch.Stop();
+                Ping = (int)_pings[id].PingStopwatch.ElapsedMilliseconds / 2;
+                _pings.Remove(id);
+            }
+            else
+            {
+                ServerLog.E("Unrecognized ping respons. Connection: " + Id +" Ping Id: " + id , LogType.PossibleBug);
+            }
+
+            _pingMutex.ReleaseMutex();
         }
 
         public bool CheckForTimeout()
@@ -100,10 +112,12 @@ namespace Frame.Network.Server
                 }
             }
 
+            _pingMutex.WaitOne();
             foreach (int ping in pingsToRemove)
             {
                 _pings.Remove(ping);
             }
+            _pingMutex.ReleaseMutex();
 
             if (_pings.Count >= 20)
                 return true;
@@ -112,10 +126,13 @@ namespace Frame.Network.Server
 
         private void SendPing(PingRequest ping)
         {
+            _pingMutex.WaitOne();
             _pings.Add(ping.Id, ping);
+            _pingMutex.ReleaseMutex();
             ping.PingStopwatch.Start();
            
             Message message = new Message();
+            message.Write(Id);
             message.Write(Ping);
             message.Write(ping.Id);
 
@@ -148,6 +165,7 @@ namespace Frame.Network.Server
         public void Close()
         {
             Message message = new Message();
+            message.Write(Id);
             SendMessage(message, AirUdpProt.Disconnected);
 
             Thread.Sleep(1);

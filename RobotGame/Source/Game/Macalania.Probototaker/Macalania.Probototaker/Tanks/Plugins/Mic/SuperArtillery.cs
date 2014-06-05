@@ -2,6 +2,7 @@
 using Macalania.Probototaker.Projectiles;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +13,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class SuperArtillery: Plugin
+    public class SuperArtillery : Plugin
     {
         ArtileryProjectile[] _rockets;
         bool _firstUpdate = true;
@@ -29,9 +30,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             MaxCooldown = 5000;
             ComponentMaxHp = 100;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/superArtillery"));
+             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/superArtillery"));
              Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
@@ -49,7 +50,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             {
                 if (_rockets[i] != null)
                 {
-                    _rockets[i].Position = Tank.Position;
+                    _rockets[i].SetPosition(Tank.Position);
                     _rockets[i].Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
                 }
             }
@@ -115,7 +116,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets[index].Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
             Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 2 - 3 - 10 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
             p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
-            _rockets[index].Position = p + Tank.Position;
+            _rockets[index].SetPosition(p + Tank.Position);
 
             _rockets[index].Direction = -Tank.GetTurretDirection();
             _rockets[index] = null;

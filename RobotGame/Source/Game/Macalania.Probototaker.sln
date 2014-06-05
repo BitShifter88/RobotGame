@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Proto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frame.Network", "..\Infrastructure\Macalania.Robototaker\Frame.Network\Frame.Network.csproj", "{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerLogic", "Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj", "{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,16 @@ Global
 		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

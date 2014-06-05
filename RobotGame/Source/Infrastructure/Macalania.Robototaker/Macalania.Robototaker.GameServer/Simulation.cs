@@ -11,6 +11,16 @@ namespace Macalania.Robototaker.GameServer
     {
         public Dictionary<long, GamePlayer> Players { get; private set; }
 
+        public Simulation()
+        {
+            StartGameLoop();
+        }
+
+        protected override void Update(double dt)
+        {
+            base.Update(dt);
+        }
+
         public void AddPlayer(ClientConnectionUdp connection, string playerName)
         {
             GamePlayer gp = new GamePlayer(connection, playerName);

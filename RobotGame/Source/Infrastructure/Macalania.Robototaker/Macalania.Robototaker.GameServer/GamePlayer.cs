@@ -1,4 +1,5 @@
 ﻿using Frame.Network.Server;
+using Macalania.Probototaker.Tanks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Macalania.Robototaker.GameServer
     {
         public ClientConnectionUdp Connection { get; private set; }
         public string PlayerName { get; private set; }
+
+        Tank _tank;
 
         public GamePlayer(ClientConnectionUdp connection, string playerName)
         {

@@ -7,10 +7,13 @@ using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +21,7 @@ using System.Text;
 
 namespace Macalania.Probototaker
 {
-    class OtherPlayer : GameObject
+    public class OtherPlayer : GameObject
     {
         Tank _tank;
         int _tankNumber;
@@ -33,7 +36,7 @@ namespace Macalania.Probototaker
             base.Inizialize();
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_tankNumber == 1)
                 _tank = TankGenerator.GenerateTank1(Room, content, new Vector2(800, 200));
@@ -47,6 +50,11 @@ namespace Macalania.Probototaker
 
         public override void Update(double dt)
         {
+            if (_tankNumber == 2)
+            {
+                if (KeyboardInput.IsKeyClicked(Keys.NumPad9))
+                    _tank.ActivatePlugin(_tank.Turret.Plugins.Where(i => i.GetType() == typeof(ShieldPlugin)).FirstOrDefault(), Vector2.Zero, null);
+            }
             base.Update(dt);
         }
 

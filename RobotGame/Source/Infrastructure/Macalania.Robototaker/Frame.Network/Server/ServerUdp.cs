@@ -154,6 +154,7 @@ namespace Frame.Network.Server
                 messageBytes[i - 5] = recieveBuffer[i];
             }
 
+            // Reads the connection id and protocl header of the message
             int senderId;
             AirUdpProt protHeader;
             using (MemoryStream memStream = new MemoryStream(header))
@@ -191,8 +192,8 @@ namespace Frame.Network.Server
             }
             else if (protHeader == AirUdpProt.HandShacke)
             {
-                ServerLog.E("Client " +senderId + " connected!", LogType.ConnectionStatus);
                 ClientConnectionUdp connection = new ClientConnectionUdp(new IPEndPoint(endPoint.Address, senderId));
+                ServerLog.E("Client " + connection.Id + " connected!", LogType.ConnectionStatus);
                 _connections.Add(connection.Id, connection);
                 ReturnHandShacke(connection);
                 NewUdpConnection(this, new NewUdpClientConnectionEventArgs(connection));
@@ -218,6 +219,7 @@ namespace Frame.Network.Server
         private void ReturnHandShacke(ClientConnectionUdp connection)
         {
             Message message = new Message();
+            message.Write(connection.Id);
             message.Write(connection.Id);
 
             connection.SendMessage(message, AirUdpProt.HandShacke);

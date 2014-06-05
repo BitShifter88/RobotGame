@@ -3,6 +3,7 @@ using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -14,7 +15,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Projectiles
 {
-    class ArtileryProjectile : Rocket
+    public class ArtileryProjectile : Rocket
     {
         public ArtileryProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
             : base(room, tankSource, position, direction, speed)
@@ -51,9 +52,9 @@ namespace Macalania.Probototaker.Projectiles
                 Sprite.Position = Position;
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Projectiles/artileryProjectile"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/artileryProjectile"));
             Sprite.SetOriginCenter();
             Sprite.DepthLayer = 0.25f;
             base.Load(content);

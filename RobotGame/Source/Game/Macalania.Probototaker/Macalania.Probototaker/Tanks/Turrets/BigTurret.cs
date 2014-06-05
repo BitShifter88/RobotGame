@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Turrets
 {
-    class BigTurret : Turret
+    public class BigTurret : Turret
     {
         public BigTurret()
         {
@@ -26,9 +27,9 @@ namespace Macalania.Probototaker.Tanks.Turrets
             StoredHp = 1000;
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Turrets/turretBig"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Turrets/turretBig"));
             Sprite.DepthLayer = 0.2f;
             base.Load(content);
         }

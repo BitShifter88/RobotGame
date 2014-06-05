@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Projectiles;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 {
-    class MiniMainGun : MainGun
+    public class MiniMainGun : MainGun
     {
         public MiniMainGun()
         {
@@ -20,9 +21,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             RateOfFire = 150;
             CoolDownRate = 0.03f;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/MiniMainGun"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/MainGuns/MiniMainGun"));
             Sprite.DepthLayer = 0.24f;
             base.Load(content);
         }

@@ -4,6 +4,7 @@ using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -20,12 +21,15 @@ namespace Macalania.Robototaker.GameServer
 
         public void StartServer()
         {
+            _world = new Simulation();
+
             _server = new ServerUdp();
             _server.NewUdpMessageReceived += new ServerUdp.NewUdpMessageReceivedEventHandler(OnNewMessage);
             _server.NewUdpConnection += new ServerUdp.NewUdpConnectionEventHandler(OnNewConnection);
             _server.ClosedConnection += new ServerUdp.ClosedConnectionEventHandler(OnConnectionClosed);
 
-            _server.StartServer(9999, 10000);
+            _server.StartServer(9999, 4000);
+
         }
 
         private void OnNewMessage(object sender, NewUdpClientMessageReceivedEventArgs e)
@@ -57,8 +61,9 @@ namespace Macalania.Robototaker.GameServer
             {
                 if (_potPlayers[i].Connection.Id == connection.Id)
                 {
-
+                    OnPlayerIdentified(_potPlayers[i].Connection);
                     potPlayerFound = true;
+                    _potPlayers.Remove(_potPlayers[i]);
                     break;
                 }
             }
@@ -67,6 +72,11 @@ namespace Macalania.Robototaker.GameServer
                 ServerLog.E("Player identification did not match a valid connection", LogType.Security);
             }
             _connectionMutex.ReleaseMutex();
+        }
+
+        private void OnPlayerIdentified(ClientConnectionUdp connection)
+        {
+
         }
 
         private void UserInput(MessageReader mr, ClientConnectionUdp connection)

@@ -9,6 +9,7 @@ using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,12 +21,13 @@ using System.Text;
 
 namespace Macalania.Probototaker
 {
-    class Player : GameObject
+    public class Player : GameObject
     {
         Tank _tank;
         ShieldPlugin sp;
         RocketStarterPlugin r;
         ArtileryStarter art;
+        StarterAttackRocketBatteryPlugin attack;
 
         public Player(Room room)
             : base(room)
@@ -36,7 +38,7 @@ namespace Macalania.Probototaker
         {
             base.Inizialize();
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             base.Load(content);
 
@@ -108,10 +110,10 @@ namespace Macalania.Probototaker
             bt.SetTank(t1);
             t.AddPluginLeftSide(bt, 1);
 
-            //AmorPlugin ap3 = new AmorPlugin(PluginDirection.Left);
-            //ap3.Load(content);
-            //ap3.SetTank(t1);
-            //t.AddPluginLeftSide(ap3, 2);
+            AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
+            ap3.Load(content);
+            ap3.SetTank(t1);
+            t.AddPluginRightSide(ap3, 2);
 
             sp = new ShieldPlugin(PluginDirection.Left);
             sp.Load(content);
@@ -123,11 +125,14 @@ namespace Macalania.Probototaker
             art.SetTank(t1);
             t.AddPluginButtom(art, 0);
 
-
-            r = new RocketStarterPlugin(PluginDirection.Right);
-            r.SetTank(t1);
-            r.Load(content);
-            t.AddPluginRightSide(r, 0);
+            attack = new StarterAttackRocketBatteryPlugin();
+            attack.SetTank(t1);
+            attack.Load(content);
+            t.AddPluginRightSide(attack, 0);
+            //r = new RocketStarterPlugin(PluginDirection.Right);
+            //r.SetTank(t1);
+            //r.Load(content);
+            //t.AddPluginRightSide(r, 0);
 
             _tank = t1;
 
@@ -154,15 +159,18 @@ namespace Macalania.Probototaker
             {
                 _tank.FireMainGun();
             }
-            if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
-            {
-                r.Activate(Vector2.Zero, null);
-            }
+
 
             if (KeyboardInput.IsKeyClicked(Keys.NumPad1))
-                sp.Activate(Vector2.Zero, null);
+                _tank.ActivatePlugin(sp, Vector2.Zero, null);
             if (KeyboardInput.IsKeyClicked(Keys.NumPad2))
-                art.Activate(new Vector2(MouseInput.X, MouseInput.Y), null);
+                _tank.ActivatePlugin(art, new Vector2(MouseInput.X, MouseInput.Y), null);
+            if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
+            {
+                _tank.ActivatePlugin(r, Vector2.Zero, null);
+            }
+            if (KeyboardInput.IsKeyClicked(Keys.NumPad4))
+                _tank.ActivatePlugin(attack, Vector2.Zero, null);
 
             _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
         }

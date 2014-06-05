@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class SunPannelPlugin : Plugin
+    public class SunPannelPlugin : Plugin
     {
         private PluginDirection _dir;
 
@@ -23,10 +24,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             Tank.AddPower((float)dt * 0.01f);
             base.Update(dt);
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/sunPannel"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/sunPannel"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }

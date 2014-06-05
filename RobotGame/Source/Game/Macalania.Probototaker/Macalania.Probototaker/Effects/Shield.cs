@@ -2,6 +2,7 @@
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -13,22 +14,25 @@ using System.Text;
 
 namespace Macalania.Probototaker.Effects
 {
-    class Shield : GameObject
+    public class Shield : GameObject
     {
         Sprite _sprite;
         Tank _tank;
         public float Duration { get; set; }
+        public float Radius { get; set; }
 
-        public Shield(Room room, Tank tank, float duration)
+        public Shield(Room room, Tank tank, float duration, float radius)
             : base(room)
         {
             _tank = tank;
             Duration = duration;
+            Radius = radius;
+            _tank.SheeldEnabled = true;
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            _sprite = new Sprite(content.Load<Texture2D>("Textures/Effects/shieldsphere"));
+            _sprite = new Sprite(content.LoadYunaTexture("Textures/Effects/shieldsphere"));
             _sprite.Color = new Color(255, 255, 255, 100);
             _sprite.SetOriginCenter();
             _sprite.Position = _tank.Position;
@@ -36,13 +40,27 @@ namespace Macalania.Probototaker.Effects
             base.Load(content);
         }
 
+        public bool CheckCollision(Sprite s)
+        {
+            if (Vector2.Distance(new Vector2(s.RelativeBoundingSphere.Center.X, s.RelativeBoundingSphere.Center.Y), Position) <= s.RelativeBoundingSphere.Radius + Radius)
+                return true;
+            return false;
+        }
+
+        private void OnShieldEnd()
+        {
+            DestroyGameObject();
+            _tank.SheeldEnabled = false;
+        }
+
         public override void Update(double dt)
         {
-            _sprite.Position = _tank.Position;
+            SetPosition(_tank.Position);
+            _sprite.Position = Position;
             Duration -= (float)dt;
 
             if (Duration <= 0)
-                DestroyGameObject();
+                OnShieldEnd();
 
             base.Update(dt);
 

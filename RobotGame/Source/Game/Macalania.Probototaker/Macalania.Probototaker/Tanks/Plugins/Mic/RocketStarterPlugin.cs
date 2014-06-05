@@ -2,6 +2,7 @@
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +13,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    class RocketStarterPlugin : Plugin
+    public class RocketStarterPlugin : Plugin
     {
         private PluginDirection _dir;
         private RocketStarterProjectile _rocket;
@@ -25,10 +26,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             MaxCooldown = 3000;
             ComponentMaxHp = 100;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Right)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/rocketStarterRight"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/rocketStarterRight"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
@@ -42,8 +43,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         public override void Update(double dt)
         {
-           
-
             if (_firstUpdate)
             {
                 ReloadRocket();
@@ -54,7 +53,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (_rocket != null)
             {
-                _rocket.Position = Tank.Position;
+                _rocket.SetPosition(Tank.Position);
                 _rocket.Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
                 
             }
@@ -87,7 +86,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
                 Vector2 p = new Vector2(Tank.Turret.Sprite.Texture.Width / 2 + _rocket.Sprite.Texture.Width / 2, 0);
                 p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
-                _rocket.Position = p + Tank.Position;
+                _rocket.SetPosition(p + Tank.Position);
 
                 _rocket.Direction = -Tank.GetTurretDirection();
                 _rocket = null;

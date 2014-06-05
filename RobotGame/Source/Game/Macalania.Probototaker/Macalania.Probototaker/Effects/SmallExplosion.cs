@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,9 +21,9 @@ namespace Macalania.Probototaker.Effects
 
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            _sprite = new Sprite(content.Load<Texture2D>("Textures/Effects/explosion"));
+            _sprite = new Sprite(content.LoadYunaTexture("Textures/Effects/explosion"));
             _sprite.SetOriginCenter();
             _sprite.DepthLayer = 0.5f;
             base.Load(content);
