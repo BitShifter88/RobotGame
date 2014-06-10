@@ -2,6 +2,7 @@
 using Frame.Network.Server;
 using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
+using Macalania.YunaEngine.Resources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,9 +20,12 @@ namespace Macalania.Robototaker.GameServer
         List<PotentialPlayer> _potPlayers = new List<PotentialPlayer>();
         Mutex _connectionMutex = new Mutex();
 
+        ResourceManager _content;
+
         public void StartServer()
         {
-            _world = new Simulation();
+            _content = new ResourceManager(null);
+            _world = new Simulation(_content);
 
             _server = new ServerUdp();
             _server.NewUdpMessageReceived += new ServerUdp.NewUdpMessageReceivedEventHandler(OnNewMessage);
@@ -61,7 +65,7 @@ namespace Macalania.Robototaker.GameServer
             {
                 if (_potPlayers[i].Connection.Id == connection.Id)
                 {
-                    OnPlayerIdentified(_potPlayers[i].Connection);
+                    OnPlayerIdentified(_potPlayers[i].Connection, username, sessionId);
                     potPlayerFound = true;
                     _potPlayers.Remove(_potPlayers[i]);
                     break;
@@ -74,9 +78,9 @@ namespace Macalania.Robototaker.GameServer
             _connectionMutex.ReleaseMutex();
         }
 
-        private void OnPlayerIdentified(ClientConnectionUdp connection)
+        private void OnPlayerIdentified(ClientConnectionUdp connection, string username, string sessionId)
         {
-
+            _world.AddPlayer(connection, username, sessionId);
         }
 
         private void UserInput(MessageReader mr, ClientConnectionUdp connection)

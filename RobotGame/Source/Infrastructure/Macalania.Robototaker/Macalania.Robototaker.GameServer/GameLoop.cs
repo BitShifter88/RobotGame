@@ -14,6 +14,7 @@ namespace Macalania.Robototaker.GameServer
         Thread _loopThread;
         bool _stop = false;
         double _desiredUpdateTime = 1000 / 60;
+       
         public void StartGameLoop()
         {
             ServerLog.E("Supports High Resolution Clock: " + Stopwatch.IsHighResolution, LogType.Information);
@@ -39,7 +40,7 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter.Reset();
                 frameCounter.Start();
-                ServerLog.E("FPS: " + frames, LogType.Information);
+                ServerLog.E("FPS: " + frames, LogType.Debug);
                 frames = 0;
             }
             
@@ -76,7 +77,7 @@ namespace Macalania.Robototaker.GameServer
                         extraTime = 1;
                         timeMissedSleeping -= 1;
                     }
-
+                    
                     Thread.Sleep((int)timeToWait + extraTime);
                 }
                 else

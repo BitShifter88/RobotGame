@@ -150,6 +150,8 @@ namespace Macalania.Probototaker
             {
                 _tank.RotateBody(RotationDirection.ClockWise);
             }
+            if (KeyboardInput.IsKeyUp(Keys.W) && KeyboardInput.IsKeyUp(Keys.S))
+                _tank.Stop();
             if (KeyboardInput.IsKeyDown(Keys.W))
                 _tank.Forward();
             if (KeyboardInput.IsKeyDown(Keys.S))

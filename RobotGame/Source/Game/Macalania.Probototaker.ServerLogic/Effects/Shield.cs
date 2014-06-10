@@ -2,6 +2,7 @@
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -29,9 +30,9 @@ namespace Macalania.Probototaker.Effects
             _tank.SheeldEnabled = true;
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            _sprite = new Sprite(content.Load<Texture2D>("Textures/Effects/shieldsphere"));
+            _sprite = new Sprite(content.LoadYunaTexture("Textures/Effects/shieldsphere"));
             _sprite.Color = new Color(255, 255, 255, 100);
             _sprite.SetOriginCenter();
             _sprite.Position = _tank.Position;

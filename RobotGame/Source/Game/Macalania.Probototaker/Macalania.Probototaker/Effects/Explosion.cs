@@ -34,7 +34,7 @@ namespace Macalania.Probototaker.Effects
 
         private void OnExplosion()
         {
-            List<Tank> tanks = ((GameRoom)Room).Tanks;
+            List<Tank> tanks = ((SimulationRoom)Room).Tanks;
 
             foreach (Tank tank in tanks)
             {

@@ -2,6 +2,8 @@
 using Macalania.Probototaker.Projectiles;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,9 +25,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             ComponentMaxHp = 100;
             _fireInterval = 400;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-             Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/artilery"));
+             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/artilery"));
              Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
@@ -59,8 +61,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                ArtileryProjectile rocket2 = new ArtileryProjectile(YunaGameEngine.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
-                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
+                ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
+                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 10 * i, Sprite.Origin.Y);
                 rocket2.Sprite.Origin = org2;

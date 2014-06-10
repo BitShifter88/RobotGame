@@ -16,13 +16,13 @@ namespace Macalania.YunaEngine
         IRender _render;
         KeyboardInput _keyboardInput = new KeyboardInput(false);
         MouseInput _mouseInput = new MouseInput();
-        Room _activeRoom;
         public static YunaGameEngine Instance { get; set; }
 
         public delegate void EngineStartedEventHandler();
         public event EngineStartedEventHandler EngineStarted;
 
         bool _stepByStepExecution = false;
+        RoomManager _roomManger;
 
         public YunaGameEngine()
         {
@@ -30,6 +30,7 @@ namespace Macalania.YunaEngine
             graphics.PreferMultiSampling = true;
             Content.RootDirectory = "Content";
             Instance = this;
+            _roomManger = new RoomManager();
 
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1300;
@@ -42,22 +43,6 @@ namespace Macalania.YunaEngine
             return Services;
         }
 
-        public Room GetActiveRoom()
-        {
-            return _activeRoom;
-        }
-
-        public void SetActiveRoom(Room room, bool load)
-        {
-            if (_activeRoom != null)
-                _activeRoom.Unload();
-            if (load)
-            {
-                room.Inizialize();
-                room.Load(Services);
-            }
-            _activeRoom = room;
-        }
 
         protected override void Initialize()
         {
@@ -85,13 +70,13 @@ namespace Macalania.YunaEngine
 
             if (_stepByStepExecution == false)
             {
-                if (_activeRoom != null)
-                    _activeRoom.Update(gameTime.ElapsedGameTime.TotalMilliseconds);
+                if (_roomManger.GetActiveRoom() != null)
+                    _roomManger.GetActiveRoom().Update(gameTime.ElapsedGameTime.TotalMilliseconds);
             }
             else if (_stepByStepExecution == true && KeyboardInput.IsKeyClicked(Keys.F2))
             {
-                if (_activeRoom != null)
-                    _activeRoom.Update(gameTime.ElapsedGameTime.TotalMilliseconds);
+                if (_roomManger.GetActiveRoom() != null)
+                    _roomManger.GetActiveRoom().Update(gameTime.ElapsedGameTime.TotalMilliseconds);
             }
         }
 
@@ -99,8 +84,8 @@ namespace Macalania.YunaEngine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            if (_activeRoom != null)
-                _activeRoom.Draw(_render);
+            if (_roomManger.GetActiveRoom() != null)
+                _roomManger.GetActiveRoom().Draw(_render);
             base.Draw(gameTime);
         }
     }

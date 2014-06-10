@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,9 +15,9 @@ namespace Macalania.Probototaker.Tanks.Hulls
         {
             StoredPower = 1000;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Hulls/hullStarter"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Hulls/hullStarter"));
             base.Load(content);
         }
     }

@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
-    <DefineConstants>TRACE;DEBUG;WINDOWS,SERVER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -76,6 +76,7 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Resources\YunaTexture.cs" />
     <Compile Include="Rooms\Room.cs" />
+    <Compile Include="Rooms\RoomManager.cs" />
     <Compile Include="YunaGameEngine.cs" />
     <Compile Include="YunaMath.cs" />
     <Compile Include="YunaSettings.cs" />

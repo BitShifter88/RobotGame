@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Macalania.Probototaker.Effects;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
@@ -40,8 +41,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (success)
             {
-                Shield s = new Shield(YunaGameEngine.Instance.GetActiveRoom(), Tank, 6000, 200);
-                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
+                Shield s = new Shield(RoomManager.Instance.GetActiveRoom(), Tank, 6000, 200);
+                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
             }
 
             return success;

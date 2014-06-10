@@ -1,6 +1,7 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,11 @@ namespace Macalania.YunaEngine.Rooms
     {
         public List<GameObject> GameObjects { get; set; }
         public List<GameObject> ToBeAdded { get; set; }
-        public ContentManager Content { get; set; }
+        public ResourceManager Content { get; set; }
         public Camera Camera { get; set; }
-        public YunaGameEngine Engine { get; set; }
 
-        public Room(YunaGameEngine engine)
+        public Room()
         {
-            Engine = engine;
             GameObjects = new List<GameObject>();
             ToBeAdded = new List<GameObject>();
             Camera = new Camera();
@@ -48,16 +47,28 @@ namespace Macalania.YunaEngine.Rooms
             ToBeAdded.Add(obj);
         }
 
+#if !SERVER
         public virtual void Load(IServiceProvider serviceProvider)
         {
-            Content = new ContentManager(serviceProvider);
-            Content.RootDirectory = "Content";
+            Content = new ResourceManager(new ContentManager(serviceProvider));
 
             foreach (GameObject obj in GameObjects)
             {
                 obj.Load(Content);
             }
         }
+#endif
+#if SERVER
+        public virtual void Load(ResourceManager content)
+        {
+            Content = content;
+
+            foreach (GameObject obj in GameObjects)
+            {
+                obj.Load(Content);
+            }
+        }
+#endif
 
         public virtual void Unload()
         {

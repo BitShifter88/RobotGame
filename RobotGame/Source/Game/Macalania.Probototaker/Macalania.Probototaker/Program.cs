@@ -1,5 +1,6 @@
 using Macalania.Probototaker.Rooms;
 using Macalania.YunaEngine;
+using Macalania.YunaEngine.Rooms;
 using System;
 
 namespace Macalania.Probototaker
@@ -18,8 +19,8 @@ namespace Macalania.Probototaker
 
         static void OnEngineStart()
         {
-            LoadGameRoom room = new LoadGameRoom(_engine);
-            _engine.SetActiveRoom(room, true);
+            LoadGameRoom room = new LoadGameRoom();
+            RoomManager.Instance.SetActiveRoom(room, true, YunaGameEngine.Instance.Services);
         }
     }
 }

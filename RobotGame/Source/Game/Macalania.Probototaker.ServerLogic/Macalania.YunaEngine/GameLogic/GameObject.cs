@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -34,7 +35,7 @@ namespace Macalania.YunaEngine.GameLogic
         public virtual void Inizialize()
         {
         }
-        public virtual void Load(ContentManager content)
+        public virtual void Load(ResourceManager content)
         {
         }
         public virtual void Unload()

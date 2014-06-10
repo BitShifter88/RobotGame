@@ -1,0 +1,1 @@
+﻿I GameServerManger er der noget rimligt tung kode inde i mutexer. Kan måske stalle

@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -19,9 +20,9 @@ namespace Macalania.Probototaker.Projectiles
             Damage = new Damage() { TankDamage = 10, AmorPenetration = 10, ComponentDamage = 2 };
         }
 
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Projectiles/bullet"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/bullet"));
             Sprite.SetOriginCenter();
             base.Load(content);
         }

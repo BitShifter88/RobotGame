@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -20,10 +21,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             StoredPower = 500;
             ComponentMaxHp = 100;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/battery"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/battery"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }

@@ -1,5 +1,6 @@
 ﻿
 using Macalania.Robototaker.GameServer;
+using Macalania.YunaEngine.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Macalania.Robototaker.MainFrame
         {
             GameServerManager gsm = new GameServerManager();
             gsm.StartServer();
-
+           
         }
     }
 }

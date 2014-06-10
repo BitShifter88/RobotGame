@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,9 +14,9 @@ namespace Macalania.YunaEngine.Graphics
         public BoundingSphere BoundingSphere { get; set; }
         public BoundingSphere RelativeBoundingSphere { get; set; }
 
-        public Texture2D BoundingSphereTexture { get; set; }
+        //public YunaTexture BoundingSphereTexture { get; set; }
 
-        public Sprite(Texture2D texture)
+        public Sprite(YunaTexture texture)
         {
             Texture = texture;
             Scale = 1;
@@ -23,7 +24,7 @@ namespace Macalania.YunaEngine.Graphics
             CalculateBoundingSphere();
         }
 
-        public Texture2D Texture { get; set; }
+        public YunaTexture Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Origin { get; set; }
         public Color Color { get; set; }
@@ -45,14 +46,14 @@ namespace Macalania.YunaEngine.Graphics
         {
             render.Draw(Texture, Position, new Rectangle(0, 0, Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, DepthLayer);
 
-            if (YunaSettings.DrawBoundingSpheres)
-                render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
+            //if (YunaSettings.DrawBoundingSpheres)
+            //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
 
         public void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
-            BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
+            //BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
         }
 
         public void CalculateRelativeBoundingSphere()
@@ -85,39 +86,39 @@ namespace Macalania.YunaEngine.Graphics
             return false;
         }
 
-        static bool PerPixelCollision(Sprite a, Sprite b)
-        {
-            // Get Color data of each Texture
-            Color[] bitsA = new Color[a.Texture.Width * a.Texture.Height];
-            a.Texture.GetData(bitsA);
-            Color[] bitsB = new Color[b.Texture.Width * b.Texture.Height];
-            b.Texture.GetData(bitsB);
+        //static bool PerPixelCollision(Sprite a, Sprite b)
+        //{
+        //    // Get Color data of each Texture
+        //    Color[] bitsA = new Color[a.Texture.Width * a.Texture.Height];
+        //    a.Texture.GetData(bitsA);
+        //    Color[] bitsB = new Color[b.Texture.Width * b.Texture.Height];
+        //    b.Texture.GetData(bitsB);
 
-            // Calculate the intersecting rectangle
-            int x1 = Math.Max(a.Bounds.X, b.Bounds.X);
-            int x2 = Math.Min(a.Bounds.X + a.Bounds.Width, b.Bounds.X + b.Bounds.Width);
+        //    // Calculate the intersecting rectangle
+        //    int x1 = Math.Max(a.Bounds.X, b.Bounds.X);
+        //    int x2 = Math.Min(a.Bounds.X + a.Bounds.Width, b.Bounds.X + b.Bounds.Width);
 
-            int y1 = Math.Max(a.Bounds.Y, b.Bounds.Y);
-            int y2 = Math.Min(a.Bounds.Y + a.Bounds.Height, b.Bounds.Y + b.Bounds.Height);
+        //    int y1 = Math.Max(a.Bounds.Y, b.Bounds.Y);
+        //    int y2 = Math.Min(a.Bounds.Y + a.Bounds.Height, b.Bounds.Y + b.Bounds.Height);
 
-            // For each single pixel in the intersecting rectangle
-            for (int y = y1; y < y2; ++y)
-            {
-                for (int x = x1; x < x2; ++x)
-                {
-                    // Get the color from each texture
-                    Color aa = bitsA[(x - a.Bounds.X) + (y - a.Bounds.Y) * a.Texture.Width];
-                    Color bb = bitsB[(x - b.Bounds.X) + (y - b.Bounds.Y) * b.Texture.Width];
+        //    // For each single pixel in the intersecting rectangle
+        //    for (int y = y1; y < y2; ++y)
+        //    {
+        //        for (int x = x1; x < x2; ++x)
+        //        {
+        //            // Get the color from each texture
+        //            Color aa = bitsA[(x - a.Bounds.X) + (y - a.Bounds.Y) * a.Texture.Width];
+        //            Color bb = bitsB[(x - b.Bounds.X) + (y - b.Bounds.Y) * b.Texture.Width];
 
-                    if (aa.A != 0 && bb.A != 0) // If both colors are not transparent (the alpha channel is not 0), then there is a collision
-                    {
-                        return true;
-                    }
-                }
-            }
-            // If no collision occurred by now, we're clear.
-            return false;
-        }
+        //            if (aa.A != 0 && bb.A != 0) // If both colors are not transparent (the alpha channel is not 0), then there is a collision
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    // If no collision occurred by now, we're clear.
+        //    return false;
+        //}
 
         private Rectangle bounds = Rectangle.Empty;
         public virtual Rectangle Bounds

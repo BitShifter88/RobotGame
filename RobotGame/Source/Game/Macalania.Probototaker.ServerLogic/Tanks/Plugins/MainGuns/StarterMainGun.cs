@@ -1,6 +1,8 @@
 ﻿using Macalania.Probototaker.Projectiles;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,9 +22,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             RateOfFire = 500;
             CoolDownRate = 1;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/mainGunStarter"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/MainGuns/mainGunStarter"));
             Sprite.DepthLayer = 0.24f;
             base.Load(content);
         }
@@ -39,9 +41,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (TimeSinceLastFire > RateOfFire)
             {
-                ShellStarter ss = new ShellStarter(YunaGameEngine.Instance.GetActiveRoom(), Tank, position, direction, 1f);
+                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, position, direction, 1f);
 
-                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 TimeSinceLastFire = 0;
                 ShotFired();
             }

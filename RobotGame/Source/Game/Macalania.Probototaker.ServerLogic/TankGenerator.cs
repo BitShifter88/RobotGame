@@ -5,6 +5,7 @@ using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -18,7 +19,7 @@ namespace Macalania.Probototaker
     public class TankGenerator
     {
 
-        public static Tank GenerateTank2(Room room, ContentManager content, Vector2 position)
+        public static Tank GenerateTank2(Room room, ResourceManager content, Vector2 position)
         {
             Tank t1 = new Tank(room, position);
 
@@ -90,7 +91,7 @@ namespace Macalania.Probototaker
             return t1;
         }
 
-        public static Tank GenerateTank1(Room room, ContentManager content, Vector2 position)
+        public static Tank GenerateTank1(Room room, ResourceManager content, Vector2 position)
         {
             Tank t1 = new Tank(room, position);
 

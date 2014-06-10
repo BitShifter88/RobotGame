@@ -1,4 +1,5 @@
 ﻿using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,14 +20,14 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             ComponentMaxHp = 500;
             CompType = TankComponentType.Amor;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Left)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/amorStarterLeft"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/amorStarterLeft"));
             if (_dir == PluginDirection.Right)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/amorStarterRight"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/amorStarterRight"));
             if (_dir == PluginDirection.Buttom)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/amorStarterBottom"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/amorStarterBottom"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }

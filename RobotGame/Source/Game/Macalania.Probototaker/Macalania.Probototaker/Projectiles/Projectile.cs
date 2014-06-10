@@ -50,7 +50,7 @@ namespace Macalania.Probototaker.Projectiles
 
         private void CheckShieldCollision()
         {
-            GameRoom gameRoom = (GameRoom)Room;
+            SimulationRoom gameRoom = (SimulationRoom)Room;
 
             foreach (Shield s in gameRoom.Shields)
             {
@@ -68,7 +68,7 @@ namespace Macalania.Probototaker.Projectiles
 
         private void CheckTankCollision()
         {
-            GameRoom gameRoom = (GameRoom)Room;
+            SimulationRoom gameRoom = (SimulationRoom)Room;
 
             List<Tank> tanks = gameRoom.Tanks;
 

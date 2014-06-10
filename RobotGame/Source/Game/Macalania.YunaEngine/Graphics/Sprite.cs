@@ -14,7 +14,7 @@ namespace Macalania.YunaEngine.Graphics
         public BoundingSphere BoundingSphere { get; set; }
         public BoundingSphere RelativeBoundingSphere { get; set; }
 
-        public YunaTexture BoundingSphereTexture { get; set; }
+        //public YunaTexture BoundingSphereTexture { get; set; }
 
         public Sprite(YunaTexture texture)
         {
@@ -46,14 +46,14 @@ namespace Macalania.YunaEngine.Graphics
         {
             render.Draw(Texture, Position, new Rectangle(0, 0, Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, DepthLayer);
 
-            if (YunaSettings.DrawBoundingSpheres)
-                render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
+            //if (YunaSettings.DrawBoundingSpheres)
+            //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
 
         public void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
-            BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
+            //BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
         }
 
         public void CalculateRelativeBoundingSphere()

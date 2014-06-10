@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -71,7 +72,7 @@ namespace Macalania.Probototaker.Tanks
             Sprite.Update(dt);
         }
 
-        public virtual void Load(ContentManager content)
+        public virtual void Load(ResourceManager content)
         {
             Sprite.SetOriginCenter();
         }

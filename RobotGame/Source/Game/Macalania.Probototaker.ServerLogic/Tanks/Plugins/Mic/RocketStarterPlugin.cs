@@ -2,6 +2,8 @@
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,10 +27,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             MaxCooldown = 3000;
             ComponentMaxHp = 100;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             if (_dir == PluginDirection.Right)
-                Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/Misc/rocketStarterRight"));
+                Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Misc/rocketStarterRight"));
             Sprite.DepthLayer = 0.3f;
             base.Load(content);
         }
@@ -69,8 +71,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         private void ReloadRocket()
         {
-            _rocket = new RocketStarterProjectile(YunaGameEngine.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
-            YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(_rocket);
+            _rocket = new RocketStarterProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
+            RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(_rocket);
             _rocket.Sprite.Origin = Sprite.Origin;
         }
 

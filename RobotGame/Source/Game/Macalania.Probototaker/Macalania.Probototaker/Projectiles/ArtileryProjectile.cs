@@ -30,7 +30,7 @@ namespace Macalania.Probototaker.Projectiles
             base.Explode();
 
             SmallExplosion e = new SmallExplosion(Room, Position);
-            YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
+            RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
         }
 
         public override void OnCollisionWithTank(Tank tank, TankComponent component)

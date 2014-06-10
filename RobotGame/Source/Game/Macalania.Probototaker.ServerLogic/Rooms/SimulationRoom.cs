@@ -1,6 +1,5 @@
 ﻿using Macalania.Probototaker.Effects;
 using Macalania.Probototaker.Tanks;
-using Macalania.YunaEngine;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Rooms;
 using System;
@@ -10,12 +9,12 @@ using System.Text;
 
 namespace Macalania.Probototaker.Rooms
 {
-    public class GameRoom : Room
+    public class SimulationRoom : Room
     {
         public List<Tank> Tanks { get; set; }
         public List<Shield> Shields { get; set; }
 
-        public GameRoom(YunaGameEngine engine) : base(engine)
+        public SimulationRoom()
         {
             Tanks = new List<Tank>();
             Shields = new List<Shield>();
@@ -57,18 +56,6 @@ namespace Macalania.Probototaker.Rooms
             base.AddGameObjectWhileRunning(obj);
         }
 
-        public override void Inizialize()
-        {
-            Player player = new Player(this);
-            AddGameObject(player);
 
-            OtherPlayer op = new OtherPlayer(this, 1);
-            AddGameObject(op);
-
-            OtherPlayer op2 = new OtherPlayer(this, 2);
-            AddGameObject(op2);
-
-            base.Inizialize();
-        }
     }
 }

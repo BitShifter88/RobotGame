@@ -3,6 +3,8 @@ using Macalania.Probototaker.Projectiles;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,9 +30,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             RateOfFire = 500;
             CoolDownRate = 1f;
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.Load<Texture2D>("Textures/Tanks/MainGuns/SprayMainGun"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/MainGuns/SprayMainGun"));
             Sprite.DepthLayer = 0.24f;
             base.Load(content);
         }
@@ -48,8 +50,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
                 Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
 
-                ShellStarter ss = new ShellStarter(YunaGameEngine.Instance.GetActiveRoom(), Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
-                YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
+                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 ShotFired();
 
                 burstShots--;

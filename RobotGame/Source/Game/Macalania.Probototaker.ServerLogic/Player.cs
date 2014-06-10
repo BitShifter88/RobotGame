@@ -9,6 +9,7 @@ using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -37,7 +38,7 @@ namespace Macalania.Probototaker
         {
             base.Inizialize();
         }
-        public override void Load(ContentManager content)
+        public override void Load(ResourceManager content)
         {
             base.Load(content);
 

@@ -97,6 +97,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Rooms\GameRoom.cs" />
     <Compile Include="Rooms\LoadGameRoom.cs" />
+    <Compile Include="Rooms\SimulationRoom.cs" />
     <Compile Include="TankGenerator.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs" />
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
@@ -131,6 +132,10 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Macalania.Robototaker\Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj">
+      <Project>{97930da9-8ce2-4bc6-a911-bae1828c0fec}</Project>
+      <Name>Macalania.Robototaker.Protocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Macalania.YunaEngine\Macalania.YunaEngine.csproj">
       <Project>{866e3a3a-1c3c-4a8c-9478-1253e89c1226}</Project>
       <Name>Macalania.YunaEngine</Name>
