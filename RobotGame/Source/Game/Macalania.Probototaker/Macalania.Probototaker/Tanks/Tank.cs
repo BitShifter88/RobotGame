@@ -375,7 +375,7 @@ namespace Macalania.Probototaker.Tanks
         {
             if (_serverCompensation == false)
                 return;
-            if (Vector2.Distance(LastKnownServerTankPosition, Position) > 1f)
+            if (Vector2.Distance(LastKnownServerTankPosition, Position) > 0.1f)
             {
                 smoothCounter++;
                 Vector2 smooti = new Vector2((Position.X - LastKnownServerTankPosition.X) * 0.1f,(Position.Y - LastKnownServerTankPosition.Y) * 0.1f);

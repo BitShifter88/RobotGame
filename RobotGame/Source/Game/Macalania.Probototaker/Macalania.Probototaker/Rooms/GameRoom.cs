@@ -59,8 +59,8 @@ namespace Macalania.Probototaker.Rooms
 
         public void PlayerCompensation(Vector2 position, float bodyRotation, int latency)
         {
-            //GhostPlayer.PlayerGameInfo(position, bodyRotation, latency, Player);
-            Player.PlayerCompensation(position, bodyRotation, latency);
+            GhostPlayer.PlayerGameInfo(position, bodyRotation, latency, Player);
+            //Player.PlayerCompensation(position, bodyRotation, latency);
         }
     }
 }

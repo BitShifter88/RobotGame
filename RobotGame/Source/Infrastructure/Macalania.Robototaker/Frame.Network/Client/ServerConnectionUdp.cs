@@ -94,7 +94,7 @@ namespace Frame.Network.Client
 
         private void SendBytes(object bytes)
         {
-            Thread.Sleep(50);
+            //Thread.Sleep(50);
             byte[] sendBuffer = (byte[])bytes;
             _sendSocket.SendTo(sendBuffer, _endPoint);
         }

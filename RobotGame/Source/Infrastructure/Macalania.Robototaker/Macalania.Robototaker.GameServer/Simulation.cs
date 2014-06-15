@@ -59,7 +59,7 @@ namespace Macalania.Robototaker.GameServer
             RemovePlayers();
             Console.WriteLine(dt);
             _oneSecUpdate += dt;
-            if (_oneSecUpdate >= 500)
+            if (_oneSecUpdate >= 1000)
             {
                 OneSecUpdate();
                 _oneSecUpdate = 0;
