@@ -59,6 +59,7 @@
     <Compile Include="Client\NewUdpServerConnectionEventArgs.cs" />
     <Compile Include="Client\NewUdpServerMessageReceivedEventArgs.cs" />
     <Compile Include="Client\UdpServerConnectionClosedEventArgs.cs" />
+    <Compile Include="Common\Trafic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\UPnP.cs" />

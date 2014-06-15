@@ -13,7 +13,7 @@ namespace Macalania.Robototaker.GameServer
     {
         Thread _loopThread;
         bool _stop = false;
-        double _desiredUpdateTime = 1000 / 60;
+        double _desiredUpdateTime = 1000d / 60d;
        
         public void StartGameLoop()
         {
@@ -40,11 +40,11 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter.Reset();
                 frameCounter.Start();
-                ServerLog.E("FPS: " + frames, LogType.Debug);
+                //ServerLog.E("FPS: " + frames, LogType.Debug);
                 frames = 0;
             }
             
-            Thread.Sleep(2);
+            //Thread.Sleep(10);
         }
 
         public void StopGameLoop()
@@ -55,8 +55,8 @@ namespace Macalania.Robototaker.GameServer
         private void LoopThread()
         {
             Stopwatch elapsedTime = new Stopwatch();
+            Stopwatch extraTimeWatch = new Stopwatch();
             double timeAtLastUpdate = 0;
-            double timeMissedSleeping = 0;
             elapsedTime.Start();
             while (_stop == false)
             {
@@ -68,17 +68,15 @@ namespace Macalania.Robototaker.GameServer
 
                 if (timeToWait > 0)
                 {
-                    timeMissedSleeping += timeToWait - (double)((int)timeToWait);
+                    double extraSleepingTime = timeToWait - (double)((int)timeToWait);
+              
+                    //Thread.Sleep((int)timeToWait);
 
-                    int extraTime = 0;
-
-                    if (timeMissedSleeping >= 1)
-                    {
-                        extraTime = 1;
-                        timeMissedSleeping -= 1;
-                    }
-                    
-                    Thread.Sleep((int)timeToWait + extraTime);
+                    extraTimeWatch.Start();
+                    while (extraTimeWatch.Elapsed.TotalMilliseconds < timeToWait)
+                        Thread.Sleep(0);
+                    extraTimeWatch.Stop();
+                    extraTimeWatch.Reset();
                 }
                 else
                 {

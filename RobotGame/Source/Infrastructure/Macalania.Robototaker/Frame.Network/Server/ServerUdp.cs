@@ -18,6 +18,7 @@ namespace Frame.Network.Server
         HandShacke = 2,
         Ping = 3,
         Disconnected = 4,
+        INTERNAL_SAFE_RESPONSE = 5,
     }
 
     class DatagramAndEndPoint

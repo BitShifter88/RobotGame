@@ -1,1 +1,3 @@
 ﻿I GameServerManger er der noget rimligt tung kode inde i mutexer. Kan måske stalle
+connectionid er en long... er det nu også en god ide?
+Tidsmaskinen i PlayerMovement virker ikke optimal

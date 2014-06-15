@@ -1,10 +1,13 @@
-﻿using Macalania.Probototaker.Tanks;
+﻿using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Rooms;
+using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Hulls;
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
+using Macalania.YunaEngine;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;
@@ -28,15 +31,21 @@ namespace Macalania.Probototaker
         RocketStarterPlugin r;
         ArtileryStarter art;
         StarterAttackRocketBatteryPlugin attack;
+        GameRoom _gameRoom;
 
         public Player(Room room)
             : base(room)
         {
-
+            _gameRoom = (GameRoom)room;
         }
         public override void Inizialize()
         {
             base.Inizialize();
+        }
+
+        public Tank GetTank()
+        {
+            return _tank;
         }
         public override void Load(ResourceManager content)
         {
@@ -142,6 +151,8 @@ namespace Macalania.Probototaker
         }
         private void HandleInput()
         {
+            if (KeyboardInput.IsKeyUp(Keys.A) && KeyboardInput.IsKeyUp(Keys.D))
+                _tank.RotateBody(RotationDirection.Still);
             if (KeyboardInput.IsKeyDown(Keys.A))
             {
                 _tank.RotateBody(RotationDirection.CounterClockWise);
@@ -151,17 +162,16 @@ namespace Macalania.Probototaker
                 _tank.RotateBody(RotationDirection.ClockWise);
             }
             if (KeyboardInput.IsKeyUp(Keys.W) && KeyboardInput.IsKeyUp(Keys.S))
-                _tank.Stop();
+                _tank.Thruttle(DrivingDirection.Still);
             if (KeyboardInput.IsKeyDown(Keys.W))
-                _tank.Forward();
+                _tank.Thruttle(DrivingDirection.Forward);
             if (KeyboardInput.IsKeyDown(Keys.S))
-                _tank.Backwards();
+                _tank.Thruttle(DrivingDirection.Backwards);
 
             if (MouseInput.IsLeftMousePressed())
             {
                 _tank.FireMainGun();
             }
-
 
             if (KeyboardInput.IsKeyClicked(Keys.NumPad1))
                 _tank.ActivatePlugin(sp, Vector2.Zero, null);
@@ -175,12 +185,19 @@ namespace Macalania.Probototaker
                 _tank.ActivatePlugin(attack, Vector2.Zero, null);
 
             _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
+
+            _gameRoom.GameCommunication.PlayerMovement(new PlayerMovement() { DrivingDir = _tank.DrivingDir, RotationDir = _tank.RotationDir });
+        }
+
+        public void PlayerCompensation(Vector2 position, float bodyRotation, int latency)
+        {
+            _tank.SetLastKnownServerInfo(position, bodyRotation, latency);
         }
         
         public override void Update(double dt)
         {
             base.Update(dt);
-
+            YunaGameEngine.Instance.Window.Title = _tank.BodyRotation.ToString();
             HandleInput();
         }
         public override void Draw(IRender render, Camera camera)

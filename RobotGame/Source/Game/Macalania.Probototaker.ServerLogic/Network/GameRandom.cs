@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Network
 {
-    class GameRandom
+    public class GameRandom
     {
         static Random _random = new Random();
 

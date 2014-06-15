@@ -78,6 +78,7 @@
     <Compile Include="Macalania.YunaEngine\YunaGameEngine.cs" />
     <Compile Include="Macalania.YunaEngine\YunaMath.cs" />
     <Compile Include="Macalania.YunaEngine\YunaSettings.cs" />
+    <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
     <Compile Include="OtherPlayer.cs" />

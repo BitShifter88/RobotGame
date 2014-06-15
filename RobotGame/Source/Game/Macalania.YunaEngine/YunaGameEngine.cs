@@ -28,13 +28,14 @@ namespace Macalania.YunaEngine
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferMultiSampling = true;
+            graphics.SynchronizeWithVerticalRetrace = true;
             Content.RootDirectory = "Content";
             Instance = this;
             _roomManger = new RoomManager();
 
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1300;
-
+         
             this.IsMouseVisible = true;
         }
 

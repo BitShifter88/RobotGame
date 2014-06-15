@@ -57,6 +57,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets[index].Direction = -Tank.GetTurretDirection();
             _rockets[index] = null;
         }
+        public override bool Activate(Vector2 point, Tank target)
+        {
+            if (Tank.IsStandingStill() == false)
+                return false;
+            return base.Activate(point, target);
+        }
         protected override void ReloadRockets()
         {
             for (int i = 0; i < _rockets.Length; i++)

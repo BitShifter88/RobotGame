@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Network
 {
-    class GameNetwork
+    public class GameNetwork
     {
         ClientUdp _client;
 
@@ -18,12 +18,17 @@ namespace Macalania.Probototaker.Network
             SetupServerConnection();
         }
 
+        public ClientUdp GetClientUdp()
+        {
+            return _client;
+        }
+
         private void SetupServerConnection()
         {
             _client = new ClientUdp();
 
             Console.WriteLine("Trying to connect to game...");
-            if (_client.Connect("127.0.0.1", 9999, 5) == true)
+            if (_client.Connect("212.10.156.150", 9999, 5) == true)
             {
                 Console.WriteLine("Connected to game!");
                 Authenticate();
@@ -34,7 +39,6 @@ namespace Macalania.Probototaker.Network
             }
 
             _client.NewUdpMessageReceived += new ClientUdp.NewUdpMessageReceivedEventHandler(OnNewMessageRecieved);
-            
         }
 
         private void Authenticate()

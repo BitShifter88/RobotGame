@@ -82,6 +82,7 @@
     <Compile Include="Effects\Explosion.cs" />
     <Compile Include="Effects\SmallExplosion.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
     <Compile Include="OtherPlayer.cs" />

@@ -9,5 +9,7 @@ namespace Macalania.Robototaker.Protocol
     public enum RobotProt : byte
     {
         PlayerIdentification = 0,
+        PlayerMovement = 1,
+        PlayerCompensation = 2,
     }
 }

@@ -7,15 +7,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Macalania.YunaEngine.Rooms
 {
     public class Room
     {
-        public List<GameObject> GameObjects { get; set; }
-        public List<GameObject> ToBeAdded { get; set; }
+        public List<GameObject> GameObjects { get; private set; }
+        public List<GameObject> ToBeAdded { get; private set; }
         public ResourceManager Content { get; set; }
         public Camera Camera { get; set; }
+        public bool IsRunning { get; set; }
+
+        Mutex _addingMutex = new Mutex();
 
         public Room()
         {
@@ -30,21 +34,27 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void AddGameObject(GameObject obj)
         {
+            _addingMutex.WaitOne();
             obj.Inizialize();
             GameObjects.Add(obj);
+            _addingMutex.ReleaseMutex();
         }
 
         protected virtual void RemoveGameObject(GameObject obj)
         {
+            _addingMutex.WaitOne();
             obj.Unload();
             GameObjects.Remove(obj);
+            _addingMutex.ReleaseMutex();
         }
 
         public virtual void AddGameObjectWhileRunning(GameObject obj)
         {
             obj.Inizialize();
             obj.Load(Content);
+            _addingMutex.WaitOne();
             ToBeAdded.Add(obj);
+            _addingMutex.ReleaseMutex();
         }
 
 #if !SERVER
@@ -84,6 +94,7 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void Update(double dt)
         {
+            IsRunning = true;
             DestroyGameObjects();
             UpdateGameObjects(dt);
             AddGameObjects();
@@ -100,15 +111,18 @@ namespace Macalania.YunaEngine.Rooms
 
         private void AddGameObjects()
         {
+            _addingMutex.WaitOne();
             foreach (GameObject obj in ToBeAdded)
             {
                 GameObjects.Add(obj);
             }
             ToBeAdded.Clear();
+            _addingMutex.ReleaseMutex();
         }
 
         private void DestroyGameObjects()
         {
+            _addingMutex.WaitOne();
             List<GameObject> objToDestroy = new List<GameObject>();
 
             foreach (GameObject obj in GameObjects)
@@ -120,6 +134,7 @@ namespace Macalania.YunaEngine.Rooms
             {
                 RemoveGameObject(obj);
             }
+            _addingMutex.ReleaseMutex();
         }
 
         public virtual void Draw(IRender render)

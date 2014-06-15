@@ -55,7 +55,5 @@ namespace Macalania.Probototaker.Rooms
 
             base.AddGameObjectWhileRunning(obj);
         }
-
-
     }
 }

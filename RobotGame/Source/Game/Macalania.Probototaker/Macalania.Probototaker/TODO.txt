@@ -8,3 +8,9 @@
 
 * Netværk
 * Landscape
+
+
+BUGS
+====================
+
+Når clienten modtager en kompenserende position, antager klienten at komponsationen ikke er for gammel. Men kompensationen er i virkelighende ping (ms) for gammel

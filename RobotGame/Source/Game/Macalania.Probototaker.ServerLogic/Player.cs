@@ -142,6 +142,8 @@ namespace Macalania.Probototaker
         }
         private void HandleInput()
         {
+            if (KeyboardInput.IsKeyUp(Keys.A) && KeyboardInput.IsKeyUp(Keys.D))
+                _tank.RotateBody(RotationDirection.Still);
             if (KeyboardInput.IsKeyDown(Keys.A))
             {
                 _tank.RotateBody(RotationDirection.CounterClockWise);
@@ -150,10 +152,12 @@ namespace Macalania.Probototaker
             {
                 _tank.RotateBody(RotationDirection.ClockWise);
             }
+            if (KeyboardInput.IsKeyUp(Keys.W) && KeyboardInput.IsKeyUp(Keys.S))
+                _tank.Thruttle(DrivingDirection.Still);
             if (KeyboardInput.IsKeyDown(Keys.W))
-                _tank.Forward();
+                _tank.Thruttle(DrivingDirection.Forward);
             if (KeyboardInput.IsKeyDown(Keys.S))
-                _tank.Backwards();
+                _tank.Thruttle(DrivingDirection.Backwards);
 
             if (MouseInput.IsLeftMousePressed())
             {

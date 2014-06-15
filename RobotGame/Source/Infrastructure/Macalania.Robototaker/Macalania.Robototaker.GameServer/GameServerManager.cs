@@ -1,5 +1,8 @@
-﻿using Frame.Network.Common;
+﻿using Frame.Network.Client;
+using Frame.Network.Common;
 using Frame.Network.Server;
+using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine.Resources;
@@ -47,6 +50,10 @@ namespace Macalania.Robototaker.GameServer
             {
                 PlayerIdentification(mr, e.Connection);
             }
+            if (header == RobotProt.PlayerMovement)
+            {
+                UserInput(mr, e.Connection);
+            }
 
             //if (header == RobotProt.UserInput)
             //{
@@ -73,6 +80,7 @@ namespace Macalania.Robototaker.GameServer
             }
             if (potPlayerFound == false)
             {
+                AuthenticationResponse(connection, false);
                 ServerLog.E("Player identification did not match a valid connection", LogType.Security);
             }
             _connectionMutex.ReleaseMutex();
@@ -81,10 +89,29 @@ namespace Macalania.Robototaker.GameServer
         private void OnPlayerIdentified(ClientConnectionUdp connection, string username, string sessionId)
         {
             _world.AddPlayer(connection, username, sessionId);
+            AuthenticationResponse(connection, true);
+        }
+
+        private void AuthenticationResponse(ClientConnectionUdp connection, bool success)
+        {
+            Message m = new Message();
+            m.Write(connection.Id);
+            m.Write((byte)RobotProt.PlayerIdentification);
+            m.Write(success);
+            connection.SendMessage(m, AirUdpProt.Unsafe);
         }
 
         private void UserInput(MessageReader mr, ClientConnectionUdp connection)
         {
+            int commandId = mr.ReadInt();
+            byte broadcastCount = mr.ReadByte();
+            DrivingDirection drivingDir = (DrivingDirection)mr.ReadByte();
+            RotationDirection rotationDirection = (RotationDirection)mr.ReadByte();
+
+            PlayerMovement pm = new PlayerMovement() { DrivingDir = drivingDir, RotationDir = rotationDirection};
+
+            _world.PlayerMovement(connection.Id, commandId, broadcastCount, pm);
+
             //int commandsIdNew = mr.ReadInt();
             //byte count1 = mr.ReadByte();
 
@@ -154,6 +181,7 @@ namespace Macalania.Robototaker.GameServer
                     break;
                 }
             }
+            _world.DisconnectedPlayer(e.Connection);
             _connectionMutex.ReleaseMutex();
         }
     }

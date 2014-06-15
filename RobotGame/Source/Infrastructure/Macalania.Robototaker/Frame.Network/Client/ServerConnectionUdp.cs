@@ -88,6 +88,14 @@ namespace Frame.Network.Client
 
             Array.Copy(message.Data, 0, sendBuffer, 1, message.Data.Length);
             //Thread.Sleep(50);
+            Thread t = new Thread(new ParameterizedThreadStart(SendBytes));
+            t.Start(sendBuffer);
+        }
+
+        private void SendBytes(object bytes)
+        {
+            Thread.Sleep(50);
+            byte[] sendBuffer = (byte[])bytes;
             _sendSocket.SendTo(sendBuffer, _endPoint);
         }
 
@@ -97,18 +105,21 @@ namespace Frame.Network.Client
             {
                 IPEndPoint nullEndPoint = new IPEndPoint(_endPoint.Address, _endPoint.Port);
                 byte[] recieveBuffer = _listener.Receive(ref nullEndPoint);
-                HandleDatagram(recieveBuffer);
+
+                Thread messageThread = new Thread(new ParameterizedThreadStart(HandleDatagram));
+                messageThread.Start(recieveBuffer);
             }
         }
 
-        private void HandleDatagram(byte[] recieveBuffer)
+        private void HandleDatagram(object recieve)
         {
+            Thread.Sleep(50);
+            byte[] recieveBuffer = (byte[])recieve;
             if (recieveBuffer.Length < 5)
             {
                 Console.WriteLine("Recieved a package that was less then 5 bytes.");
                 return;
             }
-
             byte[] header = new byte[5];
             byte[] messageBytes = new byte[recieveBuffer.Length - 1];
 
@@ -160,6 +171,7 @@ namespace Frame.Network.Client
             }
             else if (protHeader == AirUdpProt.Ping)
             {
+                
                 MessageReader mr = new MessageReader();
                 mr.SetNewMessage(message, 0);
                 Ping = mr.ReadInt();

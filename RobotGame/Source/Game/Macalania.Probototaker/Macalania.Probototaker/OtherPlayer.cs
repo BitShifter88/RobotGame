@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Macalania.Probototaker
 {
@@ -48,13 +49,29 @@ namespace Macalania.Probototaker
             base.Load(content);
         }
 
+        public void PlayerGameInfo(Vector2 position, float bodyRotation, float latency, Player mainPlayer)
+        {
+            while (_tank == null)
+                Thread.Sleep(1);
+
+            
+            mainPlayer.GetTank().TurnTimeForwardForOldPositionAndBodyRotation(ref position, ref bodyRotation, (float)latency * 2);
+
+            Console.WriteLine("R: " + (bodyRotation - mainPlayer.GetTank().BodyRotation).ToString());
+
+            Console.WriteLine(Vector2.Distance(position, mainPlayer.GetTank().Position));
+
+            _tank.SetPosition(position);
+            _tank.BodyRotation = bodyRotation;
+        }
+
         public override void Update(double dt)
         {
-            if (_tankNumber == 2)
-            {
-                if (KeyboardInput.IsKeyClicked(Keys.NumPad9))
-                    _tank.ActivatePlugin(_tank.Turret.Plugins.Where(i => i.GetType() == typeof(ShieldPlugin)).FirstOrDefault(), Vector2.Zero, null);
-            }
+            //if (_tankNumber == 2)
+            //{
+            //    if (KeyboardInput.IsKeyClicked(Keys.NumPad9))
+            //        _tank.ActivatePlugin(_tank.Turret.Plugins.Where(i => i.GetType() == typeof(ShieldPlugin)).FirstOrDefault(), Vector2.Zero, null);
+            //}
             base.Update(dt);
         }
 

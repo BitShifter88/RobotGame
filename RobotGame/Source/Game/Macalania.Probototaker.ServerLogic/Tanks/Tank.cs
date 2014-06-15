@@ -15,10 +15,18 @@ using System.Threading;
 
 namespace Macalania.Probototaker.Tanks
 {
-    public enum RotationDirection
+    public enum RotationDirection : byte
     {
-        CounterClockWise,
-        ClockWise,
+        Still = 0,
+        CounterClockWise = 1,
+        ClockWise = 2,
+    }
+
+    public enum DrivingDirection : byte
+    {
+        Still = 0,
+        Forward = 1,
+        Backwards = 2,
     }
 
     public class Tank : GameObject
@@ -35,6 +43,14 @@ namespace Macalania.Probototaker.Tanks
         public bool Dead { get; set; }
         public bool SheeldEnabled { get; set; }
         public bool ArtilleryFirering { get; set; }
+        public DrivingDirection DrivingDir { get; set; }
+        public RotationDirection RotationDir { get; set; }
+        public float CurrentSpeed { get; set; }
+        public float MaxSpeed { get; set; }
+        public float Acceleration { get; set; }
+        public float RotationAcceleration { get; set; }
+        public float CurrentRotationSpeed { get; set; }
+        public float MaxRotationSpeed { get; set; }
 
         //public BoundingSphere BoundingSphere { get; set; }
 
@@ -49,6 +65,13 @@ namespace Macalania.Probototaker.Tanks
         {
             CurrentHp -= amount;
             CheckIfDead();
+        }
+
+        public bool IsStandingStill()
+        {
+            if (CurrentRotationSpeed == 0 && CurrentSpeed == 0)
+                return true;
+            return false;
         }
 
         private void CheckIfDead()
@@ -81,7 +104,13 @@ namespace Macalania.Probototaker.Tanks
             MaxHp = GetMaxHp();
             CurrentHp = MaxHp;
 
+            DrivingDir = DrivingDirection.Still;
 
+            MaxSpeed = 0.15f;
+            Acceleration = 0.0001f;
+
+            MaxRotationSpeed = 0.0015f;
+            RotationAcceleration = 0.000005f;
             //CalculateBoundingSphere();
         }
 
@@ -149,18 +178,11 @@ namespace Macalania.Probototaker.Tanks
             Turret.FireMainGun();
         }
 
-        public void Forward()
+        public void Thruttle(DrivingDirection dir)
         {
             if (ArtilleryFirering)
                 return;
-            Position += GetBodyDirection() * 3;
-        }
-
-        public void Backwards()
-        {
-            if (ArtilleryFirering)
-                return;
-            Position -= GetBodyDirection() * 3;
+            DrivingDir = dir;
         }
 
         int counter = 0;
@@ -190,18 +212,99 @@ namespace Macalania.Probototaker.Tanks
             }
         }
 
+
+
+        private void MoveTank(double dt)
+        {
+            if (DrivingDir == DrivingDirection.Forward)
+            {
+                if (CurrentSpeed < 0)
+                {
+                    CurrentSpeed += Acceleration * 2 * (float)dt;
+                }
+                else
+                {
+                    CurrentSpeed += Acceleration * (float)dt;
+                }
+            }
+            if (DrivingDir == DrivingDirection.Backwards)
+            {
+                if (CurrentSpeed > 0)
+                {
+                    CurrentSpeed -= Acceleration * 2 * (float)dt;
+                }
+                else
+                {
+                    CurrentSpeed -= Acceleration * (float)dt;
+                }
+            }
+            if (DrivingDir == DrivingDirection.Still)
+            {
+                float beforeSpeed = CurrentSpeed;
+                if (CurrentSpeed > 0)
+                    CurrentSpeed -= Acceleration * 2 * (float)dt;
+                else if (CurrentSpeed < 0)
+                    CurrentSpeed += Acceleration * 2 * (float)dt;
+
+                if ((beforeSpeed > 0 && CurrentSpeed < 0) || (beforeSpeed < 0 && CurrentSpeed > 0))
+                    CurrentSpeed = 0;
+            }
+
+            if (CurrentSpeed > MaxSpeed)
+                CurrentSpeed = MaxSpeed;
+            if (CurrentSpeed < -MaxSpeed)
+                CurrentSpeed = -MaxSpeed;
+
+            Position += CurrentSpeed * GetBodyDirection() * (float)dt;
+        }
+
+        private void RotateTank(double dt)
+        {
+            if (dt < 0)
+            {
+                BodyRotation += CurrentRotationSpeed * (float)dt;
+            }
+            if (RotationDir == RotationDirection.ClockWise)
+            {
+                CurrentRotationSpeed += RotationAcceleration * (float)dt;
+            }
+            if (RotationDir == RotationDirection.CounterClockWise)
+            {
+                CurrentRotationSpeed -= RotationAcceleration * (float)dt;
+            }
+            if (RotationDir == RotationDirection.Still)
+            {
+                float beforeSpeed = CurrentRotationSpeed;
+                if (CurrentRotationSpeed > 0)
+                    CurrentRotationSpeed -= RotationAcceleration * (float)dt;
+                else if (CurrentRotationSpeed < 0)
+                    CurrentRotationSpeed += RotationAcceleration * (float)dt;
+
+                if ((beforeSpeed > 0 && CurrentRotationSpeed < 0) || (beforeSpeed < 0 && CurrentRotationSpeed > 0))
+                    CurrentRotationSpeed = 0;
+            }
+
+            if (CurrentRotationSpeed > MaxRotationSpeed)
+                CurrentRotationSpeed = MaxRotationSpeed;
+            if (CurrentRotationSpeed < -MaxRotationSpeed)
+                CurrentRotationSpeed = -MaxRotationSpeed;
+
+            if (dt > 0)
+            BodyRotation += CurrentRotationSpeed * (float)dt;
+        }
+
         public void RotateBody(RotationDirection dir)
         {
             if (ArtilleryFirering)
                 return;
 
-            if (dir == RotationDirection.ClockWise)
-                BodyRotation += 0.03f;
-            else
-                BodyRotation -= 0.03f;
+            RotationDir = dir;
         }
+
         public override void Update(double dt)
         {
+            MoveTank(dt);
+            RotateTank(dt);
             Hull.Update(dt);
             Turret.Update(dt);
             Track.Update(dt);
