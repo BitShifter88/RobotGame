@@ -87,14 +87,14 @@ namespace Frame.Network.Client
             sendBuffer[0] = (byte)prot;
 
             Array.Copy(message.Data, 0, sendBuffer, 1, message.Data.Length);
-            //Thread.Sleep(50);
+            Thread.Sleep(100);
             Thread t = new Thread(new ParameterizedThreadStart(SendBytes));
             t.Start(sendBuffer);
         }
 
         private void SendBytes(object bytes)
         {
-            //Thread.Sleep(50);
+            Thread.Sleep(100);
             byte[] sendBuffer = (byte[])bytes;
             _sendSocket.SendTo(sendBuffer, _endPoint);
         }

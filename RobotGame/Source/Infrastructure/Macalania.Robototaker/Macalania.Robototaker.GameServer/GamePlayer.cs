@@ -102,12 +102,16 @@ namespace Macalania.Robototaker.GameServer
         {
             if (Tank == null)
                 return;
+
+            Vector2 pos = Tank.MovePosition(Tank.Position, 1000f / 60f);
+            float rot = Tank.DoRotation(Tank.BodyRotation, 1000f / 60f);
+
             Message m = new Message();
             m.Write(Connection.Id);
             m.Write((byte)RobotProt.PlayerCompensation);
-            m.Write(Tank.Position.X);
-            m.Write(Tank.Position.Y);
-            m.Write(Tank.BodyRotation);
+            m.Write(pos.X);
+            m.Write(pos.Y);
+            m.Write(rot);
 
             Connection.SendMessage(m, AirUdpProt.Unsafe);
 

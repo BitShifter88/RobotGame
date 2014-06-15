@@ -61,28 +61,76 @@
     <Compile Include="Effects\Shield.cs" />
     <Compile Include="Effects\SmallExplosion.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Macalania.YunaEngine\GameLogic\GameObject.cs" />
-    <Compile Include="Macalania.YunaEngine\GameLogic\GameObjectTemplate.cs" />
-    <Compile Include="Macalania.YunaEngine\Graphics\Animation.cs" />
-    <Compile Include="Macalania.YunaEngine\Graphics\Camera.cs" />
-    <Compile Include="Macalania.YunaEngine\Graphics\Sprite.cs" />
-    <Compile Include="Macalania.YunaEngine\Input\KeyboardHook.cs" />
-    <Compile Include="Macalania.YunaEngine\Input\KeyboardInput.cs" />
-    <Compile Include="Macalania.YunaEngine\Input\MouseInput.cs" />
-    <Compile Include="Macalania.YunaEngine\Rendering\IRender.cs" />
-    <Compile Include="Macalania.YunaEngine\Rendering\SimpleRender.cs" />
-    <Compile Include="Macalania.YunaEngine\Resources\ResourceManager.cs" />
-    <Compile Include="Macalania.YunaEngine\Resources\YunaTexture.cs" />
-    <Compile Include="Macalania.YunaEngine\Rooms\Room.cs" />
-    <Compile Include="Macalania.YunaEngine\Rooms\RoomManager.cs" />
-    <Compile Include="Macalania.YunaEngine\YunaGameEngine.cs" />
-    <Compile Include="Macalania.YunaEngine\YunaMath.cs" />
-    <Compile Include="Macalania.YunaEngine\YunaSettings.cs" />
-    <Compile Include="Network\GameCommunication.cs" />
-    <Compile Include="Network\GameNetwork.cs" />
+    <Compile Include="Macalania.YunaEngine\GameLogic\GameObject.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\GameLogic\GameObjectTemplate.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Graphics\Animation.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Graphics\Camera.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Graphics\Sprite.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Input\KeyboardHook.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Input\KeyboardInput.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Input\MouseInput.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Rendering\IRender.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Rendering\SimpleRender.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Resources\ResourceManager.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Resources\YunaTexture.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Rooms\Room.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\Rooms\RoomManager.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\YunaGameEngine.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\YunaMath.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Macalania.YunaEngine\YunaSettings.cs">
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="Network\GameRandom.cs" />
-    <Compile Include="OtherPlayer.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Network\PlayerMovement.cs" />
     <Compile Include="Projectiles\ArtileryProjectile.cs" />
     <Compile Include="Projectiles\AttackRocketProjectile.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
@@ -129,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Macalania.YunaEngine\Collision\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Game.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

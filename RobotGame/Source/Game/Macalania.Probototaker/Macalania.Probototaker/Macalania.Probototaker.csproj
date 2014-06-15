@@ -85,6 +85,7 @@
     <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
+    <Compile Include="Network\PlayerMovement.cs" />
     <Compile Include="OtherPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Projectiles\ArtileryProjectile.cs" />

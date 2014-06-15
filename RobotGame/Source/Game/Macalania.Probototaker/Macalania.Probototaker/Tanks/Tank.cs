@@ -323,7 +323,7 @@ namespace Macalania.Probototaker.Tanks
                 CurrentSpeed = -MaxSpeed;
         }
 
-        private Vector2 MovePosition(Vector2 pos, float dt)
+        public Vector2 MovePosition(Vector2 pos, float dt)
         {
             pos = pos + CurrentSpeed * GetBodyDirection() * dt;
             return pos;
@@ -357,7 +357,7 @@ namespace Macalania.Probototaker.Tanks
                 CurrentRotationSpeed = -MaxRotationSpeed;
         }
 
-        private float DoRotation(float rotation, float dt)
+        public float DoRotation(float rotation, float dt)
         {
             return rotation + CurrentRotationSpeed * (float)dt;
         }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Macalania.YunaEngine.Resources
@@ -15,6 +16,7 @@ namespace Macalania.YunaEngine.Resources
         ContentManager _content;
         Dictionary<string, bool[,]> _images = new Dictionary<string, bool[,]>();
         public string ServerTextureFolder { get; set; }
+        static Mutex _contentManagerMutex = new Mutex();
 
         public ResourceManager(ContentManager content)
         {
@@ -62,7 +64,9 @@ namespace Macalania.YunaEngine.Resources
             }
 #endif
 #if !SERVER
+            _contentManagerMutex.WaitOne();
             YunaTexture yt = new YunaTexture(_content.Load<Texture2D>(asset));
+            _contentManagerMutex.ReleaseMutex();
             return yt;
 #endif
         }
