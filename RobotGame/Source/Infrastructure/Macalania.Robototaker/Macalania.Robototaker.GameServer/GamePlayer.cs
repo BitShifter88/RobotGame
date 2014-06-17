@@ -55,6 +55,7 @@ namespace Macalania.Robototaker.GameServer
             m.Write(player.Tank.Position.X +200);
             m.Write(player.Tank.Position.Y);
             m.Write(player.Tank.BodyRotation);
+            Console.WriteLine(player.Tank.BodyRotation);
             m.Write(player.Tank.CurrentSpeed);
             m.Write(player.Tank.CurrentRotationSpeed);
             m.Write((byte)player.Tank.DrivingDir);
@@ -128,7 +129,7 @@ namespace Macalania.Robototaker.GameServer
             Vector2 pos = Tank.MovePosition(Tank.Position, 1000f / 60f);
             float rot = Tank.DoRotation(Tank.BodyRotation, 1000f / 60f);
 
-            Console.WriteLine(Connection.Ping);
+            //Console.WriteLine(Connection.Ping);
 
             Message m = new Message();
             m.Write(Connection.Id);

@@ -94,7 +94,7 @@ namespace Frame.Network.Client
         private void SendBytes(object bytes)
         {
             //Console.WriteLine(Ping);
-            Thread.Sleep(50);
+            Thread.Sleep(30);
             byte[] sendBuffer = (byte[])bytes;
             _sendSocket.SendTo(sendBuffer, _endPoint);
         }
@@ -113,7 +113,7 @@ namespace Frame.Network.Client
 
         private void HandleDatagram(object recieve)
         {
-            Thread.Sleep(50);
+            Thread.Sleep(30);
             byte[] recieveBuffer = (byte[])recieve;
             if (recieveBuffer.Length < 5)
             {

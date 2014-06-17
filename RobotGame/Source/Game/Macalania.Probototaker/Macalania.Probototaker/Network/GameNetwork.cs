@@ -83,6 +83,8 @@ namespace Macalania.Probototaker.Network
             RotationDirection rotationDir = (RotationDirection)mr.ReadByte();
             ushort ping = mr.ReadUshort();
 
+            Console.WriteLine(bodyRotation);
+
             _gameRoom.OtherPlayerInfoMovement(sessionId, new Vector2(x,y), bodyRotation, bodySpeed, rotationSpeed, drivingDir, rotationDir, ping);
         }
 

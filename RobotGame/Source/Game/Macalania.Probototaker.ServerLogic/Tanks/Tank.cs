@@ -180,7 +180,7 @@ namespace Macalania.Probototaker.Tanks
             Acceleration = 0.0001f;
 
             MaxRotationSpeed = 0.0015f;
-            RotationAcceleration = 0.000005f;
+            RotationAcceleration = 0.000004f;
             //CalculateBoundingSphere();
         }
 

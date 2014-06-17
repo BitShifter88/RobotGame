@@ -69,7 +69,7 @@ namespace Macalania.Probototaker
             _tank.SetServerEstimation(position, bodyRotation, bodySpeed, rotationSpeed);
 
             int totalDelay = otherClientPing + playerPing;
-            int updatesBehind = (int)((double)totalDelay / (1000d / 60d));
+            int updatesBehind = (int)((double)totalDelay / (1000d / 60d)) + 1;
 
             Console.WriteLine(updatesBehind);
 
@@ -78,7 +78,7 @@ namespace Macalania.Probototaker
             {
                 _tank.UpdateServerEstimation(1000d / 60d);
             }
-
+            Console.WriteLine(_tank.EstimatedClientBodyRotation);
             //SetPosition(position);
             //_tank.BodyRotation = bodyDirection;
         }

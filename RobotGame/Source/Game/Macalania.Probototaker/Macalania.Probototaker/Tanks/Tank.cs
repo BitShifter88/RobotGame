@@ -218,7 +218,7 @@ namespace Macalania.Probototaker.Tanks
             Acceleration = 0.0001f;
 
             MaxRotationSpeed = 0.0015f;
-            RotationAcceleration = 0.000005f;
+            RotationAcceleration = 0.000004f;
 
             AmorPoints = 0;
             PowerRegen = 0;
@@ -423,9 +423,7 @@ namespace Macalania.Probototaker.Tanks
         }
         private void SmoothOtherClient(double dt)
         {
-            if (CurrentSpeed < MaxSpeed / 4)
-                return;
-            if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f)
+            if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f && CurrentSpeed > MaxSpeed / 4)
             {
                 //Vector2 smooti = new Vector2((Position.X - EstimatedClientPosition.X) * 0.01f, (Position.Y - EstimatedClientPosition.Y) * 0.01f);
 
@@ -578,7 +576,7 @@ namespace Macalania.Probototaker.Tanks
         public override void Draw(IRender render, Camera camera)
         {
             Hull.Draw(render, camera);
-            //Turret.Draw(render, camera);
+            Turret.Draw(render, camera);
         }
     }
 }
