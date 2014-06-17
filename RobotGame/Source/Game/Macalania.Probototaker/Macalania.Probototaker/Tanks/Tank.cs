@@ -114,7 +114,7 @@ namespace Macalania.Probototaker.Tanks
         {
             TurnTimeForwardForOldPositionAndBodyRotation(ref position, ref bodyRotation, (float)latency * 2);
 
-            Console.WriteLine(Vector2.Distance(position, Position));
+            //Console.WriteLine(Vector2.Distance(position, Position));
 
             LastKnownServerTankPosition = position; // MovePosition(position, (float)latency * 2);
             LastKnownServerTankBodyRotation = bodyRotation; // DoRotation(bodyRotation, latency);
@@ -373,9 +373,9 @@ namespace Macalania.Probototaker.Tanks
             return currentSpeed;
         }
 
-        public Vector2 MovePosition(Vector2 pos, float dt)
+        public Vector2 MovePosition(Vector2 pos, float currentSpeed, float dt)
         {
-            pos = pos + CurrentSpeed * GetBodyDirection() * dt;
+            pos = pos + currentSpeed * GetBodyDirection() * dt;
             return pos;
         }
        
@@ -409,9 +409,9 @@ namespace Macalania.Probototaker.Tanks
             return currentRotationSpeed;
         }
 
-        public float DoRotation(float rotation, float dt)
+        public float DoRotation(float rotation, float currentRotationSpeed, float dt)
         {
-            return rotation + CurrentRotationSpeed * (float)dt;
+            return rotation + currentRotationSpeed * (float)dt;
         }
 
         public void RotateBody(RotationDirection dir)
@@ -423,17 +423,19 @@ namespace Macalania.Probototaker.Tanks
         }
         private void SmoothOtherClient(double dt)
         {
-                if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f)
-                {
-                    //Vector2 smooti = new Vector2((Position.X - EstimatedClientPosition.X) * 0.01f, (Position.Y - EstimatedClientPosition.Y) * 0.01f);
+            if (CurrentSpeed < MaxSpeed / 4)
+                return;
+            if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f)
+            {
+                //Vector2 smooti = new Vector2((Position.X - EstimatedClientPosition.X) * 0.01f, (Position.Y - EstimatedClientPosition.Y) * 0.01f);
 
-                    SetPosition(new Vector2(Position.X - (Position.X - EstimatedClientPosition.X) * 0.01f, Position.Y - (Position.Y - EstimatedClientPosition.Y) * 0.01f));
-                }
-                if (Math.Abs((BodyRotation - EstimatedClientBodyRotation)) > 0.000003f)
-                {
-                    BodyRotation = BodyRotation - ((BodyRotation - EstimatedClientBodyRotation) * 0.1f);
-                    //Console.WriteLine("Smoothing rotation");
-                }
+                SetPosition(new Vector2(Position.X - (Position.X - EstimatedClientPosition.X) * 0.1f, Position.Y - (Position.Y - EstimatedClientPosition.Y) * 0.1f));
+            }
+            if (Math.Abs((BodyRotation - EstimatedClientBodyRotation)) > 0.000003f)
+            {
+                BodyRotation = BodyRotation - ((BodyRotation - EstimatedClientBodyRotation) * 0.1f);
+                //Console.WriteLine("Smoothing rotation");
+            }
         }
         private void SmoothPlayerCompensation(double dt)
         {
@@ -446,7 +448,7 @@ namespace Macalania.Probototaker.Tanks
             {
                 //Vector2 smooti = new Vector2((Position.X - LastKnownServerTankPosition.X) * 0.1f,(Position.Y - LastKnownServerTankPosition.Y) * 0.1f);
 
-                SetPosition(new Vector2(Position.X - (Position.X - LastKnownServerTankPosition.X) * 0.1f, Position.Y - (Position.Y - LastKnownServerTankPosition.Y) * 0.1f));
+                SetPosition(new Vector2(Position.X - (Position.X - LastKnownServerTankPosition.X) * 0.01f, Position.Y - (Position.Y - LastKnownServerTankPosition.Y) * 0.01f));
             }
             if (Math.Abs((BodyRotation - LastKnownServerTankBodyRotation)) > 0.000003f)
             {
@@ -457,8 +459,8 @@ namespace Macalania.Probototaker.Tanks
 
         public void UpdateServerPositionRotation(double dt)
         {
-            LastKnownServerTankPosition = MovePosition(LastKnownServerTankPosition, (float)dt);
-            LastKnownServerTankBodyRotation = DoRotation(LastKnownServerTankBodyRotation, (float)dt);
+            LastKnownServerTankPosition = MovePosition(LastKnownServerTankPosition, CurrentSpeed, (float)dt);
+            LastKnownServerTankBodyRotation = DoRotation(LastKnownServerTankBodyRotation, CurrentRotationSpeed, (float)dt);
         }
 
         public void UpdateServerEstimation(double dt)
@@ -466,17 +468,17 @@ namespace Macalania.Probototaker.Tanks
             EstimatedClientBodySpeed = AccelerateTank(dt, EstimatedClientBodySpeed);
             EstimatedClientBodyRotationSpeed = AccelerateRotateTank(dt, EstimatedClientBodyRotationSpeed);
 
-            EstimatedClientPosition = MovePosition(EstimatedClientPosition, (float)dt);
-            EstimatedClientBodyRotation = DoRotation(EstimatedClientBodyRotation, (float)dt);
+            EstimatedClientPosition = MovePosition(EstimatedClientPosition, EstimatedClientBodySpeed, (float)dt);
+            EstimatedClientBodyRotation = DoRotation(EstimatedClientBodyRotation, EstimatedClientBodyRotationSpeed, (float)dt);
         }
 
         public override void Update(double dt)
         {
             CurrentSpeed = AccelerateTank(dt, CurrentSpeed);
-            SetPosition(MovePosition(Position, (float)dt));
+            SetPosition(MovePosition(Position, CurrentSpeed, (float)dt));
                 
             CurrentRotationSpeed = AccelerateRotateTank(dt, CurrentRotationSpeed);
-            BodyRotation = DoRotation(BodyRotation, (float)dt);
+            BodyRotation = DoRotation(BodyRotation, CurrentRotationSpeed, (float)dt);
 
             if (_serverPlayerCompensation)
             {

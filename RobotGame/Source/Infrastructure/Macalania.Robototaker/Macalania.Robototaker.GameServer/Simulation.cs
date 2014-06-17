@@ -40,6 +40,13 @@ namespace Macalania.Robototaker.GameServer
             foreach (GamePlayer player in players)
             {
                 player.BroadcasPositionToPlayer();
+
+                //foreach (GamePlayer playerr in Players.Values)
+                //{
+                //    //if (player.Connection.Id == connectionId)
+                //    //    continue;
+                //    playerr.OtherPlayerInfoMovement(playerr);
+                //}
             }
         }
 
@@ -84,7 +91,7 @@ namespace Macalania.Robototaker.GameServer
             {
                 //if (player.Connection.Id == connectionId)
                 //    continue;
-                //player.OtherPlayerInfoMovement(Players[connectionId]);
+                player.OtherPlayerInfoMovement(Players[connectionId]);
             }
 
             _playerMutex.ReleaseMutex();

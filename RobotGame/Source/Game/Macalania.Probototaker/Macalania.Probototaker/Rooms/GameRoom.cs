@@ -62,7 +62,9 @@ namespace Macalania.Probototaker.Rooms
                 // The info from the srver is old. We fastforward the time for the tank, assuming drivingDir and rotationDir has not changed.
                 // The tank is aproxematly now the same place as on the other client
                 int totalDelay = ping + _gn.GetClientUdp().Connection.Ping;
-                int updatesBehind = (int)((double)totalDelay / (1000d / 60d)) + 1;
+                int updatesBehind = (int)((double)totalDelay / (1000d / 60d));
+
+                Console.WriteLine(updatesBehind);
 
                 for (int i = 0; i < updatesBehind; i++)
                 {
@@ -71,6 +73,8 @@ namespace Macalania.Probototaker.Rooms
 
                 op.GetTank().SetServerEstimation(op.GetTank().Position, op.GetTank().BodyRotation, op.GetTank().CurrentSpeed, op.GetTank().CurrentRotationSpeed);
 
+
+                
                 OtherPlayers.Add(sessionId, op);
             }
 

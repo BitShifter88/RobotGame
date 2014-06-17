@@ -71,6 +71,9 @@ namespace Macalania.Probototaker
             int totalDelay = otherClientPing + playerPing;
             int updatesBehind = (int)((double)totalDelay / (1000d / 60d));
 
+            Console.WriteLine(updatesBehind);
+
+            // Skruer tiden for meget frem af, for some reason
             for (int i = 0; i < updatesBehind; i++)
             {
                 _tank.UpdateServerEstimation(1000d / 60d);
