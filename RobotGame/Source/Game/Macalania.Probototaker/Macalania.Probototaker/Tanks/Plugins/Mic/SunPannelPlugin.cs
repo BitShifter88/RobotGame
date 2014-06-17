@@ -17,11 +17,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             _dir = dir;
             Size = 1;
+            PowerRegen = 1;
             ComponentMaxHp = 100;
         }
         public override void Update(double dt)
         {
-            Tank.AddPower((float)dt * 0.01f);
+           
             base.Update(dt);
         }
         public override void Load(ResourceManager content)

@@ -63,15 +63,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Frame.Network">
-      <HintPath>..\..\..\Infrastructure\Macalania.Robototaker\Frame.Network\bin\Debug\Frame.Network.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -82,6 +82,7 @@
     <Compile Include="Effects\Explosion.cs" />
     <Compile Include="Effects\SmallExplosion.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Items\StarterMine.cs" />
     <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
@@ -110,9 +111,11 @@
     <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ArtileryStarter.cs" />
     <Compile Include="Tanks\Plugins\Mic\BatteryPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\MineLayerPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\RocketBattery.cs" />
     <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs" />
+    <Compile Include="Tanks\Plugins\Mic\StarterAntiRocketLaser.cs" />
     <Compile Include="Tanks\Plugins\Mic\StarterAttackRocketBatteryPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs" />
     <Compile Include="Tanks\Plugins\Mic\SuperArtillery.cs" />
@@ -134,6 +137,10 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Macalania.Robototaker\Frame.Network\Frame.Network.csproj">
+      <Project>{a4fbb6a1-cf29-49ce-9145-d72d89aad5b3}</Project>
+      <Name>Frame.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Infrastructure\Macalania.Robototaker\Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj">
       <Project>{97930da9-8ce2-4bc6-a911-bae1828c0fec}</Project>
       <Name>Macalania.Robototaker.Protocol</Name>

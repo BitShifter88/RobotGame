@@ -29,6 +29,7 @@ namespace Macalania.YunaEngine
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferMultiSampling = true;
             graphics.SynchronizeWithVerticalRetrace = true;
+            this.IsFixedTimeStep = true;
             Content.RootDirectory = "Content";
             Instance = this;
             _roomManger = new RoomManager();

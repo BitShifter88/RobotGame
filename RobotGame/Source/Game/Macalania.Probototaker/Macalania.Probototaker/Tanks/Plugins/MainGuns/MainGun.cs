@@ -54,7 +54,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
                 Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
 
-                Fire(projectileSpawnPosition, -Tank.GetTurretDirection());
+                Fire(projectileSpawnPosition, -Tank.GetTurretBodyDirection());
             }
         }
 

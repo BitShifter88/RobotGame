@@ -41,7 +41,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
             _rockets[index].SetPosition(p + Tank.Position);
 
-            _rockets[index].Direction = -Tank.GetTurretDirection();
+            _rockets[index].Direction = -Tank.GetTurretBodyDirection();
             _rockets[index] = null;
         }
 
@@ -49,7 +49,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                AttackRocketProjectile rocket2 = new AttackRocketProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
+                AttackRocketProjectile rocket2 = new AttackRocketProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2(-(Tank.Turret.Sprite.Texture.Width / 2) - 2 - 5 * i, Sprite.Origin.Y);

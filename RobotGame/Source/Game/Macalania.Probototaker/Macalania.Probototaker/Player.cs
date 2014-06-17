@@ -30,6 +30,7 @@ namespace Macalania.Probototaker
         ShieldPlugin sp;
         RocketStarterPlugin r;
         ArtileryStarter art;
+        MineLayerPlugin mlp;
         StarterAttackRocketBatteryPlugin attack;
         GameRoom _gameRoom;
 
@@ -129,10 +130,15 @@ namespace Macalania.Probototaker
             sp.SetTank(t1);
             t.AddPluginLeftSide(sp, 2);
 
-            art = new ArtileryStarter();
-            art.Load(content);
-            art.SetTank(t1);
-            t.AddPluginButtom(art, 0);
+            //art = new ArtileryStarter();
+            //art.Load(content);
+            //art.SetTank(t1);
+            //t.AddPluginButtom(art, 0);
+
+            mlp = new MineLayerPlugin();
+            mlp.Load(content);
+            mlp.SetTank(t1);
+            t.AddPluginButtom(mlp, 0);
 
             attack = new StarterAttackRocketBatteryPlugin();
             attack.SetTank(t1);
@@ -183,8 +189,10 @@ namespace Macalania.Probototaker
             }
             if (KeyboardInput.IsKeyClicked(Keys.NumPad4))
                 _tank.ActivatePlugin(attack, Vector2.Zero, null);
+            if (KeyboardInput.IsKeyClicked(Keys.NumPad5))
+                _tank.ActivatePlugin(mlp, Vector2.Zero, null);
 
-            _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
+            //_tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
 
             _gameRoom.GameCommunication.PlayerMovement(new PlayerMovement() { DrivingDir = _tank.DrivingDir, RotationDir = _tank.RotationDir });
         }

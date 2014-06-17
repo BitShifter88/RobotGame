@@ -22,6 +22,10 @@ namespace Macalania.Probototaker.Tanks.Plugins
         public float MaxCooldown { get; set; }
         public float PowerUsage { get; set; }
 
+        // Attributes given to the tank
+        public float AmorPoints { get; set; }
+        public float PowerRegen { get; set; }
+
         public void SetOriginFromTurret(Vector2 origin)
         {
 

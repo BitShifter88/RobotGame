@@ -43,6 +43,11 @@ namespace Frame.Network.Common
             binWriter.Write(BitConverter.GetBytes(value));
         }
 
+        public void Write(ushort value)
+        {
+            binWriter.Write(BitConverter.GetBytes(value));
+        }
+
         public void Write(byte value)
         {
             binWriter.Write(value);

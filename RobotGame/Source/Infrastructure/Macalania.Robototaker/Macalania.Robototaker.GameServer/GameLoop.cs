@@ -40,7 +40,7 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter.Reset();
                 frameCounter.Start();
-                //ServerLog.E("FPS: " + frames, LogType.Debug);
+                ServerLog.E("FPS: " + frames, LogType.Debug);
                 frames = 0;
             }
             
@@ -56,13 +56,18 @@ namespace Macalania.Robototaker.GameServer
         {
             Stopwatch elapsedTime = new Stopwatch();
             Stopwatch extraTimeWatch = new Stopwatch();
+            Stopwatch performance = new Stopwatch();
             double timeAtLastUpdate = 0;
             elapsedTime.Start();
             while (_stop == false)
             {
                 double dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
                 timeAtLastUpdate = elapsedTime.Elapsed.TotalMilliseconds;
+                performance.Start();
                 Update(dt);
+                performance.Stop();
+                //ServerLog.E((performance.Elapsed.TotalMilliseconds * 1000).ToString(), LogType.Debug);
+                performance.Reset();
 
                 double timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
 

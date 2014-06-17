@@ -57,6 +57,12 @@ namespace Frame.Network.Common
             return m_BinReader.ReadInt32();
         }
 
+        public ushort ReadUshort()
+        {
+            m_HasRead = true;
+            return m_BinReader.ReadUInt16();
+        }
+
         public long ReadLong()
         {
             m_HasRead = true;

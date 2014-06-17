@@ -42,7 +42,34 @@ namespace Macalania.Robototaker.GameServer
             SessionId = sessionId;
         }
 
-        int count = 0;
+        /// <summary>
+        /// Sends information to the player about the position and movement of the player parameter
+        /// </summary>
+        /// <param name="player"></param>
+        public void OtherPlayerInfoMovement(GamePlayer player)
+        {
+            Message m = new Message();
+            m.Write(Connection.Id);
+            m.Write((byte)RobotProt.OtherPlayerInfoMovement);
+            m.Write(player.SessionId);
+            m.Write(player.Tank.Position.X +200);
+            m.Write(player.Tank.Position.Y);
+            m.Write(player.Tank.BodyRotation);
+            m.Write(player.Tank.CurrentSpeed);
+            m.Write(player.Tank.CurrentRotationSpeed);
+            m.Write((byte)player.Tank.DrivingDir);
+            m.Write((byte)player.Tank.RotationDir);
+            m.Write((ushort)player.Connection.Ping);
+
+            Connection.SendMessage(m, AirUdpProt.Unsafe);
+        }
+
+        /// <summary>
+        /// Called when the server recieves information about player movement
+        /// </summary>
+        /// <param name="commandId"></param>
+        /// <param name="broadcastCount"></param>
+        /// <param name="playerMovement"></param>
         public void PlayerMovement(int commandId, byte broadcastCount, PlayerMovement playerMovement)
         {
             _playerMutex.WaitOne();
@@ -57,11 +84,7 @@ namespace Macalania.Robototaker.GameServer
                 if (difference != 1)
                     ServerLog.E("Arrival rate out of sync of player movement package: " + difference, LogType.Debug);
 
-                if (count == 1)
-                {
-                }
-
-                ServerLog.E("When recieve " + Tank.BodyRotation, LogType.GameActivity);
+                //ServerLog.E("When recieve " + Tank.BodyRotation, LogType.GameActivity);
 
                 double timeinterval = ((double)Connection.Ping) / 100d;
 
@@ -69,7 +92,7 @@ namespace Macalania.Robototaker.GameServer
                 //{
                 //    Tank.Update(-timeinterval);
                 //}
-                ServerLog.E("After reverse " + Tank.BodyRotation, LogType.GameActivity);
+                //ServerLog.E("After reverse " + Tank.BodyRotation, LogType.GameActivity);
 
                 Tank.Thruttle(playerMovement.DrivingDir);
                 Tank.RotateBody(playerMovement.RotationDir);
@@ -81,10 +104,9 @@ namespace Macalania.Robototaker.GameServer
                 //    Tank.Update(timeinterval);
                 //}
 
-                ServerLog.E("After speed " + Tank.BodyRotation, LogType.GameActivity);
+                //ServerLog.E("After speed " + Tank.BodyRotation, LogType.GameActivity);
 
                 LastCommandId = commandId;
-                count++;
             }
             else
             {
@@ -105,6 +127,8 @@ namespace Macalania.Robototaker.GameServer
 
             Vector2 pos = Tank.MovePosition(Tank.Position, 1000f / 60f);
             float rot = Tank.DoRotation(Tank.BodyRotation, 1000f / 60f);
+
+            Console.WriteLine(Connection.Ping);
 
             Message m = new Message();
             m.Write(Connection.Id);

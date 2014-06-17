@@ -18,6 +18,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _dir = dir;
             Size = 1;
             ComponentMaxHp = 500;
+            AmorPoints = 5;
             CompType = TankComponentType.Amor;
         }
         public override void Load(ResourceManager content)

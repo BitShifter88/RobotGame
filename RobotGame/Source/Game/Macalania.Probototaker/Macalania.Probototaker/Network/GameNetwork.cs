@@ -2,6 +2,7 @@
 using Frame.Network.Common;
 using Frame.Network.Server;
 using Macalania.Probototaker.Rooms;
+using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker.Protocol;
 using Microsoft.Xna.Framework;
 using System;
@@ -35,22 +36,28 @@ namespace Macalania.Probototaker.Network
 
         private bool SetupServerConnection()
         {
-            _client = new ClientUdp();
-
-            Console.WriteLine("Trying to connect to game...");
-            if (_client.Connect("127.0.0.1", 9999, 5) == true)
+            try
             {
-                Console.WriteLine("Connected to game!");
-                Authenticate();
+                _client = new ClientUdp();
+
+                Console.WriteLine("Trying to connect to game...");
+                if (_client.Connect("127.0.0.1", 9999, 5) == true)
+                {
+                    Console.WriteLine("Connected to game!");
+                    Authenticate();
+                }
+                else
+                {
+                    Console.WriteLine("Failed to connect to game");
+                    return false;
+                }
+
+                _client.NewUdpMessageReceived += new ClientUdp.NewUdpMessageReceivedEventHandler(OnNewMessageRecieved);
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("Failed to connect to game");
-                return false;
+                System.Windows.Forms.MessageBox.Show(e.ToString());
             }
-
-            _client.NewUdpMessageReceived += new ClientUdp.NewUdpMessageReceivedEventHandler(OnNewMessageRecieved);
-
             return true;
         }
 
@@ -62,6 +69,21 @@ namespace Macalania.Probototaker.Network
             m.Write("steffan88");
             m.Write("seesionId123456");
             _client.SendMessage(m, AirUdpProt.Unsafe);
+        }
+
+        private void OnOtherPlayerInfoMovement(MessageReader mr)
+        {
+            string sessionId = mr.ReadString();
+            float x = mr.ReadFloat();
+            float y = mr.ReadFloat();
+            float bodyRotation = mr.ReadFloat();
+            float bodySpeed = mr.ReadFloat();
+            float rotationSpeed = mr.ReadFloat();
+            DrivingDirection drivingDir = (DrivingDirection)mr.ReadByte();
+            RotationDirection rotationDir = (RotationDirection)mr.ReadByte();
+            ushort ping = mr.ReadUshort();
+
+            _gameRoom.OtherPlayerInfoMovement(sessionId, new Vector2(x,y), bodyRotation, bodySpeed, rotationSpeed, drivingDir, rotationDir, ping);
         }
 
         private void OnAuthenticationResponse(MessageReader mr)
@@ -92,18 +114,29 @@ namespace Macalania.Probototaker.Network
 
         private void OnNewMessageRecieved(object sender, NewUdpServerMessageReceivedEventArgs e)
         {
-            MessageReader mr = new MessageReader();
-            mr.SetNewMessage(e.Message, 0);
-
-            RobotProt header = (RobotProt)mr.ReadByte();
-
-            if (header == RobotProt.PlayerIdentification)
+            try
             {
-                OnAuthenticationResponse(mr);
+                MessageReader mr = new MessageReader();
+                mr.SetNewMessage(e.Message, 0);
+
+                RobotProt header = (RobotProt)mr.ReadByte();
+
+                if (header == RobotProt.PlayerIdentification)
+                {
+                    OnAuthenticationResponse(mr);
+                }
+                else if (header == RobotProt.PlayerCompensation)
+                {
+                    OnPlayerCompensation(mr);
+                }
+                else if (header == RobotProt.OtherPlayerInfoMovement)
+                {
+                    OnOtherPlayerInfoMovement(mr);
+                }
             }
-            else if (header == RobotProt.PlayerCompensation)
+            catch(Exception ee)
             {
-                OnPlayerCompensation(mr);
+                System.Windows.Forms.MessageBox.Show(ee.ToString());
             }
 
             //if (protocol == AirGameProt.PlayerState)

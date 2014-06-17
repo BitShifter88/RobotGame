@@ -14,3 +14,13 @@ BUGS
 ====================
 
 Når clienten modtager en kompenserende position, antager klienten at komponsationen ikke er for gammel. Men kompensationen er i virkelighende ping (ms) for gammel
+
+
+REFACTORISERING
+====================
+
+* Brug SetPosition på alle gameobjects, og få styr på positioner
+* Alle rotations variabler skal have et entydigt navn
+* Mere struktur på kollisionssystemet
+* Mere struktur på Frame netværket
+* Thread pool i Frame netværket

@@ -34,8 +34,8 @@ namespace Macalania.Robototaker.GameServer
 
         private void OneSecUpdate()
         {
-            if (Players.Count > 0)
-            Console.WriteLine(Players.Values.ToList()[0].Connection.Ping);
+            //if (Players.Count > 0)
+            //Console.WriteLine(Players.Values.ToList()[0].Connection.Ping);
             List<GamePlayer> players = Players.Values.ToList();
             foreach (GamePlayer player in players)
             {
@@ -57,9 +57,9 @@ namespace Macalania.Robototaker.GameServer
         protected override void Update(double dt)
         {
             RemovePlayers();
-            Console.WriteLine(dt);
+            //Console.WriteLine(dt);
             _oneSecUpdate += dt;
-            if (_oneSecUpdate >= 1000)
+            if (_oneSecUpdate >= 100)
             {
                 OneSecUpdate();
                 _oneSecUpdate = 0;
@@ -79,6 +79,14 @@ namespace Macalania.Robototaker.GameServer
             }
             
             Players[connectionId].PlayerMovement(commandId, broadcastCount, playerMovement);
+
+            foreach (GamePlayer player in Players.Values)
+            {
+                //if (player.Connection.Id == connectionId)
+                //    continue;
+                //player.OtherPlayerInfoMovement(Players[connectionId]);
+            }
+
             _playerMutex.ReleaseMutex();
         }
 

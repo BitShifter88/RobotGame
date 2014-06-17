@@ -15,7 +15,7 @@ namespace Macalania.Probototaker.Rooms
 {
     public class GameRoom : SimulationRoom
     {
-        public GameCommunication GameCommunication { get; set; }
+        public GameCommunication GameCommunication { get; private set; }
         public Dictionary<string, OtherPlayer> OtherPlayers { get; set; }
         public OtherPlayer GhostPlayer { get; set; }
         public Player Player { get; set; }
@@ -42,6 +42,39 @@ namespace Macalania.Probototaker.Rooms
             AddGameObject(GhostPlayer);
 
             base.Inizialize();
+        }
+
+        public void OtherPlayerInfoMovement(string sessionId, Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, ushort ping)
+        {
+            if (OtherPlayers.ContainsKey(sessionId) == false)
+            {
+                OtherPlayer op = new OtherPlayer(this, 1);
+                this.AddGameObjectWhileRunning(op);
+
+                // TODO: Alt det her skal flyttes ind i other player klassen
+                op.SetPosition(position);
+                op.GetTank().BodyRotation = bodyRotation;
+                op.GetTank().DrivingDir = drivingDir;
+                op.GetTank().RotationDir = rotationDir;
+                op.GetTank().CurrentSpeed = bodySpeed;
+                op.GetTank().BodyRotation = rotationSpeed;
+
+                // The info from the srver is old. We fastforward the time for the tank, assuming drivingDir and rotationDir has not changed.
+                // The tank is aproxematly now the same place as on the other client
+                int totalDelay = ping + _gn.GetClientUdp().Connection.Ping;
+                int updatesBehind = (int)((double)totalDelay / (1000d / 60d)) + 1;
+
+                for (int i = 0; i < updatesBehind; i++)
+                {
+                    op.GetTank().Update(1000d / 60d);
+                }
+
+                op.GetTank().SetServerEstimation(op.GetTank().Position, op.GetTank().BodyRotation, op.GetTank().CurrentSpeed, op.GetTank().CurrentRotationSpeed);
+
+                OtherPlayers.Add(sessionId, op);
+            }
+
+            OtherPlayers[sessionId].PlayerInfoMovement(position, bodyRotation, bodySpeed, rotationSpeed, drivingDir, rotationDir, ping, _gn.GetClientUdp().Connection.Ping);
         }
 
         public override void Update(double dt)

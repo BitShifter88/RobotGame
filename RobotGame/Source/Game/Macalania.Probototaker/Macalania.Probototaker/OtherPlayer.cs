@@ -37,6 +37,17 @@ namespace Macalania.Probototaker
             base.Inizialize();
         }
 
+        public Tank GetTank()
+        {
+            return _tank;
+        }
+
+        public override void SetPosition(Vector2 position)
+        {
+            _tank.SetPosition(position);
+            base.SetPosition(position);
+        }
+
         public override void Load(ResourceManager content)
         {
             if (_tankNumber == 1)
@@ -49,6 +60,33 @@ namespace Macalania.Probototaker
             base.Load(content);
         }
 
+        public void PlayerInfoMovement(Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, ushort otherClientPing, int playerPing)
+        {
+            Console.WriteLine(drivingDir);
+
+            _tank.DrivingDir = drivingDir;
+            _tank.RotationDir = rotationDir;
+            _tank.SetServerEstimation(position, bodyRotation, bodySpeed, rotationSpeed);
+
+            int totalDelay = otherClientPing + playerPing;
+            int updatesBehind = (int)((double)totalDelay / (1000d / 60d));
+
+            for (int i = 0; i < updatesBehind; i++)
+            {
+                _tank.UpdateServerEstimation(1000d / 60d);
+            }
+
+            //SetPosition(position);
+            //_tank.BodyRotation = bodyDirection;
+        }
+
+        /// <summary>
+        /// Used for debuging network communication. Used to show this OtherPlayer as the main player on the server
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="bodyRotation"></param>
+        /// <param name="latency"></param>
+        /// <param name="mainPlayer"></param>
         public void PlayerGameInfo(Vector2 position, float bodyRotation, float latency, Player mainPlayer)
         {
             while (_tank == null)

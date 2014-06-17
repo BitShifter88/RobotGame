@@ -50,7 +50,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
                 Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
 
-                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
+                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, projectileSpawnPosition, -YunaMath.RotateVector2(Tank.GetTurretBodyDirection(), GameRandom.GetRandomFloat(0.2f) - 0.1f), 0.5f);
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 ShotFired();
 
