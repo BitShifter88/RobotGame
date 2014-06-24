@@ -14,6 +14,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         private PluginDirection _dir;
 
         public BatteryPlugin(PluginDirection dir)
+            : base(PluginType.Battery)
         {
             _dir = dir;
             Size = 1;

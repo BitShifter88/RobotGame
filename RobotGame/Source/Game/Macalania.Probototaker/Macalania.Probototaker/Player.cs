@@ -120,34 +120,34 @@ namespace Macalania.Probototaker
             bt.SetTank(t1);
             t.AddPluginLeftSide(bt, 1);
 
-            AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
-            ap3.Load(content);
-            ap3.SetTank(t1);
-            t.AddPluginRightSide(ap3, 2);
+            //AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
+            //ap3.Load(content);
+            //ap3.SetTank(t1);
+            //t.AddPluginRightSide(ap3, 2);
 
             sp = new ShieldPlugin(PluginDirection.Left);
             sp.Load(content);
             sp.SetTank(t1);
             t.AddPluginLeftSide(sp, 2);
 
-            //art = new ArtileryStarter();
-            //art.Load(content);
-            //art.SetTank(t1);
-            //t.AddPluginButtom(art, 0);
+            art = new ArtileryStarter();
+            art.Load(content);
+            art.SetTank(t1);
+            t.AddPluginButtom(art, 0);
 
-            mlp = new MineLayerPlugin();
-            mlp.Load(content);
-            mlp.SetTank(t1);
-            t.AddPluginButtom(mlp, 0);
+            //mlp = new MineLayerPlugin();
+            //mlp.Load(content);
+            //mlp.SetTank(t1);
+            //t.AddPluginButtom(mlp, 0);
 
-            attack = new StarterAttackRocketBatteryPlugin();
-            attack.SetTank(t1);
-            attack.Load(content);
-            t.AddPluginRightSide(attack, 0);
-            //r = new RocketStarterPlugin(PluginDirection.Right);
-            //r.SetTank(t1);
-            //r.Load(content);
-            //t.AddPluginRightSide(r, 0);
+            //attack = new StarterAttackRocketBatteryPlugin();
+            //attack.SetTank(t1);
+            //attack.Load(content);
+            //t.AddPluginRightSide(attack, 0);
+            r = new RocketStarterPlugin(PluginDirection.Right);
+            r.SetTank(t1);
+            r.Load(content);
+            t.AddPluginRightSide(r, 0);
 
             _tank = t1;
 
@@ -178,23 +178,28 @@ namespace Macalania.Probototaker
             {
                 _tank.FireMainGun();
             }
+            else
+                _tank.StopFireMainGun();
 
             if (KeyboardInput.IsKeyClicked(Keys.NumPad1))
-                _tank.ActivatePlugin(sp, Vector2.Zero, null);
+                //_tank.ActivatePlugin(sp, Vector2.Zero, null);
+                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.Shield, null, Vector2.Zero);
             if (KeyboardInput.IsKeyClicked(Keys.NumPad2))
-                _tank.ActivatePlugin(art, new Vector2(MouseInput.X, MouseInput.Y), null);
+                //_tank.ActivatePlugin(art, new Vector2(MouseInput.X, MouseInput.Y), null);
+                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.ArtileryStart, null, new Vector2(MouseInput.X, MouseInput.Y));
             if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
             {
-                _tank.ActivatePlugin(r, Vector2.Zero, null);
+                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.StarterAttackRocket, null, Vector2.Zero);
+               // _tank.ActivatePlugin(r, Vector2.Zero, null);
             }
-            if (KeyboardInput.IsKeyClicked(Keys.NumPad4))
-                _tank.ActivatePlugin(attack, Vector2.Zero, null);
-            if (KeyboardInput.IsKeyClicked(Keys.NumPad5))
-                _tank.ActivatePlugin(mlp, Vector2.Zero, null);
+            //if (KeyboardInput.IsKeyClicked(Keys.NumPad4))
+            //    _tank.ActivatePlugin(attack, Vector2.Zero, null);
+            //if (KeyboardInput.IsKeyClicked(Keys.NumPad5))
+            //    _tank.ActivatePlugin(mlp, Vector2.Zero, null);
 
-            //_tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
+            _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
 
-            _gameRoom.GameCommunication.PlayerMovement(new PlayerMovement() { DrivingDir = _tank.DrivingDir, RotationDir = _tank.RotationDir });
+            _gameRoom.GameCommunication.PlayerMovement(new PlayerMovement() { DrivingDir = _tank.DrivingDir, BodyDir = _tank.BodyDir, TurretDir = _tank.TurretDir, TurretRotation = _tank.TurretRotation, MainGunFirering = _tank.MainGunFirering });
         }
 
         public void PlayerCompensation(Vector2 position, float bodyRotation, int latency)
@@ -205,7 +210,7 @@ namespace Macalania.Probototaker
         public override void Update(double dt)
         {
             base.Update(dt);
-            YunaGameEngine.Instance.Window.Title = _tank.BodyRotation.ToString();
+            YunaGameEngine.Instance.Window.Title = _tank.Position.ToString();
             HandleInput();
         }
         public override void Draw(IRender render, Camera camera)

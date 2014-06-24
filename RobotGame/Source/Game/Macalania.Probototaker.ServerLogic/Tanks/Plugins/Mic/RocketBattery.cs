@@ -18,7 +18,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         protected float _currentFire = 0;
         bool _fireringRockets = false;
 
-        public RocketBattery()
+        public RocketBattery(PluginType type)
+            : base(type)
         {
 
         }

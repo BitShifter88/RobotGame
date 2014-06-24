@@ -14,10 +14,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         private PluginDirection _dir;
 
         public AmorPlugin(PluginDirection dir)
+            : base(PluginType.Amor)
         {
             _dir = dir;
             Size = 1;
             ComponentMaxHp = 500;
+            AmorPoints = 5;
             CompType = TankComponentType.Amor;
         }
         public override void Load(ResourceManager content)

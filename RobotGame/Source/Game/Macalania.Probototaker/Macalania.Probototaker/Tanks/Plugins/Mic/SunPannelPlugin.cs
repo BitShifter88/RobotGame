@@ -14,6 +14,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         private PluginDirection _dir;
 
         public SunPannelPlugin(PluginDirection dir)
+            : base(PluginType.SunPannel)
         {
             _dir = dir;
             Size = 1;

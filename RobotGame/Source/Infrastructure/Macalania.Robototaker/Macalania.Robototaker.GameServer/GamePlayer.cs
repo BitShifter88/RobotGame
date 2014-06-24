@@ -1,6 +1,7 @@
 ﻿using Frame.Network.Common;
-using Frame.Network.Server;
+using Lidgren.Network;
 using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Projectiles;
 using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Hulls;
 using Macalania.Probototaker.Tanks.Plugins;
@@ -25,21 +26,25 @@ namespace Macalania.Robototaker.GameServer
 {
     class GamePlayer : GameObject
     {
-        public ClientConnectionUdp Connection { get; private set; }
+        public NetConnection Connection { get; private set; }
+        private NetServer _server;
         public string PlayerName { get; private set; }
         public string SessionId { get; set; }
         public int LastCommandId { get; set; }
+        public byte TankId { get; set; }
 
         public Tank Tank { get; set; }
 
         Mutex _playerMutex = new Mutex();
 
-        public GamePlayer(ClientConnectionUdp connection, string playerName, string sessionId, Room room)
+        public GamePlayer(NetConnection connection, NetServer server, string playerName, string sessionId, Room room, byte tankId)
             : base(room)
         {
+            TankId = tankId;
             Connection = connection;
             PlayerName = playerName;
             SessionId = sessionId;
+            _server = server;
         }
 
         /// <summary>
@@ -48,21 +53,55 @@ namespace Macalania.Robototaker.GameServer
         /// <param name="player"></param>
         public void OtherPlayerInfoMovement(GamePlayer player)
         {
-            Message m = new Message();
-            m.Write(Connection.Id);
+            NetOutgoingMessage m = _server.CreateMessage();
             m.Write((byte)RobotProt.OtherPlayerInfoMovement);
             m.Write(player.SessionId);
-            m.Write(player.Tank.Position.X +200);
+            m.Write(player.Tank.ServerSideTankId);
+            m.Write(player.Tank.Position.X);
             m.Write(player.Tank.Position.Y);
             m.Write(player.Tank.BodyRotation);
-            Console.WriteLine(player.Tank.BodyRotation);
+            
             m.Write(player.Tank.CurrentSpeed);
             m.Write(player.Tank.CurrentRotationSpeed);
-            m.Write((byte)player.Tank.DrivingDir);
-            m.Write((byte)player.Tank.RotationDir);
-            m.Write((ushort)player.Connection.Ping);
 
-            Connection.SendMessage(m, AirUdpProt.Unsafe);
+            byte packed = BytePacker.Pack((byte)player.Tank.DrivingDir, (byte)player.Tank.BodyDir, (byte)player.Tank.TurretDir, 0);
+            m.Write(packed);
+
+            m.Write(player.Tank.TurretRotation);
+
+            m.Write((ushort)(player.Connection.AverageRoundtripTime*1000f/2f));
+
+            Connection.SendMessage(m, NetDeliveryMethod.Unreliable, 0);
+        }
+
+        public void SendAbilityActivation(PluginType type, Vector2 targetPosition, Tank targetTank)
+        {
+
+        }
+
+        public void SendProjectileInfo(List<Projectile> projectiles)
+        {
+            NetOutgoingMessage m = _server.CreateMessage();
+            m.Write((byte)RobotProt.ProjectileInfo);
+
+            if (projectiles.Count > 256)
+                ServerLog.E("Tried to send more than 256 projectiles. This is not possible", LogType.CriticalError);
+
+            m.Write((byte)projectiles.Count);
+
+            foreach (Projectile p in projectiles)
+            {
+                m.Write((byte) p.ProjectileType);
+
+                m.Write((byte)p.Source.ServerSideTankId);
+
+                m.Write(p.Position.X);
+                m.Write(p.Position.Y);
+                m.Write(p.Direction.X);
+                m.Write(p.Direction.Y);
+            }
+
+            Connection.SendMessage(m, NetDeliveryMethod.Unreliable, 0);
         }
 
         /// <summary>
@@ -76,7 +115,7 @@ namespace Macalania.Robototaker.GameServer
             _playerMutex.WaitOne();
             if (commandId != LastCommandId)
             {
-                ServerLog.E("Ping " + Connection.Ping, LogType.Debug);
+                //ServerLog.E("Ping " + (Connection.AverageRoundtripTime * 1000f) / 2f, LogType.Debug);
                 int difference = commandId - LastCommandId;
                 if (broadcastCount > 0)
                 {
@@ -87,7 +126,7 @@ namespace Macalania.Robototaker.GameServer
 
                 //ServerLog.E("When recieve " + Tank.BodyRotation, LogType.GameActivity);
 
-                double timeinterval = ((double)Connection.Ping) / 100d;
+                //double timeinterval = ((double)Connection.Ping) / 100d;
 
                 //for (int i = 0; i < 100; i++)
                 //{
@@ -96,7 +135,10 @@ namespace Macalania.Robototaker.GameServer
                 //ServerLog.E("After reverse " + Tank.BodyRotation, LogType.GameActivity);
 
                 Tank.Thruttle(playerMovement.DrivingDir);
-                Tank.RotateBody(playerMovement.RotationDir);
+                Tank.RotateBody(playerMovement.BodyDir);
+                Tank.TurretDir = playerMovement.TurretDir;
+                Tank.TurretRotation = playerMovement.TurretRotation;
+                Tank.MainGunFirering = playerMovement.MainGunFirering;
 
                 //Tank.Update(1000d / 60d);
 
@@ -126,20 +168,19 @@ namespace Macalania.Robototaker.GameServer
             if (Tank == null)
                 return;
 
-            Vector2 pos = Tank.MovePosition(Tank.Position, 1000f / 60f);
-            float rot = Tank.DoRotation(Tank.BodyRotation, 1000f / 60f);
+            Vector2 pos = Tank.MovePosition(Tank.Position, Tank.CurrentSpeed,  1000f / 60f);
+            float rot = Tank.DoBodyRotation(Tank.BodyRotation, Tank.CurrentRotationSpeed, 1000f / 60f);
 
             //Console.WriteLine(Connection.Ping);
 
-            Message m = new Message();
-            m.Write(Connection.Id);
+            NetOutgoingMessage m = _server.CreateMessage();
+
             m.Write((byte)RobotProt.PlayerCompensation);
             m.Write(pos.X);
             m.Write(pos.Y);
             m.Write(rot);
 
-            Connection.SendMessage(m, AirUdpProt.Unsafe);
-
+            Connection.SendMessage(m, NetDeliveryMethod.Unreliable, 0);
         }
 
         public override void Load(ResourceManager content)
@@ -235,6 +276,8 @@ namespace Macalania.Robototaker.GameServer
             //r.SetTank(t1);
             //r.Load(content);
             //t.AddPluginRightSide(r, 0);
+
+            t1.ServerSideTankId = TankId;
 
             Tank = t1;
 

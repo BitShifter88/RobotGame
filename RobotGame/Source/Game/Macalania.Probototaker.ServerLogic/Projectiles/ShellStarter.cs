@@ -14,8 +14,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class ShellStarter : Shell
     {
-        public ShellStarter(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed)
+        public ShellStarter(Room room, Tank tankSource, Vector2 position, Vector2 direction)
+            : base(room, tankSource, position, direction, 0.5f, ProjectileType.ShellStarter)
         {
             Damage = new Damage() { TankDamage = 10, AmorPenetration = 10, ComponentDamage = 2 };
         }

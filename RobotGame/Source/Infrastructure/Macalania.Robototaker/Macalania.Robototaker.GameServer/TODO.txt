@@ -3,3 +3,5 @@ connectionid er en long... er det nu også en god ide?
 Tidsmaskinen i PlayerMovement virker ikke optimal
 
 Det er et problem at Frame.Network laver nye threads hele tiden. Der skal være en pool
+
+Når der sendes data om et projektil sendes dens direction (Vector2). Dette kan spare væk ved at sende turretens rotation (float) i stedet for

@@ -11,18 +11,22 @@ namespace Macalania.Probototaker
         static YunaGameEngine _engine;
         static void Main(string[] args)
         {
+#if VERBOSE
             try
             {
+            #endif
                 using (_engine = new YunaGameEngine())
                 {
                     _engine.EngineStarted += new YunaGameEngine.EngineStartedEventHandler(OnEngineStart);
                     _engine.Run();
                 }
+#if VERBOSE
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
+#endif
         }
 
         static void OnEngineStart()

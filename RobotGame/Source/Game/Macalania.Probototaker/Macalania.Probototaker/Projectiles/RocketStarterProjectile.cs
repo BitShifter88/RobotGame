@@ -15,14 +15,14 @@ namespace Macalania.Probototaker.Projectiles
     public class RocketStarterProjectile : Rocket
     {
         public RocketStarterProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed)
+            : base(room, tankSource, position, direction, speed, ProjectileType.RocketStarterProjectile)
         {
 
         }
 
         public override void Update(double dt)
         {
-            if (Flying)
+            if (Fired)
             {
                 base.Update(dt);
                 Speed += (float)dt * 0.003f;

@@ -16,7 +16,7 @@ namespace Macalania.Probototaker.Rooms
     public class GameRoom : SimulationRoom
     {
         public GameCommunication GameCommunication { get; private set; }
-        public Dictionary<string, OtherPlayer> OtherPlayers { get; set; }
+        public Dictionary<byte, OtherPlayer> OtherPlayers { get; set; }
         public OtherPlayer GhostPlayer { get; set; }
         public Player Player { get; set; }
         GameNetwork _gn;
@@ -24,7 +24,7 @@ namespace Macalania.Probototaker.Rooms
         public GameRoom(GameNetwork gn)
         {
             _gn = gn;
-            OtherPlayers = new Dictionary<string, OtherPlayer>();
+            OtherPlayers = new Dictionary<byte, OtherPlayer>();
         }
 
         public override void Inizialize()
@@ -38,15 +38,18 @@ namespace Macalania.Probototaker.Rooms
             OtherPlayer op2 = new OtherPlayer(this, 2);
             AddGameObject(op2);
 
+            OtherPlayer op3 = new OtherPlayer(this, 3);
+            AddGameObject(op3);
+
             GhostPlayer = new OtherPlayer(this, 1);
             AddGameObject(GhostPlayer);
 
             base.Inizialize();
         }
 
-        public void OtherPlayerInfoMovement(string sessionId, Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, ushort ping)
+        public void OtherPlayerInfoMovement(string sessionId, Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection bodyDir, RotationDirection turretDir, float turretRotation, ushort ping, byte tankId)
         {
-            if (OtherPlayers.ContainsKey(sessionId) == false)
+            if (OtherPlayers.ContainsKey(tankId) == false)
             {
                 OtherPlayer op = new OtherPlayer(this, 1);
                 this.AddGameObjectWhileRunning(op);
@@ -55,13 +58,16 @@ namespace Macalania.Probototaker.Rooms
                 op.SetPosition(position);
                 op.GetTank().BodyRotation = bodyRotation;
                 op.GetTank().DrivingDir = drivingDir;
-                op.GetTank().RotationDir = rotationDir;
+                op.GetTank().BodyDir = bodyDir;
                 op.GetTank().CurrentSpeed = bodySpeed;
                 op.GetTank().BodyRotation = rotationSpeed;
+                op.GetTank().TurretDir = turretDir;
+                op.GetTank().TurretRotation = turretRotation;
+                op.GetTank().ServerSideTankId = tankId;
 
                 // The info from the srver is old. We fastforward the time for the tank, assuming drivingDir and rotationDir has not changed.
                 // The tank is aproxematly now the same place as on the other client
-                int totalDelay = ping + _gn.GetClientUdp().Connection.Ping;
+                int totalDelay = (int)((float)ping + (_gn.GetClientUdp().Connections[0].AverageRoundtripTime * 1000f / 2f));
                 int updatesBehind = (int)((double)totalDelay / (1000d / 60d));
 
                 Console.WriteLine(updatesBehind);
@@ -71,14 +77,12 @@ namespace Macalania.Probototaker.Rooms
                     op.GetTank().Update(1000d / 60d);
                 }
 
-                op.GetTank().SetServerEstimation(op.GetTank().Position, op.GetTank().BodyRotation, op.GetTank().CurrentSpeed, op.GetTank().CurrentRotationSpeed);
+                op.GetTank().SetServerEstimation(op.GetTank().Position, op.GetTank().BodyRotation, op.GetTank().CurrentSpeed, op.GetTank().CurrentRotationSpeed, turretRotation);
 
-
-                
-                OtherPlayers.Add(sessionId, op);
+                OtherPlayers.Add(tankId, op);
             }
 
-            OtherPlayers[sessionId].PlayerInfoMovement(position, bodyRotation, bodySpeed, rotationSpeed, drivingDir, rotationDir, ping, _gn.GetClientUdp().Connection.Ping);
+            OtherPlayers[tankId].PlayerInfoMovement(position, bodyRotation, bodySpeed, rotationSpeed, drivingDir, bodyDir, turretDir, turretRotation, ping, (int)(_gn.GetClientUdp().Connections[0].AverageRoundtripTime * 1000f / 2f));
         }
 
         public override void Update(double dt)

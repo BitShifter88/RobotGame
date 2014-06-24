@@ -17,6 +17,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
     public class ArtileryStarter : RocketBattery
     {
         public ArtileryStarter()
+            : base(PluginType.ArtileryStart)
         {
             Size = 3;
             _rockets = new ArtileryProjectile[6];
@@ -54,7 +55,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
             _rockets[index].SetPosition(p + Tank.Position);
 
-            _rockets[index].Direction = -Tank.GetTurretDirection();
+            _rockets[index].Direction = -Tank.GetTurretBodyDirection();
             _rockets[index] = null;
         }
         public override bool Activate(Vector2 point, Tank target)
@@ -67,7 +68,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretDirection(), 0.0f);
+                ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 10 * i, Sprite.Origin.Y);

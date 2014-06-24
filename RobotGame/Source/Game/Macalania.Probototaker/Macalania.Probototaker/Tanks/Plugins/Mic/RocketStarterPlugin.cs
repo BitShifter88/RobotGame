@@ -21,6 +21,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         bool _firstUpdate = true;
 
         public RocketStarterPlugin(PluginDirection dir)
+            : base(PluginType.RocketStarter)
         {
             _dir = dir;
             Size = 3;

@@ -18,6 +18,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         private PluginDirection _dir;
 
         public ShieldPlugin(PluginDirection dir)
+            : base(PluginType.Shield)
         {
             _dir = dir;
             Size = 1;

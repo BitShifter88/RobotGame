@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BytePacker.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="GamePlayer.cs" />
     <Compile Include="GameServerManager.cs" />
@@ -63,13 +64,17 @@
     <Compile Include="Simulation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj">
+      <Project>{49ba1c69-6104-41ac-a5d8-b54fa9f696e8}</Project>
+      <Name>Lidgren.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj">
       <Project>{5c659a89-db6c-4336-bc9d-e2c375ca6ffd}</Project>
       <Name>Macalania.Probototaker.ServerLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Frame.Network\Frame.Network.csproj">
-      <Project>{a4fbb6a1-cf29-49ce-9145-d72d89aad5b3}</Project>
-      <Name>Frame.Network</Name>
+    <ProjectReference Include="..\Macalania.Probototaker.ServerGlobals\Macalania.Probototaker.ServerGlobals.csproj">
+      <Project>{c67fa7e4-56e3-4329-b348-bf059e3d9135}</Project>
+      <Name>Macalania.Probototaker.ServerGlobals</Name>
     </ProjectReference>
     <ProjectReference Include="..\Macalania.Robototaker.Log\Macalania.Robototaker.Log.csproj">
       <Project>{4b88b8af-fef4-413c-bb2c-0ab0bb53c5d8}</Project>

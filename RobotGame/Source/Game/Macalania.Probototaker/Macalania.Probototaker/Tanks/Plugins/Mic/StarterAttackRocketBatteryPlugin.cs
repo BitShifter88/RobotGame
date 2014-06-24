@@ -17,6 +17,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
     public class StarterAttackRocketBatteryPlugin : RocketBattery
     {
         public StarterAttackRocketBatteryPlugin()
+            : base(PluginType.StarterAttackRocket)
         {
             Size = 2;
             _rockets = new AttackRocketProjectile[5];

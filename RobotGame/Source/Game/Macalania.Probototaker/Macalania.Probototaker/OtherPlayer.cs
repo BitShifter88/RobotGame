@@ -51,34 +51,38 @@ namespace Macalania.Probototaker
         public override void Load(ResourceManager content)
         {
             if (_tankNumber == 1)
-                _tank = TankGenerator.GenerateTank1(Room, content, new Vector2(800, 200));
+                _tank = TankGenerator.GenerateTank3(Room, content, new Vector2(800, 200));
             if (_tankNumber == 2)
                 _tank = TankGenerator.GenerateTank2(Room, content, new Vector2(1000, 200));
+            if (_tankNumber == 3)
+                _tank = TankGenerator.GenerateTank1(Room, content, new Vector2(600, 200));
 
             Room.AddGameObjectWhileRunning(_tank);
 
             base.Load(content);
         }
 
-        public void PlayerInfoMovement(Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, ushort otherClientPing, int playerPing)
+        public void PlayerInfoMovement(Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, RotationDirection turretDir, float turretRotation, ushort otherClientPing, int playerPing)
         {
-            Console.WriteLine(drivingDir);
+           // Console.WriteLine(drivingDir);
 
             _tank.DrivingDir = drivingDir;
-            _tank.RotationDir = rotationDir;
-            _tank.SetServerEstimation(position, bodyRotation, bodySpeed, rotationSpeed);
+            _tank.BodyDir = rotationDir;
+            _tank.TurretDir = turretDir;
+
+            _tank.SetServerEstimation(position, bodyRotation, bodySpeed, rotationSpeed, turretRotation);
 
             int totalDelay = otherClientPing + playerPing;
             int updatesBehind = (int)((double)totalDelay / (1000d / 60d)) + 1;
 
-            Console.WriteLine(updatesBehind);
+            //Console.WriteLine(updatesBehind);
 
             // Skruer tiden for meget frem af, for some reason
             for (int i = 0; i < updatesBehind; i++)
             {
                 _tank.UpdateServerEstimation(1000d / 60d);
             }
-            Console.WriteLine(_tank.EstimatedClientBodyRotation);
+            Console.WriteLine(_tank.Position.ToString());
             //SetPosition(position);
             //_tank.BodyRotation = bodyDirection;
         }

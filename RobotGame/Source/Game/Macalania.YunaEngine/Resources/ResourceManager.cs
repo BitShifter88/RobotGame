@@ -11,10 +11,16 @@ using System.Windows.Forms;
 
 namespace Macalania.YunaEngine.Resources
 {
+    public class YunaImage
+    {
+        public bool[,] ColMap;
+        public int Width;
+        public int Height;
+    }
     public class ResourceManager
     {
         ContentManager _content;
-        Dictionary<string, bool[,]> _images = new Dictionary<string, bool[,]>();
+        Dictionary<string, YunaImage> _images = new Dictionary<string, YunaImage>();
         public string ServerTextureFolder { get; set; }
         static Mutex _contentManagerMutex = new Mutex();
 
@@ -32,7 +38,7 @@ namespace Macalania.YunaEngine.Resources
 #if SERVER
             if (_images.ContainsKey(asset))
             {
-                return new YunaTexture(_images[asset]);
+                return new YunaTexture(_images[asset].ColMap, _images[asset].Width, _images[asset].Height);
             }
             else
             {
@@ -58,9 +64,9 @@ namespace Macalania.YunaEngine.Resources
                 btm.Dispose();
                 img.Dispose();
 
-                _images.Add(asset, transMap);
+                _images.Add(asset, new YunaImage() { ColMap = transMap, Width = img.Width, Height = img.Height });
 
-                return new YunaTexture(_images[asset]);
+                return new YunaTexture(transMap, img.Width, img.Height);
             }
 #endif
 #if !SERVER

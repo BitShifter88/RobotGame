@@ -6,6 +6,21 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins
 {
+    public enum PluginType : byte
+    {
+        Amor = 0,
+        ArtileryStart = 1,
+        MinePlayer = 2,
+        RocketStarter = 3,
+        Shield = 4,
+        StarterAntiRocketLaser = 5,
+        SunPannel = 9,
+        MiniMainGun = 6,
+        SprayMainGun = 7,
+        StarterMainGun = 8,
+        Battery = 10,
+        StarterAttackRocket = 11,
+    }
     public enum PluginDirection
     {
         Top,
@@ -21,6 +36,17 @@ namespace Macalania.Probototaker.Tanks.Plugins
         public float Cooldown { get; set; }
         public float MaxCooldown { get; set; }
         public float PowerUsage { get; set; }
+
+        // Attributes given to the tank
+        public float AmorPoints { get; set; }
+        public float PowerRegen { get; set; }
+
+        public PluginType PluginType { get; set; }
+
+        public Plugin(PluginType type)
+        {
+            PluginType = type;
+        }
 
         public void SetOriginFromTurret(Vector2 origin)
         {

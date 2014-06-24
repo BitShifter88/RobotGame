@@ -11,10 +11,10 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class Shell : Projectile
     {
-        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed)
+        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, ProjectileType type)
+            : base(room, tankSource, position, direction, speed, type)
         {
-
+            Flying = true;
         }
 
         protected override void OnCollisionWithShield(Shield s)

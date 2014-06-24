@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Macalania.Probototaker.Tanks;
 using System.Threading;
-using Frame.Network.Common;
-using Frame.Network.Server;
 using Macalania.Robototaker.Protocol;
+using Lidgren.Network;
+using Frame.Network.Common;
+using Macalania.Probototaker.Tanks.Plugins;
+using Microsoft.Xna.Framework;
 
 namespace Macalania.Probototaker.Network
 {
@@ -32,12 +34,7 @@ namespace Macalania.Probototaker.Network
 
         public void ReadyGameCommunication()
         {
-            while (_gn.Authenticated == false)
-            {
-                Thread.Sleep(1);
-            }
-
-            _lastPlayerMovement = new PlayerMovement() { DrivingDir = DrivingDirection.Still, RotationDir = RotationDirection.Still };
+            _lastPlayerMovement = new PlayerMovement() { DrivingDir = DrivingDirection.Still, BodyDir = RotationDirection.Still };
             _commandCounter = 0;
             _countBroadcast = 0;
             if (_sendThread != null)
@@ -56,18 +53,44 @@ namespace Macalania.Probototaker.Network
 
         private void SendPlayerMovement(PlayerMovement pm)
         {
-            Message message = new Message();
-            message.Write(_gn.GetClientUdp().Connection.Id);
+            NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
+
             message.Write((byte)RobotProt.PlayerMovement);
+
+            byte firering = 0;
+
+            if (pm.MainGunFirering == true)
+                firering = 1;
+
+            byte packed = BytePacker.Pack((byte)pm.DrivingDir, (byte)pm.BodyDir, (byte)pm.TurretDir, firering);
+            message.Write(packed);
+
+            message.Write(pm.TurretRotation);
+
             message.Write(_commandCounter);
             message.Write((byte)_countBroadcast);
-            message.Write((byte)pm.DrivingDir);
-            message.Write((byte)pm.RotationDir);
 
-            _gn.GetClientUdp().Connection.SendMessage(message, AirUdpProt.Unsafe);
+            _gn.GetClientUdp().SendMessage(message, NetDeliveryMethod.Unreliable, 0);
             Console.WriteLine("Broadcast. broadcastCount: " + _countBroadcast + "    Command counter: " + _commandCounter);
             _countBroadcast++;
             _broadcastIntervalCounter = _broadcastInterval;
+        }
+
+        public void SendAbilityActivation(PluginType type, Tank targetTank, Vector2 targetPosition)
+        {
+            NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
+
+            message.Write((byte)RobotProt.AbilityActivation);
+            message.Write((byte)type);
+
+            if (type == PluginType.ArtileryStart)
+            {
+                message.Write(targetPosition.X);
+                message.Write(targetPosition.Y);
+            }
+            
+
+            _gn.GetClientUdp().SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void SetLastPlayerMovement(PlayerMovement pm)

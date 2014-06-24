@@ -42,6 +42,8 @@ namespace Macalania.Probototaker.Tanks
 
     public class Tank : GameObject
     {
+        public byte ServerSideTankId { get; set; }
+
         public Hull Hull { get; private set; }
         public Track Track { get; private set; }
         public Turret Turret { get; private set; }
@@ -49,26 +51,50 @@ namespace Macalania.Probototaker.Tanks
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
         public float CurrentHp { get; set; }
-        public float MaxHp { get; set; }
         public bool Dead { get; set; }
         public bool SheeldEnabled { get; set; }
         public bool ArtilleryFirering { get; set; }
         public DrivingDirection DrivingDir { get; set; }
-        public RotationDirection RotationDir { get; set; }
+        public RotationDirection BodyDir { get; set; }
+        public RotationDirection TurretDir { get; set; }
+        public bool MainGunFirering { get; set; }
         public float CurrentSpeed { get; set; }
-        public float MaxSpeed { get; set; }
-        public float Acceleration { get; set; }
         public float RotationAcceleration { get; set; }
         public float CurrentRotationSpeed { get; set; }
-        public float MaxRotationSpeed { get; set; }
 
-        bool _serverCompensation = false;
+        public float TurretRotationSpeed { get; set; }
+
+        // Used for player latency compensation
+        bool _serverPlayerCompensation = false;
         public Vector2 LastKnownServerTankPosition { get; set; }
         public float LastKnownServerTankBodyRotation { get; set; }
+        // Used for other player latency compensation
+
+        bool _otherClientControled = false;
+        public Vector2 EstimatedClientPosition { get; set; }
+        public float EstimatedClientBodyRotation { get; set; }
+        public float EstimatedClientBodyRotationSpeed { get; set; }
+        public float EstimatedClientBodySpeed { get; set; }
+        public float EstimatedClientTurretRotation { get; set; }
 
         private List<TankLogEntry> TankLog = new List<TankLogEntry>();
 
-        //public BoundingSphere BoundingSphere { get; set; }
+
+        public long Id { get; set; }
+
+
+        // Attributes
+
+        public float AmorPoints { get; set; }
+        public float PowerRegen { get; set; }
+        public float MaxSpeed { get; set; }
+        public float MaxHp { get; set; }
+        public float MaxPower { get; set; }
+        public float MaxRotationSpeed { get; set; }
+        public float Acceleration { get; set; }
+        public float Weight { get; set; }
+        public float HorsePower { get; set; }
+        public float HullBearing { get; set; }
 
         public Tank(Room room, Vector2 position)
             : base(room)
@@ -83,12 +109,26 @@ namespace Macalania.Probototaker.Tanks
             CheckIfDead();
         }
 
+        public void SetServerEstimation(Vector2 position, float bodyRotation, float bodySpeed, float bodyRotationSpeed, float turretRotation)
+        {
+            EstimatedClientPosition = position;
+            EstimatedClientBodyRotation = bodyRotation;
+            EstimatedClientBodySpeed = bodySpeed;
+            EstimatedClientBodyRotationSpeed = bodyRotationSpeed;
+            EstimatedClientTurretRotation = turretRotation;
+
+            _otherClientControled = true;
+        }
+
         public void SetLastKnownServerInfo(Vector2 position, float bodyRotation, int latency)
         {
             TurnTimeForwardForOldPositionAndBodyRotation(ref position, ref bodyRotation, (float)latency * 2);
+
+            //Console.WriteLine(Vector2.Distance(position, Position));
+
             LastKnownServerTankPosition = position; // MovePosition(position, (float)latency * 2);
             LastKnownServerTankBodyRotation = bodyRotation; // DoRotation(bodyRotation, latency);
-            _serverCompensation = true;
+            _serverPlayerCompensation = true;
         }
 
         public void TurnTimeForwardForOldPositionAndBodyRotation(ref Vector2 position, ref float bodyRotation, float ageOfPosition)
@@ -163,25 +203,43 @@ namespace Macalania.Probototaker.Tanks
 
         public void ReadyTank()
         {
-            CurrentPower = GetMaxPower();
-            CurrentHp = GetMaxHp();
-
             foreach (Plugin p in Turret.Plugins)
             {
                 p.Ready();
             }
 
+            DrivingDir = DrivingDirection.Still;
+            BodyDir = RotationDirection.Still;
+
+            CalculateAttributes();
+        }
+
+        private void CalculateAttributes()
+        {
+            MaxPower = GetMaxPower();
+            CurrentPower = MaxPower;
+
+            CurrentHp = GetMaxHp();
+
             MaxHp = GetMaxHp();
             CurrentHp = MaxHp;
-
-            DrivingDir = DrivingDirection.Still;
 
             MaxSpeed = 0.15f;
             Acceleration = 0.0001f;
 
             MaxRotationSpeed = 0.0015f;
             RotationAcceleration = 0.000004f;
-            //CalculateBoundingSphere();
+
+            TurretRotationSpeed = 0.0006f;
+
+            AmorPoints = 0;
+            PowerRegen = 0;
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                AmorPoints += p.AmorPoints;
+                PowerRegen += p.PowerRegen;
+            }
         }
 
 
@@ -213,9 +271,11 @@ namespace Macalania.Probototaker.Tanks
             return new Vector2((float)Math.Cos((double)BodyRotation - MathHelper.ToRadians(90)), (float)Math.Sin((double)BodyRotation - MathHelper.ToRadians(90)));
         }
 
-        public  Vector2 GetTurretDirection()
+        public  Vector2 GetTurretBodyDirection()
         {
-            return new Vector2((float)Math.Cos((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)));
+            Vector2 dir = new Vector2((float)Math.Cos((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)), (float)Math.Sin((double)TurretRotation + BodyRotation + MathHelper.ToRadians(90)));
+            dir.Normalize();
+            return dir;
         }
 
         public float GetTurrentBodyRotation()
@@ -240,11 +300,12 @@ namespace Macalania.Probototaker.Tanks
 
         public void FireMainGun()
         {
-            if (ArtilleryFirering)
-                return;
-            if (SheeldEnabled)
-                return;
-            Turret.FireMainGun();
+            MainGunFirering = true;
+        }
+
+        public void StopFireMainGun()
+        {
+            MainGunFirering = false;
         }
 
         public void Thruttle(DrivingDirection dir)
@@ -260,7 +321,7 @@ namespace Macalania.Probototaker.Tanks
             if (ArtilleryFirering)
                 return;
 
-            Vector2 turretRotation = GetTurretDirection();
+            Vector2 turretRotation = GetTurretBodyDirection();
             Vector2 pointDir = Position - point;
             pointDir.Normalize();
 
@@ -272,94 +333,108 @@ namespace Macalania.Probototaker.Tanks
             if (angleAfterExtra > angle)
             {
                 if (angle > 0.005f)
-                    TurretRotation -= 0.01f;
+                {
+                    TurretDir = RotationDirection.ClockWise;
+                }
+                else
+                    TurretDir = RotationDirection.Still;
             }
             else
             {
                 if (angle > 0.005f)
-                    TurretRotation += 0.01f;
+                {
+                    TurretDir = RotationDirection.CounterClockWise;
+                }
+                else
+                {
+                    TurretDir = RotationDirection.Still;
+                }
             }
         }
 
-        private void AccelerateTank(double dt)
+        private float AccelerateTank(double dt, float currentSpeed)
         {
             if (DrivingDir == DrivingDirection.Forward)
             {
                 if (CurrentSpeed < 0)
                 {
-                    CurrentSpeed += Acceleration * 2 * (float)dt;
+                    currentSpeed += Acceleration * 2 * (float)dt;
                 }
                 else
                 {
-                    CurrentSpeed += Acceleration * (float)dt;
+                    currentSpeed += Acceleration * (float)dt;
                 }
             }
             if (DrivingDir == DrivingDirection.Backwards)
             {
-                if (CurrentSpeed > 0)
+                if (currentSpeed > 0)
                 {
-                    CurrentSpeed -= Acceleration * 2 * (float)dt;
+                    currentSpeed -= Acceleration * 2 * (float)dt;
                 }
                 else
                 {
-                    CurrentSpeed -= Acceleration * (float)dt;
+                    currentSpeed -= Acceleration * (float)dt;
                 }
             }
             if (DrivingDir == DrivingDirection.Still)
             {
-                float beforeSpeed = CurrentSpeed;
-                if (CurrentSpeed > 0)
-                    CurrentSpeed -= Acceleration * 2 * (float)dt;
+                float beforeSpeed = currentSpeed;
+                if (currentSpeed > 0)
+                    currentSpeed -= Acceleration * 2 * (float)dt;
                 else if (CurrentSpeed < 0)
-                    CurrentSpeed += Acceleration * 2 * (float)dt;
+                    currentSpeed += Acceleration * 2 * (float)dt;
 
-                if ((beforeSpeed > 0 && CurrentSpeed < 0) || (beforeSpeed < 0 && CurrentSpeed > 0))
-                    CurrentSpeed = 0;
+                if ((beforeSpeed > 0 && currentSpeed < 0) || (beforeSpeed < 0 && currentSpeed > 0))
+                    currentSpeed = 0;
             }
 
-            if (CurrentSpeed > MaxSpeed)
-                CurrentSpeed = MaxSpeed;
-            if (CurrentSpeed < -MaxSpeed)
-                CurrentSpeed = -MaxSpeed;
+            if (currentSpeed > MaxSpeed)
+                currentSpeed = MaxSpeed;
+            if (currentSpeed < -MaxSpeed)
+                currentSpeed = -MaxSpeed;
+
+            return currentSpeed;
         }
 
-        public Vector2 MovePosition(Vector2 pos, float dt)
+        public Vector2 MovePosition(Vector2 pos, float currentSpeed, float dt)
         {
-            pos = pos + CurrentSpeed * GetBodyDirection() * dt;
+            pos = pos + currentSpeed * GetBodyDirection() * dt;
             return pos;
         }
        
-        private void AccelerateRotateTank(double dt)
+        private float AccelerateRotateTank(double dt, float currentRotationSpeed)
         {
-            if (RotationDir == RotationDirection.ClockWise)
+            if (BodyDir == RotationDirection.ClockWise)
             {
-                CurrentRotationSpeed += RotationAcceleration * (float)dt;
+                currentRotationSpeed += RotationAcceleration * (float)dt;
             }
-            if (RotationDir == RotationDirection.CounterClockWise)
+            if (BodyDir == RotationDirection.CounterClockWise)
             {
-                CurrentRotationSpeed -= RotationAcceleration * (float)dt;
+                currentRotationSpeed -= RotationAcceleration * (float)dt;
             }
-            if (RotationDir == RotationDirection.Still)
+            if (BodyDir == RotationDirection.Still)
             {
-                float beforeSpeed = CurrentRotationSpeed;
-                if (CurrentRotationSpeed > 0)
-                    CurrentRotationSpeed -= RotationAcceleration * (float)dt;
+                float beforeSpeed = currentRotationSpeed;
+                if (currentRotationSpeed > 0)
+                    currentRotationSpeed -= RotationAcceleration * (float)dt;
                 else if (CurrentRotationSpeed < 0)
-                    CurrentRotationSpeed += RotationAcceleration * (float)dt;
+                    currentRotationSpeed += RotationAcceleration * (float)dt;
 
-                if ((beforeSpeed > 0 && CurrentRotationSpeed < 0) || (beforeSpeed < 0 && CurrentRotationSpeed > 0))
-                    CurrentRotationSpeed = 0;
+                if ((beforeSpeed > 0 && currentRotationSpeed < 0) || (beforeSpeed < 0 && currentRotationSpeed > 0))
+                    currentRotationSpeed = 0;
             }
 
-            if (CurrentRotationSpeed > MaxRotationSpeed)
-                CurrentRotationSpeed = MaxRotationSpeed;
-            if (CurrentRotationSpeed < -MaxRotationSpeed)
-                CurrentRotationSpeed = -MaxRotationSpeed;
+            if (currentRotationSpeed > MaxRotationSpeed)
+                currentRotationSpeed = MaxRotationSpeed;
+            if (currentRotationSpeed < -MaxRotationSpeed)
+                currentRotationSpeed = -MaxRotationSpeed;
+
+            return currentRotationSpeed;
         }
 
-        public float DoRotation(float rotation, float dt)
+        public float DoBodyRotation(float rotation, float currentRotationSpeed, float dt)
         {
-            return rotation + CurrentRotationSpeed * (float)dt;
+            return rotation + currentRotationSpeed * (float)dt;
         }
 
         public void RotateBody(RotationDirection dir)
@@ -367,47 +442,122 @@ namespace Macalania.Probototaker.Tanks
             if (ArtilleryFirering)
                 return;
 
-            RotationDir = dir;
+            BodyDir = dir;
         }
-
-        int smoothCounter = 0;
-        private void ServerCompensation(double dt)
+        private void SmoothOtherClient(double dt)
         {
-            if (_serverCompensation == false)
+            if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f && CurrentSpeed > MaxSpeed / 10f)
+            {
+                //Vector2 smooti = new Vector2((Position.X - EstimatedClientPosition.X) * 0.01f, (Position.Y - EstimatedClientPosition.Y) * 0.01f);
+
+                SetPosition(new Vector2(Position.X - (Position.X - EstimatedClientPosition.X) * 0.1f, Position.Y - (Position.Y - EstimatedClientPosition.Y) * 0.1f));
+            }
+            if (Math.Abs((BodyRotation - EstimatedClientBodyRotation)) > 0.000003f)
+            {
+                BodyRotation = BodyRotation - ((BodyRotation - EstimatedClientBodyRotation) * 0.1f);
+                //Console.WriteLine("Smoothing rotation");
+            }
+
+            if (Math.Abs(TurretRotation - EstimatedClientTurretRotation) > 0.000003f)
+            {
+                TurretRotation = TurretRotation - ((TurretRotation - EstimatedClientTurretRotation) * 0.1f);
+            }
+        }
+        private void SmoothPlayerCompensation(double dt)
+        {
+            if (_serverPlayerCompensation == false)
                 return;
+            if (CurrentSpeed < MaxSpeed / 10f)
+                return;
+
             if (Vector2.Distance(LastKnownServerTankPosition, Position) > 0.1f)
             {
-                smoothCounter++;
-                Vector2 smooti = new Vector2((Position.X - LastKnownServerTankPosition.X) * 0.1f,(Position.Y - LastKnownServerTankPosition.Y) * 0.1f);
+                //Vector2 smooti = new Vector2((Position.X - LastKnownServerTankPosition.X) * 0.1f,(Position.Y - LastKnownServerTankPosition.Y) * 0.1f);
 
-                SetPosition(new Vector2(Position.X - (Position.X - LastKnownServerTankPosition.X) * 0.1f, Position.Y - (Position.Y - LastKnownServerTankPosition.Y) * 0.1f));
-                Console.WriteLine(smoothCounter +"  "+ smooti.Length());
+                SetPosition(new Vector2(Position.X - (Position.X - LastKnownServerTankPosition.X) * 0.01f, Position.Y - (Position.Y - LastKnownServerTankPosition.Y) * 0.01f));
             }
             if (Math.Abs((BodyRotation - LastKnownServerTankBodyRotation)) > 0.000003f)
             {
-                BodyRotation = BodyRotation - ((BodyRotation - LastKnownServerTankBodyRotation) * 0.1f);
+                BodyRotation = BodyRotation - ((BodyRotation - LastKnownServerTankBodyRotation) * 0.01f);
                 //Console.WriteLine("Smoothing rotation");
             }
         }
 
+        public void UpdateServerPositionRotation(double dt)
+        {
+            LastKnownServerTankPosition = MovePosition(LastKnownServerTankPosition, CurrentSpeed, (float)dt);
+            LastKnownServerTankBodyRotation = DoBodyRotation(LastKnownServerTankBodyRotation, CurrentRotationSpeed, (float)dt);
+        }
+
+        public void UpdateServerEstimation(double dt)
+        {
+            EstimatedClientBodySpeed = AccelerateTank(dt, EstimatedClientBodySpeed);
+            EstimatedClientBodyRotationSpeed = AccelerateRotateTank(dt, EstimatedClientBodyRotationSpeed);
+
+            EstimatedClientPosition = MovePosition(EstimatedClientPosition, EstimatedClientBodySpeed, (float)dt);
+            EstimatedClientBodyRotation = DoBodyRotation(EstimatedClientBodyRotation, EstimatedClientBodyRotationSpeed, (float)dt);
+
+            EstimatedClientTurretRotation = RotateTurret(dt, EstimatedClientTurretRotation);
+        }
+
+        private float RotateTurret(double dt, float turretRotation)
+        {
+            if (TurretDir == RotationDirection.CounterClockWise)
+                turretRotation += TurretRotationSpeed * (float)dt;
+            if (TurretDir == RotationDirection.ClockWise)
+                turretRotation -= TurretRotationSpeed * (float)dt;
+
+            return turretRotation;
+        }
+
+        private void UpdateMainGun()
+        {
+            if (ArtilleryFirering)
+                return;
+            if (SheeldEnabled)
+                return;
+
+            if (MainGunFirering)
+                Turret.FireMainGun();
+        }
+
         public override void Update(double dt)
         {
-            AccelerateTank(dt);
-            SetPosition(MovePosition(Position, (float)dt));
-            if (_serverCompensation)
-                LastKnownServerTankPosition = MovePosition(LastKnownServerTankPosition, (float)dt);
+            CurrentSpeed = AccelerateTank(dt, CurrentSpeed);
+            SetPosition(MovePosition(Position, CurrentSpeed, (float)dt));
+                
+            CurrentRotationSpeed = AccelerateRotateTank(dt, CurrentRotationSpeed);
+            BodyRotation = DoBodyRotation(BodyRotation, CurrentRotationSpeed, (float)dt);
 
-            AccelerateRotateTank(dt);
-            BodyRotation = DoRotation(BodyRotation, (float)dt);
-            if (_serverCompensation)
-                LastKnownServerTankBodyRotation = DoRotation(LastKnownServerTankBodyRotation, (float)dt);
+            TurretRotation = RotateTurret(dt, TurretRotation);
 
-            ServerCompensation(dt);
+            if (_serverPlayerCompensation)
+            {
+                UpdateServerPositionRotation(dt);
+                SmoothPlayerCompensation(dt);
+            }
+
+            if (_otherClientControled)
+            {
+                UpdateServerEstimation(dt);
+                SmoothOtherClient(dt);
+            }
+
+            
             Hull.Update(dt);
             Turret.Update(dt);
             Track.Update(dt);
 
+            UpdateMainGun();
+
+            UpdatePowerRegen(dt);
+
             LogTank(dt);
+        }
+
+        private void UpdatePowerRegen(double dt)
+        {
+            AddPower((float)dt * PowerRegen / 100f);
         }
 
         private void LogTank(double dt)
@@ -439,14 +589,35 @@ namespace Macalania.Probototaker.Tanks
                 CurrentPower = GetMaxPower();
         }
 
-        public void ActivatePlugin(Plugin p, Vector2 targetPosition, Tank targetTank)
+        public bool ActivatePlugin(PluginType type, Vector2 targetPosition, Tank targetTank)
         {
-            if (ArtilleryFirering)
-                return;
-            if (SheeldEnabled)
-                return;
-            Turret.ActivatePlugin(p, targetPosition, targetTank);
+            List<Plugin> pluginsOfType = new List<Plugin>();
+
+            foreach (Plugin p in Turret.Plugins)
+            {
+                if (p.PluginType == type)
+                    pluginsOfType.Add(p);
+            }
+
+            foreach (Plugin p in pluginsOfType)
+            {
+                if (p.Activate(targetPosition, targetTank) == false)
+                    continue;
+                else
+                    return true;
+            }
+
+            return false;
         }
+
+        //public void ActivatePlugin(Plugin p, Vector2 targetPosition, Tank targetTank)
+        //{
+        //    if (ArtilleryFirering)
+        //        return;
+        //    if (SheeldEnabled)
+        //        return;
+        //    Turret.ActivatePlugin(p, targetPosition, targetTank);
+        //}
 
         public float GetMaxPower()
         {
@@ -481,7 +652,7 @@ namespace Macalania.Probototaker.Tanks
         public override void Draw(IRender render, Camera camera)
         {
             Hull.Draw(render, camera);
-            //Turret.Draw(render, camera);
+            Turret.Draw(render, camera);
         }
     }
 }

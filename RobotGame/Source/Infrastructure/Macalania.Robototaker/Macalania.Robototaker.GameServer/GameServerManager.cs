@@ -1,11 +1,13 @@
-﻿using Frame.Network.Client;
-using Frame.Network.Common;
-using Frame.Network.Server;
+﻿using Frame.Network.Common;
+using Lidgren.Network;
 using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
+using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,9 +20,16 @@ namespace Macalania.Robototaker.GameServer
 {
     public class GameServerManager
     {
-        ServerUdp _server;
-        Simulation _world;
-        List<PotentialPlayer> _potPlayers = new List<PotentialPlayer>();
+        NetServer Server;
+        NetPeerConfiguration Config;
+        private Thread _messageThread;
+
+        private bool _stop = false;
+
+        byte _gameServerTankId = 0;
+        
+        ServerGame _game;
+        ServerRoom _room;
         Mutex _connectionMutex = new Mutex();
 
         ResourceManager _content;
@@ -28,89 +37,160 @@ namespace Macalania.Robototaker.GameServer
         public void StartServer()
         {
             _content = new ResourceManager(null);
-            _world = new Simulation(_content);
 
-            _server = new ServerUdp();
-            _server.NewUdpMessageReceived += new ServerUdp.NewUdpMessageReceivedEventHandler(OnNewMessage);
-            _server.NewUdpConnection += new ServerUdp.NewUdpConnectionEventHandler(OnNewConnection);
-            _server.ClosedConnection += new ServerUdp.ClosedConnectionEventHandler(OnConnectionClosed);
+            Config = new NetPeerConfiguration("game");
+#if DEBUG
+            Config.SimulatedMinimumLatency = 0.015f;
+#endif
 
-            _server.StartServer(9999, 4000);
+            Config.Port = 9999;
+            Config.MaximumConnections = 200;
+            Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
+            Server = new NetServer(Config);
 
+            // Start it
+            Server.Start();
+
+            _game = new ServerGame(_content, Server);
+            _room = (ServerRoom)RoomManager.Instance.GetActiveRoom();
+
+            _messageThread = new Thread(new ThreadStart(MessageThreadMethod));
+            _messageThread.Start();
+
+            ServerLog.E("Server started!", LogType.ConnectionStatus);
         }
 
-        private void OnNewMessage(object sender, NewUdpClientMessageReceivedEventArgs e)
+        private void OnAbilityActivation(NetIncomingMessage mr, NetConnection connection)
         {
-            MessageReader mr = new MessageReader();
-            mr.SetNewMessage(e.Message, 0);
+            PluginType type = (PluginType)mr.ReadByte();
 
-            RobotProt header = (RobotProt)mr.ReadByte();
+            Vector2 targetPos = Vector2.Zero;
 
-            if (header == RobotProt.PlayerIdentification)
+            if (type == PluginType.ArtileryStart)
             {
-                PlayerIdentification(mr, e.Connection);
-            }
-            if (header == RobotProt.PlayerMovement)
-            {
-                UserInput(mr, e.Connection);
+                targetPos = new Vector2(mr.ReadFloat(), mr.ReadFloat());
             }
 
-            //if (header == RobotProt.UserInput)
-            //{
-            //    UserInput(mr, e.Connection);
-            //}
+            _room.ActivatePlugin(type, connection.RemoteUniqueIdentifier, 0, targetPos);
         }
 
-        private void PlayerIdentification(MessageReader mr, ClientConnectionUdp connection)
+        private void MessageThreadMethod()
         {
-            string username = mr.ReadString();
-            string sessionId = mr.ReadString();
+            NetIncomingMessage inc;
 
-            _connectionMutex.WaitOne();
-            bool potPlayerFound = false;
-            for (int i = 0; i < _potPlayers.Count; i++)
+            while (_stop == false)
             {
-                if (_potPlayers[i].Connection.Id == connection.Id)
+                if ((inc = Server.ReadMessage()) != null)
                 {
-                    OnPlayerIdentified(_potPlayers[i].Connection, username, sessionId);
-                    potPlayerFound = true;
-                    _potPlayers.Remove(_potPlayers[i]);
-                    break;
+                    // Theres few different types of messages. To simplify this process, i left only 2 of em here
+                    switch (inc.MessageType)
+                    {
+                        case NetIncomingMessageType.ConnectionApproval:
+                            {
+                                inc.SenderConnection.Approve();
+                                string username = inc.ReadString();
+                                string sessionId = inc.ReadString();
+
+                                OnPlayerIdentified(inc.SenderConnection, username, sessionId);
+                            }
+                            break;
+                        case NetIncomingMessageType.StatusChanged:
+                            {
+                                NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
+                                if (status == NetConnectionStatus.Disconnected)
+                                {
+                                    OnConnectionClosed(inc.SenderConnection);
+                                }
+                            }
+                            break;
+                        case NetIncomingMessageType.Data:
+                            {
+                                RobotProt header = (RobotProt)inc.ReadByte();
+
+                                if (header == RobotProt.PlayerMovement)
+                                {
+                                    UserInput(inc, inc.SenderConnection);
+                                }
+                                if (header == RobotProt.AbilityActivation)
+                                {
+                                    OnAbilityActivation(inc, inc.SenderConnection);
+                                }
+                            }
+                            break;
+                        case NetIncomingMessageType.WarningMessage:
+                                {
+                                    ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                                }
+                            break;
+                        case NetIncomingMessageType.Error:
+                            {
+                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            }
+                            break;
+                        case NetIncomingMessageType.VerboseDebugMessage:
+                            {
+                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            }
+                            break;
+                        case NetIncomingMessageType.DebugMessage:
+                            {
+                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            }
+                            break;
+                    }
+
+                    Server.Recycle(inc);
                 }
+                else
+                    Thread.Sleep(1);
             }
-            if (potPlayerFound == false)
-            {
-                AuthenticationResponse(connection, false);
-                ServerLog.E("Player identification did not match a valid connection", LogType.Security);
-            }
+        }
+
+        public void StopServer()
+        {
+            _stop = true;
+        }
+
+        private void OnPlayerIdentified(NetConnection connection, string username, string sessionId)
+        {
+            _connectionMutex.WaitOne();
+            _room.AddPlayer(connection, username, sessionId, _gameServerTankId);
+            _gameServerTankId++;
             _connectionMutex.ReleaseMutex();
-        }
-
-        private void OnPlayerIdentified(ClientConnectionUdp connection, string username, string sessionId)
-        {
-            _world.AddPlayer(connection, username, sessionId);
             AuthenticationResponse(connection, true);
+           
         }
 
-        private void AuthenticationResponse(ClientConnectionUdp connection, bool success)
+        private void AuthenticationResponse(NetConnection connection, bool success)
         {
-            Message m = new Message();
-            m.Write(connection.Id);
+            
+            NetOutgoingMessage m = Server.CreateMessage();
             m.Write((byte)RobotProt.PlayerIdentification);
             m.Write(success);
-            connection.SendMessage(m, AirUdpProt.Unsafe);
+            connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
         }
 
-        private void UserInput(MessageReader mr, ClientConnectionUdp connection)
+        private void UserInput(NetIncomingMessage mr, NetConnection connection)
         {
-            int commandId = mr.ReadInt();
+            byte pakced = mr.ReadByte();
+
+            DrivingDirection drivingDir = (DrivingDirection)BytePacker.GetFirst(pakced);
+            RotationDirection bodyDirection = (RotationDirection)BytePacker.GetSecond(pakced);
+            RotationDirection turretDirection = (RotationDirection)BytePacker.GetThird(pakced);
+            byte fireringByte = BytePacker.GetFourth(pakced);
+            bool firering = false;
+
+            if (fireringByte == 1)
+                firering = true;
+
+            float turretRotation = mr.ReadFloat();
+
+            int commandId = mr.ReadInt32();
             byte broadcastCount = mr.ReadByte();
-            DrivingDirection drivingDir = (DrivingDirection)mr.ReadByte();
-            RotationDirection rotationDirection = (RotationDirection)mr.ReadByte();
 
-            PlayerMovement pm = new PlayerMovement() { DrivingDir = drivingDir, RotationDir = rotationDirection};
+            PlayerMovement pm = new PlayerMovement() { DrivingDir = drivingDir, BodyDir = bodyDirection, TurretDir = turretDirection, TurretRotation = turretRotation, MainGunFirering = firering};
 
-            _world.PlayerMovement(connection.Id, commandId, broadcastCount, pm);
+            _room.PlayerMovement(connection.RemoteUniqueIdentifier, commandId, broadcastCount, pm);
 
             //int commandsIdNew = mr.ReadInt();
             //byte count1 = mr.ReadByte();
@@ -161,27 +241,11 @@ namespace Macalania.Robototaker.GameServer
         //    return commands;
         //}
 
-        private void OnNewConnection(object sender, NewUdpClientConnectionEventArgs e)
+        private void OnConnectionClosed(NetConnection connection)
         {
             _connectionMutex.WaitOne();
-            _potPlayers.Add(new PotentialPlayer() { Connection = e.Connection });
-            _connectionMutex.ReleaseMutex();
-        }
-
-        private void OnConnectionClosed(object sender, UdpClientConnectionClosedEventArgs e)
-        {
-            _connectionMutex.WaitOne();
-
-            // If the closed connection was a potential player. The potational player should be removed from the list of potential players
-            for (int i = 0 ; i < _potPlayers.Count; i++)
-            {
-                if (_potPlayers[i].Connection.Id == e.Connection.Id)
-                {
-                    _potPlayers.Remove(_potPlayers[i]);
-                    break;
-                }
-            }
-            _world.DisconnectedPlayer(e.Connection);
+            ServerLog.E("Connection closed " + connection.RemoteUniqueIdentifier, LogType.ConnectionStatus);
+            _room.DisconnectedPlayer(connection);
             _connectionMutex.ReleaseMutex();
         }
     }

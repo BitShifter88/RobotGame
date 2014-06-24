@@ -16,6 +16,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
     public class StarterMainGun : MainGun
     {
         public StarterMainGun()
+            : base(PluginType.StarterMainGun)
         {
             Size = 2;
             ProjectileStartPosition = new Vector2(0, 0);
@@ -41,7 +42,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (TimeSinceLastFire > RateOfFire)
             {
-                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, position, direction, 1f);
+                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, position, direction);
 
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
                 TimeSinceLastFire = 0;

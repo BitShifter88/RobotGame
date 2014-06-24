@@ -13,21 +13,32 @@ using System.Text;
 
 namespace Macalania.Probototaker.Projectiles
 {
+    public enum ProjectileType : byte
+    {
+        ShellStarter = 0,
+        RocketStarterProjectile = 1,
+        AttackRocketProjectile = 2,
+        ArtileryProjectile = 3,
+    }
+
     public class Projectile : GameObject
     {
-        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed)
+        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed, ProjectileType type)
             : base(room)
         {
             Source = source;
             SetPosition(position);
             Direction = direction;
             Speed = speed;
+            ProjectileType = type;
         }
         public Tank Source { get; set; }
         public Sprite Sprite { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
         public Damage Damage { get; set; }
+        public ProjectileType ProjectileType { get; set; }
+        public bool Flying { get; set; }
 
         public override void Update(double dt)
         {
@@ -100,6 +111,14 @@ namespace Macalania.Probototaker.Projectiles
         public override void Draw(IRender render, Camera camera)
         {
             Sprite.Draw(render, camera);
+        }
+
+        public static Projectile CreateProjectile(ProjectileType type, Tank source, Vector2 position, Vector2 direction)
+        {
+            if (type == ProjectileType.ShellStarter)
+                return new ShellStarter(RoomManager.Instance.GetActiveRoom(), source, position, direction);
+            else
+                throw new Exception("Unknown projectile. Cannot create");
         }
     }
 }

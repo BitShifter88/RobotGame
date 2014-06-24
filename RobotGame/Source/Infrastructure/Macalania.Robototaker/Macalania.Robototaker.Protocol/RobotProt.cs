@@ -12,5 +12,7 @@ namespace Macalania.Robototaker.Protocol
         PlayerMovement = 1,
         PlayerCompensation = 2,
         OtherPlayerInfoMovement = 3,
+        ProjectileInfo = 4,
+        AbilityActivation = 5,
     }
 }

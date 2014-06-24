@@ -18,6 +18,11 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         public float CoolDownRate { get; set; }
         public bool Overheated { get; set; }
 
+        public MainGun(PluginType type) : base (type)
+        {
+        
+        }
+
         public override void Update(double dt)
         {
             
@@ -52,7 +57,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
                 width = width - turret.Sprite.Texture.Width / 2;
                 width = -width;
 
-                Vector2 projectileSpawnPosition = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation()) + Tank.Position;
+                Vector2 dir = YunaMath.RotateVector2(new Vector2(width, height), Tank.GetTurrentBodyRotation());
+
+                Vector2 projectileSpawnPosition = dir + Tank.Position;
+
+                //dir.Normalize();
+                //projectileSpawnPosition += dir * 5;
 
                 Fire(projectileSpawnPosition, -Tank.GetTurretBodyDirection());
             }

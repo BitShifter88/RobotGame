@@ -11,13 +11,12 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class Rocket : Projectile
     {
-        public bool Flying { get; set; }
         public float Imprecition { get; set; }
         public Vector2 OriginPosition { get; set; }
         public float FlyDistance { get; set; }
 
-        public Rocket(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed)
+        public Rocket(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, ProjectileType type)
+            : base(room, tankSource, position, direction, speed, type)
         {
         }
 

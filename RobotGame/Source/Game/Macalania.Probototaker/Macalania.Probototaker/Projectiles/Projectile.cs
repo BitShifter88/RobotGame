@@ -13,24 +13,44 @@ using System.Text;
 
 namespace Macalania.Probototaker.Projectiles
 {
+    public enum ProjectileType : byte
+    {
+        ShellStarter = 0,
+        RocketStarterProjectile = 1,
+        AttackRocketProjectile = 2,
+        ArtileryProjectile = 3,
+    }
+
     public class Projectile : GameObject
     {
-        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed)
+        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed, ProjectileType type)
             : base(room)
         {
             Source = source;
             SetPosition(position);
             Direction = direction;
             Speed = speed;
+            ProjectileType = type;
         }
         public Tank Source { get; set; }
         public Sprite Sprite { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
         public Damage Damage { get; set; }
+        public ProjectileType ProjectileType { get; set; }
+        public bool Fired { get; private set; }
+        public double TimeBehindDivided { get; set; }
+        private int _smoothCount = 0;
+        private double _smoothTimeRate = 50d;
 
         public override void Update(double dt)
         {
+            if (TimeBehindDivided > 0 && _smoothCount <= _smoothTimeRate)
+            {
+                _smoothCount++;
+                dt += TimeBehindDivided;
+            }
+
             UpdatePosition(dt);
 
             base.Update(dt);
@@ -59,6 +79,16 @@ namespace Macalania.Probototaker.Projectiles
                     OnCollisionWithShield(s);
                 }
             }
+        }
+
+        public void SetTimeBehind(double time)
+        {
+            TimeBehindDivided = time / _smoothTimeRate;
+        }
+
+        public virtual void ProjectileFired()
+        {
+            Fired = true;
         }
 
         protected virtual void OnCollisionWithShield(Shield s)
@@ -100,6 +130,14 @@ namespace Macalania.Probototaker.Projectiles
         public override void Draw(IRender render, Camera camera)
         {
             Sprite.Draw(render, camera);
+        }
+
+        public static Projectile CreateProjectile(ProjectileType type, Tank source, Vector2 position, Vector2 direction)
+        {
+            if (type == ProjectileType.ShellStarter)
+                return new ShellStarter(RoomManager.Instance.GetActiveRoom(), source, position, direction);
+            else
+                throw new Exception("Unknown projectile. Cannot create");
         }
     }
 }

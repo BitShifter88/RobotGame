@@ -10,10 +10,18 @@
 * Landscape
 
 
+
+SMÅ TING
+====================
+
+Listen af projectiles i Simulation klassen skal tømmes når et givet projectile bliver slettet
+
+
 BUGS
 ====================
 
 Når clienten modtager en kompenserende position, antager klienten at komponsationen ikke er for gammel. Men kompensationen er i virkelighende ping (ms) for gammel
+Projectile bruger 2*ping når den skal skrue tiden frem. Den skal bruge ping + andenPing
 
 
 REFACTORISERING
@@ -24,3 +32,11 @@ REFACTORISERING
 * Mere struktur på kollisionssystemet
 * Mere struktur på Frame netværket
 * Thread pool i Frame netværket
+
+
+
+LATENCY COMPENSATION FORBEDRINGER
+======================
+
+* Lav et lille delay når folk trykker W A D S. Det vil sige en hybrid version af god latency compensation og ingen (ligesom i WoT)
+* Overvej om der måske skal skruges "en halv" update frem nogen steder for at sikre at der kun bliver opdateret præcis det der skal opdateres

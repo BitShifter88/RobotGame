@@ -17,8 +17,10 @@ namespace Macalania.YunaEngine.Resources
         private bool[,] _transperencyMap;
 
 #if SERVER
-        public YunaTexture(bool[,] transMap)
+        public YunaTexture(bool[,] transMap, int width, int height)
         {
+            Width = width;
+            Height = height;
             _transperencyMap = transMap;
         }
 #endif

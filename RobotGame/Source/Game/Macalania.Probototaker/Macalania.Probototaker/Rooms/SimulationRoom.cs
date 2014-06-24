@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Effects;
+using Macalania.Probototaker.Projectiles;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Rooms;
@@ -13,6 +14,7 @@ namespace Macalania.Probototaker.Rooms
     {
         public List<Tank> Tanks { get; set; }
         public List<Shield> Shields { get; set; }
+        public List<Projectile> Projectiles { get; set; }
 
         public SimulationRoom()
         {
@@ -30,6 +32,11 @@ namespace Macalania.Probototaker.Rooms
             base.RemoveGameObject(obj);
         }
 
+        public virtual void RegisterProjectileFiering(Projectile proj, Tank source)
+        {
+
+        }
+
         public override void AddGameObject(GameObject obj)
         {
             RegisterGameObject(obj);
@@ -37,7 +44,7 @@ namespace Macalania.Probototaker.Rooms
             base.AddGameObject(obj);
         }
 
-        private void RegisterGameObject(GameObject obj)
+        protected virtual void RegisterGameObject(GameObject obj)
         {
             if (obj.GetType() == typeof(Tank))
             {
@@ -46,6 +53,10 @@ namespace Macalania.Probototaker.Rooms
             if (obj.GetType() == typeof(Shield))
             {
                 Shields.Add((Shield)obj);
+            }
+            if (obj.GetType() == typeof(Projectile))
+            {
+                Projectiles.Add((Projectile)obj);
             }
         }
 

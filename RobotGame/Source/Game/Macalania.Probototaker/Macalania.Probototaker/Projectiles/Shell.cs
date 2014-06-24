@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Effects;
+using Macalania.Probototaker.Rooms;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
@@ -11,16 +12,23 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class Shell : Projectile
     {
-        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed)
+        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, ProjectileType type)
+            : base(room, tankSource, position, direction, speed, type)
         {
-
+            ProjectileFired();
         }
 
         protected override void OnCollisionWithShield(Shield s)
         {
             DestroyGameObject();
             base.OnCollisionWithShield(s);
+        }
+
+        public override void ProjectileFired()
+        {
+            ((SimulationRoom)Room).RegisterProjectileFiering(this, Source);
+
+            base.ProjectileFired();
         }
 
         public override void OnCollisionWithTank(Tank tank, TankComponent component)

@@ -62,11 +62,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Damage.cs" />
-    <Compile Include="Effects\Explosion.cs" />
-    <Compile Include="Effects\Shield.cs" />
-    <Compile Include="Effects\SmallExplosion.cs" />
-    <Compile Include="Globals.cs" />
+    <Compile Include="Damage.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Effects\Explosion.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Effects\Shield.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Effects\SmallExplosion.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Globals.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Items\StarterMine.cs" />
     <Compile Include="Macalania.YunaEngine\GameLogic\GameObject.cs">
       <SubType>
       </SubType>
@@ -136,40 +152,147 @@
       </SubType>
     </Compile>
     <Compile Include="Network\GameRandom.cs" />
-    <Compile Include="Network\PlayerMovement.cs" />
-    <Compile Include="Projectiles\ArtileryProjectile.cs" />
-    <Compile Include="Projectiles\AttackRocketProjectile.cs" />
-    <Compile Include="Projectiles\Projectile.cs" />
-    <Compile Include="Projectiles\Rocket.cs" />
-    <Compile Include="Projectiles\RocketStarterProjectile.cs" />
-    <Compile Include="Projectiles\Shell.cs" />
-    <Compile Include="Projectiles\ShellStarter.cs" />
+    <Compile Include="Network\PlayerMovement.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\ArtileryProjectile.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\AttackRocketProjectile.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\Projectile.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\Rocket.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\RocketStarterProjectile.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\Shell.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Projectiles\ShellStarter.cs">
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rooms\SimulationRoom.cs" />
-    <Compile Include="TankGenerator.cs" />
-    <Compile Include="Tanks\Hulls\Hull.cs" />
-    <Compile Include="Tanks\Hulls\StarterHull.cs" />
-    <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />
-    <Compile Include="Tanks\Plugins\MainGuns\MiniMainGun.cs" />
-    <Compile Include="Tanks\Plugins\MainGuns\SprayMainGun.cs" />
-    <Compile Include="Tanks\Plugins\MainGuns\StarterMainGun.cs" />
-    <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\ArtileryStarter.cs" />
-    <Compile Include="Tanks\Plugins\Mic\BatteryPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\RocketBattery.cs" />
-    <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\StarterAttackRocketBatteryPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs" />
-    <Compile Include="Tanks\Plugins\Mic\SuperArtillery.cs" />
-    <Compile Include="Tanks\Plugins\Plugin.cs" />
-    <Compile Include="Tanks\Tank.cs" />
-    <Compile Include="Tanks\TankComponent.cs" />
-    <Compile Include="Tanks\Tracks\StarterTrack.cs" />
-    <Compile Include="Tanks\Tracks\Track.cs" />
-    <Compile Include="Tanks\Turrets\BigTurret.cs" />
-    <Compile Include="Tanks\Turrets\StarterTurret.cs" />
-    <Compile Include="Tanks\Turrets\Turret.cs" />
+    <Compile Include="Rooms\SimulationRoom.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="TankGenerator.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Hulls\Hull.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Hulls\StarterHull.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\MainGuns\MiniMainGun.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\MainGuns\SprayMainGun.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\MainGuns\StarterMainGun.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\AmorPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\ArtileryStarter.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\BatteryPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\MineLayerPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\RocketBattery.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\RocketStarterPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\ShieldPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\StarterAntiRocketLaser.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\StarterAttackRocketBatteryPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\SunPannelPlugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Mic\SuperArtillery.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Plugins\Plugin.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Tank.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\TankComponent.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Tracks\StarterTrack.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Tracks\Track.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Turrets\BigTurret.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Turrets\StarterTurret.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Tanks\Turrets\Turret.cs">
+      <SubType>
+      </SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Macalania.Robototaker\Frame.Network\Frame.Network.csproj">

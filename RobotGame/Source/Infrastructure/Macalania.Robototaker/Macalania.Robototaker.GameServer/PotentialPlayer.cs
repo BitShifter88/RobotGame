@@ -1,4 +1,4 @@
-﻿using Frame.Network.Server;
+﻿using Lidgren.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace Macalania.Robototaker.GameServer
 {
     class PotentialPlayer
     {
-        public ClientConnectionUdp Connection { get; set; }
+        public NetOutgoingMessage Connection { get; set; }
     }
 }
