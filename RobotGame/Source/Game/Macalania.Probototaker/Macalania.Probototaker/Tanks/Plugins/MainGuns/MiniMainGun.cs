@@ -27,6 +27,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/MainGuns/MiniMainGun"));
             Sprite.DepthLayer = 0.24f;
+
             base.Load(content);
         }
 

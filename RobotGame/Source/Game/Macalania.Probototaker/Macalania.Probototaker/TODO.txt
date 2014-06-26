@@ -15,7 +15,7 @@ SMÅ TING
 ====================
 
 Listen af projectiles i Simulation klassen skal tømmes når et givet projectile bliver slettet
-
+* Ivers bag
 
 BUGS
 ====================

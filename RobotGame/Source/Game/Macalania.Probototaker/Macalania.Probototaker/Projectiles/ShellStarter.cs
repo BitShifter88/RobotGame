@@ -22,7 +22,7 @@ namespace Macalania.Probototaker.Projectiles
 
         public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/bullet"));
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/shell"));
             Sprite.SetOriginCenter();
             base.Load(content);
         }

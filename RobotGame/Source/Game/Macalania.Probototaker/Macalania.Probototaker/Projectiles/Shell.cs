@@ -24,6 +24,14 @@ namespace Macalania.Probototaker.Projectiles
             base.OnCollisionWithShield(s);
         }
 
+        public override void Load(YunaEngine.Resources.ResourceManager content)
+        {
+            base.Load(content);
+
+            Sprite.Scale = 3;
+            Sprite.Rotation = Source.BodyRotation + Source.TurretRotation + MathHelper.ToRadians(90);
+        }
+
         public override void ProjectileFired()
         {
             ((SimulationRoom)Room).RegisterProjectileFiering(this, Source);

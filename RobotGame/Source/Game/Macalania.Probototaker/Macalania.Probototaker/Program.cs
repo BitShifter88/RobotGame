@@ -11,6 +11,7 @@ namespace Macalania.Probototaker
         static YunaGameEngine _engine;
         static void Main(string[] args)
         {
+
 #if VERBOSE
             try
             {
