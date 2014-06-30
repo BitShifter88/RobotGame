@@ -65,22 +65,13 @@
       <Time>2014-05-28T11:54:51.7429513+02:00</Time>
     </Item>
     <Item>
-      <Source>Textures\Projectiles\bullet.png</Source>
-      <Name>Textures\Projectiles\bullet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\bullet.xnb</Output>
-      <Time>2014-05-31T17:54:53.9670872+02:00</Time>
-    </Item>
-    <Item>
       <Source>Textures\Tanks\MainGuns\MiniMainGun.png</Source>
       <Name>Textures\Tanks\MainGuns\MiniMainGun</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MiniMainGun.xnb</Output>
-      <Time>2014-06-01T15:18:53.8606428+02:00</Time>
+      <Time>2014-06-26T21:42:43.0854114+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Tanks\Turrets\turretBig.png</Source>
@@ -89,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBig.xnb</Output>
-      <Time>2014-06-01T16:36:10.1173726+02:00</Time>
+      <Time>2014-06-29T00:17:18.6760611+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Tanks\Misc\artilery.png</Source>
@@ -234,6 +225,24 @@
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Items\starterMine.xnb</Output>
       <Time>2014-06-16T11:55:17.3531413+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\MainGuns\MiniMainGun2.png</Source>
+      <Name>Textures\Tanks\MainGuns\MiniMainGun2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MiniMainGun2.xnb</Output>
+      <Time>2014-06-01T15:18:53.8606428+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Projectiles\shell.png</Source>
+      <Name>Textures\Projectiles\shell</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\shell.xnb</Output>
+      <Time>2014-06-26T21:04:20.7355501+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -5,7 +5,6 @@ Content\Textures\Tanks\Hulls\hullStarter.xnb
 Content\Textures\Tanks\Misc\amorStarterLeft.xnb
 Content\Textures\Tanks\Misc\rocketStarterRight.xnb
 Content\Textures\Misc\loading.xnb
-Content\Textures\Projectiles\bullet.xnb
 Content\Textures\Tanks\MainGuns\MiniMainGun.xnb
 Content\Textures\Tanks\Turrets\turretBig.xnb
 Content\Textures\Tanks\Misc\artilery.xnb
@@ -24,6 +23,8 @@ Content\Textures\Tanks\Misc\shieldBottom.xnb
 Content\Textures\Tanks\Misc\starterAttackRocket.xnb
 Content\Textures\Projectiles\attackRocketProjectile.xnb
 Content\Textures\Items\starterMine.xnb
+Content\Textures\Tanks\MainGuns\MiniMainGun2.xnb
+Content\Textures\Projectiles\shell.xnb
 Content\Textures\Tanks\Turrets\turretStarter.png
 Content\Textures\Tanks\MainGuns\mainGunStarter.png
 Content\Textures\Tanks\Tracks\tracksStarter.png
@@ -31,8 +32,7 @@ Content\Textures\Tanks\Hulls\hullStarter.png
 Content\Textures\Tanks\Misc\amorStarterLeft.png
 Content\Textures\Tanks\Misc\rocketStarterRight.png
 Content\Textures\Misc\loading.png
-Content\Textures\Projectiles\bullet.png
-Content\Textures\Tanks\MainGuns\MiniMainGun.png
+Content\Textures\Tanks\MainGuns\MiniMainGun2.png
 Content\Textures\Tanks\Turrets\turretBig.png
 Content\Textures\Tanks\Misc\artilery.png
 Content\Textures\Tanks\MainGuns\SprayMainGun.png
