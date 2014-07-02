@@ -66,7 +66,7 @@ namespace Macalania.Robototaker.GameServer
                 performance.Start();
                 Update(dt);
                 performance.Stop();
-                //ServerLog.E((performance.Elapsed.TotalMilliseconds * 1000).ToString(), LogType.Debug);
+                ServerLog.E((performance.Elapsed.TotalMilliseconds).ToString(), LogType.Debug);
                 performance.Reset();
 
                 double timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
