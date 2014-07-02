@@ -40,7 +40,7 @@ namespace Macalania.Probototaker.Projectiles
 
         public override void Update(double dt)
         {
-            if (Flying)
+            if (Fired)
             {
                 base.Update(dt);
                 Speed += (float)dt * 0.003f;

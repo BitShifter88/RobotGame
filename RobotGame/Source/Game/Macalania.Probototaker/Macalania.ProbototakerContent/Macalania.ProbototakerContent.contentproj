@@ -86,8 +86,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Tanks\MainGuns\MiniMainGun2.png">
-      <Name>MiniMainGun2</Name>
+    <Compile Include="Textures\Tanks\MainGuns\MiniMainGun.png">
+      <Name>MiniMainGun</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -234,13 +234,15 @@
       <Name>shell</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Tanks\MainGuns\MiniMainGun.png">
-      <Name>MiniMainGun</Name>
+    <Compile Include="Textures\Tanks\Turrets\turretBigNew.png">
+      <Name>turretBigNew</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

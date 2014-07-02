@@ -40,7 +40,7 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter.Reset();
                 frameCounter.Start();
-                //ServerLog.E("FPS: " + frames, LogType.Debug);
+                ServerLog.E("FPS: " + frames, LogType.Debug);
                 frames = 0;
             }
             

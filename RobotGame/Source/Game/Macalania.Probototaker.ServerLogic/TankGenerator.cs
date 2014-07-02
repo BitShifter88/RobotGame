@@ -21,7 +21,7 @@ namespace Macalania.Probototaker
 
         public static Tank GenerateTank3(Room room, ResourceManager content, Vector2 position)
         {
-            Tank t1 = new Tank(room, new Vector2(100, 600));
+            Tank t1 = new Tank(room, position);
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);

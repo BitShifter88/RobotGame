@@ -1,10 +1,12 @@
 ﻿using Macalania.Probototaker.Tanks.Hulls;
+using Macalania.Probototaker.Tanks.NewTurret;
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Tracks;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
@@ -47,6 +49,7 @@ namespace Macalania.Probototaker.Tanks
         public Hull Hull { get; private set; }
         public Track Track { get; private set; }
         public Turret Turret { get; private set; }
+        public TurretNew TurretNew { get; set; }
         public float BodyRotation { get; set; }
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
@@ -61,6 +64,8 @@ namespace Macalania.Probototaker.Tanks
         public float CurrentSpeed { get; set; }
         public float RotationAcceleration { get; set; }
         public float CurrentRotationSpeed { get; set; }
+
+        public VisualTurretStyle TurretStyle { get; set; }
 
         public float TurretRotationSpeed { get; set; }
 
@@ -570,6 +575,24 @@ namespace Macalania.Probototaker.Tanks
             }
         }
 
+        public override void Load(ResourceManager content)
+        {
+            TurretStyle = new ClasicStyle(content);
+
+            TurretNew = new TurretNew();
+
+            for (int i = 32 - 3; i < 32 + 3; i++)
+            {
+                for (int j = 32 - 4; j < 32 + 4; j++)
+                {
+                    TurretNew.AddTurretComponent(new TurretBrick(this), i, j);
+                }
+            }
+
+
+            base.Load(content);
+        }
+
         public bool DoesTankHaveEnoughPower(float value)
         {
             if (CurrentPower < value)
@@ -631,6 +654,7 @@ namespace Macalania.Probototaker.Tanks
                 maxPower += p.StoredPower;
             }
 
+
             return maxPower;
         }
 
@@ -652,7 +676,9 @@ namespace Macalania.Probototaker.Tanks
         public override void Draw(IRender render, Camera camera)
         {
             Hull.Draw(render, camera);
-            Turret.Draw(render, camera);
+            TurretNew.Draw(render, camera);
+
+            //Turret.Draw(render, camera);
         }
     }
 }

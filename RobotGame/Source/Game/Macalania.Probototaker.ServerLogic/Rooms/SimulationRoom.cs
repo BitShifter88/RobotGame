@@ -32,6 +32,11 @@ namespace Macalania.Probototaker.Rooms
             base.RemoveGameObject(obj);
         }
 
+        public virtual void RegisterProjectileFiering(Projectile proj, Tank source)
+        {
+
+        }
+
         public override void AddGameObject(GameObject obj)
         {
             RegisterGameObject(obj);

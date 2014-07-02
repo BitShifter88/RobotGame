@@ -50,6 +50,14 @@ namespace Macalania.YunaEngine.Graphics
             //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
 
+        public void Draw(IRender render, Camera camera, Rectangle source)
+        {
+            render.Draw(Texture, Position, source, Color, Rotation, Origin, Scale, DepthLayer);
+
+            //if (YunaSettings.DrawBoundingSpheres)
+            //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
+        }
+
         public void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));

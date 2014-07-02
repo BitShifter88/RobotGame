@@ -101,7 +101,9 @@ namespace Macalania.Robototaker.GameServer
                 _oneSecUpdate = 0;
             }
 
+            _playerMutex.WaitOne();
             base.Update(dt);
+            _playerMutex.ReleaseMutex();
 
             HandleNewProjectiles();
         }
@@ -111,7 +113,7 @@ namespace Macalania.Robototaker.GameServer
             if (obj.GetType().IsSubclassOf(typeof(Projectile)))
             {
                 Projectile p = (Projectile)obj;
-                if (p.Flying)
+                if (p.Fired)
                     _projectilesFiredSinceLast.Add((Projectile)obj);
             }
             base.RegisterGameObject(obj);

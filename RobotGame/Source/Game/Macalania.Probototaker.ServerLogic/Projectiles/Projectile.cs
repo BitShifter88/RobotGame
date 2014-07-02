@@ -38,10 +38,19 @@ namespace Macalania.Probototaker.Projectiles
         public float Speed { get; set; }
         public Damage Damage { get; set; }
         public ProjectileType ProjectileType { get; set; }
-        public bool Flying { get; set; }
+        public bool Fired { get; private set; }
+        public double TimeBehindDivided { get; set; }
+        private int _smoothCount = 0;
+        private double _smoothTimeRate = 50d;
 
         public override void Update(double dt)
         {
+            if (TimeBehindDivided > 0 && _smoothCount <= _smoothTimeRate)
+            {
+                _smoothCount++;
+                dt += TimeBehindDivided;
+            }
+
             UpdatePosition(dt);
 
             base.Update(dt);
@@ -70,6 +79,16 @@ namespace Macalania.Probototaker.Projectiles
                     OnCollisionWithShield(s);
                 }
             }
+        }
+
+        public void SetTimeBehind(double time)
+        {
+            TimeBehindDivided = time / _smoothTimeRate;
+        }
+
+        public virtual void ProjectileFired()
+        {
+            Fired = true;
         }
 
         protected virtual void OnCollisionWithShield(Shield s)

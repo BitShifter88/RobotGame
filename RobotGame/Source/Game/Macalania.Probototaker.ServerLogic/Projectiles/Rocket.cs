@@ -44,7 +44,7 @@ namespace Macalania.Probototaker.Projectiles
         {
             OriginPosition = originPosition;
             FlyDistance = flyDistance;
-            Flying = true;
+            ProjectileFired();
         }
 
         protected override void OnCollisionWithShield(Shield s)

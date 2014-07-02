@@ -295,10 +295,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Macalania.Robototaker\Frame.Network\Frame.Network.csproj">
-      <Project>{a4fbb6a1-cf29-49ce-9145-d72d89aad5b3}</Project>
-      <Name>Frame.Network</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\Macalania.Robototaker\Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj">
       <Project>{97930da9-8ce2-4bc6-a911-bae1828c0fec}</Project>
       <Name>Macalania.Robototaker.Protocol</Name>

@@ -49,7 +49,6 @@ namespace Macalania.Probototaker.Effects
 
         public override void Update(double dt)
         {
-            
             _haveExistedIn += (float)dt;
             if (_haveExistedIn >= _lifeSpan)
                 DestroyGameObject();

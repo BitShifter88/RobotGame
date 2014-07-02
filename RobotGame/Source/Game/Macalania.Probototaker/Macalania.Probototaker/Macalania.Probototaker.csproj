@@ -103,8 +103,12 @@
     <Compile Include="Rooms\LoadGameRoom.cs" />
     <Compile Include="Rooms\SimulationRoom.cs" />
     <Compile Include="TankGenerator.cs" />
+    <Compile Include="Tanks\ClasicStyle.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs" />
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
+    <Compile Include="Tanks\NewTurret\TurretNew.cs" />
+    <Compile Include="Tanks\NewTurret\TurretBrick.cs" />
+    <Compile Include="Tanks\NewTurret\TurretComponent.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MiniMainGun.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\SprayMainGun.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="Tanks\Turrets\BigTurret.cs" />
     <Compile Include="Tanks\Turrets\StarterTurret.cs" />
     <Compile Include="Tanks\Turrets\Turret.cs" />
+    <Compile Include="Tanks\VisualTurretStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -38,6 +38,8 @@ namespace Macalania.Robototaker.GameServer
         {
             _content = new ResourceManager(null);
 
+            PreLoader.PreLoad(_content);
+
             Config = new NetPeerConfiguration("game");
 #if DEBUG
             Config.SimulatedMinimumLatency = 0.015f;
