@@ -30,7 +30,7 @@ namespace Macalania.Probototaker.Tanks.NewTurret
             x = x - 32;
             y = y - 32;
 
-            _origin = new Vector2( - x * 8,  - y * 8);
+            _origin = new Vector2( -x * 8,  -y * 8);
         }
 
         public override void Draw(YunaEngine.Rendering.IRender render, Camera camera)
