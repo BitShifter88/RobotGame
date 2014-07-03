@@ -14,6 +14,7 @@ namespace Macalania.Probototaker.Tanks.Hulls
         public StarterHull()
         {
             StoredPower = 1000;
+            StoredHp = 1000;
         }
         public override void Load(ResourceManager content)
         {

@@ -1,5 +1,4 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
-using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine;
 using Microsoft.Xna.Framework;
 using System;
@@ -47,7 +46,7 @@ namespace Macalania.Probototaker.Tanks.NewTurret
             base.Update(dt);
         }
 
-        public virtual void FireRequest(TurretNew turret)
+        public virtual void FireRequest(Turret turret)
         {
             if (Overheated == false)
             {

@@ -108,8 +108,9 @@
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
     <Compile Include="Tanks\NewTurret\MainGunNew.cs" />
     <Compile Include="Tanks\NewTurret\MiniCanon.cs" />
+    <Compile Include="Tanks\NewTurret\SunPannelNew.cs" />
     <Compile Include="Tanks\NewTurret\TurretModule.cs" />
-    <Compile Include="Tanks\NewTurret\TurretNew.cs" />
+    <Compile Include="Tanks\NewTurret\Turret.cs" />
     <Compile Include="Tanks\NewTurret\TurretBrick.cs" />
     <Compile Include="Tanks\NewTurret\TurretComponent.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />

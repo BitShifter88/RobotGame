@@ -1,8 +1,8 @@
 ﻿using Macalania.Probototaker.Tanks.Hulls;
 using Macalania.Probototaker.Tanks.NewTurret;
 using Macalania.Probototaker.Tanks.Plugins;
+using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
-using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
@@ -48,8 +48,8 @@ namespace Macalania.Probototaker.Tanks
 
         public Hull Hull { get; private set; }
         public Track Track { get; private set; }
-        public Turret Turret { get; private set; }
-        public TurretNew TurretNew { get; set; }
+        //public Turret Turret { get; private set; }
+        public Turret Turret { get; set; }
         public float BodyRotation { get; set; }
         public float TurretRotation { get; set; }
         public float CurrentPower { get; set; }
@@ -208,7 +208,7 @@ namespace Macalania.Probototaker.Tanks
 
         public void ReadyTank()
         {
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 p.Ready();
             }
@@ -240,7 +240,7 @@ namespace Macalania.Probototaker.Tanks
             AmorPoints = 0;
             PowerRegen = 0;
 
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 AmorPoints += p.AmorPoints;
                 PowerRegen += p.PowerRegen;
@@ -250,7 +250,7 @@ namespace Macalania.Probototaker.Tanks
 
         public TankComponent IsColliding(Sprite s)
         {
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 if (p.CheckCollision(s))
                     return p;
@@ -258,8 +258,8 @@ namespace Macalania.Probototaker.Tanks
 
             if (Hull.CheckCollision(s))
                 return Hull;
-            if (Turret.CheckCollision(s))
-                return Turret;
+            //if (Turret.CheckCollision(s))
+            //    return Turret;
 
             return null;
         }
@@ -523,8 +523,7 @@ namespace Macalania.Probototaker.Tanks
                 return;
 
             if (MainGunFirering)
-                TurretNew.FireMainGun();
-                //Turret.FireMainGun();
+                Turret.FireMainGun();
         }
 
         public override void Update(double dt)
@@ -552,7 +551,6 @@ namespace Macalania.Probototaker.Tanks
             
             Hull.Update(dt);
             Turret.Update(dt);
-            TurretNew.Update(dt);
             Track.Update(dt);
 
             UpdateMainGun();
@@ -581,29 +579,9 @@ namespace Macalania.Probototaker.Tanks
         {
             TurretStyle = new ClasicStyle(content);
 
-            TurretNew = new TurretNew();
-
             //TurretNew.AddTurretComponent(new TurretBrick(this), 32-2, 30);
 
-            for (int i = 32 - 2; i < 32 + 2; i++)
-            {
-                for (int j = 32 - 1; j < 32 + 4; j++)
-                {
-                    TurretNew.AddTurretComponent(new TurretBrick(this), i, j);
-                }
-            }
-
-            MiniCanon m = new MiniCanon();
-            m.Load(content);
-            m.SetTank(this);
-
-            TurretNew.AddTurretModule(m, 32 - 2, 28);
-
-            MiniCanon m2 = new MiniCanon();
-            m2.Load(content);
-            m2.SetTank(this);
-
-            TurretNew.AddTurretModule(m2, 32, 28);
+            
 
 
             base.Load(content);
@@ -630,15 +608,15 @@ namespace Macalania.Probototaker.Tanks
 
         public bool ActivatePlugin(PluginType type, Vector2 targetPosition, Tank targetTank)
         {
-            List<Plugin> pluginsOfType = new List<Plugin>();
+            List<TurretModule> pluginsOfType = new List<TurretModule>();
 
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 if (p.PluginType == type)
                     pluginsOfType.Add(p);
             }
 
-            foreach (Plugin p in pluginsOfType)
+            foreach (TurretModule p in pluginsOfType)
             {
                 if (p.Activate(targetPosition, targetTank) == false)
                     continue;
@@ -662,10 +640,9 @@ namespace Macalania.Probototaker.Tanks
         {
             float maxPower = 0;
             maxPower += Hull.StoredPower;
-            maxPower += Turret.StoredPower;
             maxPower += Track.StoredPower;
 
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 maxPower += p.StoredPower;
             }
@@ -678,10 +655,9 @@ namespace Macalania.Probototaker.Tanks
         {
             float maxHp = 0;
             maxHp += Hull.StoredHp;
-            maxHp += Turret.StoredHp;
             maxHp += Track.StoredHp;
 
-            foreach (Plugin p in Turret.Plugins)
+            foreach (TurretModule p in Turret.GetModules())
             {
                 maxHp += p.StoredHp;
             }
@@ -692,7 +668,7 @@ namespace Macalania.Probototaker.Tanks
         public override void Draw(IRender render, Camera camera)
         {
             Hull.Draw(render, camera);
-            TurretNew.Draw(render, camera);
+            Turret.Draw(render, camera);
 
             //Turret.Draw(render, camera);
         }

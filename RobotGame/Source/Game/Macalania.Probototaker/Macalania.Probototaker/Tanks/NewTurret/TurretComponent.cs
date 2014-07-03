@@ -18,6 +18,7 @@ namespace Macalania.Probototaker.Tanks.NewTurret
         protected int _x;
         protected int _y;
 
+
         public virtual void Load(ResourceManager content)
         {
 

@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,12 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.NewTurret
 {
-    public class TurretNew
+    public class Turret
     {
         private TurretComponent[,] _turretComponents;
         private List<TurretModule> _modules = new List<TurretModule>();
 
-        public TurretNew()
+        public Turret()
         {
             _turretComponents = new TurretComponent[64, 64];
 
@@ -43,14 +44,47 @@ namespace Macalania.Probototaker.Tanks.NewTurret
             return mainGuns;
         }
 
+        public void OnTankDestroy()
+        {
+            foreach (TurretModule module in _modules)
+            {
+                module.OnTankDestroy();
+            }
+        }
+
+        public List<TurretModule> GetModules()
+        {
+            return _modules;
+        }
+
         public void AddTurretModule(TurretModule module, int x, int y)
         {
-            _modules.Add(module);
+            if (CanAddTurretModule(module, x, y) == false)
+                throw new Exception("Could not add turret module");
+
             module.SetLocation(x, y);
+            module.AddComponents(this);
+
+            _modules.Add(module);
+        }
+
+        public bool CanAddTurretModule(TurretModule module, int x, int y)
+        {
+            // The module may require that turret bricks are in place at different locations.
+            foreach (Point brick in module.RequiredBricks)
+            {
+                TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
+                if (comp == null || comp.GetType() != typeof(TurretBrick))
+                    return false;
+            }
+
+            return true;
         }
 
         public void AddTurretComponent(TurretComponent component, int x, int y)
         {
+            if (_turretComponents[x, y] != null)
+                throw new Exception("Can't add turret component");
             _turretComponents[x, y] = component;
             component.SetLocation(x, y);
         }

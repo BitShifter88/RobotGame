@@ -21,10 +21,17 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             Size = 3;
             _rockets = new ArtileryProjectile[6];
-            OriginOfset = new Vector2(0, 30);
             MaxCooldown = 5000;
             ComponentMaxHp = 100;
             _fireInterval = 400;
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 2; j++ )
+                {
+                    RequiredBricks.Add(new Point(i, j));
+                }
+            }
         }
         public override void Load(ResourceManager content)
         {
@@ -51,7 +58,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets[index].Ignite(Tank.Position, Vector2.Distance(Tank.Position, _targetPosition) + GameRandom.GetRandomInt(-200, 200));
             _rockets[index].Sprite.SetOriginCenter();
             _rockets[index].Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
-            Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 2 - 3 - 10 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
+            Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 2 - 2 - 3 - 10 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
             p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
             _rockets[index].SetPosition(p + Tank.Position);
 
@@ -71,7 +78,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
-                Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 10 * i, Sprite.Origin.Y);
+                Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 2 - 10 * i, Sprite.Origin.Y);
                 rocket2.Sprite.Origin = org2;
 
                 _rockets[i] = rocket2;

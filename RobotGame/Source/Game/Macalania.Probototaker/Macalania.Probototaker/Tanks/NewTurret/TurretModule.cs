@@ -15,7 +15,6 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 
         public int Size { get; protected set; }
         public int PluginPosition { get; set; }
-        public Vector2 OriginOfset { get; set; }
         public float Cooldown { get; set; }
         public float MaxCooldown { get; set; }
         public float PowerUsage { get; set; }
@@ -26,8 +25,11 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 
         public PluginType PluginType { get; set; }
 
+        public List<Point> RequiredBricks { get; set; }
+
         public TurretModule(PluginType type)
         {
+            RequiredBricks = new List<Point>();
             PluginType = type;
         }
 
@@ -39,6 +41,11 @@ namespace Macalania.Probototaker.Tanks.NewTurret
         public int GetCentredY()
         {
             return _y - 32;
+        }
+
+        public virtual void AddComponents(Turret turret)
+        {
+
         }
 
         public virtual void SetLocation(int x, int y)

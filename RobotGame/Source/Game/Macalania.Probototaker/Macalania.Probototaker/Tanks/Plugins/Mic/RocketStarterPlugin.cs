@@ -83,15 +83,15 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (success)
             {
-                _rocket.Ignite(Tank.Position, 1300);
-                _rocket.Sprite.SetOriginCenter();
-                _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
-                Vector2 p = new Vector2(Tank.Turret.Sprite.Texture.Width / 2 + _rocket.Sprite.Texture.Width / 2, 0);
-                p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
-                _rocket.SetPosition(p + Tank.Position);
+                //_rocket.Ignite(Tank.Position, 1300);
+                //_rocket.Sprite.SetOriginCenter();
+                //_rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
+                //Vector2 p = new Vector2(Tank.Turret.Sprite.Texture.Width / 2 + _rocket.Sprite.Texture.Width / 2, 0);
+                //p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
+                //_rocket.SetPosition(p + Tank.Position);
 
-                _rocket.Direction = -Tank.GetTurretBodyDirection();
-                _rocket = null;
+                //_rocket.Direction = -Tank.GetTurretBodyDirection();
+                //_rocket = null;
             }
 
             return success;

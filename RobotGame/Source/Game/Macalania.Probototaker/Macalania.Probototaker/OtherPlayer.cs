@@ -1,10 +1,8 @@
 ﻿using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Hulls;
 using Macalania.Probototaker.Tanks.Plugins;
-using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
-using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;

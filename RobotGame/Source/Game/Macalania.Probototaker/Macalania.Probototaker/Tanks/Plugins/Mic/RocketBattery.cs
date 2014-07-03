@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Projectiles;
+using Macalania.Probototaker.Tanks.NewTurret;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    public class RocketBattery : Plugin
+    public class RocketBattery : TurretModule
     {
         protected Rocket[] _rockets;
         bool _firstUpdate = true;
