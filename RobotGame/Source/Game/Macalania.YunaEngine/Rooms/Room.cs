@@ -99,6 +99,8 @@ namespace Macalania.YunaEngine.Rooms
             UpdateGameObjects(dt);
             AddGameObjects();
             DestroyGameObjects();
+
+            Camera.Update((float)dt);
         }
 
         private void UpdateGameObjects(double dt)
@@ -139,7 +141,7 @@ namespace Macalania.YunaEngine.Rooms
 
         public virtual void Draw(IRender render)
         {
-            render.Begin();
+            render.Begin(Camera);
             foreach (GameObject obj in GameObjects)
             {
                 obj.Draw(render, Camera);

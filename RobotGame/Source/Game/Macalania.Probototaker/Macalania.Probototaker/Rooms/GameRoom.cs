@@ -5,6 +5,7 @@ using Macalania.YunaEngine;
 using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Macalania.Probototaker.Rooms
         public OtherPlayer GhostPlayer { get; set; }
         public Player Player { get; set; }
         GameNetwork _gn;
+        bool _firstRun = true;
 
         public GameRoom(GameNetwork gn)
         {
@@ -85,8 +87,20 @@ namespace Macalania.Probototaker.Rooms
             OtherPlayers[tankId].PlayerInfoMovement(position, bodyRotation, bodySpeed, rotationSpeed, drivingDir, bodyDir, turretDir, turretRotation, ping, (int)(_gn.GetClientUdp().Connections[0].AverageRoundtripTime * 1000f / 2f));
         }
 
+        private void FirstRun()
+        {
+
+            Camera = new TankCamera(Player.GetTank());
+
+        }
+
         public override void Update(double dt)
         {
+            if (_firstRun)
+            {
+                FirstRun();
+                _firstRun = false;
+            }
             //Console.WriteLine(dt);
             base.Update(dt);
         }

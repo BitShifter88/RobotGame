@@ -178,6 +178,18 @@ namespace Macalania.Probototaker
 
             t.AddTurretModule(ar, 30, 34);
 
+            RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
+            roc.Load(content);
+            roc.SetTank(t1);
+
+            t.AddTurretModule(roc, 34, 31);
+
+            ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
+            sp.Load(content);
+            sp.SetTank(t1);
+
+            t.AddTurretModule(sp, 29, 33);
+
             _tank = t1;
 
             _tank.ReadyTank();
@@ -218,8 +230,8 @@ namespace Macalania.Probototaker
                 //_gameRoom.GameCommunication.SendAbilityActivation(PluginType.ArtileryStart, null, new Vector2(MouseInput.X, MouseInput.Y));
             if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
             {
-                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.StarterAttackRocket, null, Vector2.Zero);
-               // _tank.ActivatePlugin(r, Vector2.Zero, null);
+                //_gameRoom.GameCommunication.SendAbilityActivation(PluginType.StarterAttackRocket, null, Vector2.Zero);
+                _tank.ActivatePlugin(PluginType.RocketStarter, Vector2.Zero, null);
             }
             //if (KeyboardInput.IsKeyClicked(Keys.NumPad4))
             //    _tank.ActivatePlugin(attack, Vector2.Zero, null);

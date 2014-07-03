@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Graphics;
 
 namespace Macalania.YunaEngine.Rendering
 {
@@ -17,9 +18,9 @@ namespace Macalania.YunaEngine.Rendering
             _batch = new SpriteBatch(device);
         }
 
-        public void Begin()
+        public void Begin(Camera camera)
         {
-            _batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone);
+            _batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone, null, camera.GetMatrix());
         }
 
         public void Draw(YunaTexture texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer)

@@ -102,6 +102,7 @@
     <Compile Include="Rooms\GameRoom.cs" />
     <Compile Include="Rooms\LoadGameRoom.cs" />
     <Compile Include="Rooms\SimulationRoom.cs" />
+    <Compile Include="TankCamera.cs" />
     <Compile Include="TankGenerator.cs" />
     <Compile Include="Tanks\ClasicStyle.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs" />
