@@ -10,11 +10,43 @@ namespace Macalania.Probototaker.Tanks.NewTurret
     public class TurretNew
     {
         private TurretComponent[,] _turretComponents;
+        private List<TurretModule> _modules = new List<TurretModule>();
 
         public TurretNew()
         {
             _turretComponents = new TurretComponent[64, 64];
 
+        }
+
+        public void FireMainGun()
+        {
+            List<MainGunNew> mgs = GetMainGuns();
+
+            foreach (MainGunNew mg in mgs)
+            {
+                mg.FireRequest(this);
+            }
+        }
+
+        private List<MainGunNew> GetMainGuns()
+        {
+            List<MainGunNew> mainGuns = new List<MainGunNew>();
+
+            foreach (TurretModule p in _modules)
+            {
+                if (p.GetType().IsSubclassOf(typeof(MainGunNew)))
+                {
+                    mainGuns.Add((MainGunNew)p);
+                }
+            }
+
+            return mainGuns;
+        }
+
+        public void AddTurretModule(TurretModule module, int x, int y)
+        {
+            _modules.Add(module);
+            module.SetLocation(x, y);
         }
 
         public void AddTurretComponent(TurretComponent component, int x, int y)
@@ -28,6 +60,14 @@ namespace Macalania.Probototaker.Tanks.NewTurret
             return false;
         }
 
+        public void Update(double dt)
+        {
+            foreach (TurretModule module in _modules)
+            {
+                module.Update(dt);
+            }
+        }
+
         public void Draw(IRender render, Camera camera)
         {
             foreach (TurretComponent tc in _turretComponents)
@@ -35,6 +75,11 @@ namespace Macalania.Probototaker.Tanks.NewTurret
                 if (tc == null)
                     continue;
                 tc.Draw(render, camera);
+            }
+
+            foreach (TurretModule module in _modules)
+            {
+                module.Draw(render, camera);
             }
         }
     }

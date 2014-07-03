@@ -523,7 +523,8 @@ namespace Macalania.Probototaker.Tanks
                 return;
 
             if (MainGunFirering)
-                Turret.FireMainGun();
+                TurretNew.FireMainGun();
+                //Turret.FireMainGun();
         }
 
         public override void Update(double dt)
@@ -551,6 +552,7 @@ namespace Macalania.Probototaker.Tanks
             
             Hull.Update(dt);
             Turret.Update(dt);
+            TurretNew.Update(dt);
             Track.Update(dt);
 
             UpdateMainGun();
@@ -581,13 +583,27 @@ namespace Macalania.Probototaker.Tanks
 
             TurretNew = new TurretNew();
 
-            for (int i = 32 - 3; i < 32 + 3; i++)
+            //TurretNew.AddTurretComponent(new TurretBrick(this), 32-2, 30);
+
+            for (int i = 32 - 2; i < 32 + 2; i++)
             {
-                for (int j = 32 - 4; j < 32 + 4; j++)
+                for (int j = 32 - 1; j < 32 + 4; j++)
                 {
                     TurretNew.AddTurretComponent(new TurretBrick(this), i, j);
                 }
             }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(this);
+
+            TurretNew.AddTurretModule(m, 32 - 2, 28);
+
+            MiniCanon m2 = new MiniCanon();
+            m2.Load(content);
+            m2.SetTank(this);
+
+            TurretNew.AddTurretModule(m2, 32, 28);
 
 
             base.Load(content);
