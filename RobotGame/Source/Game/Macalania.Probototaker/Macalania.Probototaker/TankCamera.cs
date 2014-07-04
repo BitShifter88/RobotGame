@@ -13,6 +13,8 @@ namespace Macalania.Probototaker
     class TankCamera : Camera
     {
         Tank _tank;
+        Vector2 _mouseClick = Vector2.Zero;
+        bool _presedPrev = false;
 
         public TankCamera(Tank tank)
         {
@@ -22,11 +24,17 @@ namespace Macalania.Probototaker
 
         public override void Update(float dt)
         {
-            float mouseXOfset = Viewport.Width / 2 - MouseInput.X;
-            float mouseYOfset = Viewport.Height / 2 - MouseInput.Y;
+            if (MouseInput.IsRightMousePressed() == false)
+                _presedPrev = false;
+
+            if (MouseInput.IsRightMousePressed() && _presedPrev == false)
+                _mouseClick = new Vector2(MouseInput.X, MouseInput.Y);
+
+            float mouseXOfset = _mouseClick.X - MouseInput.X;
+            float mouseYOfset = _mouseClick.Y - MouseInput.Y;
 
             if (MouseInput.IsRightMousePressed())
-                Position = new Vector2(-_tank.Position.X + mouseXOfset,  -_tank.Position.Y + mouseYOfset);
+                Position = new Vector2(-_tank.Position.X - mouseXOfset,  -_tank.Position.Y - mouseYOfset);
             else
                 Position = new Vector2(-_tank.Position.X , -_tank.Position.Y );
 
@@ -38,6 +46,11 @@ namespace Macalania.Probototaker
                 Zoom = 1;
             if (Zoom < 0.5f)
                 Zoom = 0.5f;
+
+            if (MouseInput.IsRightMousePressed())
+            {
+                _presedPrev = true;
+            }
 
             base.Update(dt);
         }
