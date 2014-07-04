@@ -32,6 +32,8 @@ namespace Macalania.YunaEngine.Rooms
         {
         }
 
+
+
         public virtual void AddGameObject(GameObject obj)
         {
             _addingMutex.WaitOne();

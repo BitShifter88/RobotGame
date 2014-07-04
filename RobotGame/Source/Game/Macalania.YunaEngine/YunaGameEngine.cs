@@ -34,9 +34,11 @@ namespace Macalania.YunaEngine
             Instance = this;
             _roomManger = new RoomManager();
 
-            graphics.PreferredBackBufferHeight = 900;
-            graphics.PreferredBackBufferWidth = 1300;
-         
+            //graphics.PreferredBackBufferHeight = 900;
+            //graphics.PreferredBackBufferWidth = 1300;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.ToggleFullScreen();
             this.IsMouseVisible = true;
         }
 

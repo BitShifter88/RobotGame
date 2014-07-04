@@ -238,7 +238,7 @@ namespace Macalania.Probototaker
             //if (KeyboardInput.IsKeyClicked(Keys.NumPad5))
             //    _tank.ActivatePlugin(mlp, Vector2.Zero, null);
 
-            _tank.MoveTurretTowardsPoint(new Vector2(MouseInput.X, MouseInput.Y));
+            _tank.MoveTurretTowardsPoint(Room.Camera.ProjectPosition(MouseInput.X, MouseInput.Y));
 
             _gameRoom.GameCommunication.PlayerMovement(new PlayerMovement() { DrivingDir = _tank.DrivingDir, BodyDir = _tank.BodyDir, TurretDir = _tank.TurretDir, TurretRotation = _tank.TurretRotation, MainGunFirering = _tank.MainGunFirering });
         }

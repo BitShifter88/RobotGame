@@ -15,15 +15,20 @@ namespace Macalania.YunaEngine.Graphics
 
         public Camera()
         {
+            Zoom = 1;
+        }
 
+        public Vector2 ProjectPosition(int x, int y)
+        {
+            return new Vector2(x - Position.X - Viewport.Width / 2, y - Position.Y - Viewport.Height / 2);
         }
 
         public Matrix GetMatrix()
         {
             Matrix m = Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) *
      Matrix.CreateRotationZ(0) *
-     Matrix.CreateScale(1) *
-     Matrix.CreateTranslation(1300 / 2, 900 / 2, 0);
+     Matrix.CreateScale(Zoom) *
+     Matrix.CreateTranslation(Viewport.Width / 2, Viewport.Height / 2, 0);
             return m;
         }
 
