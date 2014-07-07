@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
+# Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.YunaEngine", "Macalania.YunaEngine\Macalania.YunaEngine.csproj", "{866E3A3A-1C3C-4A8C-9478-1253E89C1226}"
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerLogic", "Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj", "{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network", "..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj", "{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.TurretTexture", "Macalania.TurretTexture\Macalania.TurretTexture\Macalania.TurretTexture.csproj", "{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Macalania.TurretTextureContent", "Macalania.TurretTexture\Macalania.TurretTextureContent\Macalania.TurretTextureContent.contentproj", "{60C0590A-70D6-401C-A4D3-F0837D80E4E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,22 @@ Global
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|x86.ActiveCfg = Release|Any CPU
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Debug|x86.ActiveCfg = Debug|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Debug|x86.Build.0 = Debug|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Release|Any CPU.ActiveCfg = Release|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Release|x86.ActiveCfg = Release|x86
+		{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}.Release|x86.Build.0 = Release|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|Any CPU.ActiveCfg = Release|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

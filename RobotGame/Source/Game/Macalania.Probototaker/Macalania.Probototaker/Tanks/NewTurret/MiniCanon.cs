@@ -12,6 +12,8 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 {
     public class MiniCanon : MainGunNew
     {
+        Animation _ani;
+
         public MiniCanon(): base(Plugins.PluginType.MiniMainGun)
         {
             RequiredBricks = new List<Point>();
@@ -20,7 +22,7 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 
             Size = 1;
             ProjectileStartPosition = new Vector2(0, 0);
-            RateOfFire = 150;
+            RateOfFire = 300;
             CoolDownRate = 0.03f;
         }
 
@@ -37,8 +39,9 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 
         public override void Load(ResourceManager content)
         {
-            Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/MainGuns/MiniMainGun"));
-            Sprite.DepthLayer = 0.5f;
+            _ani = new Animation(32,9, 60, content.LoadYunaTexture("Textures/Tanks/MainGuns/MiniMainGun"));
+            Sprite = _ani;
+            Sprite.DepthLayer = 0.23f;
 
             base.Load(content);
         }
@@ -52,7 +55,7 @@ namespace Macalania.Probototaker.Tanks.NewTurret
                 ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, position, direction);
 
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
-                
+                _ani.PlayAnimation();
                 ShotFired();
             }
         }

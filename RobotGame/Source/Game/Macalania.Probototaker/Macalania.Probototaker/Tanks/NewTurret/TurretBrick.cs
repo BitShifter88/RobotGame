@@ -29,8 +29,8 @@ namespace Macalania.Probototaker.Tanks.NewTurret
         {
             base.SetLocation(x, y);
 
-            x = x - 32;
-            y = y - 32;
+            x = x - 16;
+            y = y - 16;
 
             _origin = new Vector2(-x * _dim, -y * _dim);
         }
@@ -38,9 +38,14 @@ namespace Macalania.Probototaker.Tanks.NewTurret
         public override void Draw(YunaEngine.Rendering.IRender render, Camera camera)
         {
             _tank.TurretStyle.MainTexture.Origin = _origin;
-            _tank.TurretStyle.MainTexture.Position = _tank.Position; 
+            _tank.TurretStyle.MainTexture.Position = _tank.Position;
             _tank.TurretStyle.MainTexture.Rotation = _tank.TurretRotation + _tank.BodyRotation;
             _tank.TurretStyle.MainTexture.Draw(render, camera, new Rectangle(_x * _dim, _y * _dim, _dim, _dim));
+
+            _tank.TurretStyle.Cluder.Origin = _origin;
+            _tank.TurretStyle.Cluder.Position = _tank.Position;
+            _tank.TurretStyle.Cluder.Rotation = _tank.TurretRotation + _tank.BodyRotation;
+            _tank.TurretStyle.Cluder.Draw(render, camera, new Rectangle(_x * _dim, (_y - _tank.Turret.YCordForTopBrick) * _dim, _dim, _dim));
             
         }
     }

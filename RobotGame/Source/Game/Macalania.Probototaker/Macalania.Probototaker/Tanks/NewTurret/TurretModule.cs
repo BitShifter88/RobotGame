@@ -35,12 +35,12 @@ namespace Macalania.Probototaker.Tanks.NewTurret
 
         public int GetCentredX()
         {
-            return _x - 32;
+            return _x - 16;
         }
 
         public int GetCentredY()
         {
-            return _y - 32;
+            return _y - 16;
         }
 
         public virtual void AddComponents(Turret turret)
@@ -53,8 +53,8 @@ namespace Macalania.Probototaker.Tanks.NewTurret
             _x = x;
             _y = y;
 
-            x = x - 32;
-            y = y - 32;
+            x = x - 16;
+            y = y - 16;
 
             Sprite.Origin = new Vector2(-x * _dim, -y * _dim);
         }

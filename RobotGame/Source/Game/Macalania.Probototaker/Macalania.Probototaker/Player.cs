@@ -146,9 +146,9 @@ namespace Macalania.Probototaker
             //r.Load(content);
             //t.AddPluginRightSide(r, 0);
 
-            for (int i = 32 - 2; i < 32 + 2; i++)
+            for (int i = 16 - 2; i < 16 + 2; i++)
             {
-                for (int j = 32 - 1; j < 32 + 4; j++)
+                for (int j = 16 - 1; j < 16 + 4; j++)
                 {
                     t.AddTurretComponent(new TurretBrick(t1), i, j);
                 }
@@ -158,37 +158,37 @@ namespace Macalania.Probototaker
             m.Load(content);
             m.SetTank(t1);
 
-            t.AddTurretModule(m, 32 - 2, 28);
+            t.AddTurretModule(m, 16 - 2, 12);
 
             MiniCanon m2 = new MiniCanon();
             m2.Load(content);
             m2.SetTank(t1);
 
-            t.AddTurretModule(m2, 32, 28);
+            t.AddTurretModule(m2, 16, 12);
 
             SunPannelNew s = new SunPannelNew(PluginDirection.Left);
             s.Load(content);
             s.SetTank(t1);
 
-            t.AddTurretModule(s, 29, 32);
+            t.AddTurretModule(s, 12, 15);
 
             ArtileryStarter ar = new ArtileryStarter();
             ar.Load(content);
             ar.SetTank(t1);
 
-            t.AddTurretModule(ar, 30, 34);
+            t.AddTurretModule(ar, 14, 18);
 
             RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
             roc.Load(content);
             roc.SetTank(t1);
 
-            t.AddTurretModule(roc, 34, 31);
+            t.AddTurretModule(roc, 18, 15);
 
-            ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
-            sp.Load(content);
-            sp.SetTank(t1);
+            //ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
+            //sp.Load(content);
+            //sp.SetTank(t1);
 
-            t.AddTurretModule(sp, 29, 33);
+            //t.AddTurretModule(sp, 13, 17);
 
             _tank = t1;
 
@@ -226,7 +226,7 @@ namespace Macalania.Probototaker
                 //_tank.ActivatePlugin(sp, Vector2.Zero, null);
                 _gameRoom.GameCommunication.SendAbilityActivation(PluginType.Shield, null, Vector2.Zero);
             if (KeyboardInput.IsKeyClicked(Keys.NumPad2))
-                _tank.ActivatePlugin(PluginType.ArtileryStart, new Vector2(MouseInput.X, MouseInput.Y), null);
+                _tank.ActivatePlugin(PluginType.ArtileryStart, Room.Camera.ProjectPositionWithZoom(MouseInput.X, MouseInput.Y), null);
                 //_gameRoom.GameCommunication.SendAbilityActivation(PluginType.ArtileryStart, null, new Vector2(MouseInput.X, MouseInput.Y));
             if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
             {

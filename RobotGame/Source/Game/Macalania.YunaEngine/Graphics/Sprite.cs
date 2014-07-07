@@ -37,12 +37,12 @@ namespace Macalania.YunaEngine.Graphics
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
         }
 
-        public void Update(double dt)
+        public virtual void Update(double dt)
         {
             CalculateRelativeBoundingSphere();
         }
 
-        public void Draw(IRender render, Camera camera)
+        public virtual void Draw(IRender render, Camera camera)
         {
             render.Draw(Texture, Position, new Rectangle(0, 0, Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, DepthLayer);
 
@@ -58,13 +58,13 @@ namespace Macalania.YunaEngine.Graphics
             //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
 
-        public void CalculateBoundingSphere()
+        public virtual void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
             //BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
         }
 
-        public void CalculateRelativeBoundingSphere()
+        public virtual void CalculateRelativeBoundingSphere()
         {
             Vector2 center = -Origin;
             center += new Vector2(Texture.Width / 2, Texture.Height / 2);

@@ -36,6 +36,26 @@ namespace Macalania.Probototaker
 
             t1.SetTurret(t);
 
+            for (int i = 16 - 2; i < 16 + 2; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 4; j++)
+                {
+                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16 - 2, 12);
+
+            MiniCanon m2 = new MiniCanon();
+            m2.Load(content);
+            m2.SetTank(t1);
+
+            t.AddTurretModule(m2, 16, 12);
+
             //StarterMainGun smg = new StarterMainGun();
             //smg.Load(content);
             //smg.SetTank(t1);
@@ -133,6 +153,26 @@ namespace Macalania.Probototaker
             Turret t = new Turret();
             t1.SetTurret(t);
 
+            for (int i = 16 - 2; i < 16 + 2; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 4; j++)
+                {
+                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16 - 2, 12);
+
+            MiniCanon m2 = new MiniCanon();
+            m2.Load(content);
+            m2.SetTank(t1);
+
+            t.AddTurretModule(m2, 16, 12);
+
             //StarterMainGun smg = new StarterMainGun();
             //smg.Load(content);
             //smg.SetTank(t1);
@@ -203,6 +243,26 @@ namespace Macalania.Probototaker
             Turret t = new Turret();
 
             t1.SetTurret(t);
+
+            for (int i = 16 - 2; i < 16 + 2; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 4; j++)
+                {
+                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16 - 2, 12);
+
+            MiniCanon m2 = new MiniCanon();
+            m2.Load(content);
+            m2.SetTank(t1);
+
+            t.AddTurretModule(m2, 16, 12);
 
             //StarterMainGun smg = new StarterMainGun();
             //smg.Load(content);

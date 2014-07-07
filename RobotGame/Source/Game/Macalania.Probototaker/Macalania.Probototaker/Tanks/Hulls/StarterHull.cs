@@ -19,6 +19,7 @@ namespace Macalania.Probototaker.Tanks.Hulls
         public override void Load(ResourceManager content)
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Hulls/hullStarter"));
+            Sprite.SetOriginCenter();
             base.Load(content);
         }
     }

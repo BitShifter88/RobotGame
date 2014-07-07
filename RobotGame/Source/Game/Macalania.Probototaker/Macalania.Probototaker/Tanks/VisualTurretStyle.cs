@@ -10,5 +10,6 @@ namespace Macalania.Probototaker.Tanks
     public class VisualTurretStyle
     {
         public Sprite MainTexture { get; set; }
+        public Sprite Cluder { get; set; }
     }
 }

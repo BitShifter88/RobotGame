@@ -20,7 +20,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             : base(PluginType.ArtileryStart)
         {
             Size = 3;
-            _rockets = new ArtileryProjectile[6];
+            _rockets = new ArtileryProjectile[3];
             MaxCooldown = 5000;
             ComponentMaxHp = 100;
             _fireInterval = 400;
@@ -58,7 +58,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets[index].Ignite(Tank.Position, Vector2.Distance(Tank.Position, _targetPosition) + GameRandom.GetRandomInt(-200, 200));
             _rockets[index].Sprite.SetOriginCenter();
             _rockets[index].Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
-            Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 2 - 2 - 3 - 10 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
+            Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 12 - 4 - 16 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
             p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
             _rockets[index].SetPosition(p + Tank.Position);
 
@@ -78,7 +78,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
                 RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
 
-                Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 2 - 2 - 10 * i, Sprite.Origin.Y);
+                Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 12 - 16 * i, Sprite.Origin.Y + 4);
                 rocket2.Sprite.Origin = org2;
 
                 _rockets[i] = rocket2;

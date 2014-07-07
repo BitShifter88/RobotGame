@@ -20,7 +20,13 @@ namespace Macalania.YunaEngine.Graphics
 
         public Vector2 ProjectPosition(int x, int y)
         {
-            return new Vector2(x - Position.X - Viewport.Width / 2, y - Position.Y - Viewport.Height / 2);
+            return new Vector2(x - Position.X - (Viewport.Width) / 2, y - Position.Y - (Viewport.Height) / 2);
+        }
+
+
+        public Vector2 ProjectPositionWithZoom(int x, int y)
+        {
+            return new Vector2(x - Position.X - (Viewport.Width) / 2 * 1 / Zoom, y - Position.Y - (Viewport.Height) / 2 * 1 / Zoom);
         }
 
         public Matrix GetMatrix()

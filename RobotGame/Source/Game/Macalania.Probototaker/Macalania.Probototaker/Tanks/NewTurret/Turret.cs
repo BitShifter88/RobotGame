@@ -12,10 +12,11 @@ namespace Macalania.Probototaker.Tanks.NewTurret
     {
         private TurretComponent[,] _turretComponents;
         private List<TurretModule> _modules = new List<TurretModule>();
+        public int YCordForTopBrick { get; set; }
 
         public Turret()
         {
-            _turretComponents = new TurretComponent[64, 64];
+            _turretComponents = new TurretComponent[32, 32];
 
         }
 
@@ -87,6 +88,24 @@ namespace Macalania.Probototaker.Tanks.NewTurret
                 throw new Exception("Can't add turret component");
             _turretComponents[x, y] = component;
             component.SetLocation(x, y);
+
+            CalculateTopBrik();
+        }
+
+        private void CalculateTopBrik()
+        {
+            int best = 32;
+
+            for (int i = 0; i <32; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    if (_turretComponents[i, j] != null && _turretComponents[i, j].GetType() == typeof(TurretBrick) && j < best)
+                        best = j;
+                }
+            }
+
+            YCordForTopBrick = best;
         }
 
         public bool CanAddTurretComponent(TurretComponent component, int x, int y)

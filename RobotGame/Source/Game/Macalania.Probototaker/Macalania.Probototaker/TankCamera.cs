@@ -42,8 +42,8 @@ namespace Macalania.Probototaker
 
             Zoom -= (float)diff / 1000f;
 
-            if (Zoom > 1)
-                Zoom = 1;
+            if (Zoom > 3)
+                Zoom = 3;
             if (Zoom < 0.5f)
                 Zoom = 0.5f;
 

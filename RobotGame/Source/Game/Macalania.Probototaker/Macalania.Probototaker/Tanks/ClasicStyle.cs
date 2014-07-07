@@ -12,7 +12,9 @@ namespace Macalania.Probototaker.Tanks
         public ClasicStyle(ResourceManager content)
         {
             MainTexture = new Sprite(content.LoadYunaTexture("Textures/Tanks/Turrets/turretBigNew"));
+            Cluder = new Sprite(content.LoadYunaTexture("Textures/Tanks/Turrets/desertTankCluder"));
             MainTexture.DepthLayer = 0.2f;
+            Cluder.DepthLayer = 0.21f;
         }
     }
 }
