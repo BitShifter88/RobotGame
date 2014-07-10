@@ -238,8 +238,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Tanks\Styles\Classic\main.png">
-      <Name>main</Name>
+    <Compile Include="Textures\Tanks\Styles\Classic\main2.png">
+      <Name>main2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -265,6 +265,13 @@
     </Compile>
     <Compile Include="Textures\Tanks\Styles\Classic\cornersRightTop.png">
       <Name>cornersRightTop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Tanks\Styles\Classic\main.png">
+      <Name>main</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

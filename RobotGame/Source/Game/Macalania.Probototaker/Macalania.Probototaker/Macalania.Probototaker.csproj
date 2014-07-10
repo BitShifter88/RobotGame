@@ -107,13 +107,13 @@
     <Compile Include="Tanks\ClasicStyle.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs" />
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
-    <Compile Include="Tanks\NewTurret\MainGunNew.cs" />
-    <Compile Include="Tanks\NewTurret\MiniCanon.cs" />
-    <Compile Include="Tanks\NewTurret\SunPannelNew.cs" />
-    <Compile Include="Tanks\NewTurret\TurretModule.cs" />
-    <Compile Include="Tanks\NewTurret\Turret.cs" />
-    <Compile Include="Tanks\NewTurret\TurretBrick.cs" />
-    <Compile Include="Tanks\NewTurret\TurretComponent.cs" />
+    <Compile Include="Tanks\Turrets\MainGunNew.cs" />
+    <Compile Include="Tanks\Turrets\MiniCanon.cs" />
+    <Compile Include="Tanks\Turrets\SunPannelNew.cs" />
+    <Compile Include="Tanks\Turrets\TurretModule.cs" />
+    <Compile Include="Tanks\Turrets\Turret.cs" />
+    <Compile Include="Tanks\Turrets\TurretBrick.cs" />
+    <Compile Include="Tanks\Turrets\TurretComponent.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MiniMainGun.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\SprayMainGun.cs" />
@@ -135,9 +135,6 @@
     <Compile Include="Tanks\TankComponent.cs" />
     <Compile Include="Tanks\Tracks\StarterTrack.cs" />
     <Compile Include="Tanks\Tracks\Track.cs" />
-    <Compile Include="Tanks\Turrets\BigTurret.cs" />
-    <Compile Include="Tanks\Turrets\StarterTurret.cs" />
-    <Compile Include="Tanks\Turrets\Turret.cs" />
     <Compile Include="Tanks\VisualTurretStyle.cs" />
   </ItemGroup>
   <ItemGroup>

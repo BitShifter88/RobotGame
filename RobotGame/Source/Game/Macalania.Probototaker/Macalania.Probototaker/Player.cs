@@ -2,7 +2,7 @@
 using Macalania.Probototaker.Rooms;
 using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Hulls;
-using Macalania.Probototaker.Tanks.NewTurret;
+using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;
@@ -193,6 +193,8 @@ namespace Macalania.Probototaker
             _tank = t1;
 
             _tank.ReadyTank();
+
+            t.DetermineTurretBricks();
 
             Room.AddGameObjectWhileRunning(_tank);
         }

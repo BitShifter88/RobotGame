@@ -112,14 +112,14 @@ namespace Macalania.TurretTexture
                     pixels[i + 2 + (j + 0 +12) * texture.Width] = replace;
                     pixels[i + 3 + (j + 0+12) * texture.Width] = replace;
 
-                    pixels[i + 0 + (j + 1+12) * texture.Width] = replace;
-                    pixels[i + 1 + (j + 1 + 12) * texture.Width] = replace;
-                    pixels[i + 2 + (j + 1 +12) * texture.Width] = replace;
+                    pixels[i + 0 + 1 + (j + 1+12) * texture.Width] = replace;
+                    pixels[i + 1 + 1 + (j + 1 + 12) * texture.Width] = replace;
+                    pixels[i + 2 + 1 + (j + 1 +12) * texture.Width] = replace;
 
-                    pixels[i + 0 + (j + 2 +12) * texture.Width] = replace;
-                    pixels[i + 1 + (j + 2 +12) * texture.Width] = replace;
+                    pixels[i + 0 + 2 + (j + 2 +12) * texture.Width] = replace;
+                    pixels[i + 1 + 2 + (j + 2 +12) * texture.Width] = replace;
 
-                    pixels[i + 0 + (j + 3 + 12) * texture.Width] = replace;
+                    pixels[i + 0 + 3 + (j + 3 + 12) * texture.Width] = replace;
                 }
             }
 

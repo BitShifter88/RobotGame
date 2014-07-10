@@ -10,7 +10,7 @@ using System.Text;
 using Macalania.Probototaker.Effects;
 using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
-using Macalania.Probototaker.Tanks.NewTurret;
+using Macalania.Probototaker.Tanks.Turrets;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {

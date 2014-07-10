@@ -1,4 +1,4 @@
-﻿using Macalania.Probototaker.Tanks.NewTurret;
+﻿using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;

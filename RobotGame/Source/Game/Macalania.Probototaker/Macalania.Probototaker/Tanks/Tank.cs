@@ -1,5 +1,5 @@
 ﻿using Macalania.Probototaker.Tanks.Hulls;
-using Macalania.Probototaker.Tanks.NewTurret;
+using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Tracks;

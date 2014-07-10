@@ -17,6 +17,9 @@ namespace Macalania.Probototaker.Tanks
             CornersRightTop = new Sprite(content.LoadYunaTexture("Textures/Tanks/Styles/Classic/cornersRightTop"));
             CornersLeftBottom = new Sprite(content.LoadYunaTexture("Textures/Tanks/Styles/Classic/cornersLeftBottom"));
             MainTexture.DepthLayer = 0.2f;
+            CornersLeftBottom.DepthLayer = 0.2f;
+            CornersLeftTop.DepthLayer = 0.2f;
+            CornersRightTop.DepthLayer = 0.2f;
             Cluder.DepthLayer = 0.21f;
         }
     }

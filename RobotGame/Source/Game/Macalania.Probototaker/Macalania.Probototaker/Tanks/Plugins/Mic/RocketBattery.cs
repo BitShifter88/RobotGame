@@ -1,6 +1,6 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Projectiles;
-using Macalania.Probototaker.Tanks.NewTurret;
+using Macalania.Probototaker.Tanks.Turrets;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
