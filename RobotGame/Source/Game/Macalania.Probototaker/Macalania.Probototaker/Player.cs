@@ -166,11 +166,11 @@ namespace Macalania.Probototaker
 
             t.AddTurretModule(m2, 16, 12);
 
-            SunPannelNew s = new SunPannelNew(PluginDirection.Left);
-            s.Load(content);
-            s.SetTank(t1);
+            //SunPannelNew s = new SunPannelNew(PluginDirection.Left);
+            //s.Load(content);
+            //s.SetTank(t1);
 
-            t.AddTurretModule(s, 12, 15);
+            //t.AddTurretModule(s, 12, 15);
 
             ArtileryStarter ar = new ArtileryStarter();
             ar.Load(content);

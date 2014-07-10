@@ -78,6 +78,8 @@ namespace Macalania.Robototaker.GameServer
                     //Thread.Sleep((int)timeToWait);
 
                     extraTimeWatch.Start();
+
+                    // PERFORMANCE: Det er lidt skidt at vil efterspørger TotalMiliseconds. Det bruger meget CPU. Overvej at lav et system med Sleep(1)
                     while (extraTimeWatch.Elapsed.TotalMilliseconds < timeToWait)
                         Thread.Sleep(0);
                     extraTimeWatch.Stop();

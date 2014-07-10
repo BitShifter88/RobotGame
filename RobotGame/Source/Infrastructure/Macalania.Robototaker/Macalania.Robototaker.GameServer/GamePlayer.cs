@@ -183,6 +183,11 @@ namespace Macalania.Robototaker.GameServer
             Connection.SendMessage(m, NetDeliveryMethod.Unreliable, 0);
         }
 
+        public void RemovedFromServer()
+        {
+
+        }
+
         public override void Load(ResourceManager content)
         {
             Tank t1 = new Tank(Room, new Vector2(100, 600));

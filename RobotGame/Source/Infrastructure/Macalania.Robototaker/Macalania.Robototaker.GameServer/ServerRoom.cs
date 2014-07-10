@@ -37,8 +37,9 @@ namespace Macalania.Robototaker.GameServer
         private void RemovePlayers()
         {
             _playerMutex.WaitOne();
-            foreach (int player in _playersToRemove)
+            foreach (long player in _playersToRemove)
             {
+                Players[player].RemovedFromServer();
                 Players.Remove(player);
             }
             _playersToRemove.Clear();

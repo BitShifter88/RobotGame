@@ -238,16 +238,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Tanks\Turrets\turretBigNew.png">
-      <Name>turretBigNew</Name>
+    <Compile Include="Textures\Tanks\Styles\Classic\main.png">
+      <Name>main</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Tanks\Turrets\desertTankCluder.png">
+    <Compile Include="Textures\Tanks\Styles\Classic\desertTankCluder.png">
       <Name>desertTankCluder</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Tanks\Styles\Classic\cornersLeftBottom.png">
+      <Name>cornersLeftBottom</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Tanks\Styles\Classic\cornersLeftTop.png">
+      <Name>cornersLeftTop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Tanks\Styles\Classic\cornersRightTop.png">
+      <Name>cornersRightTop</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

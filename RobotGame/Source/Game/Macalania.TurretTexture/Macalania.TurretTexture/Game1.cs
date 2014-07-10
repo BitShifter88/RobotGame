@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.IO;
 
 namespace Macalania.TurretTexture
 {
@@ -47,7 +48,121 @@ namespace Macalania.TurretTexture
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            CornersLeftTop();
+            CornersRightTop();
+
+            CornersLeftBottom();
+
             // TODO: use this.Content to load your game content here
+        }
+
+        private void CornersRightTop()
+        {
+            Texture2D texture = Content.Load<Texture2D>("turretBigNew");
+
+            Color[] pixels = new Color[texture.Width * texture.Height];
+
+            texture.GetData<Color>(pixels);
+
+            Color replace = new Color(0, 0, 0, 0);
+
+            for (int i = 0; i < texture.Width; i += 16)
+            {
+                for (int j = 0; j < texture.Height; j += 16)
+                {
+                    pixels[i + 0+12 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 1 + 12 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 2 + 12 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 3 + 12 + (j + 0) * texture.Width] = replace;
+
+                    pixels[i + 0 + 12+1 + (j + 1) * texture.Width] = replace;
+                    pixels[i + 1 + 12 +1+ (j + 1) * texture.Width] = replace;
+                    pixels[i + 2 + 12+1 + (j + 1) * texture.Width] = replace;
+
+                    pixels[i + 0 + 12 +2+ (j + 2) * texture.Width] = replace;
+                    pixels[i + 1 + 12 +2+ (j + 2) * texture.Width] = replace;
+
+                    pixels[i + 0 + 12 +3+ (j + 3) * texture.Width] = replace;
+                }
+            }
+
+            Texture2D output = new Texture2D(GraphicsDevice, texture.Width, texture.Height);
+            output.SetData<Color>(pixels);
+
+            output.SaveAsPng(new FileStream("C:\\Users\\John\\Desktop\\textureOutput\\cornersRightTop.png", FileMode.Create), texture.Width, texture.Height);
+        }
+
+
+        private void CornersLeftBottom()
+        {
+            Texture2D texture = Content.Load<Texture2D>("turretBigNew");
+
+            Color[] pixels = new Color[texture.Width * texture.Height];
+
+            texture.GetData<Color>(pixels);
+
+            Color replace = new Color(0, 0, 0, 0);
+
+            for (int i = 0; i < texture.Width; i += 16)
+            {
+                for (int j = 0; j < texture.Height; j += 16)
+                {
+                    pixels[i + 0 + (j + 0 +12) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 0 +12) * texture.Width] = replace;
+                    pixels[i + 2 + (j + 0 +12) * texture.Width] = replace;
+                    pixels[i + 3 + (j + 0+12) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 1+12) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 1 + 12) * texture.Width] = replace;
+                    pixels[i + 2 + (j + 1 +12) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 2 +12) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 2 +12) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 3 + 12) * texture.Width] = replace;
+                }
+            }
+
+            Texture2D output = new Texture2D(GraphicsDevice, texture.Width, texture.Height);
+            output.SetData<Color>(pixels);
+
+            output.SaveAsPng(new FileStream("C:\\Users\\John\\Desktop\\textureOutput\\cornersLeftBottom.png", FileMode.Create), texture.Width, texture.Height);
+        }
+
+        private void CornersLeftTop()
+        {
+            Texture2D texture = Content.Load<Texture2D>("turretBigNew");
+
+            Color[] pixels = new Color[texture.Width * texture.Height];
+
+            texture.GetData<Color>(pixels);
+
+            Color replace = new Color(0, 0, 0, 0);
+
+            for (int i = 0; i < texture.Width; i += 16)
+            {
+                for (int j = 0; j < texture.Height; j += 16)
+                {
+                    pixels[i + 0 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 2 + (j + 0) * texture.Width] = replace;
+                    pixels[i + 3 + (j + 0) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 1) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 1) * texture.Width] = replace;
+                    pixels[i + 2 + (j + 1) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 2) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 2) * texture.Width] = replace;
+
+                    pixels[i + 0 + (j + 3) * texture.Width] = replace;
+                }
+            }
+
+            Texture2D output = new Texture2D(GraphicsDevice, texture.Width, texture.Height);
+            output.SetData<Color>(pixels);
+
+            output.SaveAsPng(new FileStream("C:\\Users\\John\\Desktop\\textureOutput\\cornersLeftTop.png", FileMode.Create), texture.Width, texture.Height);
         }
 
         /// <summary>
