@@ -16,6 +16,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
         RightTop,
         LeftBottom,
         RightBottom,
+        Top,
+        Bottom,
+        Right,
+        Left,
     }
 
     public class TurretBrick : TurretComponent
@@ -48,32 +52,51 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public override void Draw(YunaEngine.Rendering.IRender render, Camera camera)
         {
-            Sprite textureToDraw = null;
+            Sprite brickTexture = null;
+            Rectangle sideTextureSource = _tank.TurretStyle.GetSidesSource(BrickType);
 
             if (BrickType == Turrets.BrickType.NoCorners)
             {
-                textureToDraw = _tank.TurretStyle.MainTexture;
+                brickTexture = _tank.TurretStyle.MainTexture;
+                
             }
             else if (BrickType == Turrets.BrickType.LeftTop)
-                textureToDraw = _tank.TurretStyle.CornersLeftTop;
+            {
+                brickTexture = _tank.TurretStyle.CornersLeftTop;
+            }
             else if (BrickType == Turrets.BrickType.RightTop)
-                textureToDraw = _tank.TurretStyle.CornersRightTop;
+            {
+                brickTexture = _tank.TurretStyle.CornersRightTop;
+            }
             else if (BrickType == Turrets.BrickType.LeftBottom)
-                textureToDraw = _tank.TurretStyle.CornersLeftBottom;
+            {
+                brickTexture = _tank.TurretStyle.CornersLeftBottom;
+            }
+            else if (BrickType == Turrets.BrickType.RightBottom)
+            {
+                brickTexture = _tank.TurretStyle.CornersRightBottom;
+            }
             else
-                textureToDraw = _tank.TurretStyle.MainTexture;
+                brickTexture = _tank.TurretStyle.MainTexture;
 
             // Draws main part of the brick
-            textureToDraw.Origin = _origin;
-            textureToDraw.Position = _tank.Position;
-            textureToDraw.Rotation = _tank.TurretRotation + _tank.BodyRotation;
-            textureToDraw.Draw(render, camera, new Rectangle(_x * _dim, _y * _dim, _dim, _dim));
+            brickTexture.Origin = _origin;
+            brickTexture.Position = _tank.Position;
+            brickTexture.Rotation = _tank.TurretRotation + _tank.BodyRotation;
+            brickTexture.Draw(render, camera, new Rectangle(_x * _dim, _y * _dim, _dim, _dim));
+
+            _tank.TurretStyle.Sides.Origin = _origin;
+            _tank.TurretStyle.Sides.Position = _tank.Position;
+            _tank.TurretStyle.Sides.Rotation = _tank.TurretRotation + _tank.BodyRotation;
+            if (BrickType != Turrets.BrickType.NoCorners)
+                _tank.TurretStyle.Sides.Draw(render, camera, sideTextureSource);
+
 
             // Draws clutter
-            //_tank.TurretStyle.Cluder.Origin = _origin;
-            //_tank.TurretStyle.Cluder.Position = _tank.Position;
-            //_tank.TurretStyle.Cluder.Rotation = _tank.TurretRotation + _tank.BodyRotation;
-            //_tank.TurretStyle.Cluder.Draw(render, camera, new Rectangle(_x * _dim, (_y - _tank.Turret.YCordForTopBrick) * _dim, _dim, _dim));
+            _tank.TurretStyle.Cluder.Origin = _origin;
+            _tank.TurretStyle.Cluder.Position = _tank.Position;
+            _tank.TurretStyle.Cluder.Rotation = _tank.TurretRotation + _tank.BodyRotation;
+            _tank.TurretStyle.Cluder.Draw(render, camera, new Rectangle(_x * _dim, (_y - _tank.Turret.YCordForTopBrick) * _dim, _dim, _dim));
             
         }
     }

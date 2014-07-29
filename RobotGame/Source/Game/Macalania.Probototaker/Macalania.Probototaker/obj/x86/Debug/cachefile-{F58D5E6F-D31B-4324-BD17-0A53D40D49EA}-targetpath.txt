@@ -30,6 +30,8 @@ Content\Textures\Tanks\Styles\Classic\cornersLeftBottom.xnb
 Content\Textures\Tanks\Styles\Classic\cornersLeftTop.xnb
 Content\Textures\Tanks\Styles\Classic\cornersRightTop.xnb
 Content\Textures\Tanks\Styles\Classic\main.xnb
+Content\Textures\Tanks\Styles\Classic\cornersRightBottom.xnb
+Content\Textures\Tanks\Styles\Classic\classicSides.xnb
 Content\Textures\Tanks\Turrets\turretStarter.png
 Content\Textures\Tanks\MainGuns\mainGunStarter.png
 Content\Textures\Tanks\Tracks\tracksStarter.png
@@ -56,4 +58,10 @@ Content\Textures\Tanks\Misc\starterAttackRocket.png
 Content\Textures\Projectiles\attackRocketProjectile.png
 Content\Textures\Items\starterMine.png
 Content\Textures\Tanks\Styles\Classic\main2.png
+Content\Textures\Tanks\Styles\Classic\desertTankCluder.png
+Content\Textures\Tanks\Styles\Classic\cornersLeftBottom.png
+Content\Textures\Tanks\Styles\Classic\cornersLeftTop.png
+Content\Textures\Tanks\Styles\Classic\cornersRightTop.png
+Content\Textures\Tanks\Styles\Classic\main.png
+Content\Textures\Tanks\Styles\Classic\cornersRightBottom.png
 Content\Textures\Projectiles\shell.png

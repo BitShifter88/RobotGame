@@ -74,6 +74,47 @@ namespace Macalania.Probototaker.Tanks.Turrets
                         {
                             ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.LeftBottom;
                         }
+                        else if (
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j + 1] == null || (_turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() != typeof(TurretBrick))) &&
+                            (_turretComponents[i + 1, j] == null || (_turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.RightBottom;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j - 1] == null || (_turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() != typeof(TurretBrick))) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Top;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j + 1] == null || (_turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() != typeof(TurretBrick))) &&
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Bottom;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i - 1, j] == null || (_turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Left;
+                        }
+                        else if (
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i + 1, j] == null || (_turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Right;
+                        }
                         else
                             ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.NoCorners;
                     }
@@ -182,10 +223,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
                 tc.Draw(render, camera);
             }
 
-            //foreach (TurretModule module in _modules)
-            //{
-            //    module.Draw(render, camera);
-            //}
+            foreach (TurretModule module in _modules)
+            {
+                module.Draw(render, camera);
+            }
         }
     }
 }

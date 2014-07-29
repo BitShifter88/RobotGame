@@ -190,18 +190,26 @@ namespace Macalania.Robototaker.GameServer
 
         public override void Load(ResourceManager content)
         {
+            ServerLog.E("Creating tank", LogType.Debug);
             Tank t1 = new Tank(Room, new Vector2(100, 600));
-
+            ServerLog.E("Done", LogType.Debug);
+            ServerLog.E("Creating starterhull", LogType.Debug);
             StarterHull sh = new StarterHull();
+
+            ServerLog.E("Setting tank for starter hull", LogType.Debug);
             sh.SetTank(t1);
+
+            ServerLog.E("Loading starter hull", LogType.Debug);
             sh.Load(content);
             t1.SetHull(sh);
 
+            ServerLog.E("Loading starter track", LogType.Debug);
             StarterTrack st = new StarterTrack();
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
+            ServerLog.E("Loading TUrret", LogType.Debug);
             Turret t = new BigTurret();
             t.SetTank(t1);
             t.Load(content);
@@ -213,6 +221,7 @@ namespace Macalania.Robototaker.GameServer
             //smg.SetTank(t1);
             //t.AddPluginTop(smg, 1);
 
+            ServerLog.E("Loading guns", LogType.Debug);
             MiniMainGun mg1 = new MiniMainGun();
             mg1.SetTank(t1);
             mg1.Load(content);
@@ -263,16 +272,19 @@ namespace Macalania.Robototaker.GameServer
             ap3.SetTank(t1);
             t.AddPluginRightSide(ap3, 2);
 
+            ServerLog.E("Loading shield", LogType.Debug);
             ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
             sp.Load(content);
             sp.SetTank(t1);
             t.AddPluginLeftSide(sp, 2);
 
+            ServerLog.E("Loading artillery", LogType.Debug);
             ArtileryStarter art = new ArtileryStarter();
             art.Load(content);
             art.SetTank(t1);
             t.AddPluginButtom(art, 0);
 
+            ServerLog.E("Loading attack", LogType.Debug);
             StarterAttackRocketBatteryPlugin attack = new StarterAttackRocketBatteryPlugin();
             attack.SetTank(t1);
             attack.Load(content);
@@ -286,6 +298,7 @@ namespace Macalania.Robototaker.GameServer
 
             Tank = t1;
 
+            ServerLog.E("Loading ready tank", LogType.Debug);
             Tank.ReadyTank();
 
             Room.AddGameObjectWhileRunning(Tank);

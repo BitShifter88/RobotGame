@@ -260,7 +260,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersLeftBottom.xnb</Output>
-      <Time>2014-07-11T00:36:30.0793609+02:00</Time>
+      <Time>2014-07-11T13:12:48.4426554+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Tanks\Styles\Classic\cornersLeftTop.png</Source>
@@ -288,6 +288,24 @@
       <Options>None</Options>
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main.xnb</Output>
       <Time>2014-07-10T23:10:25.4589615+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Styles\Classic\cornersRightBottom.png</Source>
+      <Name>Textures\Tanks\Styles\Classic\cornersRightBottom</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersRightBottom.xnb</Output>
+      <Time>2014-07-11T13:18:16.0547569+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tanks\Styles\Classic\classicSides.png</Source>
+      <Name>Textures\Tanks\Styles\Classic\classicSides</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\classicSides.xnb</Output>
+      <Time>2014-07-11T13:42:57.0993257+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

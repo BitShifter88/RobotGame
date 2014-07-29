@@ -17,7 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network", "..\..\li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.TurretTexture", "Macalania.TurretTexture\Macalania.TurretTexture\Macalania.TurretTexture.csproj", "{9B58EA5F-9F85-4C72-9C9D-33B8DA4D14A0}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Macalania.TurretTextureContent", "Macalania.TurretTexture\Macalania.TurretTextureContent\Macalania.TurretTextureContent.contentproj", "{60C0590A-70D6-401C-A4D3-F0837D80E4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.TurretTextureContent", "Macalania.TurretTexture\Macalania.TurretTextureContent\Macalania.TurretTextureContent.contentproj", "{60C0590A-70D6-401C-A4D3-F0837D80E4E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.WorldEditor", "Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditor.csproj", "{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Macalania.Probototaker.WorldEditorContent", "Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditorContent\Macalania.Probototaker.WorldEditorContent.contentproj", "{9E5E734F-D868-45E8-BB92-446134DD2B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +105,22 @@ Global
 		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|Any CPU.ActiveCfg = Release|x86
 		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{60C0590A-70D6-401C-A4D3-F0837D80E4E8}.Release|x86.ActiveCfg = Release|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Debug|x86.ActiveCfg = Debug|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Debug|x86.Build.0 = Debug|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Release|Any CPU.ActiveCfg = Release|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Release|x86.ActiveCfg = Release|x86
+		{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}.Release|x86.Build.0 = Release|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Debug|x86.ActiveCfg = Debug|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|Any CPU.ActiveCfg = Release|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

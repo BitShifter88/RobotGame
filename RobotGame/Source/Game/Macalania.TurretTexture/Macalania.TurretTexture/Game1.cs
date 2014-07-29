@@ -52,6 +52,7 @@ namespace Macalania.TurretTexture
             CornersRightTop();
 
             CornersLeftBottom();
+            CornersRightBottom();
 
             // TODO: use this.Content to load your game content here
         }
@@ -92,6 +93,42 @@ namespace Macalania.TurretTexture
             output.SaveAsPng(new FileStream("C:\\Users\\John\\Desktop\\textureOutput\\cornersRightTop.png", FileMode.Create), texture.Width, texture.Height);
         }
 
+        private void CornersRightBottom()
+        {
+            Texture2D texture = Content.Load<Texture2D>("turretBigNew");
+
+            Color[] pixels = new Color[texture.Width * texture.Height];
+
+            texture.GetData<Color>(pixels);
+
+            Color replace = new Color(0, 0, 0, 0);
+
+            for (int i = 0; i < texture.Width; i += 16)
+            {
+                for (int j = 0; j < texture.Height; j += 16)
+                {
+                    pixels[i + 0 + 12 + 3 + (j + 0 + 12) * texture.Width] = replace;
+                    pixels[i + 0 + 12 + 3 + (j + 0 + 1 + 12) * texture.Width] = replace;
+                    pixels[i + 0 + 12 + 3+ (j + 0 + 2 + 12) * texture.Width] = replace;
+                    pixels[i + 0 + 12 + 3+ (j + 0 + 3 + 12) * texture.Width] = replace;
+
+                    pixels[i + 2 + 12+ (j + 0 + 1 + 12) * texture.Width] = replace;
+                    pixels[i + 2 + 12+ (j + 1 + 1 + 12) * texture.Width] = replace;
+                    pixels[i + 2 + 12+ (j + 2 + 1 + 12) * texture.Width] = replace;
+
+                    pixels[i + 1 +12+ (j + 0 + 2 + 12) * texture.Width] = replace;
+                    pixels[i + 1 +12+ (j + 1 + 2 + 12) * texture.Width] = replace;
+
+                    pixels[i + 0 +12 + (j + 3 + 12) * texture.Width] = replace;
+                }
+            }
+
+            Texture2D output = new Texture2D(GraphicsDevice, texture.Width, texture.Height);
+            output.SetData<Color>(pixels);
+
+            output.SaveAsPng(new FileStream("C:\\Users\\John\\Desktop\\textureOutput\\cornersRightBottom.png", FileMode.Create), texture.Width, texture.Height);
+        }
+
 
         private void CornersLeftBottom()
         {
@@ -108,16 +145,16 @@ namespace Macalania.TurretTexture
                 for (int j = 0; j < texture.Height; j += 16)
                 {
                     pixels[i + 0 + (j + 0 +12) * texture.Width] = replace;
-                    pixels[i + 1 + (j + 0 +12) * texture.Width] = replace;
-                    pixels[i + 2 + (j + 0 +12) * texture.Width] = replace;
-                    pixels[i + 3 + (j + 0+12) * texture.Width] = replace;
+                    pixels[i + 0 + (j + 0 + 1 +12) * texture.Width] = replace;
+                    pixels[i + 0 + (j + 0 + 2 +12) * texture.Width] = replace;
+                    pixels[i + 0 + (j + 0 + 3+12) * texture.Width] = replace;
 
-                    pixels[i + 0 + 1 + (j + 1+12) * texture.Width] = replace;
-                    pixels[i + 1 + 1 + (j + 1 + 12) * texture.Width] = replace;
-                    pixels[i + 2 + 1 + (j + 1 +12) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 0 + 1+12) * texture.Width] = replace;
+                    pixels[i + 1 + (j + 1  + 1+ 12) * texture.Width] = replace;
+                    pixels[i + 1  + (j + 2 + 1 +12) * texture.Width] = replace;
 
-                    pixels[i + 0 + 2 + (j + 2 +12) * texture.Width] = replace;
-                    pixels[i + 1 + 2 + (j + 2 +12) * texture.Width] = replace;
+                    pixels[i + 2  + (j + 0 + 2 +12) * texture.Width] = replace;
+                    pixels[i + 2  + (j + 1 + 2 +12) * texture.Width] = replace;
 
                     pixels[i + 0 + 3 + (j + 3 + 12) * texture.Width] = replace;
                 }
