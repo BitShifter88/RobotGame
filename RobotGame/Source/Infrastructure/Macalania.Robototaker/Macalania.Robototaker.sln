@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.MainFrame", "Macalania.Robototaker.MainFrame\Macalania.Robototaker.MainFrame.csproj", "{26A08EDD-302E-402A-9BE4-BDEFB9AD2432}"
@@ -13,13 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frame.Network", "Frame.Netw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Protocol", "Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj", "{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerLogic", "..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj", "{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerGlobals", "Macalania.Probototaker.ServerGlobals\Macalania.Probototaker.ServerGlobals.csproj", "{C67FA7E4-56E3-4329-B348-BF059E3D9135}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network", "..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj", "{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren XNA Extensions", "..\..\..\lidgren\Lidgren XNA Extensions\Lidgren XNA Extensions\Lidgren XNA Extensions.csproj", "{2B661ABD-63A8-4916-A94B-034729231271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerLogic", "..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj", "{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,16 +81,6 @@ Global
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Release|x86.ActiveCfg = Release|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|x86.ActiveCfg = Release|Any CPU
 		{C67FA7E4-56E3-4329-B348-BF059E3D9135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C67FA7E4-56E3-4329-B348-BF059E3D9135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C67FA7E4-56E3-4329-B348-BF059E3D9135}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -121,6 +111,16 @@ Global
 		{2B661ABD-63A8-4916-A94B-034729231271}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2B661ABD-63A8-4916-A94B-034729231271}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2B661ABD-63A8-4916-A94B-034729231271}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5C659A89-DB6C-4336-BC9D-E2C375CA6FFD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

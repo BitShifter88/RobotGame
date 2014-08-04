@@ -189,10 +189,12 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="TankCamera.cs" />
     <Compile Include="TankGenerator.cs">
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="Tanks\ClasicStyle.cs" />
     <Compile Include="Tanks\Hulls\Hull.cs">
       <SubType>
       </SubType>
@@ -201,10 +203,8 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Tanks\Plugins\MainGuns\MainGun.cs">
-      <SubType>
-      </SubType>
-    </Compile>
+    <Compile Include="Tanks\Plugins\MainGuns\MainGunNew.cs" />
+    <Compile Include="Tanks\Plugins\MainGuns\MiniCanon.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MiniMainGun.cs">
       <SubType>
       </SubType>
@@ -281,18 +281,15 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Tanks\Turrets\BigTurret.cs">
-      <SubType>
-      </SubType>
-    </Compile>
-    <Compile Include="Tanks\Turrets\StarterTurret.cs">
-      <SubType>
-      </SubType>
-    </Compile>
+    <Compile Include="Tanks\Turrets\SunPannelNew.cs" />
     <Compile Include="Tanks\Turrets\Turret.cs">
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="Tanks\Turrets\TurretBrick.cs" />
+    <Compile Include="Tanks\Turrets\TurretComponent.cs" />
+    <Compile Include="Tanks\Turrets\TurretModule.cs" />
+    <Compile Include="Tanks\VisualTurretStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Macalania.Robototaker\Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj">

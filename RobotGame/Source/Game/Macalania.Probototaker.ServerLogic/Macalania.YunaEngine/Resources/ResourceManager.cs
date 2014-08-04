@@ -61,14 +61,14 @@ namespace Macalania.YunaEngine.Resources
                     }
                 }
 
-
-
                 _images.Add(asset, new YunaImage() { ColMap = transMap, Width = img.Width, Height = img.Height });
+
+                YunaTexture yt = new YunaTexture(transMap, img.Width, img.Height);
 
                 btm.Dispose();
                 img.Dispose();
 
-                return new YunaTexture(_images[asset].ColMap, _images[asset].Width, _images[asset].Height);
+                return yt;
             }
 #endif
 #if !SERVER

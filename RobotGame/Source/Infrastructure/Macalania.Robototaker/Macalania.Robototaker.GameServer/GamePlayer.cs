@@ -190,29 +190,19 @@ namespace Macalania.Robototaker.GameServer
 
         public override void Load(ResourceManager content)
         {
-            ServerLog.E("Creating tank", LogType.Debug);
             Tank t1 = new Tank(Room, new Vector2(100, 600));
-            ServerLog.E("Done", LogType.Debug);
-            ServerLog.E("Creating starterhull", LogType.Debug);
+
             StarterHull sh = new StarterHull();
-
-            ServerLog.E("Setting tank for starter hull", LogType.Debug);
             sh.SetTank(t1);
-
-            ServerLog.E("Loading starter hull", LogType.Debug);
             sh.Load(content);
             t1.SetHull(sh);
 
-            ServerLog.E("Loading starter track", LogType.Debug);
             StarterTrack st = new StarterTrack();
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
-            ServerLog.E("Loading TUrret", LogType.Debug);
-            Turret t = new BigTurret();
-            t.SetTank(t1);
-            t.Load(content);
+            Turret t = new Turret();
 
             t1.SetTurret(t);
 
@@ -221,85 +211,131 @@ namespace Macalania.Robototaker.GameServer
             //smg.SetTank(t1);
             //t.AddPluginTop(smg, 1);
 
-            ServerLog.E("Loading guns", LogType.Debug);
-            MiniMainGun mg1 = new MiniMainGun();
-            mg1.SetTank(t1);
-            mg1.Load(content);
-            t.AddPluginTop(mg1, 0);
-
-            MiniMainGun mg2 = new MiniMainGun();
-            mg2.SetTank(t1);
-            mg2.Load(content);
-            t.AddPluginTop(mg2, 1);
-
-            MiniMainGun mg3 = new MiniMainGun();
-            mg3.SetTank(t1);
-            mg3.Load(content);
-            t.AddPluginTop(mg3, 2);
-
-            //SprayMainGun smgg = new SprayMainGun(t);
-            //smgg.Load(content);
-            //smgg.SetTank(t1);
-            //t.AddPluginTop(smgg,0);
+            //MiniMainGun mg1 = new MiniMainGun();
+            //mg1.SetTank(t1);
+            //mg1.Load(content);
+            //t.AddPluginTop(mg1, 0);
 
             //MiniMainGun mg2 = new MiniMainGun();
-            //mg2.Load(content);
             //mg2.SetTank(t1);
+            //mg2.Load(content);
             //t.AddPluginTop(mg2, 1);
 
-            //AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
-            //ap1.Load(content);
-            //ap1.SetTank(t1);
-            //t.AddPluginLeftSide(ap1, 0);
+            //MiniMainGun mg3 = new MiniMainGun();
+            //mg3.SetTank(t1);
+            //mg3.Load(content);
+            //t.AddPluginTop(mg3, 2);
 
-            SunPannelPlugin spp = new SunPannelPlugin(PluginDirection.Left);
-            spp.Load(content);
-            spp.SetTank(t1);
-            t.AddPluginLeftSide(spp, 0);
+            ////SprayMainGun smgg = new SprayMainGun(t);
+            ////smgg.Load(content);
+            ////smgg.SetTank(t1);
+            ////t.AddPluginTop(smgg,0);
 
-            //AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
-            //ap2.Load(content);
-            //ap2.SetTank(t1);
-            //t.AddPluginLeftSide(ap2, 1);
+            ////MiniMainGun mg2 = new MiniMainGun();
+            ////mg2.Load(content);
+            ////mg2.SetTank(t1);
+            ////t.AddPluginTop(mg2, 1);
 
-            BatteryPlugin bt = new BatteryPlugin(PluginDirection.Left);
-            bt.Load(content);
-            bt.SetTank(t1);
-            t.AddPluginLeftSide(bt, 1);
+            ////AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
+            ////ap1.Load(content);
+            ////ap1.SetTank(t1);
+            ////t.AddPluginLeftSide(ap1, 0);
 
-            AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
-            ap3.Load(content);
-            ap3.SetTank(t1);
-            t.AddPluginRightSide(ap3, 2);
+            //SunPannelPlugin spp = new SunPannelPlugin(PluginDirection.Left);
+            //spp.Load(content);
+            //spp.SetTank(t1);
+            //t.AddPluginLeftSide(spp, 0);
 
-            ServerLog.E("Loading shield", LogType.Debug);
-            ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
-            sp.Load(content);
-            sp.SetTank(t1);
-            t.AddPluginLeftSide(sp, 2);
+            ////AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
+            ////ap2.Load(content);
+            ////ap2.SetTank(t1);
+            ////t.AddPluginLeftSide(ap2, 1);
 
-            ServerLog.E("Loading artillery", LogType.Debug);
-            ArtileryStarter art = new ArtileryStarter();
-            art.Load(content);
-            art.SetTank(t1);
-            t.AddPluginButtom(art, 0);
+            //BatteryPlugin bt = new BatteryPlugin(PluginDirection.Left);
+            //bt.Load(content);
+            //bt.SetTank(t1);
+            //t.AddPluginLeftSide(bt, 1);
 
-            ServerLog.E("Loading attack", LogType.Debug);
-            StarterAttackRocketBatteryPlugin attack = new StarterAttackRocketBatteryPlugin();
-            attack.SetTank(t1);
-            attack.Load(content);
-            t.AddPluginRightSide(attack, 0);
+            ////AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
+            ////ap3.Load(content);
+            ////ap3.SetTank(t1);
+            ////t.AddPluginRightSide(ap3, 2);
+
+            //sp = new ShieldPlugin(PluginDirection.Left);
+            //sp.Load(content);
+            //sp.SetTank(t1);
+            //t.AddPluginLeftSide(sp, 2);
+
+            ////art = new ArtileryStarter();
+            ////art.Load(content);
+            ////art.SetTank(t1);
+            ////t.AddPluginButtom(art, 0);
+
+            ////mlp = new MineLayerPlugin();
+            ////mlp.Load(content);
+            ////mlp.SetTank(t1);
+            ////t.AddPluginButtom(mlp, 0);
+
+            ////attack = new StarterAttackRocketBatteryPlugin();
+            ////attack.SetTank(t1);
+            ////attack.Load(content);
+            ////t.AddPluginRightSide(attack, 0);
             //r = new RocketStarterPlugin(PluginDirection.Right);
             //r.SetTank(t1);
             //r.Load(content);
             //t.AddPluginRightSide(r, 0);
 
+            for (int i = 16 - 2; i < 16 + 2; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 4; j++)
+                {
+                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16 - 2, 12);
+
+            MiniCanon m2 = new MiniCanon();
+            m2.Load(content);
+            m2.SetTank(t1);
+
+            t.AddTurretModule(m2, 16, 12);
+
+            //SunPannelNew s = new SunPannelNew(PluginDirection.Left);
+            //s.Load(content);
+            //s.SetTank(t1);
+
+            //t.AddTurretModule(s, 12, 15);
+
+            ArtileryStarter ar = new ArtileryStarter();
+            ar.Load(content);
+            ar.SetTank(t1);
+
+            t.AddTurretModule(ar, 14, 18);
+
+            RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
+            roc.Load(content);
+            roc.SetTank(t1);
+
+            t.AddTurretModule(roc, 18, 15);
+
+            //ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
+            //sp.Load(content);
+            //sp.SetTank(t1);
+
+            //t.AddTurretModule(sp, 13, 17);
+
             t1.ServerSideTankId = TankId;
 
             Tank = t1;
 
-            ServerLog.E("Loading ready tank", LogType.Debug);
             Tank.ReadyTank();
+
+            t.DetermineTurretBricks();
 
             Room.AddGameObjectWhileRunning(Tank);
         }

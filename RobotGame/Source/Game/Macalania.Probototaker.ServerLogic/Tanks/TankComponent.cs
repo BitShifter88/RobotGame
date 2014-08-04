@@ -74,7 +74,7 @@ namespace Macalania.Probototaker.Tanks
 
         public virtual void Load(ResourceManager content)
         {
-            Sprite.SetOriginCenter();
+                Sprite.SetOriginCenter();
         }
 
         public void Ready()

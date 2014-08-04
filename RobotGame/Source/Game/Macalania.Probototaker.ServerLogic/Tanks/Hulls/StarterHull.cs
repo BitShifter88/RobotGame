@@ -14,10 +14,12 @@ namespace Macalania.Probototaker.Tanks.Hulls
         public StarterHull()
         {
             StoredPower = 1000;
+            StoredHp = 1000;
         }
         public override void Load(ResourceManager content)
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Hulls/hullStarter"));
+            Sprite.SetOriginCenter();
             base.Load(content);
         }
     }

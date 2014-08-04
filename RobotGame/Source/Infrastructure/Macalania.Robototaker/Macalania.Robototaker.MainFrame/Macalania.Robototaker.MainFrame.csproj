@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -54,17 +57,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\NHibernateHelper.cs" />
+    <Compile Include="Data\SessionHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Game\Macalania.Probototaker.ServerLogic\Macalania.Probototaker.ServerLogic.csproj">
-      <Project>{5c659a89-db6c-4336-bc9d-e2c375ca6ffd}</Project>
-      <Name>Macalania.Probototaker.ServerLogic</Name>
+    <ProjectReference Include="..\..\..\..\lidgren\Lidgren XNA Extensions\Lidgren XNA Extensions\Lidgren XNA Extensions.csproj">
+      <Project>{2b661abd-63a8-4916-a94b-034729231271}</Project>
+      <Name>Lidgren XNA Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj">
+      <Project>{49ba1c69-6104-41ac-a5d8-b54fa9f696e8}</Project>
+      <Name>Lidgren.Network</Name>
     </ProjectReference>
     <ProjectReference Include="..\Macalania.Robototaker.GameServer\Macalania.Robototaker.GameServer.csproj">
       <Project>{12a96794-694c-458c-8d41-a07e1fa880df}</Project>

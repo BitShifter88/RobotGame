@@ -1,6 +1,4 @@
-﻿
-using Macalania.Probototaker.Tanks.Plugins;
-using Macalania.Probototaker.Tanks.Plugins.MainGuns;
+﻿using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
 using Microsoft.Xna.Framework;
@@ -11,207 +9,225 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Turrets
 {
-    public class Turret : TankComponent
+    public class Turret
     {
-        public List<Plugin> Plugins { get; set; }
-        public Plugin[] Top { get; protected set; }
-        public Plugin[] Buttom { get; protected set; }
-        public Plugin[] Left { get; protected set; }
-        public Plugin[] Right { get; protected set; }
-
-        public int ExtraPixelsTop { get; protected set; }
-        public int ExtraPixelsSide { get; set; }
-        public int ExtraPixelsButtom { get; set; }
-
+        private TurretComponent[,] _turretComponents;
+        private List<TurretModule> _modules = new List<TurretModule>();
+        public int YCordForTopBrick { get; set; }
 
         public Turret()
         {
-            Plugins = new List<Plugin>();
+            _turretComponents = new TurretComponent[32, 32];
+
         }
 
-        private List<MainGun> GetMainGuns()
+        public void FireMainGun()
         {
-            List<MainGun> mainGuns = new List<MainGun>();
+            List<MainGunNew> mgs = GetMainGuns();
 
-            foreach (Plugin p in Plugins)
+            foreach (MainGunNew mg in mgs)
             {
-                if (p.GetType().IsSubclassOf(typeof(MainGun)))
+                mg.FireRequest(this);
+            }
+        }
+
+        public void DetermineTurretBricks()
+        {
+            for (int i = 1; i < 31; i++)
+            {
+                for (int j = 1; j < 31; j++)
                 {
-                    mainGuns.Add((MainGun)p);
+                    if (_turretComponents[i, j] != null && _turretComponents[i, j].GetType() == typeof(TurretBrick))
+                    {
+                        if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.NoCorners;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                           ( _turretComponents[i, j - 1] == null || (_turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() != typeof(TurretBrick))) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                           
+                            (_turretComponents[i - 1, j] == null || (_turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() != typeof(TurretBrick))) )
+                           
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.LeftTop;
+                        }
+                        else if (
+                            (_turretComponents[i + 1, j] == null || (_turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() != typeof(TurretBrick))) &&
+
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j - 1] == null || (_turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() != typeof(TurretBrick))) &&
+
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.RightTop;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j + 1] == null || (_turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() != typeof(TurretBrick))) &&
+                            (_turretComponents[i - 1, j] == null || (_turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.LeftBottom;
+                        }
+                        else if (
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j + 1] == null || (_turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() != typeof(TurretBrick))) &&
+                            (_turretComponents[i + 1, j] == null || (_turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.RightBottom;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j - 1] == null || (_turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() != typeof(TurretBrick))) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Top;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i, j + 1] == null || (_turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() != typeof(TurretBrick))) &&
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Bottom;
+                        }
+                        else if (
+                            _turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i - 1, j] == null || (_turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Left;
+                        }
+                        else if (
+                            _turretComponents[i - 1, j] != null && _turretComponents[i - 1, j].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j - 1] != null && _turretComponents[i, j - 1].GetType() == typeof(TurretBrick) &&
+                            _turretComponents[i, j + 1] != null && _turretComponents[i, j + 1].GetType() == typeof(TurretBrick) &&
+                            (_turretComponents[i + 1, j] == null || (_turretComponents[i + 1, j] != null && _turretComponents[i + 1, j].GetType() != typeof(TurretBrick))))
+                        {
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.Right;
+                        }
+                        else
+                            ((TurretBrick)_turretComponents[i, j]).BrickType = BrickType.NoCorners;
+                    }
+                }
+            }
+        }
+
+        private List<MainGunNew> GetMainGuns()
+        {
+            List<MainGunNew> mainGuns = new List<MainGunNew>();
+
+            foreach (TurretModule p in _modules)
+            {
+                if (p.GetType().IsSubclassOf(typeof(MainGunNew)))
+                {
+                    mainGuns.Add((MainGunNew)p);
                 }
             }
 
             return mainGuns;
         }
 
-        public void ActivatePlugin(Plugin p, Vector2 targetPosition, Tank targetTank)
+        public void OnTankDestroy()
         {
-            p.Activate(targetPosition, targetTank);
+            foreach (TurretModule module in _modules)
+            {
+                module.OnTankDestroy();
+            }
         }
 
-        public bool AddPluginTop(Plugin plugin, int startIndex)
+        public List<TurretModule> GetModules()
         {
-            // Cheks if there are open slots for the plugin
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            return _modules;
+        }
+
+        public void AddTurretModule(TurretModule module, int x, int y)
+        {
+            if (CanAddTurretModule(module, x, y) == false)
+                throw new Exception("Could not add turret module");
+
+            module.SetLocation(x, y);
+            module.AddComponents(this);
+
+            _modules.Add(module);
+        }
+
+        public bool CanAddTurretModule(TurretModule module, int x, int y)
+        {
+            // The module may require that turret bricks are in place at different locations.
+            foreach (Point brick in module.RequiredBricks)
             {
-                if (Top[i] != null)
+                TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
+                if (comp == null || comp.GetType() != typeof(TurretBrick))
                     return false;
             }
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
-            {
-                Top[i] = plugin;
-            }
-
-            SetPluginOriginTop(plugin, startIndex);
-
-            Plugins.Add(plugin);
-
-            plugin.PluginPosition = startIndex;
 
             return true;
         }
 
-        public bool AddPluginButtom(Plugin plugin, int startIndex)
+        public void AddTurretComponent(TurretComponent component, int x, int y)
         {
-            // Cheks if there are open slots for the plugin
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
-            {
-                if (Buttom[i] != null)
-                    return false;
-            }
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
-            {
-                Buttom[i] = plugin;
-            }
+            if (_turretComponents[x, y] != null)
+                throw new Exception("Can't add turret component");
+            _turretComponents[x, y] = component;
+            component.SetLocation(x, y);
 
-            SetPluginOriginButtom(plugin, startIndex);
-
-            Plugins.Add(plugin);
-
-            plugin.PluginPosition = startIndex;
-
-            return true;
+            CalculateTopBrik();
+            //DetermineTurretBricks();
         }
 
-        public bool AddPluginRightSide(Plugin plugin, int startIndex)
+        private void CalculateTopBrik()
         {
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            int best = 32;
+
+            for (int i = 0; i <32; i++)
             {
-                if (Right[i] != null)
-                    return false;
-            }
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
-            {
-                Right[i] = plugin;
+                for (int j = 0; j < 32; j++)
+                {
+                    if (_turretComponents[i, j] != null && _turretComponents[i, j].GetType() == typeof(TurretBrick) && j < best)
+                        best = j;
+                }
             }
 
-            SetPluginOriginRight(plugin, startIndex);
-
-            Plugins.Add(plugin);
-            plugin.PluginPosition = startIndex;
-
-            return true;
+            YCordForTopBrick = best;
         }
 
-        public bool AddPluginLeftSide(Plugin plugin, int startIndex)
+        public bool CanAddTurretComponent(TurretComponent component, int x, int y)
         {
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
+            return false;
+        }
+
+        public void Update(double dt)
+        {
+            foreach (TurretModule module in _modules)
             {
-                if (Left[i] != null)
-                    return false;
-            }
-            for (int i = startIndex; i < startIndex + plugin.Size; i++)
-            {
-                Left[i] = plugin;
-            }
-
-            SetPluginOriginLeft(plugin, startIndex);
-
-            Plugins.Add(plugin);
-            plugin.PluginPosition = startIndex;
-
-            return true;
-        }
-
-        private void SetPluginOriginButtom(Plugin plugin, int startIndex)
-        {
-            Vector2 origin = new Vector2();
-            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2 - startIndex * Globals.PluginPixelWidth;
-            origin.Y = Sprite.Texture.Height / 2;
-            origin.Y = -origin.Y;
-
-            origin += plugin.OriginOfset;
-
-            plugin.Sprite.Origin = origin;
-        }
-
-        private void SetPluginOriginRight(Plugin plugin, int startIndex)
-        {
-            Vector2 origin = new Vector2();
-            origin.X = -(Sprite.Texture.Width / 2);
-            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * Globals.PluginPixelWidth;
-            plugin.Sprite.Origin = origin;
-        }
-
-
-        private void SetPluginOriginLeft(Plugin plugin, int startIndex)
-        {
-            Vector2 origin = new Vector2();
-            origin.X = Sprite.Texture.Width / 2 + plugin.Sprite.Texture.Width;
-            origin.Y = (Sprite.Texture.Height - ExtraPixelsSide) / 2 - startIndex * Globals.PluginPixelWidth;
-            plugin.Sprite.Origin = origin;
-        }
-
-        private void SetPluginOriginTop(Plugin plugin, int startIndex)
-        {
-            Vector2 origin = new Vector2();
-            origin.X = (Sprite.Texture.Width - ExtraPixelsTop) / 2 - startIndex * Globals.PluginPixelWidth;
-            origin.Y = plugin.Sprite.Texture.Height + Sprite.Texture.Height / 2;
-            plugin.Sprite.Origin = origin;
-        }
-
-        public override void OnTankDestroy()
-        {
-            foreach (Plugin p in Plugins)
-            {
-                p.OnTankDestroy();
-            }
-            base.OnTankDestroy();
-        }
-
-        public void FireMainGun()
-        {
-            List<MainGun> mgs = GetMainGuns();
-
-            foreach (MainGun mg in mgs)
-            {
-                mg.FireRequest(this);
+                module.Update(dt);
             }
         }
 
-        public override void Update(double dt)
+        public void Draw(IRender render, Camera camera)
         {
-            base.Update(dt);
-
-            Sprite.Rotation = Tank.TurretRotation + Tank.BodyRotation;
-
-            foreach (Plugin p in Plugins)
+            foreach (TurretComponent tc in _turretComponents)
             {
-                p.Update(dt);
-            }
-        }
-
-        public override void Draw(IRender render, Camera camera)
-        {
-            base.Draw(render, camera);
-
-            foreach (Plugin p in Plugins)
-            {
-                p.Draw(render, camera);
+                if (tc == null)
+                    continue;
+                tc.Draw(render, camera);
             }
 
-
-
+            foreach (TurretModule module in _modules)
+            {
+                module.Draw(render, camera);
+            }
         }
     }
 }

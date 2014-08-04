@@ -10,10 +10,11 @@ using System.Text;
 using Macalania.Probototaker.Effects;
 using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
+using Macalania.Probototaker.Tanks.Turrets;
 
 namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
-    public class ShieldPlugin : Plugin
+    public class ShieldPlugin : TurretModule
     {
         private PluginDirection _dir;
 
