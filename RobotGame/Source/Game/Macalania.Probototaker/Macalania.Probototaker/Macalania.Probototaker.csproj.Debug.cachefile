@@ -32,6 +32,8 @@ Content\Textures\Tanks\Styles\Classic\cornersRightTop.xnb
 Content\Textures\Tanks\Styles\Classic\main.xnb
 Content\Textures\Tanks\Styles\Classic\cornersRightBottom.xnb
 Content\Textures\Tanks\Styles\Classic\classicSides.xnb
+Content\Textures\Tanks\Turrets\turretBigNew.xnb
+Content\Textures\Garage\blockBrick.xnb
 Content\Textures\Tanks\Turrets\turretStarter.png
 Content\Textures\Tanks\MainGuns\mainGunStarter.png
 Content\Textures\Tanks\Tracks\tracksStarter.png
@@ -64,4 +66,6 @@ Content\Textures\Tanks\Styles\Classic\cornersLeftTop.png
 Content\Textures\Tanks\Styles\Classic\cornersRightTop.png
 Content\Textures\Tanks\Styles\Classic\main.png
 Content\Textures\Tanks\Styles\Classic\cornersRightBottom.png
+Content\Textures\Tanks\Styles\Classic\classicSides.png
+Content\Textures\Tanks\Turrets\turretBigNew.png
 Content\Textures\Projectiles\shell.png

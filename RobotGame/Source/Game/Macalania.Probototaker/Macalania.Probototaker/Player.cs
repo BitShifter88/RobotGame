@@ -52,7 +52,7 @@ namespace Macalania.Probototaker
         {
             base.Load(content);
 
-            Tank t1 = new Tank(Room, new Vector2(100, 600));
+            Tank t1 = new Tank(new Vector2(100, 600));
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);
@@ -64,7 +64,7 @@ namespace Macalania.Probototaker
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1);
 
             t1.SetTurret(t);
 
@@ -193,7 +193,7 @@ namespace Macalania.Probototaker
 
             _tank = t1;
 
-            _tank.ReadyTank();
+            _tank.ReadyTank(Room);
 
             t.DetermineTurretBricks();
 

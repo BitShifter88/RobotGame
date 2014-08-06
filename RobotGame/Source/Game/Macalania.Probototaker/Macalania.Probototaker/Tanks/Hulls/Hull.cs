@@ -11,7 +11,7 @@ namespace Macalania.Probototaker.Tanks.Hulls
         public override void Update(double dt)
         {
             base.Update(dt);
-
+          
             Sprite.Rotation = Tank.BodyRotation;
         }
     }

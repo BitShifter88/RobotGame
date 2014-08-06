@@ -68,13 +68,20 @@ namespace Macalania.Probototaker.Tanks
 
         public virtual void Update(double dt)
         {
-            Sprite.Position = Tank.Position;
+            SetPositionAfterTank();
             Sprite.Update(dt);
+        }
+
+        public void SetPositionAfterTank()
+        {
+            Sprite.Position = Tank.Position;
         }
 
         public virtual void Load(ResourceManager content)
         {
                 Sprite.SetOriginCenter();
+
+                
         }
 
         public void Ready()

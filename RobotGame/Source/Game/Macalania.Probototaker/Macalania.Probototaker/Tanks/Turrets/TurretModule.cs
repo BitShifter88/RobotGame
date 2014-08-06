@@ -27,9 +27,12 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public List<Point> RequiredBricks { get; set; }
 
+        public List<Point> RequiredFreeSpace { get; set; }
+
         public TurretModule(PluginType type)
         {
             RequiredBricks = new List<Point>();
+            RequiredFreeSpace = new List<Point>();
             PluginType = type;
         }
 

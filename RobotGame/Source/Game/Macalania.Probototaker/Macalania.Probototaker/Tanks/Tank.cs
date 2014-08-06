@@ -101,8 +101,8 @@ namespace Macalania.Probototaker.Tanks
         public float HorsePower { get; set; }
         public float HullBearing { get; set; }
 
-        public Tank(Room room, Vector2 position)
-            : base(room)
+        public Tank(Vector2 position)
+            : base(null)
         {
             SetPosition(position);
            
@@ -206,7 +206,7 @@ namespace Macalania.Probototaker.Tanks
             DestroyGameObject();
         }
 
-        public void ReadyTank()
+        public void ReadyTank(Room room)
         {
             foreach (TurretModule p in Turret.GetModules())
             {
@@ -217,6 +217,8 @@ namespace Macalania.Probototaker.Tanks
             BodyDir = RotationDirection.Still;
 
             CalculateAttributes();
+
+            Room = room;
         }
 
         private void CalculateAttributes()
@@ -291,11 +293,13 @@ namespace Macalania.Probototaker.Tanks
         public void SetHull(Hull hull)
         {
             Hull = hull;
+            Hull.Sprite.Position = Position;
         }
 
         public void SetTrack(Track track)
         {
             Track = track;
+            Track.Sprite.Position = Position;
         }
 
         public void SetTurret(Turret turret)

@@ -18,10 +18,9 @@ namespace Macalania.Probototaker
 {
     public class TankGenerator
     {
-
-        public static Tank GenerateTank3(Room room, ResourceManager content, Vector2 position)
+        public static Tank GenerateStarterTank(ResourceManager content, Vector2 position)
         {
-            Tank t1 = new Tank(room, position);
+            Tank t1 = new Tank(position);
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);
@@ -33,7 +32,46 @@ namespace Macalania.Probototaker
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1);
+
+            t1.SetTurret(t);
+
+            for (int i = 16 - 1; i < 16 + 2; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 1; j++)
+                {
+                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon();
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16-1, 12);
+
+            t1.TurretStyle = new ClasicStyle(content);
+
+            t.DetermineTurretBricks();
+
+            return t1;
+        }
+
+        public static Tank GenerateTank3(Room room, ResourceManager content, Vector2 position)
+        {
+            Tank t1 = new Tank(position);
+
+            StarterHull sh = new StarterHull();
+            sh.SetTank(t1);
+            sh.Load(content);
+            t1.SetHull(sh);
+
+            StarterTrack st = new StarterTrack();
+            st.SetTank(t1);
+            st.Load(content);
+            t1.SetTrack(st);
+
+            Turret t = new Turret(t1);
 
             t1.SetTurret(t);
 
@@ -132,7 +170,7 @@ namespace Macalania.Probototaker
             //attack.Load(content);
             //t.AddPluginRightSide(attack, 0);
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
 
             t.DetermineTurretBricks();
 
@@ -141,7 +179,7 @@ namespace Macalania.Probototaker
 
         public static Tank GenerateTank2(Room room, ResourceManager content, Vector2 position)
         {
-            Tank t1 = new Tank(room, position);
+            Tank t1 = new Tank(position);
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);
@@ -153,7 +191,7 @@ namespace Macalania.Probototaker
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1);
             t1.SetTurret(t);
 
             for (int i = 16 - 2; i < 16 + 2; i++)
@@ -224,7 +262,7 @@ namespace Macalania.Probototaker
             //sp.SetTank(t1);
             //t.AddPluginButtom(sp, 1);
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
 
             t.DetermineTurretBricks();
 
@@ -233,7 +271,7 @@ namespace Macalania.Probototaker
 
         public static Tank GenerateTank1(Room room, ResourceManager content, Vector2 position)
         {
-            Tank t1 = new Tank(room, position);
+            Tank t1 = new Tank(position);
 
             StarterHull sh = new StarterHull();
             sh.SetTank(t1);
@@ -245,7 +283,7 @@ namespace Macalania.Probototaker
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1);
 
             t1.SetTurret(t);
 
@@ -341,7 +379,7 @@ namespace Macalania.Probototaker
 
 
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
             t.DetermineTurretBricks();
             return t1;
         }
