@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
+using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Microsoft.Xna.Framework;
 using System;
@@ -90,6 +91,16 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return _y - 16;
         }
 
+        public int GetX()
+        {
+            return _x;
+        }
+
+        public int GetY()
+        {
+            return _y;
+        }
+
         public virtual void AddComponents(Turret turret)
         {
 
@@ -148,6 +159,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
             {
                 return new RocketStarterPlugin(dir);
             }
+            if (type == PluginType.MiniMainGun)
+                return new MiniCanon();
+            if (type == PluginType.ArtileryStart)
+                return new ArtileryStarter();
 
             throw new Exception("Turret Module not registred");
         }

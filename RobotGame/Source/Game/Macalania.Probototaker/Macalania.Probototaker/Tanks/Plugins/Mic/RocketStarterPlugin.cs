@@ -90,7 +90,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             _rocket = new RocketStarterProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
             RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(_rocket);
-            _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X, Sprite.Origin.Y -4);
+            if (PluginDir == PluginDirection.Right)
+                _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X-16, Sprite.Origin.Y -4);
+            if (PluginDir == PluginDirection.Left)
+                _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X -8, Sprite.Origin.Y - 4);
         }
 
         public override bool Activate(Vector2 point, Tank target)
@@ -102,10 +105,12 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 _rocket.Ignite(Tank.Position, 1300);
                 _rocket.Sprite.SetOriginCenter();
                 _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
-                Vector2 p = new Vector2(Sprite.Origin.X - _rocket.Sprite.Texture.Width / 2, Sprite.Origin.Y);
-
+                Vector2 p = Vector2.Zero;
+                
                 if (PluginDir == PluginDirection.Right)
-                    p = new Vector2(-p.X, p.Y);
+                 p = new Vector2(-(Sprite.Origin.X - 16 - _rocket.Sprite.Texture.Width / 2), -Sprite.Origin.Y + 32);
+                if (PluginDir == PluginDirection.Left)
+                    p = new Vector2(-(Sprite.Origin.X - 8 - _rocket.Sprite.Texture.Width / 2), -Sprite.Origin.Y + 32);
                 p = YunaMath.RotateVector2(p, Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180));
                 _rocket.SetPosition(p + Tank.Position);
 

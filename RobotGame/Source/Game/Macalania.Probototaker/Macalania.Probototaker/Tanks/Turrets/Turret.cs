@@ -285,11 +285,17 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public bool CanAddTurretComponent(TurretComponent component, int x, int y)
         {
-            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+            if (x < 1 || y < 1 || x >= 31 || y >= 31)
                 return false;
-            if (_turretComponents[x, y] == null)
-                return true;
-            else return false;
+            if ((_turretComponents[x + 1, y] != null && _turretComponents[x + 1, y].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x - 1, y] != null && _turretComponents[x - 1, y].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x, y + 1] != null && _turretComponents[x, y + 1].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x, y - 1] != null && _turretComponents[x, y - 1].GetType() == typeof(TurretBrick)))
+            {
+                if (_turretComponents[x, y] == null)
+                    return true;
+            }
+            return false;
         }
 
         public void Update(double dt)

@@ -25,7 +25,7 @@ namespace Macalania.YunaEngine.Rendering
 
         public void Draw(YunaTexture texture, Vector2 position, Vector2 origin, Color color)
         {
-            Draw(texture, position, new Rectangle(0, 0, texture.GetXnaTexture().Width, texture.GetXnaTexture().Height), color, 0, origin, 1, 0.5f);
+            //Draw(texture, position, new Rectangle(0, 0, texture.GetXnaTexture().Width, texture.GetXnaTexture().Height), color, 0, origin, 1, 0.5f);
         }
 
         public void Draw(YunaTexture texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer)

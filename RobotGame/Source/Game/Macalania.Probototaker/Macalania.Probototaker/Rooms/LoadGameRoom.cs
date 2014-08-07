@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Network;
+using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Rooms;
 using System;
@@ -15,18 +16,20 @@ namespace Macalania.Probototaker.Rooms
 
         GameRoom _gameRoom;
         GameNetwork _gameNetwork;
+        TankPackage _tp;
 
         private bool _loadingDone = false;
         private bool _connectingDone = false;
 
-        public LoadGameRoom()
+        public LoadGameRoom(TankPackage tp)
         {
+            _tp = tp;
         }
 
         public override void Load(IServiceProvider serviceProvider)
         {
             _gameNetwork = new GameNetwork();
-            _gameRoom = new GameRoom(_gameNetwork);
+            _gameRoom = new GameRoom(_gameNetwork, _tp);
 
             _loadThread = new Thread(LoadGameRoomThread);
             _loadThread.Priority = ThreadPriority.BelowNormal;

@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Plugins;
+using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine;
@@ -117,6 +118,12 @@ namespace Macalania.Probototaker.GarageLogic
                 rsp.Load(RoomManager.Instance.GetActiveRoom().Content);
                 rsp.ReloadRocket();
                 _selectedModule = rsp;
+            }
+            else if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
+            {
+                _selectedBrick = null;
+                _selectedModule = new MiniCanon();
+                _selectedModule.Load(RoomManager.Instance.GetActiveRoom().Content);
             }
         }
 

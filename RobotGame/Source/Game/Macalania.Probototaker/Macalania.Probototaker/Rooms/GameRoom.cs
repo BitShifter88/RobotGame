@@ -22,16 +22,18 @@ namespace Macalania.Probototaker.Rooms
         public Player Player { get; set; }
         GameNetwork _gn;
         bool _firstRun = true;
+        TankPackage _tp;
 
-        public GameRoom(GameNetwork gn)
+        public GameRoom(GameNetwork gn, TankPackage tp)
         {
+            _tp = tp;
             _gn = gn;
             OtherPlayers = new Dictionary<byte, OtherPlayer>();
         }
 
         public override void Inizialize()
         {
-            Player = new Player(this);
+            Player = new Player(this, _tp);
             AddGameObject(Player);
 
             OtherPlayer op = new OtherPlayer(this, 1);

@@ -111,6 +111,7 @@
     <Compile Include="Tanks\Hulls\StarterHull.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MainGunNew.cs" />
     <Compile Include="Tanks\Plugins\MainGuns\MiniCanon.cs" />
+    <Compile Include="Tanks\TankPackage.cs" />
     <Compile Include="Tanks\Turrets\BlockBrick.cs" />
     <Compile Include="Tanks\Turrets\SunPannelNew.cs" />
     <Compile Include="Tanks\Turrets\TurretModule.cs" />

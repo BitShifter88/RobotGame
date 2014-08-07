@@ -33,10 +33,12 @@ namespace Macalania.Probototaker
         MineLayerPlugin mlp;
         StarterAttackRocketBatteryPlugin attack;
         GameRoom _gameRoom;
+        TankPackage _tp;
 
-        public Player(Room room)
+        public Player(Room room, TankPackage tp)
             : base(room)
         {
+            _tp = tp;
             _gameRoom = (GameRoom)room;
         }
         public override void Inizialize()
@@ -52,150 +54,156 @@ namespace Macalania.Probototaker
         {
             base.Load(content);
 
-            Tank t1 = new Tank(new Vector2(100, 600));
+            Tank t1 = Tank.GetTankFromPackage(new Vector2(100, 600), _tp, content);
 
-            StarterHull sh = new StarterHull();
-            sh.SetTank(t1);
-            sh.Load(content);
-            t1.SetHull(sh);
+            //Tank t1 = new Tank(new Vector2(100, 600));
 
-            StarterTrack st = new StarterTrack();
-            st.SetTank(t1);
-            st.Load(content);
-            t1.SetTrack(st);
 
-            Turret t = new Turret(t1);
 
-            t1.SetTurret(t);
+            //StarterHull sh = new StarterHull();
+            //sh.SetTank(t1);
+            //sh.Load(content);
+            //t1.SetHull(sh);
 
-            //StarterMainGun smg = new StarterMainGun();
-            //smg.Load(content);
-            //smg.SetTank(t1);
-            //t.AddPluginTop(smg, 1);
+            //StarterTrack st = new StarterTrack();
+            //st.SetTank(t1);
+            //st.Load(content);
+            //t1.SetTrack(st);
 
-            //MiniMainGun mg1 = new MiniMainGun();
-            //mg1.SetTank(t1);
-            //mg1.Load(content);
-            //t.AddPluginTop(mg1, 0);
+            //Turret t = new Turret(t1);
 
-            //MiniMainGun mg2 = new MiniMainGun();
-            //mg2.SetTank(t1);
-            //mg2.Load(content);
-            //t.AddPluginTop(mg2, 1);
+            //t1.SetTurret(t);
 
-            //MiniMainGun mg3 = new MiniMainGun();
-            //mg3.SetTank(t1);
-            //mg3.Load(content);
-            //t.AddPluginTop(mg3, 2);
+            ////StarterMainGun smg = new StarterMainGun();
+            ////smg.Load(content);
+            ////smg.SetTank(t1);
+            ////t.AddPluginTop(smg, 1);
 
-            ////SprayMainGun smgg = new SprayMainGun(t);
-            ////smgg.Load(content);
-            ////smgg.SetTank(t1);
-            ////t.AddPluginTop(smgg,0);
+            ////MiniMainGun mg1 = new MiniMainGun();
+            ////mg1.SetTank(t1);
+            ////mg1.Load(content);
+            ////t.AddPluginTop(mg1, 0);
 
             ////MiniMainGun mg2 = new MiniMainGun();
-            ////mg2.Load(content);
             ////mg2.SetTank(t1);
+            ////mg2.Load(content);
             ////t.AddPluginTop(mg2, 1);
 
-            ////AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
-            ////ap1.Load(content);
-            ////ap1.SetTank(t1);
-            ////t.AddPluginLeftSide(ap1, 0);
+            ////MiniMainGun mg3 = new MiniMainGun();
+            ////mg3.SetTank(t1);
+            ////mg3.Load(content);
+            ////t.AddPluginTop(mg3, 2);
 
-            //SunPannelPlugin spp = new SunPannelPlugin(PluginDirection.Left);
-            //spp.Load(content);
-            //spp.SetTank(t1);
-            //t.AddPluginLeftSide(spp, 0);
+            //////SprayMainGun smgg = new SprayMainGun(t);
+            //////smgg.Load(content);
+            //////smgg.SetTank(t1);
+            //////t.AddPluginTop(smgg,0);
 
-            ////AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
-            ////ap2.Load(content);
-            ////ap2.SetTank(t1);
-            ////t.AddPluginLeftSide(ap2, 1);
+            //////MiniMainGun mg2 = new MiniMainGun();
+            //////mg2.Load(content);
+            //////mg2.SetTank(t1);
+            //////t.AddPluginTop(mg2, 1);
 
-            //BatteryPlugin bt = new BatteryPlugin(PluginDirection.Left);
-            //bt.Load(content);
-            //bt.SetTank(t1);
-            //t.AddPluginLeftSide(bt, 1);
+            //////AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
+            //////ap1.Load(content);
+            //////ap1.SetTank(t1);
+            //////t.AddPluginLeftSide(ap1, 0);
 
-            ////AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
-            ////ap3.Load(content);
-            ////ap3.SetTank(t1);
-            ////t.AddPluginRightSide(ap3, 2);
+            ////SunPannelPlugin spp = new SunPannelPlugin(PluginDirection.Left);
+            ////spp.Load(content);
+            ////spp.SetTank(t1);
+            ////t.AddPluginLeftSide(spp, 0);
 
-            //sp = new ShieldPlugin(PluginDirection.Left);
-            //sp.Load(content);
-            //sp.SetTank(t1);
-            //t.AddPluginLeftSide(sp, 2);
+            //////AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
+            //////ap2.Load(content);
+            //////ap2.SetTank(t1);
+            //////t.AddPluginLeftSide(ap2, 1);
 
-            ////art = new ArtileryStarter();
-            ////art.Load(content);
-            ////art.SetTank(t1);
-            ////t.AddPluginButtom(art, 0);
+            ////BatteryPlugin bt = new BatteryPlugin(PluginDirection.Left);
+            ////bt.Load(content);
+            ////bt.SetTank(t1);
+            ////t.AddPluginLeftSide(bt, 1);
 
-            ////mlp = new MineLayerPlugin();
-            ////mlp.Load(content);
-            ////mlp.SetTank(t1);
-            ////t.AddPluginButtom(mlp, 0);
+            //////AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
+            //////ap3.Load(content);
+            //////ap3.SetTank(t1);
+            //////t.AddPluginRightSide(ap3, 2);
 
-            ////attack = new StarterAttackRocketBatteryPlugin();
-            ////attack.SetTank(t1);
-            ////attack.Load(content);
-            ////t.AddPluginRightSide(attack, 0);
-            //r = new RocketStarterPlugin(PluginDirection.Right);
-            //r.SetTank(t1);
-            //r.Load(content);
-            //t.AddPluginRightSide(r, 0);
+            ////sp = new ShieldPlugin(PluginDirection.Left);
+            ////sp.Load(content);
+            ////sp.SetTank(t1);
+            ////t.AddPluginLeftSide(sp, 2);
 
-            for (int i = 16 - 2; i < 16 + 2; i++)
-            {
-                for (int j = 16 - 1; j < 16 + 4; j++)
-                {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
-                }
-            }
+            //////art = new ArtileryStarter();
+            //////art.Load(content);
+            //////art.SetTank(t1);
+            //////t.AddPluginButtom(art, 0);
 
-            MiniCanon m = new MiniCanon();
-            m.Load(content);
-            m.SetTank(t1);
+            //////mlp = new MineLayerPlugin();
+            //////mlp.Load(content);
+            //////mlp.SetTank(t1);
+            //////t.AddPluginButtom(mlp, 0);
 
-            t.AddTurretModule(m, 16 - 2, 12);
+            //////attack = new StarterAttackRocketBatteryPlugin();
+            //////attack.SetTank(t1);
+            //////attack.Load(content);
+            //////t.AddPluginRightSide(attack, 0);
+            ////r = new RocketStarterPlugin(PluginDirection.Right);
+            ////r.SetTank(t1);
+            ////r.Load(content);
+            ////t.AddPluginRightSide(r, 0);
 
-            MiniCanon m2 = new MiniCanon();
-            m2.Load(content);
-            m2.SetTank(t1);
+            //for (int i = 16 - 2; i < 16 + 2; i++)
+            //{
+            //    for (int j = 16 - 1; j < 16 + 4; j++)
+            //    {
+            //        t.AddTurretComponent(new TurretBrick(t1), i, j);
+            //    }
+            //}
 
-            t.AddTurretModule(m2, 16, 12);
+            //MiniCanon m = new MiniCanon();
+            //m.Load(content);
+            //m.SetTank(t1);
 
-            //SunPannelNew s = new SunPannelNew(PluginDirection.Left);
-            //s.Load(content);
-            //s.SetTank(t1);
+            //t.AddTurretModule(m, 16 - 2, 12);
 
-            //t.AddTurretModule(s, 12, 15);
+            //MiniCanon m2 = new MiniCanon();
+            //m2.Load(content);
+            //m2.SetTank(t1);
 
-            ArtileryStarter ar = new ArtileryStarter();
-            ar.Load(content);
-            ar.SetTank(t1);
+            //t.AddTurretModule(m2, 16, 12);
 
-            t.AddTurretModule(ar, 14, 18);
+            ////SunPannelNew s = new SunPannelNew(PluginDirection.Left);
+            ////s.Load(content);
+            ////s.SetTank(t1);
 
-            RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
-            roc.Load(content);
-            roc.SetTank(t1);
+            ////t.AddTurretModule(s, 12, 15);
 
-            t.AddTurretModule(roc, 18, 15);
+            //ArtileryStarter ar = new ArtileryStarter();
+            //ar.Load(content);
+            //ar.SetTank(t1);
 
-            //ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
-            //sp.Load(content);
-            //sp.SetTank(t1);
+            //t.AddTurretModule(ar, 14, 18);
 
-            //t.AddTurretModule(sp, 13, 17);
+            //RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
+            //roc.Load(content);
+            //roc.SetTank(t1);
+
+            //t.AddTurretModule(roc, 17, 15);
+
+            ////ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
+            ////sp.Load(content);
+            ////sp.SetTank(t1);
+
+            ////t.AddTurretModule(sp, 13, 17);
+
+            //_tank = t1;
 
             _tank = t1;
 
             _tank.ReadyTank(Room);
 
-            t.DetermineTurretBricks();
+            //t.DetermineTurretBricks();
 
             Room.AddGameObjectWhileRunning(_tank);
         }

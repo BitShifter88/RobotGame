@@ -1,10 +1,12 @@
 ﻿using Macalania.Probototaker.GarageLogic;
 using Macalania.Probototaker.Tanks;
+using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,13 @@ namespace Macalania.Probototaker.Rooms
         public override void Update(double dt)
         {
             YunaEngine.YunaGameEngine.Instance.Window.Title = _editor.MousePositionToTurretCoordinate().ToString();
+
+            if (KeyboardInput.IsKeyClicked(Keys.Enter))
+            {
+                LoadGameRoom lgr = new LoadGameRoom(_editor.Tank.GetTankPackage());
+                RoomManager.Instance.SetActiveRoom(lgr, true, YunaGameEngine.Instance.Services);
+            }
+
             base.Update(dt);
         }
 
