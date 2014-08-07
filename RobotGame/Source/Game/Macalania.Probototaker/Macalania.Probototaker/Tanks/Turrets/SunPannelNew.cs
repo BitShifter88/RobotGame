@@ -18,7 +18,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             : base(PluginType.SunPannel)
         {
             _dir = dir;
-            Size = 1;
             PowerRegen = 1;
             ComponentMaxHp = 100;
         }

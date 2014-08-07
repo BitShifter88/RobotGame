@@ -21,12 +21,13 @@ namespace Macalania.Probototaker.Tanks.Plugins
         Battery = 10,
         StarterAttackRocket = 11,
     }
-    public enum PluginDirection
+    public enum PluginDirection : byte
     {
-        Top,
-        Buttom,
-        Left,
-        Right,
+        NonDirectional = 0,
+        Top = 1,
+        Buttom = 2,
+        Left = 3,
+        Right = 4,
     }
     public class Plugin : TankComponent
     {

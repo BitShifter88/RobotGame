@@ -34,6 +34,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
             }
         }
 
+        public TurretComponent GetTurretComponent(int x, int y)
+        {
+            return _turretComponents[x, y];
+        }
+
         public void DetermineTurretBricks()
         {
             for (int i = 1; i < 31; i++)
@@ -180,6 +185,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
             RemoveBlockBricks(module);
         }
 
+        public void RemoveTurretBrick(int x, int y)
+        {
+            _turretComponents[x, y] = null;
+        }
+
         public void AddTurretModule(TurretModule module, int x, int y)
         {
             if (x < 0 || y < 0 || x >= 32 || y >= 32)
@@ -214,7 +224,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         private void AddBlockBricks(TurretModule module, int x, int y)
         {
-            foreach (Point brick in module.RequiredFreeSpace)
+            foreach (Point brick in module.GetRotatedFreeSpace())
             {
                 BlockBrick bb = new BlockBrick(module, _tank);
                 bb.SetLocation(x + brick.X, y + brick.Y);
@@ -225,8 +235,10 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public bool CanAddTurretModule(TurretModule module, int x, int y)
         {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return false;
             // The module may require that turret bricks are in place at different locations.
-            foreach (Point brick in module.RequiredBricks)
+            foreach (Point brick in module.GetRotatedRequiredBricks())
             {
                 TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
                 if (comp == null || comp.GetType() != typeof(TurretBrick))
@@ -234,7 +246,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
             }
 
             // The module may require free space
-            foreach (Point brick in module.RequiredFreeSpace)
+            foreach (Point brick in module.GetRotatedFreeSpace())
             {
                 TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
                 if (comp != null)
@@ -273,7 +285,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public bool CanAddTurretComponent(TurretComponent component, int x, int y)
         {
-            return false;
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return false;
+            if (_turretComponents[x, y] == null)
+                return true;
+            else return false;
         }
 
         public void Update(double dt)

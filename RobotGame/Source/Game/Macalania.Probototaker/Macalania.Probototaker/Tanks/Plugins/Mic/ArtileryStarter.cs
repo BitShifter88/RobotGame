@@ -19,7 +19,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         public ArtileryStarter()
             : base(PluginType.ArtileryStart)
         {
-            Size = 3;
             _rockets = new ArtileryProjectile[3];
             MaxCooldown = 5000;
             ComponentMaxHp = 100;
@@ -27,9 +26,16 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             for (int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < 2; j++ )
+                for (int j = 0; j < 2; j++)
                 {
                     RequiredBricks.Add(new Point(i, j));
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 2; j < 3; j++)
+                {
+                    RequiredFreeSpace.Add(new Point(i, j));
                 }
             }
         }

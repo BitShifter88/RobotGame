@@ -30,7 +30,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
                 }
             }
 
-                Size = 1;
             ProjectileStartPosition = new Vector2(0, 0);
             RateOfFire = 300;
             CoolDownRate = 0.03f;

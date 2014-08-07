@@ -22,7 +22,7 @@ namespace Macalania.Probototaker.Rooms
 
             Camera = new Camera();
             _editor = new TankEditor(this);
-            Tank tank = TankGenerator.GenerateStarterTank(Content, new Vector2(Globals.Viewport.Width / 2, Globals.Viewport.Height / 2));
+            Tank tank = TankGenerator.GenerateStarterTank(Content, new Vector2(((Globals.Viewport.Width / 2) / 16) * 16, ((Globals.Viewport.Height / 2) / 16) * 16));
             tank.ReadyTank(this);
             _editor.SetTank(tank);
 

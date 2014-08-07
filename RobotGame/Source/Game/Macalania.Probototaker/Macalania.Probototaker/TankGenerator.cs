@@ -36,9 +36,9 @@ namespace Macalania.Probototaker
 
             t1.SetTurret(t);
 
-            for (int i = 16 - 1; i < 16 + 2; i++)
+            for (int i = 16 - 2; i < 16 + 3; i++)
             {
-                for (int j = 16 - 1; j < 16 + 1; j++)
+                for (int j = 16 - 1; j < 16 + 4; j++)
                 {
                     t.AddTurretComponent(new TurretBrick(t1), i, j);
                 }

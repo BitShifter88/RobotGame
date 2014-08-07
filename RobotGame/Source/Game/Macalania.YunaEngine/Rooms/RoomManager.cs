@@ -21,13 +21,14 @@ namespace Macalania.YunaEngine.Rooms
         {
             if (_activeRoom != null)
                 _activeRoom.Unload();
+
+            _activeRoom = room;
             if (load)
             {
-                _activeRoom = room;
                 room.Inizialize();
                 room.Load(services);
             }
-            
+           
         }
 #endif
 

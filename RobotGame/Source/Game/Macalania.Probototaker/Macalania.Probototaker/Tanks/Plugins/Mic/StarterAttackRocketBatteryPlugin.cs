@@ -19,7 +19,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         public StarterAttackRocketBatteryPlugin()
             : base(PluginType.StarterAttackRocket)
         {
-            Size = 2;
             _rockets = new AttackRocketProjectile[5];
             MaxCooldown = 5000;
             ComponentMaxHp = 100;

@@ -22,7 +22,6 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             : base(PluginType.Shield)
         {
             _dir = dir;
-            Size = 1;
             MaxCooldown = 500;
             PowerUsage = 400;
             ComponentMaxHp = 100;

@@ -66,6 +66,11 @@ namespace Macalania.Probototaker.Tanks
             return Sprite.CheckCollision(s, Sprite);
         }
 
+        public void SetColor(Color color)
+        {
+            Sprite.Color = color;
+        }
+
         public virtual void Update(double dt)
         {
             SetPositionAfterTank();

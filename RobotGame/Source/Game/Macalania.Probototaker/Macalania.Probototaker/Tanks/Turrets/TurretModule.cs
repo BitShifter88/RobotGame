@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
+using Macalania.Probototaker.Tanks.Plugins.Mic;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,14 @@ namespace Macalania.Probototaker.Tanks.Turrets
 {
     public class TurretModule : TankComponent
     {
+        public PluginDirection PluginDir { get; set; }
+
         protected int _x;
         protected int _y;
         int _dim = 16;
 
-        public int Size { get; protected set; }
+        protected Point _moduleDim;
+
         public int PluginPosition { get; set; }
         public float Cooldown { get; set; }
         public float MaxCooldown { get; set; }
@@ -25,15 +29,55 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public PluginType PluginType { get; set; }
 
-        public List<Point> RequiredBricks { get; set; }
+        public List<Point> RequiredBricks { protected get; set; }
 
-        public List<Point> RequiredFreeSpace { get; set; }
+        public List<Point> RequiredFreeSpace {protected get;  set; }
+
+        public List<PluginDirection> PossibleDirections { get; set; }
+
 
         public TurretModule(PluginType type)
         {
             RequiredBricks = new List<Point>();
             RequiredFreeSpace = new List<Point>();
+            PossibleDirections = new List<PluginDirection>();
             PluginType = type;
+        }
+
+        public List<Point> GetRotatedFreeSpace()
+        {
+            if (PluginDir == PluginDirection.Right || PluginDir == PluginDirection.NonDirectional)
+                return RequiredFreeSpace;
+
+            List<Point> rotated = new List<Point>();
+
+            if (PluginDir == PluginDirection.Left)
+            {
+                foreach (Point p in RequiredFreeSpace)
+                {
+                    rotated.Add(new Point((_moduleDim.X - 1) - p.X,  p.Y));
+                }
+            }
+
+            return rotated;
+        }
+
+        public List<Point> GetRotatedRequiredBricks()
+        {
+            if (PluginDir == PluginDirection.Right || PluginDir ==  PluginDirection.NonDirectional)
+                return RequiredBricks;
+
+            List<Point> rotated = new List<Point>();
+
+            if (PluginDir == PluginDirection.Left)
+            {
+                foreach (Point p in RequiredBricks)
+                {
+                    rotated.Add(new Point((_moduleDim.X -1) - p.X,  p.Y));
+                }
+            }
+
+            return rotated;
         }
 
         public int GetCentredX()
@@ -96,6 +140,16 @@ namespace Macalania.Probototaker.Tanks.Turrets
             }
 
             return false;
+        }
+
+        public static TurretModule GenerateTurretModule(PluginType type, PluginDirection dir)
+        {
+            if (type == PluginType.RocketStarter)
+            {
+                return new RocketStarterPlugin(dir);
+            }
+
+            throw new Exception("Turret Module not registred");
         }
     }
 }
