@@ -23,10 +23,11 @@ namespace Macalania.YunaEngine.Rooms
                 _activeRoom.Unload();
             if (load)
             {
+                _activeRoom = room;
                 room.Inizialize();
                 room.Load(services);
             }
-            _activeRoom = room;
+            
         }
 #endif
 

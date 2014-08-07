@@ -33,8 +33,8 @@ namespace Macalania.Probototaker
         static void OnEngineStart()
         {
             Globals.Viewport = _engine.GraphicsDevice.Viewport;
-            //LoadGameRoom room = new LoadGameRoom();
-            Room room = new Garage();
+            LoadGameRoom room = new LoadGameRoom();
+            //Room room = new Garage();
             RoomManager.Instance.SetActiveRoom(room, true, YunaGameEngine.Instance.Services);
         }
     }
