@@ -1,3 +1,5 @@
+using Macalania.YunaEngine;
+using Macalania.YunaEngine.Rooms;
 using System;
 
 namespace Macalania.Probototaker.WorldEditor
@@ -5,15 +7,24 @@ namespace Macalania.Probototaker.WorldEditor
 #if WINDOWS || XBOX
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        static YunaGameEngine _engine;
+
+
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (_engine = new YunaGameEngine())
             {
-                game.Run();
+                _engine.EngineStarted += new YunaGameEngine.EngineStartedEventHandler(OnEngineStart);
+                _engine.Run();
             }
+        }
+
+        static void OnEngineStart()
+        {
+            Globals.Viewport = _engine.GraphicsDevice.Viewport;
+            //LoadGameRoom room = new LoadGameRoom();
+            Room editorRoom = new EditorRoom();
+            RoomManager.Instance.SetActiveRoom(editorRoom, true, YunaGameEngine.Instance.Services);
         }
     }
 #endif

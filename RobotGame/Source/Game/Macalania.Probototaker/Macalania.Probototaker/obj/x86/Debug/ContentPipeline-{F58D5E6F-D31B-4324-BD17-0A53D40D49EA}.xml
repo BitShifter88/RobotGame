@@ -334,6 +334,24 @@
       <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Garage\blockBrick.xnb</Output>
       <Time>2014-08-06T20:22:25.5370057+02:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Tanks\MainGuns\MicroMainGun.png</Source>
+      <Name>Textures\Tanks\MainGuns\MicroMainGun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MicroMainGun.xnb</Output>
+      <Time>2014-08-08T20:51:56.2858166+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Tiles\jungle.jpg</Source>
+      <Name>Textures\Tiles\jungle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tiles\jungle.xnb</Output>
+      <Time>2014-08-09T12:44:32.1387948+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{F58D5E6F-D31B-4324-BD17-0A53D40D49EA}</ContentProjectGUID>

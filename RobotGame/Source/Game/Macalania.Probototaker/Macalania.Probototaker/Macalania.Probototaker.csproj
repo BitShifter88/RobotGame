@@ -85,6 +85,9 @@
     <Compile Include="GarageLogic\TankEditor.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Items\StarterMine.cs" />
+    <Compile Include="Map\GameMap.cs" />
+    <Compile Include="Map\JungleStyle.cs" />
+    <Compile Include="Map\TileStyle.cs" />
     <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />

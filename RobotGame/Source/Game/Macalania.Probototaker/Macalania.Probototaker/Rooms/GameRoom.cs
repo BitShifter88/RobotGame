@@ -1,4 +1,5 @@
 ﻿using Macalania.Probototaker.Effects;
+using Macalania.Probototaker.Map;
 using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine;
@@ -23,6 +24,7 @@ namespace Macalania.Probototaker.Rooms
         GameNetwork _gn;
         bool _firstRun = true;
         TankPackage _tp;
+        public GameMap GameMap { get; set; }
 
         public GameRoom(GameNetwork gn, TankPackage tp)
         {
@@ -49,6 +51,15 @@ namespace Macalania.Probototaker.Rooms
             AddGameObject(GhostPlayer);
 
             base.Inizialize();
+        }
+
+        public override void Load(IServiceProvider serviceProvider)
+        {
+            base.Load(serviceProvider);
+
+            GameMap = GameMap.LoadFromFile("Maps/map.ptm", this);
+            AddGameObject(GameMap);
+            
         }
 
         public void OtherPlayerInfoMovement(string sessionId, Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection bodyDir, RotationDirection turretDir, float turretRotation, ushort ping, byte tankId)
