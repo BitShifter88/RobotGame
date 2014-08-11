@@ -55,7 +55,8 @@ namespace Macalania.Probototaker.ImageProcessor
                 {
                     for (int j = 0; j < btm.Height; j++)
                     {
-                        if (btm.GetPixel(i, j).A == 255)
+                        byte color = btm.GetPixel(i, j).A;
+                        if (color == 0)
                             transMap[i, j] = false;
                         else
                             transMap[i, j] = true;

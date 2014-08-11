@@ -20,6 +20,7 @@ namespace Macalania.Probototaker.Rooms
 
         private bool _loadingDone = false;
         private bool _connectingDone = false;
+        private bool _connectionFailed = false;
 
         public LoadGameRoom(TankPackage tp)
         {
@@ -42,18 +43,29 @@ namespace Macalania.Probototaker.Rooms
 
         private void LoadGameRoomThread()
         {
+            if (_gameNetwork.Start(_gameRoom) == false)
+            {
+                _connectionFailed = true;
+                return;
+            }
+            _connectingDone = true;
+
             _gameRoom.Inizialize();
             _gameRoom.Load(YunaGameEngine.Instance.Services);
             _loadingDone = true;
 
-            _gameNetwork.Start(_gameRoom);
-            _connectingDone = true;
+            
         }
 
         public override void Update(double dt)
         {
             if (_connectingDone == true && _loadingDone == true)
                 RoomManager.Instance.SetActiveRoom(_gameRoom, false, YunaGameEngine.Instance.Services);
+            if (_connectionFailed == true)
+            {
+                Garage g = new Garage();
+                RoomManager.Instance.SetActiveRoom(g, true, YunaGameEngine.Instance.Services);
+            }
 
             base.Update(dt);
         }

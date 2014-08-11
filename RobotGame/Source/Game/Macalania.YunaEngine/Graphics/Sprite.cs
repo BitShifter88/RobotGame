@@ -95,6 +95,7 @@ namespace Macalania.YunaEngine.Graphics
                     b.GetTransform(), b.Texture.Width, b.Texture.Height, b.Texture.GetTransperancyMap()) == true)
                     return true;
                 return false;
+
             }
 
             return false;

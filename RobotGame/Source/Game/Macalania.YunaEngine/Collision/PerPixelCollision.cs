@@ -46,7 +46,7 @@ namespace Macalania.YunaEngine.Collision
                     {
 
                         // If both pixels are not completely transparent,
-                        if (dataA[xA, yA] == false && dataB[xB, yB] == false)
+                        if (dataA[xA, yA] == true && dataB[xB, yB] == true)
                         {
                             // then an intersection has been found
                             return true;
