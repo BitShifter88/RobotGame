@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Macalania.Probototaker.Tanks.Turrets
 {
-    public class TurretComponent
+    public class TurretComponent : TankComponent
     {
         public bool CanAttachLeft { get; set; }
         public bool CanAttachRight { get; set; }
@@ -20,6 +20,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
 
         public virtual void Load(ResourceManager content)
+        {
+
+        }
+
+        public virtual void Update(double dt)
         {
 
         }

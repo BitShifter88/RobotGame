@@ -40,7 +40,9 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1);
+                    tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
@@ -79,7 +81,9 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1);
+                    tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
@@ -198,7 +202,9 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1);
+                    tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
@@ -291,7 +297,9 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1);
+                    tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 

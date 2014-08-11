@@ -259,8 +259,14 @@ namespace Macalania.Probototaker.Tanks
                     return p;
             }
 
-            if (Hull.CheckCollision(s))
-                return Hull;
+            List<TurretBrick> bricks = Turret.GetTurretBricks();
+
+            foreach (TurretBrick b in bricks)
+            {
+                if (b.CheckCollision(s))
+                    return b;
+            }
+
             //if (Turret.CheckCollision(s))
             //    return Turret;
 
@@ -712,7 +718,9 @@ namespace Macalania.Probototaker.Tanks
 
             foreach (TurretBrickPackage tbp in p.TurretBrickPackages)
             {
-                tur.AddTurretComponent(new TurretBrick(t), tbp.X, tbp.Y);
+                TurretBrick tb = new TurretBrick(t);
+                tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                tur.AddTurretComponent(tb, tbp.X, tbp.Y);
             }
 
             tur.DetermineTurretBricks();

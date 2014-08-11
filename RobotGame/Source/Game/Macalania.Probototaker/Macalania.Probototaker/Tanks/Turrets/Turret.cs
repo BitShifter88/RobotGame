@@ -190,6 +190,21 @@ namespace Macalania.Probototaker.Tanks.Turrets
             _turretComponents[x, y] = null;
         }
 
+        public List<TurretBrick> GetTurretBricks()
+        {
+            List<TurretBrick> bricks = new List<TurretBrick>();
+
+            foreach (TurretComponent tp in _turretComponents)
+            {
+                if (tp == null)
+                    continue;
+                if (tp.GetType() == typeof(TurretBrick))
+                    bricks.Add((TurretBrick)tp);
+            }
+
+            return bricks;
+        }
+
         public void AddTurretModule(TurretModule module, int x, int y)
         {
             if (x < 0 || y < 0 || x >= 32 || y >= 32)
@@ -303,6 +318,12 @@ namespace Macalania.Probototaker.Tanks.Turrets
             foreach (TurretModule module in _modules)
             {
                 module.Update(dt);
+            }
+
+            foreach (TurretComponent tc in _turretComponents)
+            {
+                if (tc != null)
+                    tc.Update(dt);
             }
         }
 

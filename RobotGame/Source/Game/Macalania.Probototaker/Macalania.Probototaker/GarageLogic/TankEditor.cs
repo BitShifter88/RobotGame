@@ -54,7 +54,9 @@ namespace Macalania.Probototaker.GarageLogic
             {
                 if (_selectedBrick != null && Tank.Turret.CanAddTurretComponent(_selectedBrick, mousePos.X, mousePos.Y))
                 {
-                    Tank.Turret.AddTurretComponent(new TurretBrick(Tank), mousePos.X, mousePos.Y);
+                    TurretBrick tb = new TurretBrick(Tank);
+                    tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                    Tank.Turret.AddTurretComponent(tb, mousePos.X, mousePos.Y);
                     Tank.Turret.DetermineTurretBricks();
                 }
                 if (_selectedModule != null)
@@ -100,6 +102,7 @@ namespace Macalania.Probototaker.GarageLogic
             {
                 _selectedModule = null;
                 _selectedBrick = new TurretBrick(Tank);
+                _selectedBrick.Load(RoomManager.Instance.GetActiveRoom().Content);
                 _selectedBrick.UseAbsolutePosition = true;
                 _selectedBrick.SetLocation(16, 16);
                 _selectedBrick.Origin = new Vector2(0, 0);

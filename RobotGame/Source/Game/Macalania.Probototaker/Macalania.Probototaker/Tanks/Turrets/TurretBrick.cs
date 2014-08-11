@@ -52,6 +52,29 @@ namespace Macalania.Probototaker.Tanks.Turrets
             Origin = new Vector2(-x * _dim, -y * _dim);
         }
 
+        public override void Update(double dt)
+        {
+            Sprite.Position = _tank.Position;
+            Sprite.Origin = Origin;
+            Sprite.Rotation = _tank.TurretRotation + _tank.BodyRotation;
+
+            Sprite.Update(dt);
+
+            base.Update(dt);
+        }
+
+        public bool CheckCollision(Sprite a)
+        {
+            return Sprite.CheckCollision(Sprite, a);
+        }
+
+        public override void Load(ResourceManager content)
+        {
+            base.Load(content);
+
+            Sprite = new Sprite(content.LoadYunaTexture("Textures/Garage/blockBrick"));
+        }
+
         public override void Draw(YunaEngine.Rendering.IRender render, Camera camera)
         {
             Sprite brickTexture = null;
