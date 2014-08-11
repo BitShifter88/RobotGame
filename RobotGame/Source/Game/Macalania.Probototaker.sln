@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.YunaEngine", "Macalania.YunaEngine\Macalania.YunaEngine.csproj", "{866E3A3A-1C3C-4A8C-9478-1253E89C1226}"
@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.TurretTextureCont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.WorldEditor", "Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditor.csproj", "{186D5D2A-8E7B-4F20-ACE8-F05C1D75612E}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Macalania.Probototaker.WorldEditorContent", "Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditorContent\Macalania.Probototaker.WorldEditorContent.contentproj", "{9E5E734F-D868-45E8-BB92-446134DD2B33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.WorldEditorContent", "Macalania.Probototaker.WorldEditor\Macalania.Probototaker.WorldEditorContent\Macalania.Probototaker.WorldEditorContent.contentproj", "{9E5E734F-D868-45E8-BB92-446134DD2B33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ImageProcessor", "Macalania.Probototaker.ImageProcessor\Macalania.Probototaker.ImageProcessor.csproj", "{385898DD-0858-4846-BD8F-58F4DBED220A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +123,16 @@ Global
 		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|Any CPU.ActiveCfg = Release|x86
 		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{9E5E734F-D868-45E8-BB92-446134DD2B33}.Release|x86.ActiveCfg = Release|x86
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{385898DD-0858-4846-BD8F-58F4DBED220A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

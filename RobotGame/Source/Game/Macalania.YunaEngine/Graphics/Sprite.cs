@@ -1,4 +1,5 @@
-﻿using Macalania.YunaEngine.Rendering;
+﻿using Macalania.YunaEngine.Collision;
+using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,6 +36,17 @@ namespace Macalania.YunaEngine.Graphics
         public void SetOriginCenter()
         {
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+        }
+
+        public Matrix GetTransform()
+        {
+            Matrix blockTransform =
+                    Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) *
+                    Matrix.CreateScale(Scale) *  
+                    Matrix.CreateRotationZ(Rotation) *
+                    Matrix.CreateTranslation(new Vector3(Position, 0.0f));
+
+            return blockTransform;
         }
 
         public virtual void Update(double dt)
@@ -79,7 +91,10 @@ namespace Macalania.YunaEngine.Graphics
         {
             if (Sprite.BoundingSphereCollision(a, b))
             {
+                if (PerPixelCollision.IntersectPixels(a.GetTransform(), a.Texture.Width, a.Texture.Height, a.Texture.GetTransperancyMap(),
+                    b.GetTransform(), b.Texture.Width, b.Texture.Height, b.Texture.GetTransperancyMap()) == true)
                     return true;
+                return false;
             }
 
             return false;

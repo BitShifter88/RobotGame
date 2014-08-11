@@ -42,31 +42,33 @@ namespace Macalania.YunaEngine.Resources
             }
             else
             {
-                string path = ServerTextureFolder + asset + ".png";
+                string path = ServerTextureFolder + asset + ".png.col";
                 path = path.Replace('\\', Path.DirectorySeparatorChar);
                 path = path.Replace('/', Path.DirectorySeparatorChar);
-                Image img = Image.FromFile(path);
-                Bitmap btm = new Bitmap(img);
 
-                bool[,] transMap = new bool[btm.Width, btm.Height];
+                bool[,] transMap = null;
+                int dimx = -1;
+                int dimy = -1;
 
-                for (int i = 0; i < btm.Width; i++)
+                using (BinaryReader br = new BinaryReader(new FileStream(path,FileMode.Open)))
                 {
-                    for (int j = 0; j < btm.Height; j++)
+                    dimx = br.ReadInt32();
+                    dimy = br.ReadInt32();
+
+                    transMap = new bool[dimx, dimy];
+
+                    for (int i = 0 ; i < dimx; i++)
                     {
-                        if (btm.GetPixel(i, j).A == 255)
-                            transMap[i, j] = false;
-                        else
-                            transMap[i, j] = true;
+                        for (int j = 0; j < dimy; j++)
+                        {
+                            transMap[i, j] = br.ReadBoolean();
+                        }
                     }
                 }
 
-                _images.Add(asset, new YunaImage() { ColMap = transMap, Width = img.Width, Height = img.Height });
+                _images.Add(asset, new YunaImage() { ColMap = transMap, Width = dimx, Height = dimy });
 
-                YunaTexture yt = new YunaTexture(transMap, img.Width, img.Height);
-
-                btm.Dispose();
-                img.Dispose();
+                YunaTexture yt = new YunaTexture(transMap, dimx, dimy);
 
                 return yt;
             }

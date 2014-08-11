@@ -62,6 +62,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collision\PerPixelCollision.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="GameLogic\GameObjectTemplate.cs" />
     <Compile Include="Graphics\Animation.cs" />
@@ -81,9 +82,7 @@
     <Compile Include="YunaMath.cs" />
     <Compile Include="YunaSettings.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Collision\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

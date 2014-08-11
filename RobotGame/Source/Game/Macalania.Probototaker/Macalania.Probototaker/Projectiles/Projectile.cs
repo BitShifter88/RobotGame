@@ -68,6 +68,24 @@ namespace Macalania.Probototaker.Projectiles
             base.SetPosition(position);
         }
 
+        private void CheckTankCollision()
+        {
+            SimulationRoom gameRoom = (SimulationRoom)Room;
+
+            List<Tank> tanks = gameRoom.Tanks;
+
+            foreach (Tank t in tanks)
+            {
+                if (Source == t)
+                    continue;
+                TankComponent collidingComponent = t.IsColliding(Sprite);
+                if (collidingComponent != null)
+                {
+                    OnCollisionWithTank(t, collidingComponent);
+                }
+            }
+        }
+
         private void CheckShieldCollision()
         {
             SimulationRoom gameRoom = (SimulationRoom)Room;
@@ -96,23 +114,7 @@ namespace Macalania.Probototaker.Projectiles
 
         }
 
-        private void CheckTankCollision()
-        {
-            SimulationRoom gameRoom = (SimulationRoom)Room;
-
-            List<Tank> tanks = gameRoom.Tanks;
-
-            foreach (Tank t in tanks)
-            {
-                if (Source == t)
-                    continue;
-                TankComponent collidingComponent = t.IsColliding(Sprite);
-                if (collidingComponent != null)
-                {
-                    OnCollisionWithTank(t, collidingComponent);
-                }
-            }
-        }
+  
 
         private void UpdatePosition(double dt)
         {
