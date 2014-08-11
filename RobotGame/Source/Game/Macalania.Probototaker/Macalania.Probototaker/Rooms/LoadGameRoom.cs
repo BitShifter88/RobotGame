@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
 using Macalania.YunaEngine;
+using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rooms;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace Macalania.Probototaker.Rooms
     public class LoadGameRoom : Room
     {
         Thread _loadThread;
+
+        Animation _loadingAnimation;
+        Sprite background;
 
         GameRoom _gameRoom;
         GameNetwork _gameNetwork;
@@ -43,16 +47,19 @@ namespace Macalania.Probototaker.Rooms
 
         private void LoadGameRoomThread()
         {
-            if (_gameNetwork.Start(_gameRoom) == false)
-            {
-                _connectionFailed = true;
-                return;
-            }
-            _connectingDone = true;
+
 
             _gameRoom.Inizialize();
             _gameRoom.Load(YunaGameEngine.Instance.Services);
             _loadingDone = true;
+
+            if (_gameNetwork.Start(_gameRoom) == false)
+            {
+                _connectionFailed = true;
+                _gameRoom.Unload();
+                return;
+            }
+            _connectingDone = true;
 
             
         }
