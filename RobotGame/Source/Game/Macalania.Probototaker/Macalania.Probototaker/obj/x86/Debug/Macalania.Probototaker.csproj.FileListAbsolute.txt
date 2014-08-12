@@ -174,3 +174,6 @@ C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Sou
 C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Maps\map.ptm
 C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Garage\blockBrick.png
 C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tiles\jungle.xnb
+C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Maps\map.ptm
+C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Garage\blockBrick.png
+C:\Users\John\Documents\GitHub\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tiles\jungle.png

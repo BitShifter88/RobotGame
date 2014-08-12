@@ -36,6 +36,8 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public TurretComponent GetTurretComponent(int x, int y)
         {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return null;
             return _turretComponents[x, y];
         }
 
