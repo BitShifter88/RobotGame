@@ -256,7 +256,7 @@ namespace Macalania.Probototaker.Network
                     continue;
                 Tank t = _gameRoom.OtherPlayers[tankId].GetTank();
 
-                Projectile proj = Projectile.CreateProjectile(type, t, new Vector2(posX, posY), new Vector2(dirX, dirY));
+                Projectile proj = Projectile.CreateProjectile(type, t, _gameRoom, new Vector2(posX, posY), new Vector2(dirX, dirY));
 
                 float timeBehind = ((mr.SenderConnection.AverageRoundtripTime * 1000f / 1f));
 

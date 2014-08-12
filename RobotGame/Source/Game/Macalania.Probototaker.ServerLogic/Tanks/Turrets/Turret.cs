@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,13 @@ namespace Macalania.Probototaker.Tanks.Turrets
         private TurretComponent[,] _turretComponents;
         private List<TurretModule> _modules = new List<TurretModule>();
         public int YCordForTopBrick { get; set; }
+        Tank _tank;
+        public Room Room { get; set; }
 
-        public Turret()
+        public Turret(Tank tank, Room room)
         {
+            Room = room;
+            _tank = tank;
             _turretComponents = new TurretComponent[32, 32];
 
         }
@@ -29,6 +34,13 @@ namespace Macalania.Probototaker.Tanks.Turrets
             {
                 mg.FireRequest(this);
             }
+        }
+
+        public TurretComponent GetTurretComponent(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return null;
+            return _turretComponents[x, y];
         }
 
         public void DetermineTurretBricks()
@@ -151,24 +163,112 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return _modules;
         }
 
+        public TurretModule GetModuleAtLocation(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return null;
+
+            if (_turretComponents[x, y] == null)
+                return null;
+            if (_turretComponents[x, y].GetType() == typeof(BlockBrick))
+            {
+                BlockBrick block = (BlockBrick)_turretComponents[x, y];
+                return block.Owner;
+            }
+            else
+                return null;
+        }
+
+        public void RemoveModule(TurretModule module)
+        {
+            if (_modules.Contains(module) == false)
+                throw new Exception("Module not found");
+
+            _modules.Remove(module);
+
+            RemoveBlockBricks(module);
+        }
+
+        public void RemoveTurretBrick(int x, int y)
+        {
+            _turretComponents[x, y] = null;
+        }
+
+        public List<TurretBrick> GetTurretBricks()
+        {
+            List<TurretBrick> bricks = new List<TurretBrick>();
+
+            foreach (TurretComponent tp in _turretComponents)
+            {
+                if (tp == null)
+                    continue;
+                if (tp.GetType() == typeof(TurretBrick))
+                    bricks.Add((TurretBrick)tp);
+            }
+
+            return bricks;
+        }
+
         public void AddTurretModule(TurretModule module, int x, int y)
         {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return;
             if (CanAddTurretModule(module, x, y) == false)
                 throw new Exception("Could not add turret module");
 
+            
             module.SetLocation(x, y);
             module.AddComponents(this);
+            module.SetPositionAfterTank();
 
             _modules.Add(module);
+            AddBlockBricks(module, x, y);
+        }
+
+        private void RemoveBlockBricks(TurretModule module)
+        {
+            for (int i = 0; i < 32; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    if (_turretComponents[i,j] != null && _turretComponents[i,j].GetType() == typeof(BlockBrick))
+                    {
+                        BlockBrick blockBrick = (BlockBrick)_turretComponents[i, j];
+                        if (blockBrick.Owner == module)
+                            _turretComponents[i, j] = null;
+                    }
+                }
+            }
+        }
+
+        private void AddBlockBricks(TurretModule module, int x, int y)
+        {
+            foreach (Point brick in module.GetRotatedFreeSpace())
+            {
+                BlockBrick bb = new BlockBrick(module, _tank, Room);
+                bb.SetLocation(x + brick.X, y + brick.Y);
+                bb.Load(Room.Content);
+                _turretComponents[x + brick.X, y + brick.Y] = bb;
+            }
         }
 
         public bool CanAddTurretModule(TurretModule module, int x, int y)
         {
+            if (x < 0 || y < 0 || x >= 32 || y >= 32)
+                return false;
             // The module may require that turret bricks are in place at different locations.
-            foreach (Point brick in module.RequiredBricks)
+            foreach (Point brick in module.GetRotatedRequiredBricks())
             {
                 TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
                 if (comp == null || comp.GetType() != typeof(TurretBrick))
+                    return false;
+            }
+
+            // The module may require free space
+            foreach (Point brick in module.GetRotatedFreeSpace())
+            {
+                TurretComponent comp = _turretComponents[x + brick.X, y + brick.Y];
+                if (comp != null)
                     return false;
             }
 
@@ -204,6 +304,16 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public bool CanAddTurretComponent(TurretComponent component, int x, int y)
         {
+            if (x < 1 || y < 1 || x >= 31 || y >= 31)
+                return false;
+            if ((_turretComponents[x + 1, y] != null && _turretComponents[x + 1, y].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x - 1, y] != null && _turretComponents[x - 1, y].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x, y + 1] != null && _turretComponents[x, y + 1].GetType() == typeof(TurretBrick)) ||
+                (_turretComponents[x, y - 1] != null && _turretComponents[x, y - 1].GetType() == typeof(TurretBrick)))
+            {
+                if (_turretComponents[x, y] == null)
+                    return true;
+            }
             return false;
         }
 
@@ -212,6 +322,12 @@ namespace Macalania.Probototaker.Tanks.Turrets
             foreach (TurretModule module in _modules)
             {
                 module.Update(dt);
+            }
+
+            foreach (TurretComponent tc in _turretComponents)
+            {
+                if (tc != null)
+                    tc.Update(dt);
             }
         }
 

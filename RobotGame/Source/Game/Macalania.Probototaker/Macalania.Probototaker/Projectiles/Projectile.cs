@@ -134,10 +134,10 @@ namespace Macalania.Probototaker.Projectiles
             Sprite.Draw(render, camera);
         }
 
-        public static Projectile CreateProjectile(ProjectileType type, Tank source, Vector2 position, Vector2 direction)
+        public static Projectile CreateProjectile(ProjectileType type, Tank source, Room room, Vector2 position, Vector2 direction)
         {
             if (type == ProjectileType.ShellStarter)
-                return new ShellStarter(RoomManager.Instance.GetActiveRoom(), source, position, direction);
+                return new ShellStarter(room, source, position, direction);
             else
                 throw new Exception("Unknown projectile. Cannot create");
         }

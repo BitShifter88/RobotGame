@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Macalania.YunaEngine.Rooms;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace Macalania.Probototaker.Tanks.Plugins
 
         public PluginType PluginType { get; set; }
 
-        public Plugin(PluginType type)
+        public Plugin(PluginType type, Room room) : base(room)
         {
             PluginType = type;
         }

@@ -1,6 +1,7 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -27,6 +28,13 @@ namespace Macalania.Probototaker.Tanks
         public float ComponentCurrentHp { get; set; }
         public TankComponentType CompType { get; set; }
         public bool IsDestroyed { get; set; }
+
+        public Room Room { get; set; }
+
+        public TankComponent(Room room)
+        {
+            Room = room;
+        }
 
         public Vector2 GetDim()
         {

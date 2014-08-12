@@ -63,13 +63,14 @@
     <Compile Include="BytePacker.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="GamePlayer.cs" />
+    <Compile Include="GameInstance.cs" />
     <Compile Include="GameServerManager.cs" />
     <Compile Include="PotentialPlayer.cs" />
     <Compile Include="PreLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerRoom.cs" />
-    <Compile Include="Simulation.cs" />
+    <Compile Include="ServerGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj">

@@ -192,17 +192,17 @@ namespace Macalania.Robototaker.GameServer
         {
             Tank t1 = new Tank(Room, new Vector2(100, 600));
 
-            StarterHull sh = new StarterHull();
+            StarterHull sh = new StarterHull(Room);
             sh.SetTank(t1);
             sh.Load(content);
             t1.SetHull(sh);
 
-            StarterTrack st = new StarterTrack();
+            StarterTrack st = new StarterTrack(Room);
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1, Room);
 
             t1.SetTurret(t);
 
@@ -289,39 +289,42 @@ namespace Macalania.Robototaker.GameServer
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1, Room);
+                    tb.SetTank(t1);
+                    tb.Load(content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
-            MiniCanon m = new MiniCanon();
-            m.Load(content);
-            m.SetTank(t1);
+            //MiniCanon m = new MiniCanon(Room);
+            //m.Load(content);
+            //m.SetTank(t1);
 
-            t.AddTurretModule(m, 16 - 2, 12);
+            //t.AddTurretModule(m, 16 - 2, 12);
 
-            MiniCanon m2 = new MiniCanon();
-            m2.Load(content);
-            m2.SetTank(t1);
+            //MiniCanon m2 = new MiniCanon(Room);
+            //m2.Load(content);
+            //m2.SetTank(t1);
 
-            t.AddTurretModule(m2, 16, 12);
+            //t.AddTurretModule(m2, 16, 12);
 
-            //SunPannelNew s = new SunPannelNew(PluginDirection.Left);
-            //s.Load(content);
-            //s.SetTank(t1);
+            ////SunPannelNew s = new SunPannelNew(PluginDirection.Left);
+            ////s.Load(content);
+            ////s.SetTank(t1);
 
-            //t.AddTurretModule(s, 12, 15);
+            ////t.AddTurretModule(s, 12, 15);
 
-            ArtileryStarter ar = new ArtileryStarter();
-            ar.Load(content);
-            ar.SetTank(t1);
+            //ArtileryStarter ar = new ArtileryStarter(Room);
+            //ar.Load(content);
+            //ar.SetTank(t1);
 
-            t.AddTurretModule(ar, 14, 18);
+            //t.AddTurretModule(ar, 14, 18);
 
-            RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right);
-            roc.Load(content);
-            roc.SetTank(t1);
+            //RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right, Room);
+            //roc.Load(content);
+            //roc.SetTank(t1);
 
-            t.AddTurretModule(roc, 18, 15);
+            //t.AddTurretModule(roc, 18, 15);
 
             //ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
             //sp.Load(content);
@@ -333,7 +336,7 @@ namespace Macalania.Robototaker.GameServer
 
             Tank = t1;
 
-            Tank.ReadyTank();
+            Tank.ReadyTank(Room);
 
             t.DetermineTurretBricks();
 

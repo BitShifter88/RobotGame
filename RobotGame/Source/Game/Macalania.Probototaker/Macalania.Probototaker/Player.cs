@@ -54,7 +54,7 @@ namespace Macalania.Probototaker
         {
             base.Load(content);
 
-            Tank t1 = Tank.GetTankFromPackage(new Vector2(100, 600), _tp, content);
+            Tank t1 = Tank.GetTankFromPackage(new Vector2(100, 600), _tp, content, Room);
 
             //Tank t1 = new Tank(new Vector2(100, 600));
 

@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BytePacker.cs" />
     <Compile Include="Damage.cs">
       <SubType>
       </SubType>
@@ -78,11 +79,13 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="GarageLogic\TankEditor.cs" />
     <Compile Include="Globals.cs">
       <SubType>
       </SubType>
     </Compile>
     <Compile Include="Items\StarterMine.cs" />
+    <Compile Include="Macalania.YunaEngine\Collision\PerPixelCollision.cs" />
     <Compile Include="Macalania.YunaEngine\GameLogic\GameObject.cs">
       <SubType>
       </SubType>
@@ -139,10 +142,6 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Macalania.YunaEngine\YunaGameEngine.cs">
-      <SubType>
-      </SubType>
-    </Compile>
     <Compile Include="Macalania.YunaEngine\YunaMath.cs">
       <SubType>
       </SubType>
@@ -151,6 +150,9 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="Map\GameMap.cs" />
+    <Compile Include="Map\JungleStyle.cs" />
+    <Compile Include="Map\TileStyle.cs" />
     <Compile Include="Network\GameRandom.cs" />
     <Compile Include="Network\PlayerMovement.cs">
       <SubType>
@@ -273,6 +275,7 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="Tanks\TankPackage.cs" />
     <Compile Include="Tanks\Tracks\StarterTrack.cs">
       <SubType>
       </SubType>
@@ -281,6 +284,7 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="Tanks\Turrets\BlockBrick.cs" />
     <Compile Include="Tanks\Turrets\SunPannelNew.cs" />
     <Compile Include="Tanks\Turrets\Turret.cs">
       <SubType>
@@ -297,11 +301,14 @@
       <Name>Macalania.Robototaker.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Macalania.YunaEngine\Collision\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\map.ptm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,8 +14,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
     {
         private PluginDirection _dir;
 
-        public AmorPlugin(PluginDirection dir)
-            : base(PluginType.Amor)
+        public AmorPlugin(PluginDirection dir, Room room)
+            : base(PluginType.Amor, room)
         {
             _dir = dir;
             Size = 1;

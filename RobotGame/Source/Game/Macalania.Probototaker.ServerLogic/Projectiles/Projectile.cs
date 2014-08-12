@@ -68,6 +68,24 @@ namespace Macalania.Probototaker.Projectiles
             base.SetPosition(position);
         }
 
+        private void CheckTankCollision()
+        {
+            SimulationRoom gameRoom = (SimulationRoom)Room;
+
+            List<Tank> tanks = gameRoom.Tanks;
+
+            foreach (Tank t in tanks)
+            {
+                if (Source == t)
+                    continue;
+                TankComponent collidingComponent = t.IsColliding(Sprite);
+                if (collidingComponent != null)
+                {
+                    OnCollisionWithTank(t, collidingComponent);
+                }
+            }
+        }
+
         private void CheckShieldCollision()
         {
             SimulationRoom gameRoom = (SimulationRoom)Room;
@@ -96,23 +114,7 @@ namespace Macalania.Probototaker.Projectiles
 
         }
 
-        private void CheckTankCollision()
-        {
-            SimulationRoom gameRoom = (SimulationRoom)Room;
-
-            List<Tank> tanks = gameRoom.Tanks;
-
-            foreach (Tank t in tanks)
-            {
-                if (Source == t)
-                    continue;
-                TankComponent collidingComponent = t.IsColliding(Sprite);
-                if (collidingComponent != null)
-                {
-                    OnCollisionWithTank(t, collidingComponent);
-                }
-            }
-        }
+  
 
         private void UpdatePosition(double dt)
         {
@@ -132,10 +134,10 @@ namespace Macalania.Probototaker.Projectiles
             Sprite.Draw(render, camera);
         }
 
-        public static Projectile CreateProjectile(ProjectileType type, Tank source, Vector2 position, Vector2 direction)
+        public static Projectile CreateProjectile(ProjectileType type, Tank source, Room room, Vector2 position, Vector2 direction)
         {
             if (type == ProjectileType.ShellStarter)
-                return new ShellStarter(RoomManager.Instance.GetActiveRoom(), source, position, direction);
+                return new ShellStarter(room, source, position, direction);
             else
                 throw new Exception("Unknown projectile. Cannot create");
         }

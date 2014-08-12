@@ -25,11 +25,18 @@ namespace Macalania.YunaEngine.Resources
         }
 #endif
 
-        public YunaTexture(Texture2D xnaTexture)
+        public bool[,] GetTransperancyMap()
         {
+            return _transperencyMap;
+        }
+
+        public YunaTexture(Texture2D xnaTexture, bool[,] transMap)
+        {
+            _transperencyMap = transMap;
             _xnaTexture = xnaTexture;
             Width = _xnaTexture.Width;
             Height = _xnaTexture.Height;
+
         }
 
         public Texture2D GetXnaTexture()

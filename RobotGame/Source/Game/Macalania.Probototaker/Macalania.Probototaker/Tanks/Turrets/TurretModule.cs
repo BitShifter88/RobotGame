@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Plugins.MainGuns;
 using Macalania.Probototaker.Tanks.Plugins.Mic;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
         public List<PluginDirection> PossibleDirections { get; set; }
 
 
-        public TurretModule(PluginType type)
+        public TurretModule(PluginType type, Room room) : base(room)
         {
             RequiredBricks = new List<Point>();
             RequiredFreeSpace = new List<Point>();
@@ -153,16 +154,16 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return false;
         }
 
-        public static TurretModule GenerateTurretModule(PluginType type, PluginDirection dir)
+        public static TurretModule GenerateTurretModule(PluginType type, PluginDirection dir, Room room)
         {
             if (type == PluginType.RocketStarter)
             {
-                return new RocketStarterPlugin(dir);
+                return new RocketStarterPlugin(dir, room);
             }
             if (type == PluginType.MiniMainGun)
-                return new MiniCanon();
+                return new MiniCanon(room);
             if (type == PluginType.ArtileryStart)
-                return new ArtileryStarter();
+                return new ArtileryStarter(room);
 
             throw new Exception("Turret Module not registred");
         }

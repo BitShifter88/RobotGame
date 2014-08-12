@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Projectiles;
 using Macalania.Probototaker.Tanks.Turrets;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         protected float _currentFire = 0;
         bool _fireringRockets = false;
 
-        public RocketBattery(PluginType type)
-            : base(type)
+        public RocketBattery(PluginType type, Room room)
+            : base(type, room)
         {
 
         }

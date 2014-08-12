@@ -35,7 +35,7 @@ namespace Macalania.Probototaker.Projectiles
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/rocketStarterProjectile"));
             Sprite.SetOriginCenter();
-            Sprite.DepthLayer = 0.25f;
+            Sprite.DepthLayer = 0.301f;
             base.Load(content);
         }
     }

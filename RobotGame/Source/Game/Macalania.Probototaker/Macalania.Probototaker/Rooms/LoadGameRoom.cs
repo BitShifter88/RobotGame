@@ -43,12 +43,8 @@ namespace Macalania.Probototaker.Rooms
             base.Load(serviceProvider);
         }
 
-
-
         private void LoadGameRoomThread()
         {
-
-
             _gameRoom.Inizialize();
             _gameRoom.Load(YunaGameEngine.Instance.Services);
             _loadingDone = true;
@@ -67,11 +63,11 @@ namespace Macalania.Probototaker.Rooms
         public override void Update(double dt)
         {
             if (_connectingDone == true && _loadingDone == true)
-                RoomManager.Instance.SetActiveRoom(_gameRoom, false, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(_gameRoom, false, YunaGameEngine.Instance.Services);
             if (_connectionFailed == true)
             {
                 Garage g = new Garage();
-                RoomManager.Instance.SetActiveRoom(g, true, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(g, true, YunaGameEngine.Instance.Services);
             }
 
             base.Update(dt);

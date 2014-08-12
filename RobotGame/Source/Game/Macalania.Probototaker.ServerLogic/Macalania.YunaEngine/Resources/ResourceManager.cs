@@ -35,10 +35,18 @@ namespace Macalania.YunaEngine.Resources
 
         public YunaTexture LoadYunaTexture(string asset)
         {
-#if SERVER
+            _contentManagerMutex.WaitOne();
+
+
+
+            bool[,] transMap = null;
+
+            int dimx = -1;
+            int dimy = -1;
+
             if (_images.ContainsKey(asset))
             {
-                return new YunaTexture(_images[asset].ColMap, _images[asset].Width, _images[asset].Height);
+                transMap = _images[asset].ColMap;
             }
             else
             {
@@ -46,18 +54,15 @@ namespace Macalania.YunaEngine.Resources
                 path = path.Replace('\\', Path.DirectorySeparatorChar);
                 path = path.Replace('/', Path.DirectorySeparatorChar);
 
-                bool[,] transMap = null;
-                int dimx = -1;
-                int dimy = -1;
 
-                using (BinaryReader br = new BinaryReader(new FileStream(path,FileMode.Open)))
+                using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open)))
                 {
                     dimx = br.ReadInt32();
                     dimy = br.ReadInt32();
 
                     transMap = new bool[dimx, dimy];
 
-                    for (int i = 0 ; i < dimx; i++)
+                    for (int i = 0; i < dimx; i++)
                     {
                         for (int j = 0; j < dimy; j++)
                         {
@@ -68,14 +73,16 @@ namespace Macalania.YunaEngine.Resources
 
                 _images.Add(asset, new YunaImage() { ColMap = transMap, Width = dimx, Height = dimy });
 
-                YunaTexture yt = new YunaTexture(transMap, dimx, dimy);
-
-                return yt;
             }
+
+#if SERVER
+            YunaTexture yt = new YunaTexture(transMap, dimx, dimy);
+            _contentManagerMutex.ReleaseMutex();
+            return yt;
 #endif
+
 #if !SERVER
-            _contentManagerMutex.WaitOne();
-            YunaTexture yt = new YunaTexture(_content.Load<Texture2D>(asset));
+            YunaTexture yt = new YunaTexture(_content.Load<Texture2D>(asset), transMap);
             _contentManagerMutex.ReleaseMutex();
             return yt;
 #endif

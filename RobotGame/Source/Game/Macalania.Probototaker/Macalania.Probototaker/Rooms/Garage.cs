@@ -24,7 +24,7 @@ namespace Macalania.Probototaker.Rooms
 
             Camera = new Camera();
             _editor = new TankEditor(this);
-            Tank tank = TankGenerator.GenerateStarterTank(Content, new Vector2(((Globals.Viewport.Width / 2) / 16) * 16, ((Globals.Viewport.Height / 2) / 16) * 16));
+            Tank tank = TankGenerator.GenerateStarterTank(Content, new Vector2(((Globals.Viewport.Width / 2) / 16) * 16, ((Globals.Viewport.Height / 2) / 16) * 16), this);
             tank.ReadyTank(this);
             _editor.SetTank(tank);
 
@@ -38,7 +38,7 @@ namespace Macalania.Probototaker.Rooms
             if (KeyboardInput.IsKeyClicked(Keys.Enter))
             {
                 LoadGameRoom lgr = new LoadGameRoom(_editor.Tank.GetTankPackage());
-                RoomManager.Instance.SetActiveRoom(lgr, true, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(lgr, true, YunaGameEngine.Instance.Services);
             }
 
             base.Update(dt);

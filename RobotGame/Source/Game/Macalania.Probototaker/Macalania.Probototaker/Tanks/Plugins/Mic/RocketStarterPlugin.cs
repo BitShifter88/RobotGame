@@ -20,8 +20,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         private RocketStarterProjectile _rocket;
         bool _firstUpdate = true;
 
-        public RocketStarterPlugin(PluginDirection dir)
-            : base(PluginType.RocketStarter)
+        public RocketStarterPlugin(PluginDirection dir, Room room)
+            : base(PluginType.RocketStarter, room)
         {
             PluginDir = dir;
             _moduleDim = new Point(3, 4);
@@ -88,8 +88,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         public void ReloadRocket()
         {
-            _rocket = new RocketStarterProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
-            RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(_rocket);
+            _rocket = new RocketStarterProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
+            Room.AddGameObjectWhileRunning(_rocket);
             if (PluginDir == PluginDirection.Right)
                 _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X-16, Sprite.Origin.Y -4);
             if (PluginDir == PluginDirection.Left)

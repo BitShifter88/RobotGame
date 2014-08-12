@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Macalania.YunaEngine.Rooms;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,13 @@ namespace Macalania.Probototaker.Tanks.Plugins
         Battery = 10,
         StarterAttackRocket = 11,
     }
-    public enum PluginDirection
+    public enum PluginDirection : byte
     {
-        Top,
-        Buttom,
-        Left,
-        Right,
+        NonDirectional = 0,
+        Top = 1,
+        Buttom = 2,
+        Left = 3,
+        Right = 4,
     }
     public class Plugin : TankComponent
     {
@@ -43,7 +45,7 @@ namespace Macalania.Probototaker.Tanks.Plugins
 
         public PluginType PluginType { get; set; }
 
-        public Plugin(PluginType type)
+        public Plugin(PluginType type, Room room) : base(room)
         {
             PluginType = type;
         }

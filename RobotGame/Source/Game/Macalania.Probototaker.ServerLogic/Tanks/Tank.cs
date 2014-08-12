@@ -32,6 +32,7 @@ namespace Macalania.Probototaker.Tanks
         Backwards = 2,
     }
 
+
     public struct TankLogEntry
     {
         public Vector2 BodyDirection;
@@ -86,6 +87,7 @@ namespace Macalania.Probototaker.Tanks
 
 
         public long Id { get; set; }
+        Room _room;
 
 
         // Attributes
@@ -102,10 +104,10 @@ namespace Macalania.Probototaker.Tanks
         public float HullBearing { get; set; }
 
         public Tank(Room room, Vector2 position)
-            : base(room)
+            : base(null)
         {
             SetPosition(position);
-           
+            _room = room;
         }
 
         public void DamageTank(float amount, float amorPenetration)
@@ -206,7 +208,7 @@ namespace Macalania.Probototaker.Tanks
             DestroyGameObject();
         }
 
-        public void ReadyTank()
+        public void ReadyTank(Room room)
         {
             foreach (TurretModule p in Turret.GetModules())
             {
@@ -217,6 +219,8 @@ namespace Macalania.Probototaker.Tanks
             BodyDir = RotationDirection.Still;
 
             CalculateAttributes();
+
+            Room = room;
         }
 
         private void CalculateAttributes()
@@ -256,8 +260,14 @@ namespace Macalania.Probototaker.Tanks
                     return p;
             }
 
-            if (Hull.CheckCollision(s))
-                return Hull;
+            List<TurretBrick> bricks = Turret.GetTurretBricks();
+
+            foreach (TurretBrick b in bricks)
+            {
+                if (b.CheckCollision(s))
+                    return b;
+            }
+
             //if (Turret.CheckCollision(s))
             //    return Turret;
 
@@ -291,11 +301,13 @@ namespace Macalania.Probototaker.Tanks
         public void SetHull(Hull hull)
         {
             Hull = hull;
+            Hull.Sprite.Position = Position;
         }
 
         public void SetTrack(Track track)
         {
             Track = track;
+            Track.Sprite.Position = Position;
         }
 
         public void SetTurret(Turret turret)
@@ -663,6 +675,68 @@ namespace Macalania.Probototaker.Tanks
             }
 
             return maxHp;
+        }
+
+        public TankPackage GetTankPackage()
+        {
+            TankPackage tp = new TankPackage();
+
+            for (int i = 0; i < 32; i++)
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    if (Turret.GetTurretComponent(i,j) != null && Turret.GetTurretComponent(i,j).GetType() == typeof(TurretBrick))
+                    {
+                        tp.TurretBrickPackages.Add(new TurretBrickPackage() { X = (byte)i, Y = (byte)j });
+                    }
+                }
+            }
+
+            foreach (TurretModule tm in Turret.GetModules())
+            {
+                tp.ModulePackages.Add(new ModulePackage() { ModuleType = tm.PluginType, X = (byte)tm.GetX(), Y = (byte)tm.GetY(), ModuleDir = tm.PluginDir });
+            }
+
+
+
+            return tp;
+        }
+
+        public static Tank GetTankFromPackage(Vector2 position, TankPackage p, ResourceManager content, Room room)
+        {
+            Tank t = new Tank(room, position);
+            StarterHull h = new StarterHull(room);
+            h.SetTank(t);
+            h.Load(content);
+            t.SetHull(h);
+
+            StarterTrack st = new StarterTrack(room);
+            st.SetTank(t);
+            st.Load(content);
+            t.SetTrack(st);
+
+            Turret tur = new Turret(t, room);
+
+            foreach (TurretBrickPackage tbp in p.TurretBrickPackages)
+            {
+                TurretBrick tb = new TurretBrick(t, room);
+                tb.Load(room.Content);
+                tur.AddTurretComponent(tb, tbp.X, tbp.Y);
+            }
+
+            tur.DetermineTurretBricks();
+
+            foreach (ModulePackage mp in p.ModulePackages)
+            {
+                TurretModule tm = TurretModule.GenerateTurretModule(mp.ModuleType, mp.ModuleDir, room);
+                tm.SetTank(t);
+                tm.Load(content);
+                tur.AddTurretModule(tm, mp.X, mp.Y);
+            }
+
+            t.SetTurret(tur);
+
+            return t;
         }
 
         public override void Draw(IRender render, Camera camera)

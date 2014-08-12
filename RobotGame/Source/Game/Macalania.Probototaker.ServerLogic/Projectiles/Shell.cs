@@ -28,7 +28,7 @@ namespace Macalania.Probototaker.Projectiles
         {
             base.Load(content);
 
-            Sprite.Scale = 3;
+            //Sprite.Scale = 3;
             Sprite.Rotation = Source.BodyRotation + Source.TurretRotation + MathHelper.ToRadians(90);
         }
 

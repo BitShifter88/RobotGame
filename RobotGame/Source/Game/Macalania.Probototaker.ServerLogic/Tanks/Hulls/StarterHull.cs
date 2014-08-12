@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,7 +12,7 @@ namespace Macalania.Probototaker.Tanks.Hulls
 {
     public class StarterHull : Hull
     {
-        public StarterHull()
+        public StarterHull(Room room) : base(room)
         {
             StoredPower = 1000;
             StoredHp = 1000;
@@ -20,6 +21,7 @@ namespace Macalania.Probototaker.Tanks.Hulls
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Tanks/Hulls/hullStarter"));
             Sprite.SetOriginCenter();
+            Sprite.DepthLayer = 0.1f;
             base.Load(content);
         }
     }

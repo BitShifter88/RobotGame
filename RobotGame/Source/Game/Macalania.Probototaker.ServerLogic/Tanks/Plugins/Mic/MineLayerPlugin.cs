@@ -12,7 +12,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
     class MineLayerPlugin : Plugin
     {
-        public MineLayerPlugin() : base(PluginType.MinePlayer)
+        public MineLayerPlugin(Room room) : base(PluginType.MinePlayer, room)
         {
             Size = 3;
             OriginOfset = new Vector2(0, 30);
@@ -29,8 +29,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         protected virtual void LayMine()
         {
-            StarterMine mine = new StarterMine(RoomManager.Instance.GetActiveRoom());
-            RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(mine);
+            StarterMine mine = new StarterMine(Room);
+            Room.AddGameObjectWhileRunning(mine);
             Vector2 minePos = Tank.Position + Tank.GetTurretBodyDirection() * ((float)Tank.Hull.Sprite.Texture.Height/2f + (float)mine.Sprite.Texture.Height/2f + 10f);
 
             mine.SetPosition(minePos);

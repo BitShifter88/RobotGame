@@ -16,9 +16,11 @@ namespace Macalania.Probototaker.Tanks.Turrets
         private List<TurretModule> _modules = new List<TurretModule>();
         public int YCordForTopBrick { get; set; }
         Tank _tank;
+        public Room Room { get; set; }
 
-        public Turret(Tank tank)
+        public Turret(Tank tank, Room room)
         {
+            Room = room;
             _tank = tank;
             _turretComponents = new TurretComponent[32, 32];
 
@@ -243,9 +245,9 @@ namespace Macalania.Probototaker.Tanks.Turrets
         {
             foreach (Point brick in module.GetRotatedFreeSpace())
             {
-                BlockBrick bb = new BlockBrick(module, _tank);
+                BlockBrick bb = new BlockBrick(module, _tank, Room);
                 bb.SetLocation(x + brick.X, y + brick.Y);
-                bb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                bb.Load(Room.Content);
                 _turretComponents[x + brick.X, y + brick.Y] = bb;
             }
         }

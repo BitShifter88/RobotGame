@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,8 +14,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
     {
         private PluginDirection _dir;
 
-        public SunPannelPlugin(PluginDirection dir)
-            : base(PluginType.SunPannel)
+        public SunPannelPlugin(PluginDirection dir, Room room)
+            : base(PluginType.SunPannel, room)
         {
             _dir = dir;
             Size = 1;

@@ -16,8 +16,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 {
     public class ArtileryStarter : RocketBattery
     {
-        public ArtileryStarter()
-            : base(PluginType.ArtileryStart)
+        public ArtileryStarter(Room room)
+            : base(PluginType.ArtileryStart, room)
         {
             _rockets = new ArtileryProjectile[3];
             MaxCooldown = 5000;
@@ -81,8 +81,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                ArtileryProjectile rocket2 = new ArtileryProjectile(RoomManager.Instance.GetActiveRoom(), Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
-                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(rocket2);
+                ArtileryProjectile rocket2 = new ArtileryProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
+                Room.AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 12 - 16 * i, Sprite.Origin.Y + 4);
                 rocket2.Sprite.Origin = org2;

@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Resources;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -32,7 +33,7 @@ namespace Macalania.Probototaker.Tanks.Turrets
         // Number of pixels for the brick (both width and height)
         int _dim = 16;
 
-        public TurretBrick(Tank tank)
+        public TurretBrick(Tank tank, Room room) : base(room)
         {
             CanAttachBottom = true;
             CanAttachLeft = true;

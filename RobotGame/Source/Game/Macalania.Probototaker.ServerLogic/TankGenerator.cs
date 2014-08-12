@@ -18,22 +18,62 @@ namespace Macalania.Probototaker
 {
     public class TankGenerator
     {
+        public static Tank GenerateStarterTank(ResourceManager content, Vector2 position, Room room)
+        {
+            Tank t1 = new Tank(room, position);
+
+            StarterHull sh = new StarterHull(room);
+            sh.SetTank(t1);
+            sh.Load(content);
+            t1.SetHull(sh);
+
+            StarterTrack st = new StarterTrack(room);
+            st.SetTank(t1);
+            st.Load(content);
+            t1.SetTrack(st);
+
+            Turret t = new Turret(t1, room);
+
+            t1.SetTurret(t);
+
+            for (int i = 16 - 2; i < 16 + 3; i++)
+            {
+                for (int j = 16 - 1; j < 16 + 4; j++)
+                {
+                    TurretBrick tb = new TurretBrick(t1, room);
+                    tb.Load(room.Content);
+                    t.AddTurretComponent(tb, i, j);
+                }
+            }
+
+            MiniCanon m = new MiniCanon(room);
+            m.Load(content);
+            m.SetTank(t1);
+
+            t.AddTurretModule(m, 16-1, 12);
+
+            t1.TurretStyle = new ClasicStyle(content);
+
+            t.DetermineTurretBricks();
+
+            return t1;
+        }
 
         public static Tank GenerateTank3(Room room, ResourceManager content, Vector2 position)
         {
             Tank t1 = new Tank(room, position);
 
-            StarterHull sh = new StarterHull();
+            StarterHull sh = new StarterHull(room);
             sh.SetTank(t1);
             sh.Load(content);
             t1.SetHull(sh);
 
-            StarterTrack st = new StarterTrack();
+            StarterTrack st = new StarterTrack(room);
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1, room);
 
             t1.SetTurret(t);
 
@@ -41,17 +81,19 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1, room);
+                    tb.Load(room.Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
-            MiniCanon m = new MiniCanon();
+            MiniCanon m = new MiniCanon(room);
             m.Load(content);
             m.SetTank(t1);
 
             t.AddTurretModule(m, 16 - 2, 12);
 
-            MiniCanon m2 = new MiniCanon();
+            MiniCanon m2 = new MiniCanon(room);
             m2.Load(content);
             m2.SetTank(t1);
 
@@ -132,7 +174,7 @@ namespace Macalania.Probototaker
             //attack.Load(content);
             //t.AddPluginRightSide(attack, 0);
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
 
             t.DetermineTurretBricks();
 
@@ -141,36 +183,38 @@ namespace Macalania.Probototaker
 
         public static Tank GenerateTank2(Room room, ResourceManager content, Vector2 position)
         {
-            Tank t1 = new Tank(room, position);
+            Tank t1 = new Tank(room,position);
 
-            StarterHull sh = new StarterHull();
+            StarterHull sh = new StarterHull(room);
             sh.SetTank(t1);
             sh.Load(content);
             t1.SetHull(sh);
 
-            StarterTrack st = new StarterTrack();
+            StarterTrack st = new StarterTrack(room);
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1, room);
             t1.SetTurret(t);
 
             for (int i = 16 - 2; i < 16 + 2; i++)
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1, room);
+                    tb.Load(room.Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
-            MiniCanon m = new MiniCanon();
+            MiniCanon m = new MiniCanon(room);
             m.Load(content);
             m.SetTank(t1);
 
             t.AddTurretModule(m, 16 - 2, 12);
 
-            MiniCanon m2 = new MiniCanon();
+            MiniCanon m2 = new MiniCanon(room);
             m2.Load(content);
             m2.SetTank(t1);
 
@@ -224,7 +268,7 @@ namespace Macalania.Probototaker
             //sp.SetTank(t1);
             //t.AddPluginButtom(sp, 1);
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
 
             t.DetermineTurretBricks();
 
@@ -235,17 +279,17 @@ namespace Macalania.Probototaker
         {
             Tank t1 = new Tank(room, position);
 
-            StarterHull sh = new StarterHull();
+            StarterHull sh = new StarterHull(room);
             sh.SetTank(t1);
             sh.Load(content);
             t1.SetHull(sh);
 
-            StarterTrack st = new StarterTrack();
+            StarterTrack st = new StarterTrack(room);
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
 
-            Turret t = new Turret();
+            Turret t = new Turret(t1, room);
 
             t1.SetTurret(t);
 
@@ -253,17 +297,19 @@ namespace Macalania.Probototaker
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
                 {
-                    t.AddTurretComponent(new TurretBrick(t1), i, j);
+                    TurretBrick tb = new TurretBrick(t1, room);
+                    tb.Load(room.Content);
+                    t.AddTurretComponent(tb, i, j);
                 }
             }
 
-            MiniCanon m = new MiniCanon();
+            MiniCanon m = new MiniCanon(room);
             m.Load(content);
             m.SetTank(t1);
 
             t.AddTurretModule(m, 16 - 2, 12);
 
-            MiniCanon m2 = new MiniCanon();
+            MiniCanon m2 = new MiniCanon(room);
             m2.Load(content);
             m2.SetTank(t1);
 
@@ -341,7 +387,7 @@ namespace Macalania.Probototaker
 
 
 
-            t1.ReadyTank();
+            t1.ReadyTank(room);
             t.DetermineTurretBricks();
             return t1;
         }

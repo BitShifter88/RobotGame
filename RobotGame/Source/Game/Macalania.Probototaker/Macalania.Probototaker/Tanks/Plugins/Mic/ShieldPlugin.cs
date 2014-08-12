@@ -18,8 +18,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
     {
         private PluginDirection _dir;
 
-        public ShieldPlugin(PluginDirection dir)
-            : base(PluginType.Shield)
+        public ShieldPlugin(PluginDirection dir, Room room)
+            : base(PluginType.Shield, room)
         {
             _dir = dir;
             MaxCooldown = 500;
@@ -42,8 +42,8 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
             if (success)
             {
-                Shield s = new Shield(RoomManager.Instance.GetActiveRoom(), Tank, 6000, 200);
-                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(s);
+                Shield s = new Shield(Room, Tank, 6000, 200);
+                Room.AddGameObjectWhileRunning(s);
             }
 
             return success;

@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.GameS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Log", "Macalania.Robototaker.Log\Macalania.Robototaker.Log.csproj", "{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frame.Network", "Frame.Network\Frame.Network.csproj", "{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Robototaker.Protocol", "Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj", "{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macalania.Probototaker.ServerGlobals", "Macalania.Probototaker.ServerGlobals\Macalania.Probototaker.ServerGlobals.csproj", "{C67FA7E4-56E3-4329-B348-BF059E3D9135}"
@@ -61,16 +59,6 @@ Global
 		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4B88B8AF-FEF4-413C-BB2C-0AB0BB53C5D8}.Release|x86.ActiveCfg = Release|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A4FBB6A1-CF29-49CE-9145-D72D89AAD5B3}.Release|x86.ActiveCfg = Release|Any CPU
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97930DA9-8CE2-4BC6-A911-BAE1828C0FEC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

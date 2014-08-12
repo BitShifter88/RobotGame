@@ -87,6 +87,7 @@ namespace Macalania.Probototaker.Tanks
 
 
         public long Id { get; set; }
+        Room _room;
 
 
         // Attributes
@@ -102,11 +103,11 @@ namespace Macalania.Probototaker.Tanks
         public float HorsePower { get; set; }
         public float HullBearing { get; set; }
 
-        public Tank(Vector2 position)
+        public Tank(Room room, Vector2 position)
             : base(null)
         {
             SetPosition(position);
-           
+            _room = room;
         }
 
         public void DamageTank(float amount, float amorPenetration)
@@ -701,25 +702,25 @@ namespace Macalania.Probototaker.Tanks
             return tp;
         }
 
-        public static Tank GetTankFromPackage(Vector2 position, TankPackage p, ResourceManager content)
+        public static Tank GetTankFromPackage(Vector2 position, TankPackage p, ResourceManager content, Room room)
         {
-            Tank t = new Tank(position);
-            StarterHull h = new StarterHull();
+            Tank t = new Tank(room, position);
+            StarterHull h = new StarterHull(room);
             h.SetTank(t);
             h.Load(content);
             t.SetHull(h);
 
-            StarterTrack st = new StarterTrack();
+            StarterTrack st = new StarterTrack(room);
             st.SetTank(t);
             st.Load(content);
             t.SetTrack(st);
 
-            Turret tur = new Turret(t);
+            Turret tur = new Turret(t, room);
 
             foreach (TurretBrickPackage tbp in p.TurretBrickPackages)
             {
-                TurretBrick tb = new TurretBrick(t);
-                tb.Load(RoomManager.Instance.GetActiveRoom().Content);
+                TurretBrick tb = new TurretBrick(t, room);
+                tb.Load(room.Content);
                 tur.AddTurretComponent(tb, tbp.X, tbp.Y);
             }
 
@@ -727,7 +728,7 @@ namespace Macalania.Probototaker.Tanks
 
             foreach (ModulePackage mp in p.ModulePackages)
             {
-                TurretModule tm = TurretModule.GenerateTurretModule(mp.ModuleType, mp.ModuleDir);
+                TurretModule tm = TurretModule.GenerateTurretModule(mp.ModuleType, mp.ModuleDir, room);
                 tm.SetTank(t);
                 tm.Load(content);
                 tur.AddTurretModule(tm, mp.X, mp.Y);

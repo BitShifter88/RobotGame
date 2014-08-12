@@ -15,7 +15,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
     {
         Animation _ani;
 
-        public MiniCanon(): base(Plugins.PluginType.MiniMainGun)
+        public MiniCanon(Room room): base(Plugins.PluginType.MiniMainGun, room)
         {
             RequiredBricks = new List<Point>();
             RequiredFreeSpace = new List<Point>();
@@ -41,7 +41,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    turret.AddTurretComponent(new TurretComponent(), _x + i, _y + j);
+                    turret.AddTurretComponent(new TurretComponent(Room), _x + i, _y + j);
                 }
             }
         }
@@ -61,9 +61,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
 
             if (TimeSinceLastFire > RateOfFire)
             {
-                ShellStarter ss = new ShellStarter(RoomManager.Instance.GetActiveRoom(), Tank, position, direction);
+                ShellStarter ss = new ShellStarter(Room, Tank, position, direction);
 
-                RoomManager.Instance.GetActiveRoom().AddGameObjectWhileRunning(ss);
+                Room.AddGameObjectWhileRunning(ss);
                 _ani.PlayAnimation();
                 ShotFired();
             }

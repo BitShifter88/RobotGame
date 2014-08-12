@@ -76,7 +76,7 @@ namespace Macalania.YunaEngine.Resources
             }
 
 #if SERVER
-            YunaTexture yt = new YunaTexture(colMap, dimx, dimy);
+            YunaTexture yt = new YunaTexture(transMap, dimx, dimy);
             _contentManagerMutex.ReleaseMutex();
             return yt;
 #endif

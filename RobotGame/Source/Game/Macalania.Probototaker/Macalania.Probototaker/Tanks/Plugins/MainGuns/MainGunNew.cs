@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Probototaker.Tanks.Turrets;
 using Macalania.YunaEngine;
+using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.MainGuns
         public float CoolDownRate { get; set; }
         public bool Overheated { get; set; }
 
-        public MainGunNew(PluginType type) : base (type)
+        public MainGunNew(PluginType type, Room room) : base (type, room)
         {
         
         }
