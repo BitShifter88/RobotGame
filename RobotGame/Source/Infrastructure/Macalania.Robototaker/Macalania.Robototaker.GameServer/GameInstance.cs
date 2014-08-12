@@ -20,43 +20,28 @@ namespace Macalania.Robototaker.GameServer
 {
     class GameInstance
     {
-        NetServer Server;
-        NetPeerConfiguration Config;
-        private Thread _messageThread;
 
-        private bool _stop = false;
 
         byte _gameServerTankId = 0;
         
         ServerRoom _room;
         Mutex _connectionMutex = new Mutex();
-
+        NetServer _server;
         ResourceManager _content;
 
-        public void StartGame(ResourceManager content)
+        public void StartGame(ResourceManager content, NetServer server)
         {
             _content = content;
+            _server = server;
 
             PreLoader.PreLoad(_content);
 
-            Config = new NetPeerConfiguration("game");
-#if DEBUG
-            Config.SimulatedMinimumLatency = 0.015f;
-#endif
 
-            Config.Port = 9999;
-            Config.MaximumConnections = 200;
-            Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
-            Server = new NetServer(Config);
 
-            // Start it
-            Server.Start();
-
-            _room = new ServerRoom(Server);
+            _room = new ServerRoom(_server);
             _room.Load(_content);
 
-            _messageThread = new Thread(new ThreadStart(MessageThreadMethod));
-            _messageThread.Start();
+
 
             ServerLog.E("Server started!", LogType.ConnectionStatus);
         }
@@ -75,85 +60,23 @@ namespace Macalania.Robototaker.GameServer
             _room.ActivatePlugin(type, connection.RemoteUniqueIdentifier, 0, targetPos);
         }
 
-        private void MessageThreadMethod()
+        public void HandleData(NetIncomingMessage inc)
         {
-            NetIncomingMessage inc;
+            RobotProt header = (RobotProt)inc.ReadByte();
 
-            while (_stop == false)
+            if (header == RobotProt.PlayerMovement)
             {
-                if ((inc = Server.ReadMessage()) != null)
-                {
-                    // Theres few different types of messages. To simplify this process, i left only 2 of em here
-                    switch (inc.MessageType)
-                    {
-                        case NetIncomingMessageType.ConnectionApproval:
-                            {
-                                inc.SenderConnection.Approve();
-                                string username = inc.ReadString();
-                                string sessionId = inc.ReadString();
-
-                                OnPlayerIdentified(inc.SenderConnection, username, sessionId);
-                            }
-                            break;
-                        case NetIncomingMessageType.StatusChanged:
-                            {
-                                NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
-                                if (status == NetConnectionStatus.Disconnected)
-                                {
-                                    OnConnectionClosed(inc.SenderConnection);
-                                }
-                            }
-                            break;
-                        case NetIncomingMessageType.Data:
-                            {
-                                RobotProt header = (RobotProt)inc.ReadByte();
-
-                                if (header == RobotProt.PlayerMovement)
-                                {
-                                    UserInput(inc, inc.SenderConnection);
-                                }
-                                if (header == RobotProt.AbilityActivation)
-                                {
-                                    OnAbilityActivation(inc, inc.SenderConnection);
-                                }
-                            }
-                            break;
-                        case NetIncomingMessageType.WarningMessage:
-                                {
-                                    ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                                }
-                            break;
-                        case NetIncomingMessageType.Error:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                        case NetIncomingMessageType.VerboseDebugMessage:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                        case NetIncomingMessageType.DebugMessage:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                    }
-
-                    Server.Recycle(inc);
-                }
-                else
-                    Thread.Sleep(1);
-                Thread.Sleep(0);
+                UserInput(inc, inc.SenderConnection);
+            }
+            if (header == RobotProt.AbilityActivation)
+            {
+                OnAbilityActivation(inc, inc.SenderConnection);
             }
         }
 
-        public void StopServer()
-        {
-            _stop = true;
-        }
 
-        private void OnPlayerIdentified(NetConnection connection, string username, string sessionId)
+
+        public void OnPlayerIdentified(NetConnection connection, string username, string sessionId)
         {
             _connectionMutex.WaitOne();
             _room.AddPlayer(connection, username, sessionId, _gameServerTankId);
@@ -165,8 +88,8 @@ namespace Macalania.Robototaker.GameServer
 
         private void AuthenticationResponse(NetConnection connection, bool success)
         {
-            
-            NetOutgoingMessage m = Server.CreateMessage();
+
+            NetOutgoingMessage m = _server.CreateMessage();
             m.Write((byte)RobotProt.PlayerIdentification);
             m.Write(success);
             connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
@@ -248,7 +171,7 @@ namespace Macalania.Robototaker.GameServer
             _room.Update(dt);
         }
 
-        private void OnConnectionClosed(NetConnection connection)
+        public void OnConnectionClosed(NetConnection connection)
         {
             _connectionMutex.WaitOne();
             ServerLog.E("Connection closed " + connection.RemoteUniqueIdentifier, LogType.ConnectionStatus);
