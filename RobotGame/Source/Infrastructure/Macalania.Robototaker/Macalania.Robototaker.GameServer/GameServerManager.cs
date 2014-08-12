@@ -14,31 +14,39 @@ namespace Macalania.Robototaker.GameServer
         long _idCounter = 0;
 
         ResourceManager _content;
-        ServerRoom _room;
 
 
-        public GameServerManager(ResourceManager content, NetServer server)
+        public GameServerManager()
         {
-            _content = content;
-            
-            _room = new ServerRoom(server);
-            
+            _content = new ResourceManager(null);
+                       
             StartGameLoop();
         }
 
+        private void StartServer()
+        {
+            
+        }
 
         protected override void Update(double dt)
         {
-            _room.Update(dt);
+            foreach (KeyValuePair<long, GameInstance> instance in _instances)
+            {
+                instance.Value.Update(dt);
+            }
 
             base.Update(dt);
         }
 
 
-        //public GameServerInstance CreateNewGameServerInstance()
-        //{
-            
-        //}
+        public GameInstance CreateNewGameInstance()
+        {
+            GameInstance gi = new GameInstance();
+            gi.StartGame(_content);
+            _instances.Add(GetNextId(), gi);
+
+            return gi;
+        }
 
         private long GetNextId()
         {

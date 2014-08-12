@@ -13,8 +13,8 @@ namespace Macalania.Robototaker.MainFrame
     {
         static void Main(string[] args)
         {
-            GameInstance gsm = new GameInstance();
-            gsm.StartServer();
+            GameServerManager gsm = new GameServerManager();
+            gsm.CreateNewGameInstance();
            
         }
     }

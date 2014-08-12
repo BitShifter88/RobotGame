@@ -24,7 +24,7 @@ namespace Macalania.Probototaker.Projectiles
         {
             Sprite = new Sprite(content.LoadYunaTexture("Textures/Projectiles/shell"));
             Sprite.SetOriginCenter();
-            Sprite.DepthLayer = 0.1f;
+            Sprite.DepthLayer = 0.7f;
             base.Load(content);
         }
 

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace Macalania.Robototaker.GameServer
 {
-    class GameInstance : GameLoop
+    class GameInstance
     {
         NetServer Server;
         NetPeerConfiguration Config;
@@ -33,9 +33,9 @@ namespace Macalania.Robototaker.GameServer
 
         ResourceManager _content;
 
-        public void StartServer()
+        public void StartGame(ResourceManager content)
         {
-            _content = new ResourceManager(null);
+            _content = content;
 
             PreLoader.PreLoad(_content);
 
@@ -52,15 +52,11 @@ namespace Macalania.Robototaker.GameServer
             // Start it
             Server.Start();
 
-
             _room = new ServerRoom(Server);
             _room.Load(_content);
 
-            StartGameLoop();
-
             _messageThread = new Thread(new ThreadStart(MessageThreadMethod));
             _messageThread.Start();
-
 
             ServerLog.E("Server started!", LogType.ConnectionStatus);
         }
@@ -247,10 +243,9 @@ namespace Macalania.Robototaker.GameServer
         //    return commands;
         //}
 
-        protected override void Update(double dt)
+        public void Update(double dt)
         {
             _room.Update(dt);
-            base.Update(dt);
         }
 
         private void OnConnectionClosed(NetConnection connection)
