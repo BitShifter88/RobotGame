@@ -30,8 +30,6 @@ namespace Macalania.Robototaker.GameServer
             _content = new ResourceManager(null);
                        
             StartGameLoop();
-
-            
         }
 
         public void StartServer()
@@ -75,8 +73,8 @@ namespace Macalania.Robototaker.GameServer
 
         private long GetNextId()
         {
-            return _idCounter;
             _idCounter++;
+            return _idCounter;
         }
 
         public void StopServer()

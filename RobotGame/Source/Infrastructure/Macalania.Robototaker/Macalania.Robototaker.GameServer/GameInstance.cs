@@ -73,9 +73,6 @@ namespace Macalania.Robototaker.GameServer
                 OnAbilityActivation(inc, inc.SenderConnection);
             }
         }
-
-
-
         public void OnPlayerIdentified(NetConnection connection, string username, string sessionId)
         {
             _connectionMutex.WaitOne();
