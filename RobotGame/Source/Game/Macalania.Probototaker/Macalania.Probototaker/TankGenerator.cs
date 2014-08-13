@@ -36,9 +36,9 @@ namespace Macalania.Probototaker
 
             t1.SetTurret(t);
 
-            for (int i = 16 - 2; i < 16 + 3; i++)
+            for (int i = 16 - 2; i < 16 + 2; i++)
             {
-                for (int j = 16 - 1; j < 16 + 4; j++)
+                for (int j = 16 - 1; j < 16 + 2; j++)
                 {
                     TurretBrick tb = new TurretBrick(t1, room);
                     tb.Load(room.Content);
@@ -50,7 +50,7 @@ namespace Macalania.Probototaker
             m.Load(content);
             m.SetTank(t1);
 
-            t.AddTurretModule(m, 16-1, 12);
+            t.AddTurretModule(m, 16-2, 12);
 
             t1.TurretStyle = new ClasicStyle(content);
 

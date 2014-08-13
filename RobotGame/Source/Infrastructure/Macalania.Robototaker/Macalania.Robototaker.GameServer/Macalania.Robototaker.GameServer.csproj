@@ -60,7 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BytePacker.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="GamePlayer.cs" />
     <Compile Include="GameInstance.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerRoom.cs" />
     <Compile Include="ServerGame.cs" />
+    <Compile Include="ThreadLoadRecorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj">

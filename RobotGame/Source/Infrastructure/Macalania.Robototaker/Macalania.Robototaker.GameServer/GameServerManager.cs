@@ -5,6 +5,7 @@ using Macalania.YunaEngine.Resources;
 using Macalania.YunaEngine.Rooms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,10 +25,13 @@ namespace Macalania.Robototaker.GameServer
 
         private bool _stop = false;
 
+        ThreadLoadRecorder _threadLoadRecorder;
+
 
         public GameServerManager()
         {
             _content = new ResourceManager(null);
+            _threadLoadRecorder = new ThreadLoadRecorder();
                        
             StartGameLoop();
         }
@@ -53,14 +57,23 @@ namespace Macalania.Robototaker.GameServer
 
         protected override void Update(double dt)
         {
+            Stopwatch s = new Stopwatch();
+            s.Start();
             foreach (KeyValuePair<long, GameInstance> instance in _instances)
             {
                 instance.Value.Update(dt);
             }
+            s.Stop();
+
+            //CheckForMessages();
 
             base.Update(dt);
         }
 
+        protected override void SecondUpdate()
+        {
+            base.SecondUpdate();
+        }
 
         public GameInstance CreateNewGameInstance()
         {
@@ -84,66 +97,72 @@ namespace Macalania.Robototaker.GameServer
 
         private void MessageThreadMethod()
         {
-            NetIncomingMessage inc;
-
             while (_stop == false)
             {
-                if ((inc = Server.ReadMessage()) != null)
-                {
-                    // Theres few different types of messages. To simplify this process, i left only 2 of em here
-                    switch (inc.MessageType)
-                    {
-                        case NetIncomingMessageType.ConnectionApproval:
-                            {
-                                inc.SenderConnection.Approve();
-                                string username = inc.ReadString();
-                                string sessionId = inc.ReadString();
-
-                                _instances.FirstOrDefault().Value.OnPlayerIdentified(inc.SenderConnection, username, sessionId);
-                            }
-                            break;
-                        case NetIncomingMessageType.StatusChanged:
-                            {
-                                NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
-                                if (status == NetConnectionStatus.Disconnected)
-                                {
-                                    _instances.FirstOrDefault().Value.OnConnectionClosed(inc.SenderConnection);
-                                }
-                            }
-                            break;
-                        case NetIncomingMessageType.Data:
-                            {
-                                _instances.FirstOrDefault().Value.HandleData(inc);
-                            }
-                            break;
-                        case NetIncomingMessageType.WarningMessage:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                        case NetIncomingMessageType.Error:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                        case NetIncomingMessageType.VerboseDebugMessage:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                        case NetIncomingMessageType.DebugMessage:
-                            {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
-                            }
-                            break;
-                    }
-
-                    Server.Recycle(inc);
-                }
-                else
-                    Thread.Sleep(1);
-                Thread.Sleep(0);
+                CheckForMessages();
             }
+        }
+
+        private void CheckForMessages()
+        {
+            if (Server == null)
+                return;
+            NetIncomingMessage inc;
+            if ((inc = Server.ReadMessage()) != null)
+            {
+                // Theres few different types of messages. To simplify this process, i left only 2 of em here
+                switch (inc.MessageType)
+                {
+                    case NetIncomingMessageType.ConnectionApproval:
+                        {
+                            inc.SenderConnection.Approve();
+                            string username = inc.ReadString();
+                            string sessionId = inc.ReadString();
+
+                            _instances.FirstOrDefault().Value.OnPlayerIdentified(inc.SenderConnection, username, sessionId);
+                        }
+                        break;
+                    case NetIncomingMessageType.StatusChanged:
+                        {
+                            NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
+                            if (status == NetConnectionStatus.Disconnected)
+                            {
+                                _instances.FirstOrDefault().Value.OnConnectionClosed(inc.SenderConnection);
+                            }
+                        }
+                        break;
+                    case NetIncomingMessageType.Data:
+                        {
+                            _instances.FirstOrDefault().Value.HandleData(inc);
+                        }
+                        break;
+                    case NetIncomingMessageType.WarningMessage:
+                        {
+                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                        }
+                        break;
+                    case NetIncomingMessageType.Error:
+                        {
+                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                        }
+                        break;
+                    case NetIncomingMessageType.VerboseDebugMessage:
+                        {
+                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                        }
+                        break;
+                    case NetIncomingMessageType.DebugMessage:
+                        {
+                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                        }
+                        break;
+                }
+
+                Server.Recycle(inc);
+            }
+            else
+                Thread.Sleep(1);
+            Thread.Sleep(0);
         }
     }
 }

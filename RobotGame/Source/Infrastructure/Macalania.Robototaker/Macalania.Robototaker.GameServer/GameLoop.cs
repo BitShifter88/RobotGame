@@ -14,6 +14,7 @@ namespace Macalania.Robototaker.GameServer
         Thread _loopThread;
         bool _stop = false;
         double _desiredUpdateTime = 1000d / 60d;
+        ThreadLoadRecorder _load = new ThreadLoadRecorder();
        
         public void StartGameLoop()
         {
@@ -42,9 +43,16 @@ namespace Macalania.Robototaker.GameServer
                 frameCounter.Start();
                 ServerLog.E("FPS: " + frames, LogType.Debug);
                 frames = 0;
+
+                SecondUpdate();
             }
             
             //Thread.Sleep(10);
+        }
+
+        protected virtual void SecondUpdate()
+        {
+            ServerLog.E("Thread load: " + string.Format("{0:N2}%", _load.GetSecondPeek()), LogType.Information);
         }
 
         public void StopGameLoop()
@@ -56,20 +64,30 @@ namespace Macalania.Robototaker.GameServer
         {
             Stopwatch elapsedTime = new Stopwatch();
             Stopwatch extraTimeWatch = new Stopwatch();
-            Stopwatch performance = new Stopwatch();
+            Stopwatch load = new Stopwatch();
             double timeAtLastUpdate = 0;
+            double frameTime = 1000d / 60d;
             elapsedTime.Start();
+
             while (_stop == false)
             {
                 double dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
                 timeAtLastUpdate = elapsedTime.Elapsed.TotalMilliseconds;
-                performance.Start();
+
+                if (dt > frameTime + 0.01f || dt < frameTime - 0.01f)
+                {
+                    ServerLog.E("dt unstable", LogType.ServerOverload);
+                }
+
                 Update(dt);
-                performance.Stop();
-                //ServerLog.E((performance.Elapsed.TotalMilliseconds).ToString(), LogType.Debug);
-                performance.Reset();
 
                 double timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
+                load.Stop();
+                
+                double percentUsage = 1 - (frameTime - load.Elapsed.TotalMilliseconds) / frameTime;
+                percentUsage *= 100;
+                _load.RegisterLoad(percentUsage);
+                load.Reset();
 
                 if (timeToWait > 0)
                 {
@@ -78,15 +96,17 @@ namespace Macalania.Robototaker.GameServer
                     //Thread.Sleep((int)timeToWait);
 
                     extraTimeWatch.Start();
-
+                    
                     // PERFORMANCE: Det er lidt skidt at vil efterspørger TotalMiliseconds. Det bruger meget CPU. Overvej at lav et system med Sleep(1)
                     while (extraTimeWatch.Elapsed.TotalMilliseconds < timeToWait)
                         Thread.Sleep(0);
+                    load.Start();
                     extraTimeWatch.Stop();
                     extraTimeWatch.Reset();
                 }
                 else
                 {
+                    load.Start();
                     ServerLog.E("Lag on the game loop!", LogType.ServerOverload);
                 }
                 //Console.WriteLine(timeToWait);

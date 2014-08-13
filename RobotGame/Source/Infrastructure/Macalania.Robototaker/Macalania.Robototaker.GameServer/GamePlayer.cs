@@ -190,7 +190,7 @@ namespace Macalania.Robototaker.GameServer
 
         public override void Load(ResourceManager content)
         {
-            Tank t1 = new Tank(Room, new Vector2(100, 600));
+            Tank t1 = new Tank(Room, new Vector2(1000, 600));
 
             StarterHull sh = new StarterHull(Room);
             sh.SetTank(t1);

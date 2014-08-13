@@ -20,8 +20,6 @@ namespace Macalania.Robototaker.GameServer
 {
     class GameInstance
     {
-
-
         byte _gameServerTankId = 0;
         
         ServerRoom _room;
@@ -36,12 +34,8 @@ namespace Macalania.Robototaker.GameServer
 
             PreLoader.PreLoad(_content);
 
-
-
             _room = new ServerRoom(_server);
             _room.Load(_content);
-
-
 
             ServerLog.E("Server started!", LogType.ConnectionStatus);
         }
@@ -80,12 +74,10 @@ namespace Macalania.Robototaker.GameServer
             _gameServerTankId++;
             _connectionMutex.ReleaseMutex();
             AuthenticationResponse(connection, true);
-           
         }
 
         private void AuthenticationResponse(NetConnection connection, bool success)
         {
-
             NetOutgoingMessage m = _server.CreateMessage();
             m.Write((byte)RobotProt.PlayerIdentification);
             m.Write(success);

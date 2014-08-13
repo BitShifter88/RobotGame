@@ -107,7 +107,7 @@ namespace Macalania.YunaEngine
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             if (_activeRoom != null)
                 _activeRoom.Draw(_render);
