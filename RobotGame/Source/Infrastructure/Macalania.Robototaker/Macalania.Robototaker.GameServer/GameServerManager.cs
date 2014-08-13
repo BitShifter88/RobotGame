@@ -32,8 +32,6 @@ namespace Macalania.Robototaker.GameServer
         {
             _content = new ResourceManager(null);
             _threadLoadRecorder = new ThreadLoadRecorder();
-                       
-            StartGameLoop();
         }
 
         public void StartServer()
@@ -65,7 +63,7 @@ namespace Macalania.Robototaker.GameServer
             }
             s.Stop();
 
-            //CheckForMessages();
+            CheckForMessages();
 
             base.Update(dt);
         }
@@ -97,10 +95,10 @@ namespace Macalania.Robototaker.GameServer
 
         private void MessageThreadMethod()
         {
-            while (_stop == false)
-            {
-                CheckForMessages();
-            }
+            //while (_stop == false)
+            //{
+            //    CheckForMessages();
+            //}
         }
 
         private void CheckForMessages()
@@ -160,9 +158,9 @@ namespace Macalania.Robototaker.GameServer
 
                 Server.Recycle(inc);
             }
-            else
-                Thread.Sleep(1);
-            Thread.Sleep(0);
+            //else
+            //    Thread.Sleep(1);
+            //Thread.Sleep(0);
         }
     }
 }

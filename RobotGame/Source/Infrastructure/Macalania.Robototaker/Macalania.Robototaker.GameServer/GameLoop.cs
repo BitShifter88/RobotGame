@@ -74,10 +74,10 @@ namespace Macalania.Robototaker.GameServer
                 double dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
                 timeAtLastUpdate = elapsedTime.Elapsed.TotalMilliseconds;
 
-                if (dt > frameTime + 0.01f || dt < frameTime - 0.01f)
-                {
-                    ServerLog.E("dt unstable", LogType.ServerOverload);
-                }
+                //if (dt > frameTime + 0.01f || dt < frameTime - 0.01f)
+                //{
+                //    ServerLog.E("dt unstable", LogType.ServerOverload);
+                //}
 
                 Update(dt);
 

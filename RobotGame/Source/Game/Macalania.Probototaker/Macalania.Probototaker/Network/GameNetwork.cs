@@ -59,7 +59,7 @@ namespace Macalania.Probototaker.Network
             outmsg.Write("steffan88");
             outmsg.Write("session12345");
 
-            _client.Connect("127.0.0.1", 9999, outmsg);
+            _client.Connect("192.168.87.101", 9999, outmsg);
 
             if (WaitForAuthentication() == false)
             {
