@@ -52,10 +52,12 @@ namespace Macalania.Robototaker.GameServer
             //Thread.Sleep(10);
         }
 
+        bool displayUpdate = false;
         protected virtual void SecondUpdate()
         {
             if (ShowStats)
             {
+                displayUpdate = true;
                 ServerLog.ClearConsoleWindow();
                 ServerLog.WriteToConsoleWindow("FPS: " + frames, 0);
                 ServerLog.WriteToConsoleWindow("Thread load peek sec: " + string.Format("{0:N2}%", _load.GetSecondPeek()), 1);
@@ -99,9 +101,15 @@ namespace Macalania.Robototaker.GameServer
                 timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
                 load.Stop();
                 
+
                 percentUsage = 1 - (frameTime - load.Elapsed.TotalMilliseconds) / frameTime;
                 percentUsage *= 100;
-                _load.RegisterLoad(percentUsage);
+                if (displayUpdate == false)
+                {
+                    _load.RegisterLoad(percentUsage);
+                }
+                else
+                    displayUpdate = false;
                 load.Reset();
 
                 if (timeToWait > 0)
