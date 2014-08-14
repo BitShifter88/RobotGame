@@ -18,14 +18,14 @@ namespace Macalania.Robototaker.GameServer
             Stopwatch s = new Stopwatch();
             s.Start();
 
-            FindFilesInFolder("Content");
+            //FindFilesInFolder("Content");
 
-            ServerLog.E("Preloading resources...", LogType.Information);
+            //ServerLog.E("Preloading resources...", LogType.Information);
 
-            foreach (string file in foundFiles)
-            {
-                content.LoadYunaTexture(file);
-            }
+            //foreach (string file in foundFiles)
+            //{
+            //    content.LoadYunaTexture(file);
+            //}
             
             s.Stop();
             ServerLog.E("Resources loaded in time: " + s.Elapsed.TotalMilliseconds + "ms", LogType.Information);

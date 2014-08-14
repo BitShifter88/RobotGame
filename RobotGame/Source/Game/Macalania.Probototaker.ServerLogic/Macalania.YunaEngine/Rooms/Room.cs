@@ -42,7 +42,7 @@ namespace Macalania.YunaEngine.Rooms
             _addingMutex.ReleaseMutex();
         }
 
-        protected virtual void RemoveGameObject(GameObject obj)
+        public virtual void RemoveGameObject(GameObject obj)
         {
             _addingMutex.WaitOne();
             obj.Unload();

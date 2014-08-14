@@ -186,7 +186,7 @@ namespace Macalania.Robototaker.GameServer
 
         public void RemovedFromServer()
         {
-
+            Room.RemoveGameObject(Tank);
         }
 
         

@@ -22,7 +22,7 @@ namespace Macalania.Probototaker.Rooms
             Shields = new List<Shield>();
         }
 
-        protected override void RemoveGameObject(GameObject obj)
+        public override void RemoveGameObject(GameObject obj)
         {
             if (obj.GetType() == typeof(Tank))
                 Tanks.Remove((Tank)obj);

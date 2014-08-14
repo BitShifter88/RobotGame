@@ -42,13 +42,16 @@ namespace Macalania.Robototaker.Log
 
         private static void SetConsoleWindow(int height)
         {
+#if !RASPBERRY
             _consoleWindowHeight = height;
             _consoleWindowStart = Console.CursorTop;
             Console.SetCursorPosition(0, _consoleWindowStart + height);
+#endif
         }
 
         public static void ClearConsoleWindow()
         {
+#if !RASPBERRY
             if (_disabled)
                 return;
             int top = Console.CursorTop;
@@ -59,20 +62,24 @@ namespace Macalania.Robototaker.Log
                 Console.Write("                                             ");
             }
             Console.SetCursorPosition(left, top);
+#endif
         }
 
         public static void WriteToConsoleWindow(string text, int row)
         {
             if (_disabled)
                 return;
+#if !RASPBERRY
             int top = Console.CursorTop;
             int left = Console.CursorLeft;
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(0, row + _consoleWindowStart);
+#endif
             Console.WriteLine(text);
-
+#if !RASPBERRY
             Console.SetCursorPosition(left, top);
+#endif
         }
 
         public static void E(string message, LogType type)
@@ -119,8 +126,10 @@ namespace Macalania.Robototaker.Log
 
             Console.WriteLine(DateTime.Now.ToString() + " ::\t" + message);
 
+#if !RASPBERRY
             _consoleWindowStart = Console.CursorTop;
             Console.SetCursorPosition(0, _consoleWindowStart + _consoleWindowHeight);
+#endif
         }
     }
 }
