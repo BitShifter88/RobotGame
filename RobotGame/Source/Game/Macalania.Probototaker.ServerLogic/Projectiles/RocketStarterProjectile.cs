@@ -14,8 +14,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class RocketStarterProjectile : Rocket
     {
-        public RocketStarterProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed, ProjectileType.RocketStarterProjectile)
+        public RocketStarterProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float maxDist, float speed)
+            : base(room, tankSource, position, direction, speed, maxDist, ProjectileType.RocketStarterProjectile)
         {
 
         }

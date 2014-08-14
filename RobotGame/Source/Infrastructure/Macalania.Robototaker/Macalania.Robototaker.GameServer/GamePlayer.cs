@@ -17,6 +17,7 @@ using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -188,23 +189,33 @@ namespace Macalania.Robototaker.GameServer
 
         }
 
+        
         public override void Load(ResourceManager content)
         {
+            Stopwatch s = new Stopwatch();
+            s.Start();
             Tank t1 = new Tank(Room, new Vector2(1000, 600));
 
+            
             StarterHull sh = new StarterHull(Room);
             sh.SetTank(t1);
-            sh.Load(content);
-            t1.SetHull(sh);
 
+            sh.Load(content);
+
+            
+
+            t1.SetHull(sh);
+            
             StarterTrack st = new StarterTrack(Room);
             st.SetTank(t1);
             st.Load(content);
             t1.SetTrack(st);
-
+            
             Turret t = new Turret(t1, Room);
 
             t1.SetTurret(t);
+
+            
 
             //StarterMainGun smg = new StarterMainGun();
             //smg.Load(content);
@@ -284,7 +295,7 @@ namespace Macalania.Robototaker.GameServer
             //r.SetTank(t1);
             //r.Load(content);
             //t.AddPluginRightSide(r, 0);
-
+            
             for (int i = 16 - 2; i < 16 + 2; i++)
             {
                 for (int j = 16 - 1; j < 16 + 4; j++)
@@ -295,6 +306,7 @@ namespace Macalania.Robototaker.GameServer
                     t.AddTurretComponent(tb, i, j);
                 }
             }
+            
 
             //MiniCanon m = new MiniCanon(Room);
             //m.Load(content);
@@ -331,16 +343,23 @@ namespace Macalania.Robototaker.GameServer
             //sp.SetTank(t1);
 
             //t.AddTurretModule(sp, 13, 17);
-
+            
             t1.ServerSideTankId = TankId;
 
             Tank = t1;
-
+            
             Tank.ReadyTank(Room);
-
+            
             t.DetermineTurretBricks();
-
+            
+            
             Room.AddGameObjectWhileRunning(Tank);
+
+            s.Stop();
+
+            Console.WriteLine("Cretion time " + s.Elapsed.TotalMilliseconds);
+
+
         }
     }
 }

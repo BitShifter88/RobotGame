@@ -27,11 +27,41 @@ namespace Macalania.Robototaker.GameServer
 
         ThreadLoadRecorder _threadLoadRecorder;
 
+        Thread _consoleReadThread;
+
 
         public GameServerManager()
         {
             _content = new ResourceManager(null);
             _threadLoadRecorder = new ThreadLoadRecorder();
+
+            ShowStats = true;
+
+            _consoleReadThread = new Thread(new ThreadStart(ConsoleRead));
+            _consoleReadThread.Start();
+        }
+
+        private void ConsoleRead()
+        {
+            while(_stop == false)
+            {
+                string read = Console.ReadLine();
+                read = read.ToLower();
+                if (read == "exit" || read == "stop")
+                {
+                    StopServer();
+                }
+                if (read == "stopconsole" || read == "stopverbose" || read == "noconsole")
+                {
+                    ShowStats = false;
+                    ServerLog.DisableConsole();
+                }
+                if (read == "showconsole" || read == "console")
+                {
+                    ShowStats = true;
+                    ServerLog.EnableConsole();
+                }
+            }
         }
 
         public void StartServer()
@@ -49,19 +79,18 @@ namespace Macalania.Robototaker.GameServer
             // Start it
             Server.Start();
 
-            _messageThread = new Thread(new ThreadStart(MessageThreadMethod));
-            _messageThread.Start();
+            //_messageThread = new Thread(new ThreadStart(MessageThreadMethod));
+            //_messageThread.Start();
         }
 
         protected override void Update(double dt)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
+            CheckForMessages();
+
             foreach (KeyValuePair<long, GameInstance> instance in _instances)
             {
                 instance.Value.Update(dt);
             }
-            s.Stop();
 
             CheckForMessages();
 
@@ -90,7 +119,10 @@ namespace Macalania.Robototaker.GameServer
 
         public void StopServer()
         {
+            StopGameLoop();
+            Thread.Sleep(100);
             _stop = true;
+            Server.DiscoverLocalPeers(9999);
         }
 
         private void MessageThreadMethod()

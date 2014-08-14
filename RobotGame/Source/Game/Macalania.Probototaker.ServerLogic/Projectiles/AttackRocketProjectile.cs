@@ -18,7 +18,7 @@ namespace Macalania.Probototaker.Projectiles
     public class AttackRocketProjectile : Rocket
     {
         public AttackRocketProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed, ProjectileType.AttackRocketProjectile)
+            : base(room, tankSource, position, direction, speed, 10000, ProjectileType.AttackRocketProjectile)
         {
             Damage = new Damage() { AmorPenetration = 1, ComponentDamage = 20, TankDamage = 30 };
             Imprecition = GameRandom.GetRandomFloat(0.00015f);

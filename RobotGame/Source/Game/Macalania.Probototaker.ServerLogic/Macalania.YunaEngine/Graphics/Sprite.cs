@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -20,9 +21,13 @@ namespace Macalania.YunaEngine.Graphics
         public Sprite(YunaTexture texture)
         {
             Texture = texture;
+             
             Scale = 1;
-            Color = Color.White;
+            
+            //Color = Color.White;
+            
             CalculateBoundingSphere();
+
         }
 
         public YunaTexture Texture { get; set; }
@@ -69,10 +74,11 @@ namespace Macalania.YunaEngine.Graphics
             //if (YunaSettings.DrawBoundingSpheres)
             //    render.Draw(BoundingSphereTexture, new Vector2(RelativeBoundingSphere.Center.X, RelativeBoundingSphere.Center.Y),new Rectangle(0,0, BoundingSphereTexture.Width, BoundingSphereTexture.Height), Color.Red, 0, new Vector2(BoundingSphereTexture.Width/2, BoundingSphereTexture.Height/2), 1, 0.9f);
         }
-
+        Stopwatch s = new Stopwatch();
         public virtual void CalculateBoundingSphere()
         {
             BoundingSphere = BoundingSphere.CreateFromBoundingBox(new BoundingBox(new Vector3(Texture.Width, Texture.Height, 0), new Vector3(0, 0, 0)));
+
             //BoundingSphereTexture = YunaMath.CreateCircleTexture((int)BoundingSphere.Radius, YunaGameEngine.Instance.GraphicsDevice);
         }
 

@@ -23,7 +23,7 @@ namespace Macalania.Probototaker.Projectiles
 
     public class Projectile : GameObject
     {
-        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed, ProjectileType type)
+        public Projectile(Room room, Tank source, Vector2 position, Vector2 direction, float speed, float maxDist, ProjectileType type)
             : base(room)
         {
             Source = source;
@@ -31,6 +31,7 @@ namespace Macalania.Probototaker.Projectiles
             Direction = direction;
             Speed = speed;
             ProjectileType = type;
+            MaxDist = maxDist;
         }
         public Tank Source { get; set; }
         public Sprite Sprite { get; set; }
@@ -42,6 +43,7 @@ namespace Macalania.Probototaker.Projectiles
         public double TimeBehindDivided { get; set; }
         private int _smoothCount = 0;
         private double _smoothTimeRate = 50d;
+        public float MaxDist { get; set; }
 
         public override void Update(double dt)
         {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -32,12 +33,12 @@ namespace Macalania.YunaEngine.Resources
             _content.RootDirectory = "Content";
 #endif
         }
-
         public YunaTexture LoadYunaTexture(string asset)
         {
+
             _contentManagerMutex.WaitOne();
 
-
+           
 
             bool[,] transMap = null;
 
@@ -78,6 +79,7 @@ namespace Macalania.YunaEngine.Resources
 #if SERVER
             YunaTexture yt = new YunaTexture(transMap, dimx, dimy);
             _contentManagerMutex.ReleaseMutex();
+
             return yt;
 #endif
 

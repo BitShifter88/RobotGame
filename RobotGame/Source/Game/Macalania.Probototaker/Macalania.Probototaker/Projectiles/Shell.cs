@@ -12,9 +12,12 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class Shell : Projectile
     {
-        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, ProjectileType type)
-            : base(room, tankSource, position, direction, speed, type)
+        public float MaxDist { get; set; }
+
+        public Shell(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, float maxDist, ProjectileType type)
+            : base(room, tankSource, position, direction, speed, maxDist, type)
         {
+            MaxDist = maxDist;
             ProjectileFired();
         }
 

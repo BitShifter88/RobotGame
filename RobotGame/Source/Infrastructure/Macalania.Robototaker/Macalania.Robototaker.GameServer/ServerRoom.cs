@@ -11,6 +11,7 @@ using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -169,12 +170,17 @@ namespace Macalania.Robototaker.GameServer
 
         public void AddPlayer(NetConnection connection, string playerName, string sessionId, byte tankId)
         {
+
             _playerMutex.WaitOne();
-            GamePlayer gp = new GamePlayer(connection, _server,  playerName, sessionId, this, tankId);
+            GamePlayer gp = new GamePlayer(connection, _server, playerName, sessionId, this, tankId);
+            
             Players.Add(connection.RemoteUniqueIdentifier, gp);
+            
             AddGameObjectWhileRunning(gp);
             ServerLog.E("Player added: " + sessionId, LogType.GameActivity);
+            
             _playerMutex.ReleaseMutex();
+
         }
     }
 }

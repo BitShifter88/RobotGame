@@ -21,8 +21,64 @@ namespace Macalania.Robototaker.Log
 
     public static class ServerLog
     {
+        private static int _consoleWindowHeight = 0;
+        private static int _consoleWindowStart = 0;
+        private static bool _disabled = false;
+
+        public static void DisableConsole()
+        {
+            _disabled = true;
+        }
+
+        public static void EnableConsole()
+        {
+            _disabled = false;
+        }
+
+        public static void CreateConsoleWindow(int height)
+        {
+            SetConsoleWindow(height);
+        }
+
+        private static void SetConsoleWindow(int height)
+        {
+            _consoleWindowHeight = height;
+            _consoleWindowStart = Console.CursorTop;
+            Console.SetCursorPosition(0, _consoleWindowStart + height);
+        }
+
+        public static void ClearConsoleWindow()
+        {
+            if (_disabled)
+                return;
+            int top = Console.CursorTop;
+            int left = Console.CursorLeft;
+            for (int i = _consoleWindowStart; i < _consoleWindowStart + _consoleWindowHeight; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("                                             ");
+            }
+            Console.SetCursorPosition(left, top);
+        }
+
+        public static void WriteToConsoleWindow(string text, int row)
+        {
+            if (_disabled)
+                return;
+            int top = Console.CursorTop;
+            int left = Console.CursorLeft;
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, row + _consoleWindowStart);
+            Console.WriteLine(text);
+
+            Console.SetCursorPosition(left, top);
+        }
+
         public static void E(string message, LogType type)
         {
+            if (_disabled)
+                return;
             //Console.BackgroundColor = ConsoleColor.DarkGray;
             if (type == LogType.None)
             {
@@ -62,6 +118,9 @@ namespace Macalania.Robototaker.Log
             }
 
             Console.WriteLine(DateTime.Now.ToString() + " ::\t" + message);
+
+            _consoleWindowStart = Console.CursorTop;
+            Console.SetCursorPosition(0, _consoleWindowStart + _consoleWindowHeight);
         }
     }
 }

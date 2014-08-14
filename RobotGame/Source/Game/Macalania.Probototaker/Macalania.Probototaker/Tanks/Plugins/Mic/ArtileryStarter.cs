@@ -81,7 +81,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         {
             for (int i = 0; i < _rockets.Length; i++)
             {
-                ArtileryProjectile rocket2 = new ArtileryProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
+                ArtileryProjectile rocket2 = new ArtileryProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), float.MaxValue, 0.0f);
                 Room.AddGameObjectWhileRunning(rocket2);
 
                 Vector2 org2 = new Vector2((Sprite.Texture.Width / 2) - 12 - 16 * i, Sprite.Origin.Y + 4);

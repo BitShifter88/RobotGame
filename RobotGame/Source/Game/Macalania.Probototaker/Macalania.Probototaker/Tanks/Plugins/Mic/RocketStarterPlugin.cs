@@ -88,7 +88,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         public void ReloadRocket()
         {
-            _rocket = new RocketStarterProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 0.0f);
+            _rocket = new RocketStarterProjectile(Room, Tank, new Vector2(0, 0), Tank.GetTurretBodyDirection(), 10000, 0.0f);
             Room.AddGameObjectWhileRunning(_rocket);
             if (PluginDir == PluginDirection.Right)
                 _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X-16, Sprite.Origin.Y -4);

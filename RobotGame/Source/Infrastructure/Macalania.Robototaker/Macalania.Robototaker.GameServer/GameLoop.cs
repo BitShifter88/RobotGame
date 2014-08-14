@@ -15,11 +15,12 @@ namespace Macalania.Robototaker.GameServer
         bool _stop = false;
         double _desiredUpdateTime = 1000d / 60d;
         ThreadLoadRecorder _load = new ThreadLoadRecorder();
+        public bool ShowStats { get; set; }
        
         public void StartGameLoop()
         {
             ServerLog.E("Supports High Resolution Clock: " + Stopwatch.IsHighResolution, LogType.Information);
-
+            ServerLog.E("GameLoop started!", LogType.Information);
             _loopThread = new Thread(new ThreadStart(LoopThread));
             _loopThread.Start();
         }
@@ -35,16 +36,17 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter = new Stopwatch();
                 frameCounter.Start();
+                ServerLog.CreateConsoleWindow(5);
             }
 
-            if (frameCounter.Elapsed.TotalMilliseconds >= 1000)
+            if (frameCounter.ElapsedMilliseconds >= 1000)
             {
                 frameCounter.Reset();
                 frameCounter.Start();
-                ServerLog.E("FPS: " + frames, LogType.Debug);
-                frames = 0;
 
                 SecondUpdate();
+
+                frames = 0;
             }
             
             //Thread.Sleep(10);
@@ -52,7 +54,15 @@ namespace Macalania.Robototaker.GameServer
 
         protected virtual void SecondUpdate()
         {
-            ServerLog.E("Thread load: " + string.Format("{0:N2}%", _load.GetSecondPeek()), LogType.Information);
+            if (ShowStats)
+            {
+                ServerLog.ClearConsoleWindow();
+                ServerLog.WriteToConsoleWindow("FPS: " + frames, 0);
+                ServerLog.WriteToConsoleWindow("Thread load peek sec: " + string.Format("{0:N2}%", _load.GetSecondPeek()), 1);
+                ServerLog.WriteToConsoleWindow("Thread load peek min: " + string.Format("{0:N2}%", _load.GetMinutPeek()), 2);
+                ServerLog.WriteToConsoleWindow("Thread load avg sec: " + string.Format("{0:N2}%", _load.GetAvgSec()), 3);
+                ServerLog.WriteToConsoleWindow("Thread load avg min: " + string.Format("{0:N2}%", _load.GetAvgMin()), 4);
+            }
         }
 
         public void StopGameLoop()
@@ -69,9 +79,14 @@ namespace Macalania.Robototaker.GameServer
             double frameTime = 1000d / 60d;
             elapsedTime.Start();
 
+            double dt ;
+            double timeToWait;
+            double percentUsage;
+            double extraSleepingTime;
+
             while (_stop == false)
             {
-                double dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
+                dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
                 timeAtLastUpdate = elapsedTime.Elapsed.TotalMilliseconds;
 
                 //if (dt > frameTime + 0.01f || dt < frameTime - 0.01f)
@@ -81,17 +96,17 @@ namespace Macalania.Robototaker.GameServer
 
                 Update(dt);
 
-                double timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
+                timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
                 load.Stop();
                 
-                double percentUsage = 1 - (frameTime - load.Elapsed.TotalMilliseconds) / frameTime;
+                percentUsage = 1 - (frameTime - load.Elapsed.TotalMilliseconds) / frameTime;
                 percentUsage *= 100;
                 _load.RegisterLoad(percentUsage);
                 load.Reset();
 
                 if (timeToWait > 0)
                 {
-                    double extraSleepingTime = timeToWait - (double)((int)timeToWait);
+                    extraSleepingTime = timeToWait - (double)((int)timeToWait);
               
                     //Thread.Sleep((int)timeToWait);
 

@@ -15,8 +15,8 @@ namespace Macalania.Probototaker.Projectiles
         public Vector2 OriginPosition { get; set; }
         public float FlyDistance { get; set; }
 
-        public Rocket(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, ProjectileType type)
-            : base(room, tankSource, position, direction, speed, type)
+        public Rocket(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed, float maxDist, ProjectileType type)
+            : base(room, tankSource, position, direction, speed, maxDist, type)
         {
         }
 

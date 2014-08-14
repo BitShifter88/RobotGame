@@ -28,6 +28,8 @@ namespace Macalania.Probototaker.Rooms
                 Tanks.Remove((Tank)obj);
             if (obj.GetType() == typeof(Shield))
                 Shields.Remove((Shield)obj);
+            if (obj.GetType() == typeof(Projectile))
+                Projectiles.Remove((Projectile)obj);
 
             base.RemoveGameObject(obj);
         }

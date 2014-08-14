@@ -17,8 +17,8 @@ namespace Macalania.Probototaker.Projectiles
 {
     public class ArtileryProjectile : Rocket
     {
-        public ArtileryProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float speed)
-            : base(room, tankSource, position, direction, speed, ProjectileType.ArtileryProjectile)
+        public ArtileryProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float maxDist, float speed)
+            : base(room, tankSource, position, direction, speed, maxDist, ProjectileType.ArtileryProjectile)
         {
             Imprecition = GameRandom.GetRandomFloat(0.0005f);
             if (GameRandom.GetRandoBool())
