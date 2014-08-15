@@ -27,13 +27,12 @@ namespace Macalania.Robototaker.GameServer
         NetServer _server;
         ResourceManager _content;
 
+
         public void StartGame(ResourceManager content, NetServer server)
         {
             _content = content;
             _server = server;
-
-            PreLoader.PreLoad(_content);
-
+            
             _room = new ServerRoom(_server);
             _room.Load(_content);
 
@@ -67,14 +66,36 @@ namespace Macalania.Robototaker.GameServer
                 OnAbilityActivation(inc, inc.SenderConnection);
             }
         }
-        public void OnPlayerIdentified(NetConnection connection, string username, string sessionId)
+        public void OnPlayerIdentified(NetConnection connection, string username, string sessionId, TankPackage tp)
         {
             _connectionMutex.WaitOne();
-            _room.AddPlayer(connection, username, sessionId, _gameServerTankId);
+            GamePlayer gp = _room.AddPlayer(connection, username, sessionId, _gameServerTankId, tp);
             _gameServerTankId++;
+
+            CreateOtherPlayer(gp);
+
             _connectionMutex.ReleaseMutex();
             AuthenticationResponse(connection, true);
         }
+
+        public void CreateOtherPlayer(GamePlayer player)
+        {
+
+           
+            foreach (KeyValuePair<long,GamePlayer> p in _room.Players)
+            {
+                NetOutgoingMessage message = _server.CreateMessage();
+                message.Write((byte)RobotProt.CreateOtherPlayer);
+                message.Write((byte)player.Tank.ServerSideTankId);
+                message.Write(player.Tank.Position.X);
+                message.Write(player.Tank.Position.Y);
+                message.Write(player.Tank.BodyRotation);
+                player.TankPackage.WriteToMessage(message);
+
+                p.Value.Connection.SendMessage(message, NetDeliveryMethod.ReliableUnordered, 0);
+            }
+        }
+
 
         private void AuthenticationResponse(NetConnection connection, bool success)
         {
@@ -106,54 +127,7 @@ namespace Macalania.Robototaker.GameServer
 
             _room.PlayerMovement(connection.RemoteUniqueIdentifier, commandId, broadcastCount, pm);
 
-            //int commandsIdNew = mr.ReadInt();
-            //byte count1 = mr.ReadByte();
-
-            //List<UserCommand> commandsNew = ReadCommands(mr, count1);
-
-            //int commandsIdOld = mr.ReadInt();
-            //byte count2 = mr.ReadByte();
-
-            //List<UserCommand> commands2Old = ReadCommands(mr, count2);
-
-            ////commands.AngleOfAttack = (AngleOfAttackState)mr.ReadByte();
-            ////commands.AngleOfAttackPerc = mr.ReadFloat();
-
-            ////commands.Role = (RoleState)mr.ReadByte();
-            ////commands.RolePerc = mr.ReadFloat();
-
-            ////commands.Engine = (EngineState)mr.ReadByte();
-
-            //_world.UserInput(commandsNew, commandsIdNew, commands2Old, commandsIdOld, connection);
         }
-
-        //private static List<UserCommand> ReadCommands(MessageReader mr, int count)
-        //{
-        //    List<UserCommand> commands = new List<UserCommand>();
-
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        UserCommand command = new UserCommand();
-        //        byte packed = mr.ReadByte();
-
-        //        command.AngleOfAttack = (AngleOfAttackState)BytePacker.GetFirst(packed);
-        //        command.Role = (RoleState)BytePacker.GetSecond(packed);
-        //        command.Engine = (EngineState)BytePacker.GetThird(packed);
-
-        //        if ((byte)command.AngleOfAttack != 0)
-        //        {
-        //            command.AngleOfAttackPerc = mr.ReadByte();
-        //        }
-        //        if ((byte)command.Role != 0)
-        //        {
-        //            command.RolePerc = mr.ReadByte();
-        //        }
-
-        //        commands.Add(command);
-        //    }
-
-        //    return commands;
-        //}
 
         public void Update(double dt)
         {

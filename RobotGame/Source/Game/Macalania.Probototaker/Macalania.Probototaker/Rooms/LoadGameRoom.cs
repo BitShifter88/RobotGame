@@ -49,7 +49,7 @@ namespace Macalania.Probototaker.Rooms
             _gameRoom.Load(YunaGameEngine.Instance.Services);
             _loadingDone = true;
 
-            if (_gameNetwork.Start(_gameRoom) == false)
+            if (_gameNetwork.Start(_gameRoom, _tp) == false)
             {
                 _connectionFailed = true;
                 _gameRoom.Unload();

@@ -3,6 +3,7 @@ using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Projectiles;
 using Macalania.Probototaker.Rooms;
 using Macalania.Probototaker.ServerGlobals;
+using Macalania.Probototaker.Tanks;
 using Macalania.Probototaker.Tanks.Plugins;
 using Macalania.Robototaker.Log;
 using Macalania.YunaEngine.GameLogic;
@@ -34,6 +35,7 @@ namespace Macalania.Robototaker.GameServer
             _server = server;
             Players = new Dictionary<long, GamePlayer>();
         }
+
 
         private void RemovePlayers()
         {
@@ -168,19 +170,20 @@ namespace Macalania.Robototaker.GameServer
             _playerMutex.ReleaseMutex();
         }
 
-        public void AddPlayer(NetConnection connection, string playerName, string sessionId, byte tankId)
+        public GamePlayer AddPlayer(NetConnection connection, string playerName, string sessionId, byte tankId, TankPackage tp)
         {
 
             _playerMutex.WaitOne();
-            GamePlayer gp = new GamePlayer(connection, _server, playerName, sessionId, this, tankId);
+            GamePlayer gp = new GamePlayer(connection, _server, playerName, sessionId, this, tankId, tp);
             
             Players.Add(connection.RemoteUniqueIdentifier, gp);
             
             AddGameObjectWhileRunning(gp);
             ServerLog.E("Player added: " + sessionId, LogType.GameActivity);
-            
             _playerMutex.ReleaseMutex();
 
+            return gp;
         }
+
     }
 }

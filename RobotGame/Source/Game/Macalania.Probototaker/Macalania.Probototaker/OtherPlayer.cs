@@ -24,10 +24,12 @@ namespace Macalania.Probototaker
     {
         Tank _tank;
         int _tankNumber;
+        public TankPackage TankPackage { get; set; }
 
-        public OtherPlayer(Room room, int tankNumber)
+        public OtherPlayer(Room room, int tankNumber, TankPackage tp)
             : base(room)
         {
+            TankPackage = tp;
             _tankNumber = tankNumber;
         }
         public override void Inizialize()
@@ -48,6 +50,10 @@ namespace Macalania.Probototaker
 
         public override void Load(ResourceManager content)
         {
+            if (_tankNumber == 0)
+            {
+                _tank = Tank.GetTankFromPackage(Vector2.Zero, TankPackage, content, Room);
+            }
             if (_tankNumber == 1)
                 _tank = TankGenerator.GenerateTank3(Room, content, new Vector2(800, 200));
             if (_tankNumber == 2)

@@ -38,16 +38,16 @@ namespace Macalania.Probototaker.Rooms
             Player = new Player(this, _tp);
             AddGameObject(Player);
 
-            OtherPlayer op = new OtherPlayer(this, 1);
+            OtherPlayer op = new OtherPlayer(this, 1, null);
             AddGameObject(op);
 
-            OtherPlayer op2 = new OtherPlayer(this, 2);
+            OtherPlayer op2 = new OtherPlayer(this, 2, null);
             AddGameObject(op2);
 
-            OtherPlayer op3 = new OtherPlayer(this, 3);
+            OtherPlayer op3 = new OtherPlayer(this, 3, null);
             AddGameObject(op3);
 
-            GhostPlayer = new OtherPlayer(this, 1);
+            GhostPlayer = new OtherPlayer(this, 1, null);
             AddGameObject(GhostPlayer);
 
             base.Inizialize();
@@ -62,11 +62,23 @@ namespace Macalania.Probototaker.Rooms
             
         }
 
+        public void CreateOtherPlayer(byte tankId, Vector2 position, float bodyRotation, TankPackage tp)
+        {
+            OtherPlayer op = new OtherPlayer(this, 0, tp);
+            this.AddGameObjectWhileRunning(op);
+            op.SetPosition(position);
+            op.GetTank().BodyRotation = bodyRotation;
+            op.GetTank().ServerSideTankId = tankId;
+
+            OtherPlayers.Add(tankId, op);
+        }
+
         public void OtherPlayerInfoMovement(string sessionId, Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection bodyDir, RotationDirection turretDir, float turretRotation, ushort ping, byte tankId)
         {
             if (OtherPlayers.ContainsKey(tankId) == false)
             {
-                OtherPlayer op = new OtherPlayer(this, 1);
+                Console.WriteLine("Tank created the wrong way");
+                OtherPlayer op = new OtherPlayer(this, 1, null);
                 this.AddGameObjectWhileRunning(op);
 
                 // TODO: Alt det her skal flyttes ind i other player klassen

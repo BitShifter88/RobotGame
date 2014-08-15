@@ -1,4 +1,5 @@
 ﻿using Lidgren.Network;
+using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker.Log;
 using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine.Resources;
@@ -34,7 +35,7 @@ namespace Macalania.Robototaker.GameServer
         {
             _content = new ResourceManager(null);
             _threadLoadRecorder = new ThreadLoadRecorder();
-
+            PreLoader.PreLoad(_content);
             ShowStats = true;
 
             _consoleReadThread = new Thread(new ThreadStart(ConsoleRead));
@@ -56,7 +57,7 @@ namespace Macalania.Robototaker.GameServer
                     ShowStats = false;
                     ServerLog.DisableConsole();
                 }
-                if (read == "showconsole" || read == "console")
+                if (read == "showconsole" || read == "console" || read == "startconsole")
                 {
                     ShowStats = true;
                     ServerLog.EnableConsole();
@@ -148,8 +149,9 @@ namespace Macalania.Robototaker.GameServer
                             inc.SenderConnection.Approve();
                             string username = inc.ReadString();
                             string sessionId = inc.ReadString();
+                            TankPackage tp = TankPackage.ReadTankPackage(inc);
 
-                            _instances.FirstOrDefault().Value.OnPlayerIdentified(inc.SenderConnection, username, sessionId);
+                            _instances.FirstOrDefault().Value.OnPlayerIdentified(inc.SenderConnection, username, sessionId, tp);
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:

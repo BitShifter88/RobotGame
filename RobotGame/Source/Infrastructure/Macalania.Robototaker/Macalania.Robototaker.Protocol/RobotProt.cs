@@ -14,5 +14,7 @@ namespace Macalania.Robototaker.Protocol
         OtherPlayerInfoMovement = 3,
         ProjectileInfo = 4,
         AbilityActivation = 5,
+        CreateOtherPlayer = 6,
+        FullWorldUpdate = 7,
     }
 }

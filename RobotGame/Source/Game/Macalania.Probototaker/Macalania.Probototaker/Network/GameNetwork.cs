@@ -22,11 +22,12 @@ namespace Macalania.Probototaker.Network
 
         bool _stop = false;
         public bool Authenticated { get; set; }
+        int _authenticationTimeout = 5000;
 
-        public bool Start(GameRoom gameRoom)
+        public bool Start(GameRoom gameRoom, TankPackage tp)
         {
             _gameRoom = gameRoom;
-            if (SetupServerConnection())
+            if (SetupServerConnection(tp))
             {
                 gameRoom.ReadyGameCommunication();
                 return true;
@@ -39,7 +40,7 @@ namespace Macalania.Probototaker.Network
             return _client;
         }
 
-        private bool SetupServerConnection()
+        private bool SetupServerConnection(TankPackage tp)
         {
 #if VERBOSE
             try
@@ -58,8 +59,9 @@ namespace Macalania.Probototaker.Network
             NetOutgoingMessage outmsg = _client.CreateMessage();
             outmsg.Write("steffan88");
             outmsg.Write("session12345");
+            tp.WriteToMessage(outmsg);
 
-            _client.Connect("212.10.156.150", 9999, outmsg);
+            _client.Connect("127.0.0.1", 9999, outmsg);
 
             if (WaitForAuthentication() == false)
             {
@@ -126,6 +128,10 @@ namespace Macalania.Probototaker.Network
                                 {
                                     OnProjectileInfo(mr);
                                 }
+                                else if (header == RobotProt.CreateOtherPlayer)
+                                {
+                                    OnCreateOtherPlayer(mr);
+                                }
                             }
                             break;
                     }
@@ -143,7 +149,7 @@ namespace Macalania.Probototaker.Network
             Stopwatch s = new Stopwatch();
             s.Start();
 
-            while (!authenticated && s.Elapsed.TotalMilliseconds <= 5000)
+            while (!authenticated && s.ElapsedMilliseconds <= _authenticationTimeout)
             {
                 if ((inc = _client.ReadMessage()) != null)
                 {
@@ -210,6 +216,18 @@ namespace Macalania.Probototaker.Network
             Console.WriteLine(bodyRotation);
 
             _gameRoom.OtherPlayerInfoMovement(sessionId, new Vector2(x,y), bodyRotation, bodySpeed, rotationSpeed, drivingDir, bodyDir, turretDir, turretRotation, ping, tankId);
+        }
+
+        private void OnCreateOtherPlayer(NetIncomingMessage mr)
+        {
+            byte tankId = mr.ReadByte();
+            float x = mr.ReadFloat();
+            float y = mr.ReadFloat();
+            float bodyRotation = mr.ReadFloat();
+
+            TankPackage tp = TankPackage.ReadTankPackage(mr);
+
+
         }
 
         private void OnAuthenticationResponse(NetIncomingMessage mr)

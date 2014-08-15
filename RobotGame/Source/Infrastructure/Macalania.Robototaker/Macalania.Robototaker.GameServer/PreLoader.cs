@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Macalania.Robototaker.GameServer
 {
@@ -18,14 +19,17 @@ namespace Macalania.Robototaker.GameServer
             Stopwatch s = new Stopwatch();
             s.Start();
 
-            //FindFilesInFolder("Content");
 
-            //ServerLog.E("Preloading resources...", LogType.Information);
+            string resourceFolder = Path.Combine(Application.StartupPath, "Content");
 
-            //foreach (string file in foundFiles)
-            //{
-            //    content.LoadYunaTexture(file);
-            //}
+            ServerLog.E("Preloading resources in folder: " + resourceFolder, LogType.Information);
+
+            FindFilesInFolder(resourceFolder);
+            
+            foreach (string file in foundFiles)
+            {
+                content.LoadYunaTexture(file);
+            }
             
             s.Stop();
             ServerLog.E("Resources loaded in time: " + s.Elapsed.TotalMilliseconds + "ms", LogType.Information);
@@ -45,7 +49,7 @@ namespace Macalania.Robototaker.GameServer
                 {
                     string cutfile = file.Remove(file.Length - 4);
                     cutfile = cutfile.Replace('\\', '/');
-                    cutfile = cutfile.Remove(0, 8);
+                    cutfile = cutfile.Remove(0, cutfile.IndexOf("Content") + 8);
                     foundFiles.Add(cutfile);
                 }
             }

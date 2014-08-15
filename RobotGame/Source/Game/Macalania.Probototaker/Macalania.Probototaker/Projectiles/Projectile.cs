@@ -117,8 +117,6 @@ namespace Macalania.Probototaker.Projectiles
 
         }
 
-  
-
         private void UpdatePosition(double dt)
         {
             float change = Speed * (float)dt;

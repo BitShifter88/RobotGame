@@ -18,7 +18,7 @@ namespace Macalania.Robototaker.MainFrame
 
             gsm.StartServer();
             gsm.CreateNewGameInstance();
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             GC.Collect();
             gsm.StartGameLoop();
         }

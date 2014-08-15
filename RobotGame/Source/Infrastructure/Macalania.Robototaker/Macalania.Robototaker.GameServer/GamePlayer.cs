@@ -35,13 +35,15 @@ namespace Macalania.Robototaker.GameServer
         public byte TankId { get; set; }
 
         public Tank Tank { get; set; }
+        public TankPackage TankPackage { get; set; }
 
         Mutex _playerMutex = new Mutex();
 
-        public GamePlayer(NetConnection connection, NetServer server, string playerName, string sessionId, Room room, byte tankId)
+        public GamePlayer(NetConnection connection, NetServer server, string playerName, string sessionId, Room room, byte tankId, TankPackage tp)
             : base(room)
         {
             TankId = tankId;
+            TankPackage = tp;
             Connection = connection;
             PlayerName = playerName;
             SessionId = sessionId;
@@ -74,6 +76,12 @@ namespace Macalania.Robototaker.GameServer
 
             Connection.SendMessage(m, NetDeliveryMethod.Unreliable, 0);
         }
+
+
+        /// <summary>
+        /// Sends information to the player that this player has been created
+        /// </summary>
+        /// <param name="player"></param>
 
         public void SendAbilityActivation(PluginType type, Vector2 targetPosition, Tank targetTank)
         {
@@ -194,164 +202,13 @@ namespace Macalania.Robototaker.GameServer
         {
             Stopwatch s = new Stopwatch();
             s.Start();
-            Tank t1 = new Tank(Room, new Vector2(1000, 600));
+            Tank t1 = Tank.GetTankFromPackage(new Vector2(1000, 600), TankPackage, content, Room);
 
-            
-            StarterHull sh = new StarterHull(Room);
-            sh.SetTank(t1);
-
-            sh.Load(content);
-
-            
-
-            t1.SetHull(sh);
-            
-            StarterTrack st = new StarterTrack(Room);
-            st.SetTank(t1);
-            st.Load(content);
-            t1.SetTrack(st);
-            
-            Turret t = new Turret(t1, Room);
-
-            t1.SetTurret(t);
-
-            
-
-            //StarterMainGun smg = new StarterMainGun();
-            //smg.Load(content);
-            //smg.SetTank(t1);
-            //t.AddPluginTop(smg, 1);
-
-            //MiniMainGun mg1 = new MiniMainGun();
-            //mg1.SetTank(t1);
-            //mg1.Load(content);
-            //t.AddPluginTop(mg1, 0);
-
-            //MiniMainGun mg2 = new MiniMainGun();
-            //mg2.SetTank(t1);
-            //mg2.Load(content);
-            //t.AddPluginTop(mg2, 1);
-
-            //MiniMainGun mg3 = new MiniMainGun();
-            //mg3.SetTank(t1);
-            //mg3.Load(content);
-            //t.AddPluginTop(mg3, 2);
-
-            ////SprayMainGun smgg = new SprayMainGun(t);
-            ////smgg.Load(content);
-            ////smgg.SetTank(t1);
-            ////t.AddPluginTop(smgg,0);
-
-            ////MiniMainGun mg2 = new MiniMainGun();
-            ////mg2.Load(content);
-            ////mg2.SetTank(t1);
-            ////t.AddPluginTop(mg2, 1);
-
-            ////AmorPlugin ap1 = new AmorPlugin(PluginDirection.Left);
-            ////ap1.Load(content);
-            ////ap1.SetTank(t1);
-            ////t.AddPluginLeftSide(ap1, 0);
-
-            //SunPannelPlugin spp = new SunPannelPlugin(PluginDirection.Left);
-            //spp.Load(content);
-            //spp.SetTank(t1);
-            //t.AddPluginLeftSide(spp, 0);
-
-            ////AmorPlugin ap2 = new AmorPlugin(PluginDirection.Left);
-            ////ap2.Load(content);
-            ////ap2.SetTank(t1);
-            ////t.AddPluginLeftSide(ap2, 1);
-
-            //BatteryPlugin bt = new BatteryPlugin(PluginDirection.Left);
-            //bt.Load(content);
-            //bt.SetTank(t1);
-            //t.AddPluginLeftSide(bt, 1);
-
-            ////AmorPlugin ap3 = new AmorPlugin(PluginDirection.Right);
-            ////ap3.Load(content);
-            ////ap3.SetTank(t1);
-            ////t.AddPluginRightSide(ap3, 2);
-
-            //sp = new ShieldPlugin(PluginDirection.Left);
-            //sp.Load(content);
-            //sp.SetTank(t1);
-            //t.AddPluginLeftSide(sp, 2);
-
-            ////art = new ArtileryStarter();
-            ////art.Load(content);
-            ////art.SetTank(t1);
-            ////t.AddPluginButtom(art, 0);
-
-            ////mlp = new MineLayerPlugin();
-            ////mlp.Load(content);
-            ////mlp.SetTank(t1);
-            ////t.AddPluginButtom(mlp, 0);
-
-            ////attack = new StarterAttackRocketBatteryPlugin();
-            ////attack.SetTank(t1);
-            ////attack.Load(content);
-            ////t.AddPluginRightSide(attack, 0);
-            //r = new RocketStarterPlugin(PluginDirection.Right);
-            //r.SetTank(t1);
-            //r.Load(content);
-            //t.AddPluginRightSide(r, 0);
-            
-            for (int i = 16 - 2; i < 16 + 2; i++)
-            {
-                for (int j = 16 - 1; j < 16 + 4; j++)
-                {
-                    TurretBrick tb = new TurretBrick(t1, Room);
-                    tb.SetTank(t1);
-                    tb.Load(content);
-                    t.AddTurretComponent(tb, i, j);
-                }
-            }
-            
-
-            //MiniCanon m = new MiniCanon(Room);
-            //m.Load(content);
-            //m.SetTank(t1);
-
-            //t.AddTurretModule(m, 16 - 2, 12);
-
-            //MiniCanon m2 = new MiniCanon(Room);
-            //m2.Load(content);
-            //m2.SetTank(t1);
-
-            //t.AddTurretModule(m2, 16, 12);
-
-            ////SunPannelNew s = new SunPannelNew(PluginDirection.Left);
-            ////s.Load(content);
-            ////s.SetTank(t1);
-
-            ////t.AddTurretModule(s, 12, 15);
-
-            //ArtileryStarter ar = new ArtileryStarter(Room);
-            //ar.Load(content);
-            //ar.SetTank(t1);
-
-            //t.AddTurretModule(ar, 14, 18);
-
-            //RocketStarterPlugin roc = new RocketStarterPlugin(PluginDirection.Right, Room);
-            //roc.Load(content);
-            //roc.SetTank(t1);
-
-            //t.AddTurretModule(roc, 18, 15);
-
-            //ShieldPlugin sp = new ShieldPlugin(PluginDirection.Left);
-            //sp.Load(content);
-            //sp.SetTank(t1);
-
-            //t.AddTurretModule(sp, 13, 17);
-            
             t1.ServerSideTankId = TankId;
 
             Tank = t1;
             
             Tank.ReadyTank(Room);
-            
-            t.DetermineTurretBricks();
-            
             
             Room.AddGameObjectWhileRunning(Tank);
 
