@@ -28,7 +28,7 @@ namespace Macalania.Probototaker.Map
         public int DimY { get; set; }
         public TileStyle TileStyle { get; set; }
 
-        public static int TILE_DIM = 64;
+        public static int TILE_DIM = 32;
        
 
         public GameMap(int dimx, int dimy, Room room) : base(room)

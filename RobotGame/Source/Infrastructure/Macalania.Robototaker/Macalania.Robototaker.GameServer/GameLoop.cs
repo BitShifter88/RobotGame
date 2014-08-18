@@ -36,7 +36,6 @@ namespace Macalania.Robototaker.GameServer
             {
                 frameCounter = new Stopwatch();
                 frameCounter.Start();
-                ServerLog.CreateConsoleWindow(5);
             }
 
             if (frameCounter.ElapsedMilliseconds >= 1000)
@@ -58,12 +57,11 @@ namespace Macalania.Robototaker.GameServer
             if (ShowStats)
             {
                 displayUpdate = true;
-                ServerLog.ClearConsoleWindow();
-                ServerLog.WriteToConsoleWindow("FPS: " + frames, 0);
-                ServerLog.WriteToConsoleWindow("Thread load peek sec: " + string.Format("{0:N2}%", _load.GetSecondPeek()), 1);
-                ServerLog.WriteToConsoleWindow("Thread load peek min: " + string.Format("{0:N2}%", _load.GetMinutPeek()), 2);
-                ServerLog.WriteToConsoleWindow("Thread load avg sec: " + string.Format("{0:N2}%", _load.GetAvgSec()), 3);
-                ServerLog.WriteToConsoleWindow("Thread load avg min: " + string.Format("{0:N2}%", _load.GetAvgMin()), 4);
+                ServerLog.E("FPS: " + fps, LogType.Information);
+                ServerLog.E("Thread load peek sec: " + string.Format("{0:N2}%", _load.GetSecondPeek()), LogType.Information);
+                ServerLog.E("Thread load peek min: " + string.Format("{0:N2}%", _load.GetMinutPeek()), LogType.Information);
+                ServerLog.E("Thread load avg sec: " + string.Format("{0:N2}%", _load.GetAvgSec()), LogType.Information);
+                ServerLog.E("Thread load avg min: " + string.Format("{0:N2}%", _load.GetAvgMin()), LogType.Information);
             }
         }
 
@@ -71,6 +69,8 @@ namespace Macalania.Robototaker.GameServer
         {
             _stop = true;
         }
+
+        double fps = 0;
 
         private void LoopThread()
         {
@@ -85,23 +85,37 @@ namespace Macalania.Robototaker.GameServer
             double timeToWait;
             double percentUsage;
             double extraSleepingTime;
+            double correction = 0;
+            double restCorrection = 0;
+
+            bool first = true;
+            int frames = 0;
 
             while (_stop == false)
             {
-                dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate;
+                dt = elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate + correction;
                 timeAtLastUpdate = elapsedTime.Elapsed.TotalMilliseconds;
 
-                //if (dt > frameTime + 0.01f || dt < frameTime - 0.01f)
-                //{
-                //    ServerLog.E("dt unstable", LogType.ServerOverload);
-                //}
+                correction = dt - frameTime;
+                correction += restCorrection;
+                restCorrection = 0;
 
-                Update(dt);
+                Update(frameTime);
+                frames++;
+                fps = 1000d / (elapsedTime.Elapsed.TotalMilliseconds / (double)frames);
 
                 timeToWait = _desiredUpdateTime - (elapsedTime.Elapsed.TotalMilliseconds - timeAtLastUpdate);
+                timeToWait -= correction;
+                if (timeToWait < 0)
+                {
+                    restCorrection += Math.Abs(timeToWait);
+                    correction -= Math.Abs(timeToWait);
+                    timeToWait = 0;
+                    //ServerLog.E("Doing correctionRest", LogType.Information);
+                }
+
                 load.Stop();
                 
-
                 percentUsage = 1 - (frameTime - load.Elapsed.TotalMilliseconds) / frameTime;
                 percentUsage *= 100;
                 if (displayUpdate == false)
@@ -115,9 +129,7 @@ namespace Macalania.Robototaker.GameServer
                 if (timeToWait > 0)
                 {
                     extraSleepingTime = timeToWait - (double)((int)timeToWait);
-              
-                    //Thread.Sleep((int)timeToWait);
-
+                    
                     extraTimeWatch.Start();
                     
                     // PERFORMANCE: Det er lidt skidt at vil efterspørger TotalMiliseconds. Det bruger meget CPU. Overvej at lav et system med Sleep(1)
@@ -130,8 +142,9 @@ namespace Macalania.Robototaker.GameServer
                 else
                 {
                     load.Start();
-                    ServerLog.E("Lag on the game loop!", LogType.ServerOverload);
+                    //ServerLog.E("Lag on the game loop!", LogType.ServerOverload);
                 }
+                first = false;
                 //Console.WriteLine(timeToWait);
             }
         }

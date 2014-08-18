@@ -1,5 +1,4 @@
-﻿using Macalania.Robototaker.Log;
-using Macalania.YunaEngine.Resources;
+﻿using Macalania.YunaEngine.Resources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Macalania.Robototaker.GameServer
+namespace Macalania.Robototaker
 {
     public static class PreLoader
     {
@@ -22,7 +21,7 @@ namespace Macalania.Robototaker.GameServer
 
             string resourceFolder = Path.Combine(Application.StartupPath, "Content");
 
-            ServerLog.E("Preloading resources in folder: " + resourceFolder, LogType.Information);
+            //ServerLog.E("Preloading resources in folder: " + resourceFolder, LogType.Information);
 
             FindFilesInFolder(resourceFolder);
             
@@ -32,7 +31,7 @@ namespace Macalania.Robototaker.GameServer
             }
             
             s.Stop();
-            ServerLog.E("Resources loaded in time: " + s.Elapsed.TotalMilliseconds + "ms", LogType.Information);
+           // ServerLog.E("Resources loaded in time: " + s.Elapsed.TotalMilliseconds + "ms", LogType.Information);
         }
 
         private static void FindFilesInFolder(string folder)

@@ -50,7 +50,7 @@ namespace Macalania.Robototaker.GameServer
                 targetPos = new Vector2(mr.ReadFloat(), mr.ReadFloat());
             }
 
-            _room.ActivatePlugin(type, connection.RemoteUniqueIdentifier, 0, targetPos);
+            _room.ActivatePlugin(type, connection.RemoteUniqueIdentifier, 255, targetPos);
         }
 
         public void HandleData(NetIncomingMessage inc)

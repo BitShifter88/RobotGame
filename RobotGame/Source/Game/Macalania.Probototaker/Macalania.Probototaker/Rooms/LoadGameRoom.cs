@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
+using Macalania.Robototaker;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rooms;
@@ -47,6 +48,7 @@ namespace Macalania.Probototaker.Rooms
         {
             _gameRoom.Inizialize();
             _gameRoom.Load(YunaGameEngine.Instance.Services);
+            PreLoader.PreLoad(_gameRoom.Content);
             _loadingDone = true;
 
             if (_gameNetwork.Start(_gameRoom, _tp) == false)
@@ -56,8 +58,6 @@ namespace Macalania.Probototaker.Rooms
                 return;
             }
             _connectingDone = true;
-
-            
         }
 
         public override void Update(double dt)

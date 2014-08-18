@@ -24,7 +24,7 @@ namespace Macalania.Probototaker.Map
             JungleTile tile = (JungleTile)tileType;
 
             if (tile == JungleTile.Grass)
-                return new Rectangle(64 * 2, 64 * 2, 64, 64);
+                return new Rectangle(32 * 2, 32 * 2, 32, 32);
 
             throw new Exception("No tile found");
         }

@@ -97,7 +97,7 @@ namespace Macalania.Probototaker
                 _gameRoom.GameCommunication.SendAbilityActivation(PluginType.ArtileryStart, null, new Vector2(MouseInput.X, MouseInput.Y));
             if (KeyboardInput.IsKeyClicked(Keys.NumPad3))
             {
-                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.StarterAttackRocket, null, Vector2.Zero);
+                _gameRoom.GameCommunication.SendAbilityActivation(PluginType.RocketStarter, null, Vector2.Zero);
                 //_tank.ActivatePlugin(PluginType.RocketStarter, Vector2.Zero, null);
             }
             //if (KeyboardInput.IsKeyClicked(Keys.NumPad4))

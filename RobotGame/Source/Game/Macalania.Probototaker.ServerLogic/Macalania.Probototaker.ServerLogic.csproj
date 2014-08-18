@@ -144,6 +144,7 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="PreLoader.cs" />
     <Compile Include="Projectiles\ArtileryProjectile.cs">
       <SubType>
       </SubType>

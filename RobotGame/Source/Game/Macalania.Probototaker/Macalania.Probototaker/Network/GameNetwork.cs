@@ -160,20 +160,19 @@ namespace Macalania.Probototaker.Network
             float y = mr.ReadFloat();
             ushort seed = mr.ReadUInt16();
 
+            Tank tt = null;
+            if (_gameRoom.OtherPlayers.ContainsKey(targetTank))
+                tt = _gameRoom.OtherPlayers[targetTank].GetTank();
+            if (_gameRoom.Player.GetTank().ServerSideTankId == targetTank)
+                tt = _gameRoom.Player.GetTank();
 
             // TODO: UNDTAGELSE: Hvad nu hvis en tank ikke findes?
-            // TODO: Når der ikke er nogen "targeTank" er targetTank id'en 0.
             if (_gameRoom.Player.GetTank().ServerSideTankId == tankId)
             {
-                _gameRoom.Player.GetTank().ActivatePlugin(type, new Vector2(x, y), _gameRoom.OtherPlayers[targetTank].GetTank(), new Random(seed));
+                _gameRoom.Player.GetTank().ActivatePlugin(type, new Vector2(x, y), tt, new Random(seed));
             }
             else
             {
-                Tank tt = null;
-                if (_gameRoom.OtherPlayers.ContainsKey(targetTank))
-                    tt = _gameRoom.OtherPlayers[targetTank].GetTank();
-                if (_gameRoom.Player.GetTank().ServerSideTankId == targetTank)
-                    tt = _gameRoom.Player.GetTank();
                 _gameRoom.OtherPlayers[tankId].GetTank().ActivatePlugin(type, new Vector2(x, y), tt, new Random(seed));
             }
         }
