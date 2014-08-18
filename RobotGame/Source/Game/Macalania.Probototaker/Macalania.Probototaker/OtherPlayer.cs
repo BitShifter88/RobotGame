@@ -70,8 +70,6 @@ namespace Macalania.Probototaker
 
         public void PlayerInfoMovement(Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, RotationDirection turretDir, float turretRotation, ushort otherClientPing, int playerPing)
         {
-            
-            
             _tank.DrivingDir = drivingDir;
             _tank.BodyDir = rotationDir;
             _tank.TurretDir = turretDir;
@@ -89,8 +87,6 @@ namespace Macalania.Probototaker
                 _tank.UpdateServerEstimation(1000d / 60d);
             }
             
-
-            
             //SetPosition(position);
             //_tank.BodyRotation = bodyDirection;
         }
@@ -107,7 +103,6 @@ namespace Macalania.Probototaker
             while (_tank == null)
                 Thread.Sleep(1);
 
-            
             mainPlayer.GetTank().TurnTimeForwardForOldPositionAndBodyRotation(ref position, ref bodyRotation, (float)latency * 2);
 
             //Console.WriteLine("R: " + (bodyRotation - mainPlayer.GetTank().BodyRotation).ToString());
