@@ -65,45 +65,105 @@ namespace Macalania.Robototaker.GameServer
             {
                 OnAbilityActivation(inc, inc.SenderConnection);
             }
+            if (header == RobotProt.RequestFullWorldUpdate)
+            {
+                OnRequestFullWorldUpdate(inc);
+            }
         }
+
+        public void OnRequestFullWorldUpdate(NetIncomingMessage inc)
+        {
+            SendWorldUpdate(_room.Players[inc.SenderConnection.RemoteUniqueIdentifier]);
+        }
+
         public void OnPlayerIdentified(NetConnection connection, string username, string sessionId, TankPackage tp)
         {
             _connectionMutex.WaitOne();
             GamePlayer gp = _room.AddPlayer(connection, username, sessionId, _gameServerTankId, tp);
             _gameServerTankId++;
 
+            
             CreateOtherPlayer(gp);
+            
 
             _connectionMutex.ReleaseMutex();
-            AuthenticationResponse(connection, true);
+            
+            //AuthenticationResponse(connection, true);
         }
 
+        public void SendWorldUpdate(GamePlayer player)
+        {
+            NetOutgoingMessage message = _server.CreateMessage();
+            message.Write((byte)RobotProt.FullWorldUpdate);
+
+            WriteWorldUpdate(message, player.Connection);
+
+            player.Connection.SendMessage(message, NetDeliveryMethod.ReliableUnordered, 0);
+        }
+
+        private void WriteWorldUpdate(NetOutgoingMessage m, NetConnection connection)
+        {
+            m.Write(_room.Players[connection.RemoteUniqueIdentifier].TankId);
+            m.Write((byte)(_room.Players.Count - 1));
+
+            foreach (KeyValuePair<long, GamePlayer> p in _room.Players)
+            {
+                if (p.Key == connection.RemoteUniqueIdentifier)
+                    continue;
+                WritePlayerInfo(p.Value, m);
+            }
+        }
+
+        /// <summary>
+        /// Sends a message to all other players that player has joined the game
+        /// </summary>
+        /// <param name="player"></param>
         public void CreateOtherPlayer(GamePlayer player)
         {
-
-           
             foreach (KeyValuePair<long,GamePlayer> p in _room.Players)
             {
+                if (player.Connection.RemoteUniqueIdentifier == p.Key)
+                    continue;
+
                 NetOutgoingMessage message = _server.CreateMessage();
                 message.Write((byte)RobotProt.CreateOtherPlayer);
-                message.Write((byte)player.Tank.ServerSideTankId);
-                message.Write(player.Tank.Position.X);
-                message.Write(player.Tank.Position.Y);
-                message.Write(player.Tank.BodyRotation);
-                player.TankPackage.WriteToMessage(message);
+                WritePlayerInfo(player, message);
 
                 p.Value.Connection.SendMessage(message, NetDeliveryMethod.ReliableUnordered, 0);
             }
         }
 
-
-        private void AuthenticationResponse(NetConnection connection, bool success)
+        private static void WritePlayerInfo(GamePlayer player, NetOutgoingMessage message)
         {
-            NetOutgoingMessage m = _server.CreateMessage();
-            m.Write((byte)RobotProt.PlayerIdentification);
-            m.Write(success);
-            connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
+            message.Write(player.Tank.ServerSideTankId);
+            message.Write(player.Tank.Position.X);
+            message.Write(player.Tank.Position.Y);
+            message.Write(player.Tank.BodyRotation);
+
+            message.Write(player.Tank.CurrentSpeed);
+            message.Write(player.Tank.CurrentRotationSpeed);
+
+            byte packed = BytePacker.Pack((byte)player.Tank.DrivingDir, (byte)player.Tank.BodyDir, (byte)player.Tank.TurretDir, 0);
+            message.Write(packed);
+
+            message.Write(player.Tank.TurretRotation);
+
+            message.Write((ushort)(player.Connection.AverageRoundtripTime * 1000f / 2f));
+
+
+            player.TankPackage.WriteToMessage(message);
         }
+
+
+        //public NetOutgoingMessage GetAuthenticationResponse(NetConnection connection, bool success)
+        //{
+        //    NetOutgoingMessage m = _server.CreateMessage();
+        //    m.Write(success);
+        //    if (success)
+        //        WriteWorldUpdate(m, connection);
+
+        //    return m;
+        //}
 
         private void UserInput(NetIncomingMessage mr, NetConnection connection)
         {

@@ -28,6 +28,7 @@ namespace Macalania.Robototaker.GameServer
         double _oneSecUpdate = 0;
         Mutex _playerMutex = new Mutex();
         private NetServer _server;
+        Random _random = new Random();
 
 
         public ServerRoom(NetServer server)
@@ -51,9 +52,10 @@ namespace Macalania.Robototaker.GameServer
 
         public void ActivatePlugin(PluginType type, long connectionId, byte tankTargetId, Vector2 targetPosition)
         {
-            if (Players[connectionId].Tank.ActivatePlugin(type, targetPosition, null))
+            ushort seed = (ushort)_random.Next(0, ushort.MaxValue-1);
+            if (Players[connectionId].Tank.ActivatePlugin(type, targetPosition, null, new Random(seed)))
             {
-
+                PlayerCommunication.BroadcastAbilityActivationToPlayers(_server, Players[connectionId], Players.Values.ToList(), type, tankTargetId, targetPosition, seed);
             }
         }
 

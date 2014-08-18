@@ -17,6 +17,8 @@ SMÅ TING
 Listen af projectiles i Simulation klassen skal tømmes når et givet projectile bliver slettet
 * Ivers bag
 
+Der bliver sendt alt for mange bevægelses pakker når turreted kun bevæger sig en lille smugle. MEget vigitgt
+
 BUGS
 ====================
 

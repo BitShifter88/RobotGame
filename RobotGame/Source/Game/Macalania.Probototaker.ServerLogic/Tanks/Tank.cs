@@ -398,7 +398,7 @@ namespace Macalania.Probototaker.Tanks
                 float beforeSpeed = currentSpeed;
                 if (currentSpeed > 0)
                     currentSpeed -= Acceleration * 2 * (float)dt;
-                else if (CurrentSpeed < 0)
+                else if (currentSpeed < 0)
                     currentSpeed += Acceleration * 2 * (float)dt;
 
                 if ((beforeSpeed > 0 && currentSpeed < 0) || (beforeSpeed < 0 && currentSpeed > 0))
@@ -463,6 +463,7 @@ namespace Macalania.Probototaker.Tanks
         }
         private void SmoothOtherClient(double dt)
         {
+            
             if (Vector2.Distance(EstimatedClientPosition, Position) > 0.1f && CurrentSpeed > MaxSpeed / 10f)
             {
                 //Vector2 smooti = new Vector2((Position.X - EstimatedClientPosition.X) * 0.01f, (Position.Y - EstimatedClientPosition.Y) * 0.01f);
@@ -618,7 +619,7 @@ namespace Macalania.Probototaker.Tanks
                 CurrentPower = GetMaxPower();
         }
 
-        public bool ActivatePlugin(PluginType type, Vector2 targetPosition, Tank targetTank)
+        public bool ActivatePlugin(PluginType type, Vector2 targetPosition, Tank targetTank, Random activationRandom)
         {
             List<TurretModule> pluginsOfType = new List<TurretModule>();
 
@@ -630,7 +631,7 @@ namespace Macalania.Probototaker.Tanks
 
             foreach (TurretModule p in pluginsOfType)
             {
-                if (p.Activate(targetPosition, targetTank) == false)
+                if (p.Activate(targetPosition, targetTank, activationRandom) == false)
                     continue;
                 else
                     return true;

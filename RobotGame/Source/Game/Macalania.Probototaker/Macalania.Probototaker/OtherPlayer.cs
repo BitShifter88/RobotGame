@@ -53,6 +53,8 @@ namespace Macalania.Probototaker
             if (_tankNumber == 0)
             {
                 _tank = Tank.GetTankFromPackage(Vector2.Zero, TankPackage, content, Room);
+                _tank.ReadyTank(Room);
+               
             }
             if (_tankNumber == 1)
                 _tank = TankGenerator.GenerateTank3(Room, content, new Vector2(800, 200));
@@ -68,8 +70,8 @@ namespace Macalania.Probototaker
 
         public void PlayerInfoMovement(Vector2 position, float bodyRotation, float bodySpeed, float rotationSpeed, DrivingDirection drivingDir, RotationDirection rotationDir, RotationDirection turretDir, float turretRotation, ushort otherClientPing, int playerPing)
         {
-           // Console.WriteLine(drivingDir);
-
+            
+            
             _tank.DrivingDir = drivingDir;
             _tank.BodyDir = rotationDir;
             _tank.TurretDir = turretDir;
@@ -86,7 +88,9 @@ namespace Macalania.Probototaker
             {
                 _tank.UpdateServerEstimation(1000d / 60d);
             }
-            Console.WriteLine(_tank.Position.ToString());
+            
+
+            
             //SetPosition(position);
             //_tank.BodyRotation = bodyDirection;
         }
@@ -106,9 +110,9 @@ namespace Macalania.Probototaker
             
             mainPlayer.GetTank().TurnTimeForwardForOldPositionAndBodyRotation(ref position, ref bodyRotation, (float)latency * 2);
 
-            Console.WriteLine("R: " + (bodyRotation - mainPlayer.GetTank().BodyRotation).ToString());
+            //Console.WriteLine("R: " + (bodyRotation - mainPlayer.GetTank().BodyRotation).ToString());
 
-            Console.WriteLine(Vector2.Distance(position, mainPlayer.GetTank().Position));
+            //Console.WriteLine(Vector2.Distance(position, mainPlayer.GetTank().Position));
 
             _tank.SetPosition(position);
             _tank.BodyRotation = bodyRotation;

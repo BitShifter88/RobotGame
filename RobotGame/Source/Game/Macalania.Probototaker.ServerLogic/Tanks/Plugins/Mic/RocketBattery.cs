@@ -45,10 +45,10 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             if (_fireringRockets && _currentFire <= 0)
             {
                 // Find the next rocket to fire
-                int rocketToFire = GameRandom.GetRandomInt(0, _rockets.Length - 1);
+                int rocketToFire = GameRandom.GetRandomInt(0, _rockets.Length - 1, _activationRandom);
                 while (_rockets[rocketToFire] == null)
                 {
-                    rocketToFire = GameRandom.GetRandomInt(0, _rockets.Length - 1);
+                    rocketToFire = GameRandom.GetRandomInt(0, _rockets.Length - 1, _activationRandom);
                 }
 
                 FireRocket(rocketToFire);
@@ -68,9 +68,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
 
         }
 
-        public override bool Activate(Vector2 point, Tank target)
+        public override bool Activate(Vector2 point, Tank target, Random activationRandom)
         {
-            if (base.Activate(point, target))
+            if (base.Activate(point, target, activationRandom))
             {
                 _targetPosition = point;
                 _targetTank = target;

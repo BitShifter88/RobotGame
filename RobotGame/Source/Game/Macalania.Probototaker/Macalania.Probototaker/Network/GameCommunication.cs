@@ -51,6 +51,13 @@ namespace Macalania.Probototaker.Network
             _sendThread.Start();
         }
 
+        public void RequestFullWorldUpdate()
+        {
+            NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
+            message.Write((byte)RobotProt.RequestFullWorldUpdate);
+            _gn.GetClientUdp().SendMessage(message, NetDeliveryMethod.ReliableUnordered);
+        }
+
         private void SendPlayerMovement(PlayerMovement pm)
         {
             NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
@@ -71,7 +78,7 @@ namespace Macalania.Probototaker.Network
             message.Write((byte)_countBroadcast);
 
             _gn.GetClientUdp().SendMessage(message, NetDeliveryMethod.Unreliable, 0);
-            Console.WriteLine("Broadcast. broadcastCount: " + _countBroadcast + "    Command counter: " + _commandCounter);
+            //Console.WriteLine("Broadcast. broadcastCount: " + _countBroadcast + "    Command counter: " + _commandCounter);
             _countBroadcast++;
             _broadcastIntervalCounter = _broadcastInterval;
         }

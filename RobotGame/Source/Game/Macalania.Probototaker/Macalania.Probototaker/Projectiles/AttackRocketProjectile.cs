@@ -21,9 +21,7 @@ namespace Macalania.Probototaker.Projectiles
             : base(room, tankSource, position, direction, speed, 10000, ProjectileType.AttackRocketProjectile)
         {
             Damage = new Damage() { AmorPenetration = 1, ComponentDamage = 20, TankDamage = 30 };
-            Imprecition = GameRandom.GetRandomFloat(0.00015f);
-            if (GameRandom.GetRandoBool())
-                Imprecition = -Imprecition;
+
         }
 
         public override void Explode()
@@ -34,8 +32,13 @@ namespace Macalania.Probototaker.Projectiles
             //YunaGameEngine.Instance.GetActiveRoom().AddGameObjectWhileRunning(e);
         }
 
-       
-
+        public override void Ignite(Vector2 originPosition, float flyDistance, Random random)
+        {
+            Imprecition = GameRandom.GetRandomFloat(0.00015f, random);
+            if (GameRandom.GetRandoBool(random))
+                Imprecition = -Imprecition;
+            base.Ignite(originPosition, flyDistance, random);
+        }
         public override void Update(double dt)
         {
             if (Fired)

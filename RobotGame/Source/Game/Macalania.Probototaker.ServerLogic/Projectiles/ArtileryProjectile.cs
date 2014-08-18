@@ -20,9 +20,15 @@ namespace Macalania.Probototaker.Projectiles
         public ArtileryProjectile(Room room, Tank tankSource, Vector2 position, Vector2 direction, float maxDist, float speed)
             : base(room, tankSource, position, direction, speed, maxDist, ProjectileType.ArtileryProjectile)
         {
-            Imprecition = GameRandom.GetRandomFloat(0.0005f);
-            if (GameRandom.GetRandoBool())
+
+        }
+
+        public override void Ignite(Vector2 originPosition, float flyDistance, Random random)
+        {
+            Imprecition = GameRandom.GetRandomFloat(0.0005f, random);
+            if (GameRandom.GetRandoBool(random))
                 Imprecition = -Imprecition;
+            base.Ignite(originPosition, flyDistance, random);
         }
 
         public override void Explode()

@@ -16,5 +16,7 @@ namespace Macalania.Robototaker.Protocol
         AbilityActivation = 5,
         CreateOtherPlayer = 6,
         FullWorldUpdate = 7,
+        RequestFullWorldUpdate = 8,
+        PlayerUsesAbility = 9
     }
 }

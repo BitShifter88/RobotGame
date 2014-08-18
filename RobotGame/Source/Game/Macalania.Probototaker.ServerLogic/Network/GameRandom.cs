@@ -7,21 +7,19 @@ namespace Macalania.Probototaker.Network
 {
     class GameRandom
     {
-        static Random _random = new Random();
-
-        public static float GetRandomFloat(float scale)
+        public static float GetRandomFloat(float scale, Random random)
         {
-            return (float)_random.NextDouble() * scale;
+            return (float)random.NextDouble() * scale;
         }
 
-        public static int GetRandomInt(int min, int max)
+        public static int GetRandomInt(int min, int max, Random random)
         {
-            return _random.Next(min, max+1);
+            return random.Next(min, max+1);
         }
 
-        public static bool GetRandoBool()
+        public static bool GetRandoBool(Random random)
         {
-            int rnd = GetRandomInt(0, 1);
+            int rnd = GetRandomInt(0, 1, random);
             if (rnd == 0)
                 return false;
             else return true;

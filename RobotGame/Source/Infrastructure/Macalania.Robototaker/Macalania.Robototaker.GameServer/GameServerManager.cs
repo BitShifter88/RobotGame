@@ -141,7 +141,6 @@ namespace Macalania.Robototaker.GameServer
             NetIncomingMessage inc;
             if ((inc = Server.ReadMessage()) != null)
             {
-                // Theres few different types of messages. To simplify this process, i left only 2 of em here
                 switch (inc.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:

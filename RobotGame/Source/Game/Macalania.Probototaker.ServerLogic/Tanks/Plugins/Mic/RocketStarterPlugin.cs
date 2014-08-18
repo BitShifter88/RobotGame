@@ -96,13 +96,13 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
                 _rocket.Sprite.Origin = new Vector2(Sprite.Origin.X -8, Sprite.Origin.Y - 4);
         }
 
-        public override bool Activate(Vector2 point, Tank target)
+        public override bool Activate(Vector2 point, Tank target, Random activationRandom)
         {
-            bool success = base.Activate(point, target);
+            bool success = base.Activate(point, target, activationRandom);
 
             if (success)
             {
-                _rocket.Ignite(Tank.Position, 1300);
+                _rocket.Ignite(Tank.Position, 1300, activationRandom);
                 _rocket.Sprite.SetOriginCenter();
                 _rocket.Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
                 Vector2 p = Vector2.Zero;

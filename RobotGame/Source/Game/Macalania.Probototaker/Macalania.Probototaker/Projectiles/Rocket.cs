@@ -40,7 +40,7 @@ namespace Macalania.Probototaker.Projectiles
             DestroyGameObject();
         }
 
-        public void Ignite(Vector2 originPosition, float flyDistance)
+        public virtual void Ignite(Vector2 originPosition, float flyDistance, Random random)
         {
             OriginPosition = originPosition;
             FlyDistance = flyDistance;

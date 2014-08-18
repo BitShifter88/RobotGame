@@ -61,7 +61,7 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
         }
         protected override void FireRocket(int index)
         {
-            _rockets[index].Ignite(Tank.Position, Vector2.Distance(Tank.Position, _targetPosition) + GameRandom.GetRandomInt(-200, 200));
+            _rockets[index].Ignite(Tank.Position, Vector2.Distance(Tank.Position, _targetPosition) + GameRandom.GetRandomInt(-200, 200, _activationRandom), _activationRandom);
             _rockets[index].Sprite.SetOriginCenter();
             _rockets[index].Sprite.Rotation = Tank.GetTurrentBodyRotation() + MathHelper.ToRadians(180);
             Vector2 p = new Vector2(-((Sprite.Texture.Width / 2) - 12 - 4 - 16 * index), -Sprite.Origin.Y + _rockets[index].Sprite.Texture.Height/2);
@@ -71,11 +71,11 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             _rockets[index].Direction = -Tank.GetTurretBodyDirection();
             _rockets[index] = null;
         }
-        public override bool Activate(Vector2 point, Tank target)
+        public override bool Activate(Vector2 point, Tank target, Random activationRandom)
         {
             if (Tank.IsStandingStill() == false)
                 return false;
-            return base.Activate(point, target);
+            return base.Activate(point, target, activationRandom);
         }
         protected override void ReloadRockets()
         {

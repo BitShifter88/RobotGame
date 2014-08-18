@@ -36,9 +36,9 @@ namespace Macalania.Probototaker.Tanks.Plugins.Mic
             base.Load(content);
         }
 
-        public override bool Activate(Vector2 point, Tank target)
+        public override bool Activate(Vector2 point, Tank target, Random activationRandom)
         {
-            bool success = base.Activate(point, target);
+            bool success = base.Activate(point, target, activationRandom);
 
             if (success)
             {

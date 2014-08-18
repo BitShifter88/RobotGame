@@ -44,6 +44,7 @@ namespace Macalania.Probototaker.Projectiles
         private int _smoothCount = 0;
         private double _smoothTimeRate = 50d;
         public float MaxDist { get; set; }
+        public float DistanceTraveled { get; set; }
 
         public override void Update(double dt)
         {
@@ -116,12 +117,17 @@ namespace Macalania.Probototaker.Projectiles
 
         }
 
-  
-
         private void UpdatePosition(double dt)
         {
-            SetPosition(Position+ Direction * Speed * (float)dt);
+            float change = Speed * (float)dt;
+            DistanceTraveled += change;
+            SetPosition(Position+ Direction*change);
             Sprite.Position = Position;
+
+            if (DistanceTraveled >= MaxDist)
+            {
+                DestroyGameObject();
+            }
         }
 
         public virtual void OnCollisionWithTank(Tank tank, TankComponent component)

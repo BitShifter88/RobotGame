@@ -37,6 +37,8 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public List<PluginDirection> PossibleDirections { get; set; }
 
+        protected Random _activationRandom;
+
 
         public TurretModule(PluginType type, Room room) : base(room)
         {
@@ -142,8 +144,9 @@ namespace Macalania.Probototaker.Tanks.Turrets
             return false;
         }
 
-        public virtual bool Activate(Vector2 point, Tank target)
+        public virtual bool Activate(Vector2 point, Tank target, Random random)
         {
+            _activationRandom = random;
             if (IsActivationValid())
             {
                 Tank.UsePower(PowerUsage);

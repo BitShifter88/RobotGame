@@ -73,5 +73,4 @@ Content\Textures\Tanks\Styles\Classic\classicSides.png
 Content\Textures\Tanks\Turrets\turretBigNew.png
 Content\Textures\Tanks\Misc\rocketStarterLeft.png
 Content\Textures\Garage\blockBrick.png
-Content\Textures\Tiles\jungle.png
 Content\Textures\Projectiles\shell.png
