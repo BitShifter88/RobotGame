@@ -54,7 +54,6 @@ namespace Macalania.Probototaker
             {
                 _tank = Tank.GetTankFromPackage(Vector2.Zero, TankPackage, content, Room);
                 _tank.ReadyTank(Room);
-               
             }
             if (_tankNumber == 1)
                 _tank = TankGenerator.GenerateTank3(Room, content, new Vector2(800, 200));
