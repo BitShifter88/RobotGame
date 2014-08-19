@@ -19,4 +19,9 @@ namespace Macalania.Robototaker.Protocol
         RequestFullWorldUpdate = 8,
         PlayerUsesAbility = 9
     }
+    public enum MainFrameProt : byte
+    {
+       CreatePlayer = 0,
+
+    }
 }

@@ -1,6 +1,6 @@
-﻿
-using Macalania.Robototaker.GameServer;
+﻿using Macalania.Robototaker.GameServer;
 using Macalania.Robototaker.MainFrame.Data.Mapping;
+using Macalania.Robototaker.MainFrame.Network.GameMainFrame;
 using Macalania.Robototaker.MainFrame.Services;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -16,6 +16,9 @@ namespace Macalania.Robototaker.MainFrame
     {
         static void Main(string[] args)
         {
+            GServer gserver = new GServer();
+            gserver.Start(9998);
+
             CreateDatabase();
             AccountService a = new AccountService();
             a.CreateAccount("steffan888");
@@ -23,7 +26,7 @@ namespace Macalania.Robototaker.MainFrame
 
         static void CreateDatabase()
         {
-            var cfg = new Configuration();
+                var cfg = new Configuration();
             cfg.Configure();
             cfg.AddAssembly(typeof(Account).Assembly);
 
