@@ -27,12 +27,12 @@ namespace Macalania.Robototaker.Protocol
 
             if (WaitForAuthentication() == false)
             {
-                Console.WriteLine("Could not connect to server!");
+                Console.WriteLine("Could not connect to Main Frame!");
                 return false;
             }
             else
             {
-                Console.WriteLine("Connected to server!");
+                Console.WriteLine("Connected to Main Frame!");
                 //_messageThread = new Thread(new ThreadStart(ReadMessages));
                 //_messageThread.Start();
             }
