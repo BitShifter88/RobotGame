@@ -55,7 +55,6 @@ namespace Macalania.YunaEngine
                 room.Inizialize();
                 room.Load(services);
             }
-
         }
 
         public Room GetActiveRoom()
@@ -67,7 +66,6 @@ namespace Macalania.YunaEngine
         {
             return Services;
         }
-
 
         protected override void Initialize()
         {

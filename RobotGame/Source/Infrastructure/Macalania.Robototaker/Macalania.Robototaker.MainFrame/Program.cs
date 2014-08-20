@@ -19,14 +19,17 @@ namespace Macalania.Robototaker.MainFrame
             GServer gserver = new GServer();
             gserver.Start(9998);
 
-            CreateDatabase();
-            AccountService a = new AccountService();
-            a.CreateAccount("steffan888");
+
+            //CreateDatabase();
+
+            Console.ReadLine();
+            gserver.Stop();
+
         }
 
         static void CreateDatabase()
         {
-                var cfg = new Configuration();
+            var cfg = new Configuration();
             cfg.Configure();
             cfg.AddAssembly(typeof(Account).Assembly);
 

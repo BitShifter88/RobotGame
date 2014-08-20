@@ -37,8 +37,6 @@ namespace Macalania.YunaEngine.Resources
         {
             _contentManagerMutex.WaitOne();
 
-
-
             bool[,] transMap = null;
 
             int dimx = -1;
@@ -53,7 +51,6 @@ namespace Macalania.YunaEngine.Resources
                 string path = ServerTextureFolder + asset + ".png.col";
                 path = path.Replace('\\', Path.DirectorySeparatorChar);
                 path = path.Replace('/', Path.DirectorySeparatorChar);
-
 
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open)))
                 {

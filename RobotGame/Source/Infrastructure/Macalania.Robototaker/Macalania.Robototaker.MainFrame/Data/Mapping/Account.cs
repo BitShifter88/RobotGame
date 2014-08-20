@@ -9,5 +9,8 @@ namespace Macalania.Robototaker.MainFrame.Data.Mapping
     {
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
+        public virtual string PasswordSalt { get; set; }
+        public virtual string PasswordHash { get; set; }
+        public virtual string IngameName { get; set; }
     }
 }

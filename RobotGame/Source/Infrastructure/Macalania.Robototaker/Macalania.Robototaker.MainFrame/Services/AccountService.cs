@@ -9,11 +9,31 @@ namespace Macalania.Robototaker.MainFrame.Services
 {
     class AccountService
     {
-        public void CreateAccount(string username)
+        AccountRepository _ar;
+
+        public AccountService()
         {
-            AccountRepository ar = new AccountRepository();
-            Account ac = new Account() { Username = username };
-            ar.Add(ac);
+            _ar = new AccountRepository();
+        }
+
+        public bool CreateAccount(string username, string inGameName, string password)
+        {
+            Account ac = new Account() { Username = username, IngameName = inGameName };
+
+            ac.PasswordSalt = Hash.CreateSalt();
+            ac.PasswordHash = Hash.CreatePasswordHash(password, ac.PasswordSalt);
+
+            if (DoesAccountExist(username) == false)
+                _ar.Add(ac);
+            else return false;
+            return true;
+        }
+
+        public bool DoesAccountExist(string username)
+        {
+            if (_ar.GetAccount(username) == null)
+                return false;
+            else return true;
         }
     }
 }

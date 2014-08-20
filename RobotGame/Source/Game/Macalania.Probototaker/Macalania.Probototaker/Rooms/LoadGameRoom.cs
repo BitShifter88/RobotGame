@@ -3,7 +3,9 @@ using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace Macalania.Probototaker.Rooms
         Thread _loadThread;
 
         Animation _loadingAnimation;
-        Sprite background;
+        Sprite _background;
 
         GameRoom _gameRoom;
         GameNetwork _gameNetwork;
@@ -34,14 +36,16 @@ namespace Macalania.Probototaker.Rooms
 
         public override void Load(IServiceProvider serviceProvider)
         {
+            base.Load(serviceProvider);
+
+            _background = new Sprite(Content.LoadYunaTexture("Textures/Misc/loading"));
+
             _gameNetwork = new GameNetwork();
             _gameRoom = new GameRoom(_gameNetwork, _tp);
 
             _loadThread = new Thread(LoadGameRoomThread);
             _loadThread.Priority = ThreadPriority.BelowNormal;
             _loadThread.Start();
-
-            base.Load(serviceProvider);
         }
 
         private void LoadGameRoomThread()
@@ -73,9 +77,9 @@ namespace Macalania.Probototaker.Rooms
             base.Update(dt);
         }
 
-        public override void Draw(YunaEngine.Rendering.IRender render)
+        protected override void DrawOther(IRender render, Camera camera)
         {
-            base.Draw(render);
+            render.Draw(_background.Texture, new Rectangle(0,0,Globals.Viewport.Width, Globals.Viewport.Height), Color.White);
         }
     }
 }

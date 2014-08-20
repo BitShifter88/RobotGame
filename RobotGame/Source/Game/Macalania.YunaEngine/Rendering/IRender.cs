@@ -12,7 +12,7 @@ namespace Macalania.YunaEngine.Rendering
     public interface IRender
     {
         void Begin(Camera camera);
-        void Draw(YunaTexture texture, Vector2 position, Vector2 origin, Color color);
+        void Draw(YunaTexture texture, Rectangle destination, Color color);
         void Draw(YunaTexture texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer);
         void End();
     }

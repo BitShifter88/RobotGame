@@ -1,5 +1,6 @@
 ﻿using Macalania.Probototaker.GarageLogic;
 using Macalania.Probototaker.Tanks;
+using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Input;
@@ -17,6 +18,7 @@ namespace Macalania.Probototaker.Rooms
     class Garage : Room
     {
         TankEditor _editor;
+        MainFrameConnection _connection;
 
         public override void Load(IServiceProvider serviceProvider)
         {
@@ -29,6 +31,9 @@ namespace Macalania.Probototaker.Rooms
             _editor.SetTank(tank);
 
             AddGameObject(_editor);
+
+            _connection = new MainFrameConnection();
+            _connection.Connect();
         }
 
         public override void Update(double dt)
@@ -44,9 +49,5 @@ namespace Macalania.Probototaker.Rooms
             base.Update(dt);
         }
 
-        public override void Draw(IRender render)
-        {
-            base.Draw(render);
-        }
     }
 }

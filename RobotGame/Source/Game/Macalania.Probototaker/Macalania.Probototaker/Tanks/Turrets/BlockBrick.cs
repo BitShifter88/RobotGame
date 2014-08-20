@@ -39,9 +39,6 @@ namespace Macalania.Probototaker.Tanks.Turrets
 
         public override void Draw(YunaEngine.Rendering.IRender render, YunaEngine.Graphics.Camera camera)
         {
-#if DEBUG
-            render.Draw(Sprite.Texture, _tank.Position, _origin, new Color(1f, 1f, 1f, 0.1f));
-#endif
             base.Draw(render, camera);
         }
     }

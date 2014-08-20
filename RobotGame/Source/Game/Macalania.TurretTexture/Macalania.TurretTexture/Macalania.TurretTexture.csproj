@@ -83,6 +83,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\lidgren\Lidgren.Network\Lidgren.Network.csproj">
+      <Project>{49ba1c69-6104-41ac-a5d8-b54fa9f696e8}</Project>
+      <Name>Lidgren.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Macalania.TurretTextureContent\Macalania.TurretTextureContent.contentproj">
       <Name>Macalania.TurretTextureContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

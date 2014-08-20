@@ -287,7 +287,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main.xnb</Output>
-      <Time>2014-07-30T11:14:30.451158+02:00</Time>
+      <Time>2014-08-18T14:39:27.4163422+02:00</Time>
     </Item>
     <Item>
       <Source>Textures\Tanks\Styles\Classic\cornersRightBottom.png</Source>
@@ -359,10 +359,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.ProbototakerContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.ProbototakerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

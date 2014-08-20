@@ -23,14 +23,14 @@ namespace Macalania.YunaEngine.Rendering
             _batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, camera.GetMatrix());
         }
 
-        public void Draw(YunaTexture texture, Vector2 position, Vector2 origin, Color color)
-        {
-            //Draw(texture, position, new Rectangle(0, 0, texture.GetXnaTexture().Width, texture.GetXnaTexture().Height), color, 0, origin, 1, 0.5f);
-        }
-
         public void Draw(YunaTexture texture, Vector2 position, Rectangle? source, Color color, float rotation, Vector2 origin, float scale, float depthLayer)
         {
             _batch.Draw(texture.GetXnaTexture(), position, source, color, rotation, origin, scale, SpriteEffects.None, depthLayer);
+        }
+
+        public void Draw(YunaTexture texture, Rectangle destination, Color color)
+        {
+            _batch.Draw(texture.GetXnaTexture(), destination, color);
         }
 
         public void End()

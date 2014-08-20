@@ -1,6 +1,7 @@
 ﻿using Macalania.Robototaker.MainFrame.Data;
 using Macalania.Robototaker.MainFrame.Data.Mapping;
 using NHibernate;
+using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,18 @@ namespace Macalania.Robototaker.MainFrame.Repositories
             {
                 session.Save(product);
                 transaction.Commit();
+            }
+        }
+
+        public Account GetAccount(string username)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+               Account account = session.CreateCriteria(typeof(Account)).
+                                Add(Restrictions.Eq("Username", username)).
+                                UniqueResult<Account>();
+
+               return account;
             }
         }
     }

@@ -141,14 +141,20 @@ namespace Macalania.YunaEngine.Rooms
             _addingMutex.ReleaseMutex();
         }
 
-        public virtual void Draw(IRender render)
+        public void Draw(IRender render)
         {
             render.Begin(Camera);
             foreach (GameObject obj in GameObjects)
             {
                 obj.Draw(render, Camera);
             }
+            DrawOther(render, Camera);
             render.End();
+        }
+
+        protected virtual void DrawOther(IRender render, Camera camera)
+        {
+
         }
     }
 }

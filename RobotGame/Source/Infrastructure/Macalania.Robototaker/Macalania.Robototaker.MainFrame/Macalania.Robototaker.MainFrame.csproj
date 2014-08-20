@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <Private>True</Private>
     </Reference>
@@ -64,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Data\Mapping\Account.cs" />
     <Compile Include="Data\NHibernateHelper.cs" />
+    <Compile Include="Hash.cs" />
     <Compile Include="Network\GameMainFrame\GServer.cs" />
     <Compile Include="Network\ServerMainFrame\SServer.cs" />
     <Compile Include="Program.cs" />
@@ -89,6 +91,14 @@
     <ProjectReference Include="..\Macalania.Robototaker.GameServer\Macalania.Robototaker.GameServer.csproj">
       <Project>{12a96794-694c-458c-8d41-a07e1fa880df}</Project>
       <Name>Macalania.Robototaker.GameServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Macalania.Robototaker.Log\Macalania.Robototaker.Log.csproj">
+      <Project>{4b88b8af-fef4-413c-bb2c-0ab0bb53c5d8}</Project>
+      <Name>Macalania.Robototaker.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Macalania.Robototaker.Protocol\Macalania.Robototaker.Protocol.csproj">
+      <Project>{97930da9-8ce2-4bc6-a911-bae1828c0fec}</Project>
+      <Name>Macalania.Robototaker.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

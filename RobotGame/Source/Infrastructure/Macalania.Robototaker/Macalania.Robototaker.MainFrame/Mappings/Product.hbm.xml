@@ -8,6 +8,8 @@
       <generator class="identity"/>
     </id>
     <property name="Username"  />
+    <property name="PasswordHash"  />
+    <property name="IngameName"  />
   </class>
-  
+    
 </hibernate-mapping>
