@@ -29,6 +29,20 @@ namespace Macalania.Robototaker.MainFrame.Services
             return true;
         }
 
+        public Account IsValidLogin(string username, string password)
+        {
+            Account account = _ar.GetAccount(username);
+
+            if (account == null)
+                return null;
+
+            string passHash = Hash.CreatePasswordHash(password, account.PasswordSalt);
+
+            if (account.PasswordHash == passHash)
+                return account;
+            return null;
+        }
+
         public bool DoesAccountExist(string username)
         {
             if (_ar.GetAccount(username) == null)

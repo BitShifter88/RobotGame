@@ -22,6 +22,6 @@ namespace Macalania.Robototaker.Protocol
     public enum MainFrameProt : byte
     {
        CreatePlayer = 0,
-
+        Login = 1,
     }
 }

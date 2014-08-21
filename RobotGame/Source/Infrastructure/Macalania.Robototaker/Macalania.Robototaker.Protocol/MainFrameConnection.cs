@@ -12,9 +12,13 @@ namespace Macalania.Robototaker.Protocol
     {
         NetClient _client;
         int _authenticationTimeout = 5000;
+        MainFrameMessageParser _parser;
+        bool _stop;
+        Thread _messageThread;
 
-        public bool Connect()
+        public bool Connect(IMainFrameMessageHandler messageHandler)
         {
+            _parser = new MainFrameMessageParser(messageHandler);
             Console.WriteLine("Connecting to server...");
 
             NetPeerConfiguration Config = new NetPeerConfiguration("game");
@@ -28,6 +32,10 @@ namespace Macalania.Robototaker.Protocol
             if (WaitForAuthentication() == false)
             {
                 Console.WriteLine("Could not connect to Main Frame!");
+
+                _messageThread = new Thread(new ThreadStart(ReadMessages));
+                _messageThread.Start();
+
                 return false;
             }
             else
@@ -37,6 +45,39 @@ namespace Macalania.Robototaker.Protocol
                 //_messageThread.Start();
             }
             return true;
+        }
+
+        private void ReadMessages()
+        {
+            while (_stop == false)
+            {
+                NetIncomingMessage mr;
+
+                if ((mr = _client.ReadMessage()) != null)
+                {
+                    switch (mr.MessageType)
+                    {
+                        case NetIncomingMessageType.Data:
+                            {
+                                MainFrameProt header = (MainFrameProt)mr.ReadByte();
+
+                                if (header == MainFrameProt.CreatePlayer)
+                                {
+                                    _parser.OnCreatePlayerResponse(mr);
+                                }
+                                else if (header == MainFrameProt.Login)
+                                {
+                                    _parser.OnLoginResponse(mr);
+                                }
+                            }
+                            break;
+                    }
+                    _client.Recycle(mr);
+                }
+                else
+                    Thread.Sleep(1);
+
+            }
         }
 
         private bool WaitForAuthentication()

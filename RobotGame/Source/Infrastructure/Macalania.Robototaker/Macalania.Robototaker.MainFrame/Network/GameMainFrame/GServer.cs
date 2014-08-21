@@ -16,6 +16,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         NetServer _server;
         Thread _messageThread;
         AccountService _accountService = new AccountService();
+        SessionManager _sessionManager;
         bool _stop;
 
         public void Start(int port)
@@ -28,6 +29,8 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
             _server = new NetServer(Config);
             _server.Start();
+
+            _sessionManager = new SessionManager(_server);
 
             StartReadingMessages();
             ServerLog.E("GServer started!", LogType.Information);
@@ -50,6 +53,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             m.Write((byte)MainFrameProt.CreatePlayer);
             m.Write(result);
             connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
+        }
+
+        private void OnLogin(NetIncomingMessage mr)
+        {
+            string username = mr.ReadString();
+            string password = mr.ReadString();
+      
+            _sessionManager.LoginAttempt(mr.SenderConnection, username, password);
         }
 
         private void OnCreatePlayer(NetIncomingMessage mr)
@@ -93,6 +104,10 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
                                 if (header == MainFrameProt.CreatePlayer)
                                 {
                                     OnCreatePlayer(inc);
+                                }
+                                if (header == MainFrameProt.Login)
+                                {
+                                    OnLogin(inc);
                                 }
 
                                 //_instances.FirstOrDefault().Value.HandleData(inc);

@@ -16,6 +16,7 @@ namespace Macalania.Robototaker.MainFrame
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Main Frame starting!");
             GServer gserver = new GServer();
             gserver.Start(9998);
 
