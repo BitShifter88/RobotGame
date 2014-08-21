@@ -7,7 +7,7 @@ namespace Macalania.Robototaker.Protocol
 {
     public interface IMainFrameMessageHandler
     {
-        public void HandleCreateResponse(bool success);
-        public void HandleLoginResponse(bool success, int sessionId);
+        void HandleCreateResponse(bool success);
+        void HandleLoginResponse(bool success, int sessionId);
     }
 }

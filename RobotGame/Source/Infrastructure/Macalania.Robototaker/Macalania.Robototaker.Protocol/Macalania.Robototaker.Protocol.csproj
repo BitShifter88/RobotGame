@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdManager.cs" />
     <Compile Include="MainFrameConnection.cs" />
     <Compile Include="IMainFrameMessageHandler.cs" />
     <Compile Include="MainFrameMessageParser.cs" />

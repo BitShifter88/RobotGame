@@ -13,7 +13,7 @@ namespace Macalania.Robototaker.Protocol
         NetClient _client;
         int _authenticationTimeout = 5000;
         MainFrameMessageParser _parser;
-        bool _stop;
+        bool _stop = false;
         Thread _messageThread;
 
         public bool Connect(IMainFrameMessageHandler messageHandler)

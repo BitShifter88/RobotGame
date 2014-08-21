@@ -20,6 +20,7 @@ namespace Macalania.Robototaker.Protocol
             bool result = mr.ReadBoolean();
             _messageHandler.HandleCreateResponse(result);
         }
+
         public void OnLoginResponse(NetIncomingMessage mr)
         {
             bool success = mr.ReadBoolean();

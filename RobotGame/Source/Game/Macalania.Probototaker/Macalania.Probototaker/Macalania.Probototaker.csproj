@@ -91,6 +91,7 @@
     <Compile Include="Network\GameCommunication.cs" />
     <Compile Include="Network\GameNetwork.cs" />
     <Compile Include="Network\GameRandom.cs" />
+    <Compile Include="Network\MainFrameMessageHandler.cs" />
     <Compile Include="Network\PlayerMovement.cs" />
     <Compile Include="OtherPlayer.cs" />
     <Compile Include="Player.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Rooms\GameRoom.cs" />
     <Compile Include="Rooms\Garage.cs" />
     <Compile Include="Rooms\LoadGameRoom.cs" />
+    <Compile Include="Rooms\LoginScreen.cs" />
     <Compile Include="Rooms\SimulationRoom.cs" />
     <Compile Include="TankCamera.cs" />
     <Compile Include="TankGenerator.cs" />
