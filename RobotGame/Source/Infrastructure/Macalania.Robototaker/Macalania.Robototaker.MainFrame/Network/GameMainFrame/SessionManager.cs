@@ -49,13 +49,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             return ps;
         }
 
-        public void DisconnectPlayer(NetConnection connection)
+        public void DisconnectedPlayer(NetConnection connection)
         {
             for (int i = 0; i < _playerSessions.Values.Count; i++)
             {
                 if (_playerSessions.Values.ElementAt(i).Connection.RemoteUniqueIdentifier == connection.RemoteUniqueIdentifier)
                 {
                     _playerSessions.Remove(_playerSessions.Values.ElementAt(i).SessionId);
+                    break;
                 }
             }
         }

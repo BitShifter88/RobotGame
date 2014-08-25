@@ -69,6 +69,8 @@
     <Compile Include="Network\GameMainFrame\SessionManager.cs" />
     <Compile Include="Network\GameMainFrame\GServer.cs" />
     <Compile Include="Network\GameMainFrame\PlayerSession.cs" />
+    <Compile Include="Network\ServerMainFrame\AuthorizedServer.cs" />
+    <Compile Include="Network\ServerMainFrame\ServerManager.cs" />
     <Compile Include="Network\ServerMainFrame\SServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

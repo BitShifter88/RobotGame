@@ -1,6 +1,7 @@
 ﻿using Macalania.Robototaker.GameServer;
 using Macalania.Robototaker.MainFrame.Data.Mapping;
 using Macalania.Robototaker.MainFrame.Network.GameMainFrame;
+using Macalania.Robototaker.MainFrame.Network.ServerMainFrame;
 using Macalania.Robototaker.MainFrame.Services;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -17,8 +18,12 @@ namespace Macalania.Robototaker.MainFrame
         static void Main(string[] args)
         {
             Console.WriteLine("Main Frame starting!");
+
             GServer gserver = new GServer();
             gserver.Start(9998);
+
+            SServer sserver = new SServer();
+            sserver.Start(9997);
 
             CreateDatabase();
 

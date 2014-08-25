@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretStarter.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretStarter.xnb</Output>
       <Time>2014-07-01T14:23:41.7315005+02:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\mainGunStarter.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\mainGunStarter.xnb</Output>
       <Time>2014-07-01T14:23:41.6924983+02:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Tracks\tracksStarter.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Tracks\tracksStarter.xnb</Output>
       <Time>2014-07-01T14:23:41.7255001+02:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Hulls\hullStarter.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Hulls\hullStarter.xnb</Output>
       <Time>2014-07-30T11:14:30.3731578+02:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterLeft.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterLeft.xnb</Output>
       <Time>2014-07-01T14:23:41.6984986+02:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterRight.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterRight.xnb</Output>
       <Time>2014-08-11T11:23:29.5969935+02:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Misc\loading.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Misc\loading.xnb</Output>
       <Time>2014-07-01T14:23:41.6664968+02:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MiniMainGun.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MiniMainGun.xnb</Output>
       <Time>2014-07-30T11:14:30.3887579+02:00</Time>
     </Item>
     <Item>
@@ -79,7 +79,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBig.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBig.xnb</Output>
       <Time>2014-07-01T14:23:41.7285003+02:00</Time>
     </Item>
     <Item>
@@ -88,7 +88,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\artilery.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\artilery.xnb</Output>
       <Time>2014-07-30T11:14:30.3887579+02:00</Time>
     </Item>
     <Item>
@@ -97,7 +97,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\SprayMainGun.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\SprayMainGun.xnb</Output>
       <Time>2014-07-01T14:23:41.6904981+02:00</Time>
     </Item>
     <Item>
@@ -106,7 +106,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldLeft.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldLeft.xnb</Output>
       <Time>2014-07-03T14:13:42.6099686+02:00</Time>
     </Item>
     <Item>
@@ -115,7 +115,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\shieldsphere.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\shieldsphere.xnb</Output>
       <Time>2014-07-01T14:23:41.6604964+02:00</Time>
     </Item>
     <Item>
@@ -124,7 +124,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\battery.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\battery.xnb</Output>
       <Time>2014-07-01T14:23:41.705499+02:00</Time>
     </Item>
     <Item>
@@ -133,7 +133,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\sunPannel.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\sunPannel.xnb</Output>
       <Time>2014-07-30T11:14:30.4043579+02:00</Time>
     </Item>
     <Item>
@@ -142,7 +142,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\rocketStarterProjectile.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\rocketStarterProjectile.xnb</Output>
       <Time>2014-07-30T11:14:30.3731578+02:00</Time>
     </Item>
     <Item>
@@ -151,7 +151,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\artileryProjectile.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\artileryProjectile.xnb</Output>
       <Time>2014-07-30T11:14:30.3731578+02:00</Time>
     </Item>
     <Item>
@@ -160,7 +160,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\explosion.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Effects\explosion.xnb</Output>
       <Time>2014-07-01T14:23:41.6574963+02:00</Time>
     </Item>
     <Item>
@@ -169,7 +169,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\superArtillery.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\superArtillery.xnb</Output>
       <Time>2014-07-01T14:23:41.7225+02:00</Time>
     </Item>
     <Item>
@@ -178,7 +178,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterRight.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterRight.xnb</Output>
       <Time>2014-07-01T14:23:41.7014988+02:00</Time>
     </Item>
     <Item>
@@ -187,7 +187,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterBottom.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\amorStarterBottom.xnb</Output>
       <Time>2014-07-01T14:23:41.6954984+02:00</Time>
     </Item>
     <Item>
@@ -196,7 +196,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldBottom.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\shieldBottom.xnb</Output>
       <Time>2014-07-01T14:23:41.7134995+02:00</Time>
     </Item>
     <Item>
@@ -205,7 +205,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\starterAttackRocket.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\starterAttackRocket.xnb</Output>
       <Time>2014-07-01T14:23:41.7174997+02:00</Time>
     </Item>
     <Item>
@@ -214,7 +214,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\attackRocketProjectile.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\attackRocketProjectile.xnb</Output>
       <Time>2014-07-01T14:23:41.670497+02:00</Time>
     </Item>
     <Item>
@@ -223,7 +223,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Items\starterMine.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Items\starterMine.xnb</Output>
       <Time>2014-07-01T14:23:41.6634966+02:00</Time>
     </Item>
     <Item>
@@ -232,7 +232,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\shell.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Projectiles\shell.xnb</Output>
       <Time>2014-07-02T14:04:44.543516+02:00</Time>
     </Item>
     <Item>
@@ -241,7 +241,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main2.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main2.xnb</Output>
       <Time>2014-07-30T11:14:30.451158+02:00</Time>
     </Item>
     <Item>
@@ -250,7 +250,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\desertTankCluder.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\desertTankCluder.xnb</Output>
       <Time>2014-07-30T11:14:30.451158+02:00</Time>
     </Item>
     <Item>
@@ -259,7 +259,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersLeftBottom.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersLeftBottom.xnb</Output>
       <Time>2014-07-30T11:14:30.4199579+02:00</Time>
     </Item>
     <Item>
@@ -268,7 +268,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersLeftTop.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersLeftTop.xnb</Output>
       <Time>2014-07-30T11:14:30.4199579+02:00</Time>
     </Item>
     <Item>
@@ -277,7 +277,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersRightTop.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersRightTop.xnb</Output>
       <Time>2014-07-30T11:14:30.435558+02:00</Time>
     </Item>
     <Item>
@@ -286,7 +286,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\main.xnb</Output>
       <Time>2014-08-18T14:39:27.4163422+02:00</Time>
     </Item>
     <Item>
@@ -295,7 +295,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersRightBottom.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\cornersRightBottom.xnb</Output>
       <Time>2014-07-30T11:14:30.435558+02:00</Time>
     </Item>
     <Item>
@@ -304,7 +304,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\classicSides.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Styles\Classic\classicSides.xnb</Output>
       <Time>2014-07-30T11:14:30.4043579+02:00</Time>
     </Item>
     <Item>
@@ -313,7 +313,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBigNew.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Turrets\turretBigNew.xnb</Output>
       <Time>2014-08-04T11:55:02.0459999+02:00</Time>
     </Item>
     <Item>
@@ -322,7 +322,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterLeft.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\Misc\rocketStarterLeft.xnb</Output>
       <Time>2014-08-11T11:23:29.5899931+02:00</Time>
     </Item>
     <Item>
@@ -331,7 +331,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Garage\blockBrick.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Garage\blockBrick.xnb</Output>
       <Time>2014-08-07T11:03:32.3879864+02:00</Time>
     </Item>
     <Item>
@@ -340,7 +340,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MicroMainGun.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tanks\MainGuns\MicroMainGun.xnb</Output>
       <Time>2014-08-11T11:23:29.5839928+02:00</Time>
     </Item>
     <Item>
@@ -349,7 +349,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tiles\jungle.xnb</Output>
+      <Output>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\Textures\Tiles\jungle.xnb</Output>
       <Time>2014-08-14T14:41:56.0397854+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -359,10 +359,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.ProbototakerContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Windows\system32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.ProbototakerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Windows\System32\config\systemprofile\Desktop\Steffan\RobotGame\RobotGame\Source\Game\Macalania.Probototaker\Macalania.Probototaker\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

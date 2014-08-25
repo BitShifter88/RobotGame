@@ -76,7 +76,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
         private void OnDisconnect(NetConnection connection)
         {
-            _sessionManager.DisconnectPlayer(connection);
+            _sessionManager.DisconnectedPlayer(connection);
         }
 
         private void ReadMessages()
