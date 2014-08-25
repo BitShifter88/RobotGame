@@ -20,8 +20,7 @@ namespace Macalania.Robototaker.MainFrame
             GServer gserver = new GServer();
             gserver.Start(9998);
 
-
-            //CreateDatabase();
+            CreateDatabase();
 
             Console.ReadLine();
             gserver.Stop();

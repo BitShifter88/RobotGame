@@ -17,11 +17,16 @@ namespace Macalania.Robototaker.Protocol
         CreateOtherPlayer = 6,
         FullWorldUpdate = 7,
         RequestFullWorldUpdate = 8,
-        PlayerUsesAbility = 9
+        PlayerUsesAbility = 9,
     }
     public enum MainFrameProt : byte
     {
        CreatePlayer = 0,
         Login = 1,
+    }
+    public enum InfrastructureProt : byte
+    {
+        Authorize = 200,
+        StartGameInstance = 201,
     }
 }

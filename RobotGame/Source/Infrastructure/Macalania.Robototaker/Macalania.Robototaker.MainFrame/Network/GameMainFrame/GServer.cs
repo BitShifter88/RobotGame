@@ -74,6 +74,11 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             RespondOnCreatePlayer(mr.SenderConnection, result);
         }
 
+        private void OnDisconnect(NetConnection connection)
+        {
+            _sessionManager.DisconnectPlayer(connection);
+        }
+
         private void ReadMessages()
         {
             NetIncomingMessage inc;
@@ -93,6 +98,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
                                 NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
                                 if (status == NetConnectionStatus.Disconnected)
                                 {
+                                    OnDisconnect(inc.SenderConnection);
                                     //_instances.FirstOrDefault().Value.OnConnectionClosed(inc.SenderConnection);
                                 }
                             }

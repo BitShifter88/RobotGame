@@ -67,11 +67,11 @@ namespace Macalania.Probototaker.Rooms
         public override void Update(double dt)
         {
             if (_connectingDone == true && _loadingDone == true)
-                YunaGameEngine.Instance.SetActiveRoom(_gameRoom, false, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(_gameRoom, false);
             if (_connectionFailed == true)
             {
                 Garage g = new Garage();
-                YunaGameEngine.Instance.SetActiveRoom(g, true, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(g, true);
             }
 
             base.Update(dt);

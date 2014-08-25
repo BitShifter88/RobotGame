@@ -8,9 +8,9 @@ namespace Macalania.Robototaker.Protocol
 {
     public class MainFrameMessageParser
     {
-        IMainFrameMessageHandler _messageHandler;
+        MainFrameMessageHandlerBase _messageHandler;
 
-        public MainFrameMessageParser(IMainFrameMessageHandler handler)
+        public MainFrameMessageParser(MainFrameMessageHandlerBase handler)
         {
             _messageHandler = handler;
         }

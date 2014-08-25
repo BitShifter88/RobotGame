@@ -26,19 +26,20 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             if (account != null)
             {
                 PlayerSession ps = CreatePlayerSession(connection, account);
-                LoginAttemptResponse(true, ps.SessionId);
+                LoginAttemptResponse(true, ps.SessionId, connection);
             }
             else
-                LoginAttemptResponse(false, 0);
+                LoginAttemptResponse(false, 0, connection);
         }
 
         private PlayerSession CreatePlayerSession(NetConnection connection, Account account)
         {
-            foreach (KeyValuePair<int, PlayerSession> player in _playerSessions)
+            for (int i = 0; i < _playerSessions.Values.Count; i++)
             {
-                if (player.Value.Account.Username == account.Username)
+                if (_playerSessions.Values.ElementAt(i).Account.Username == account.Username)
                 {
-                    SignOutPlayerSession(player.Value);
+                    SignOutPlayerSession(_playerSessions.Values.ElementAt(i));
+                    break;
                 }
             }
 
@@ -48,20 +49,31 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             return ps;
         }
 
+        public void DisconnectPlayer(NetConnection connection)
+        {
+            for (int i = 0; i < _playerSessions.Values.Count; i++)
+            {
+                if (_playerSessions.Values.ElementAt(i).Connection.RemoteUniqueIdentifier == connection.RemoteUniqueIdentifier)
+                {
+                    _playerSessions.Remove(_playerSessions.Values.ElementAt(i).SessionId);
+                }
+            }
+        }
+
         private void SignOutPlayerSession(PlayerSession session)
         {
             _playerSessions.Remove(session.SessionId);
             session.SignOut();
         }
 
-        private void LoginAttemptResponse(bool success, int sessionId)
+        private void LoginAttemptResponse(bool success, int sessionId, NetConnection connection)
         {
             NetOutgoingMessage m = _server.CreateMessage();
             m.Write((byte)MainFrameProt.Login);
             m.Write(success);
             if (success)
                 m.Write(sessionId);
-
+            connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
         }
     }
 }

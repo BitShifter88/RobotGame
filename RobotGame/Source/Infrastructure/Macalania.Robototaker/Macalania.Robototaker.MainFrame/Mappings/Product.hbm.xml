@@ -8,6 +8,7 @@
       <generator class="identity"/>
     </id>
     <property name="Username"  />
+    <property name="PasswordSalt"  />
     <property name="PasswordHash"  />
     <property name="IngameName"  />
   </class>

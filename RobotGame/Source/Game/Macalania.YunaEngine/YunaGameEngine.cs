@@ -44,7 +44,7 @@ namespace Macalania.YunaEngine
 
         
 
-        public void SetActiveRoom(Room room, bool load, IServiceProvider services)
+        public void SetActiveRoom(Room room, bool load)
         {
             if (_activeRoom != null)
                 _activeRoom.Unload();
@@ -53,7 +53,7 @@ namespace Macalania.YunaEngine
             if (load)
             {
                 room.Inizialize();
-                room.Load(services);
+                room.Load(Services);
             }
         }
 

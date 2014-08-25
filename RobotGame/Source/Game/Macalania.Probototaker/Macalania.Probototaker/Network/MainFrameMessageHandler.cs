@@ -6,16 +6,21 @@ using System.Text;
 
 namespace Macalania.Probototaker.Network
 {
-    class MainFrameMessageHandler : IMainFrameMessageHandler
+    class MainFrameMessageHandler : MainFrameMessageHandlerBase
     {
+        public MainFrameMessageHandler(MainFrameConnection connection) : base (connection)
+        {
+
+        }
+
         public void HandleCreateResponse(bool success)
         {
-            throw new NotImplementedException();
+            base.HandleCreateResponse(success);
         }
 
         public void HandleLoginResponse(bool success, int sessionId)
         {
-            throw new NotImplementedException();
+            base.HandleLoginResponse(success, sessionId);
         }
     }
 }

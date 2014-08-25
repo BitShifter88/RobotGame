@@ -23,7 +23,7 @@ namespace Macalania.Probototaker.WorldEditor
             Globals.Viewport = _engine.GraphicsDevice.Viewport;
             //LoadGameRoom room = new LoadGameRoom();
             Room editorRoom = new EditorRoom();
-            YunaGameEngine.Instance.SetActiveRoom(editorRoom, true, YunaGameEngine.Instance.Services);
+            YunaGameEngine.Instance.SetActiveRoom(editorRoom, true);
         }
     }
 #endif

@@ -8,16 +8,27 @@ using System.Threading;
 
 namespace Macalania.Robototaker.Protocol
 {
+    public enum LoginStatus
+    {
+        NotLoggedIn,
+        LoggedIn,
+        LogginFailed,
+        LogginTimedOut,
+    }
+
     public class MainFrameConnection
     {
+        public int SessionId { get; set; }
+        public LoginStatus LoggedIn { get; set; }
         NetClient _client;
         int _authenticationTimeout = 5000;
         MainFrameMessageParser _parser;
         bool _stop = false;
         Thread _messageThread;
 
-        public bool Connect(IMainFrameMessageHandler messageHandler)
+        public bool Connect(MainFrameMessageHandlerBase messageHandler)
         {
+            LoggedIn = LoginStatus.NotLoggedIn;
             _parser = new MainFrameMessageParser(messageHandler);
             Console.WriteLine("Connecting to server...");
 
@@ -33,18 +44,52 @@ namespace Macalania.Robototaker.Protocol
             {
                 Console.WriteLine("Could not connect to Main Frame!");
 
-                _messageThread = new Thread(new ThreadStart(ReadMessages));
-                _messageThread.Start();
-
                 return false;
             }
             else
             {
                 Console.WriteLine("Connected to Main Frame!");
+                _messageThread = new Thread(new ThreadStart(ReadMessages));
+                _messageThread.Start();
                 //_messageThread = new Thread(new ThreadStart(ReadMessages));
                 //_messageThread.Start();
             }
             return true;
+        }
+
+        public void Login(string username, string password)
+        {
+            LoggedIn = LoginStatus.NotLoggedIn;
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)MainFrameProt.Login);
+            message.Write(username);
+            message.Write(password);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        public LoginStatus WaitForLoginResponse(int timeout)
+        {
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            while (s.ElapsedMilliseconds < timeout)
+            {
+                if (LoggedIn == LoginStatus.LoggedIn || LoggedIn == LoginStatus.LogginFailed)
+                    return LoggedIn;
+            }
+
+            LoggedIn = LoginStatus.LogginTimedOut;
+
+            return LoggedIn;
+        }
+
+        public void CreateAccount(string username, string inGameName, string password)
+        {
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)MainFrameProt.CreatePlayer);
+            message.Write(username);
+            message.Write(inGameName);
+            message.Write(password);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void ReadMessages()

@@ -42,7 +42,7 @@ namespace Macalania.Probototaker.Rooms
             if (KeyboardInput.IsKeyClicked(Keys.Enter))
             {
                 LoadGameRoom lgr = new LoadGameRoom(_editor.Tank.GetTankPackage());
-                YunaGameEngine.Instance.SetActiveRoom(lgr, true, YunaGameEngine.Instance.Services);
+                YunaGameEngine.Instance.SetActiveRoom(lgr, true);
             }
 
             base.Update(dt);
