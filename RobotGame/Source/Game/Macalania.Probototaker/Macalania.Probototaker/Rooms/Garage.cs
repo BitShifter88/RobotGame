@@ -32,8 +32,7 @@ namespace Macalania.Probototaker.Rooms
 
             AddGameObject(_editor);
 
-            _connection = new MainFrameConnection();
-            _connection.Connect();
+
         }
 
         public override void Update(double dt)
