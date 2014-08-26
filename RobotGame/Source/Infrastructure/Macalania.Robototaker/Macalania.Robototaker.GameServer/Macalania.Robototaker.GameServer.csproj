@@ -55,6 +55,7 @@
     <Compile Include="GamePlayer.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="GameServerManager.cs" />
+    <Compile Include="MainFrameConnection.cs" />
     <Compile Include="PlayerCommunication.cs" />
     <Compile Include="PotentialPlayer.cs" />
     <Compile Include="Program.cs" />

@@ -40,6 +40,8 @@ namespace Macalania.Robototaker.GameServer
 
             _consoleReadThread = new Thread(new ThreadStart(ConsoleRead));
             _consoleReadThread.Start();
+
+            ShowStats = false;
         }
 
         private void ConsoleRead()
@@ -169,22 +171,22 @@ namespace Macalania.Robototaker.GameServer
                         break;
                     case NetIncomingMessageType.WarningMessage:
                         {
-                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            ServerLog.E(inc.ReadString(), LogType.Lidgren);
                         }
                         break;
                     case NetIncomingMessageType.Error:
                         {
-                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            ServerLog.E(inc.ReadString(), LogType.Lidgren);
                         }
                         break;
                     case NetIncomingMessageType.VerboseDebugMessage:
                         {
-                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            ServerLog.E(inc.ReadString(), LogType.Lidgren);
                         }
                         break;
                     case NetIncomingMessageType.DebugMessage:
                         {
-                            ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                            ServerLog.E(inc.ReadString(), LogType.Lidgren);
                         }
                         break;
                 }

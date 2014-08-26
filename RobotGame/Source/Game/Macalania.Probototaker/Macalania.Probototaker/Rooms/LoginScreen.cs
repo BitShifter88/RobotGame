@@ -32,7 +32,7 @@ namespace Macalania.Probototaker.Rooms
                     
             _connection.CreateAccount("steffan88", "MileyCyrus", "kodekode");
             _connection.Login("steffan88", "kodekode");
-            LoginStatus ls= _connection.WaitForLoginResponse(5000);
+            LoginStatus ls= _connection.WaitForLoginResponse(10000);
             Console.WriteLine(ls);
 
             if (ls == LoginStatus.LoggedIn)

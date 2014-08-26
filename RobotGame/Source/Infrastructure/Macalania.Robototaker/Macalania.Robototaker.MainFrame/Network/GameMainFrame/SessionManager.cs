@@ -1,4 +1,5 @@
 ﻿using Lidgren.Network;
+using Macalania.Robototaker.Log;
 using Macalania.Robototaker.MainFrame.Data.Mapping;
 using Macalania.Robototaker.MainFrame.Services;
 using Macalania.Robototaker.Protocol;
@@ -26,10 +27,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             if (account != null)
             {
                 PlayerSession ps = CreatePlayerSession(connection, account);
+                ServerLog.E("Player " + username + " signed in!", LogType.Security);
                 LoginAttemptResponse(true, ps.SessionId, connection);
             }
             else
+            {
+                ServerLog.E("Player " + username + " failed to sign in!", LogType.Security);
                 LoginAttemptResponse(false, 0, connection);
+            }
         }
 
         private PlayerSession CreatePlayerSession(NetConnection connection, Account account)
@@ -38,7 +43,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             {
                 if (_playerSessions.Values.ElementAt(i).Account.Username == account.Username)
                 {
-                    SignOutPlayerSession(_playerSessions.Values.ElementAt(i));
+                    SignOutPlayerSession(_playerSessions.Values.ElementAt(i), "Another computer has signed into your account");
                     break;
                 }
             }
@@ -55,16 +60,16 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             {
                 if (_playerSessions.Values.ElementAt(i).Connection.RemoteUniqueIdentifier == connection.RemoteUniqueIdentifier)
                 {
-                    _playerSessions.Remove(_playerSessions.Values.ElementAt(i).SessionId);
+                    SignOutPlayerSession(_playerSessions.Values.ElementAt(i), "Client disconnected");
                     break;
                 }
             }
         }
 
-        private void SignOutPlayerSession(PlayerSession session)
+        private void SignOutPlayerSession(PlayerSession session, string reason)
         {
             _playerSessions.Remove(session.SessionId);
-            session.SignOut();
+            session.SignOut(reason);
         }
 
         private void LoginAttemptResponse(bool success, int sessionId, NetConnection connection)

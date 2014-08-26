@@ -33,7 +33,7 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
             _serverManager = new ServerManager();
 
             StartReadingMessages();
-            ServerLog.E("GServer started!", LogType.Information);
+            ServerLog.E("Server Server started on port " + port + "!", LogType.Information);
         }
 
         public void Stop()
@@ -56,9 +56,14 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
             if (password == "123456")
             {
-                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection);
+                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection, username);
                 _serverManager.AddServer(auths);
+                ServerLog.E("Server " + username + " authorized!", LogType.Security);
                 success = true;
+            }
+            else
+            {
+                ServerLog.E("Server " + username + " failed to authorize!", LogType.Security);
             }
 
             RespondAuthorize(mr.SenderConnection, success);
@@ -66,6 +71,7 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
         private void OnServerDisconnect(NetConnection connection)
         {
+            
             _serverManager.ServerDisconnected(connection);
         }
 
@@ -90,6 +96,7 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
                     {
                         case NetIncomingMessageType.ConnectionApproval:
                             {
+                                ServerLog.E("Server " + inc.SenderConnection.RemoteUniqueIdentifier + " connected!", LogType.ConnectionStatus);
                                 inc.SenderConnection.Approve();
                             }
                             break;
@@ -121,22 +128,23 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
                             break;
                         case NetIncomingMessageType.WarningMessage:
                             {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                                ServerLog.E(inc.ReadString(), LogType.Lidgren);
                             }
                             break;
                         case NetIncomingMessageType.Error:
                             ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
                             {
+                                ServerLog.E(inc.ReadString(), LogType.Lidgren);
                             }
                             break;
                         case NetIncomingMessageType.VerboseDebugMessage:
                             {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                                ServerLog.E(inc.ReadString(), LogType.Lidgren);
                             }
                             break;
                         case NetIncomingMessageType.DebugMessage:
                             {
-                                ServerLog.E(inc.ReadString(), LogType.ConnectionStatus);
+                                ServerLog.E(inc.ReadString(), LogType.Lidgren);
                             }
                             break;
                     }

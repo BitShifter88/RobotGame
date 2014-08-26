@@ -1,5 +1,6 @@
 ﻿
 using Macalania.Robototaker.GameServer;
+using Macalania.Robototaker.Log;
 using Macalania.YunaEngine.Resources;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,26 @@ namespace Macalania.Robototaker.MainFrame
         static void Main(string[] args)
         {
             GameServerManager gsm = new GameServerManager();
+            MainFrameConnection mfc = new MainFrameConnection(gsm);
+
+            while (true)
+            {
+                if (mfc.ConnectToMainFrame(9997))
+                    break;
+            }
+
+            mfc.Authorize("Sputnik", "123456");
+
+            
+
+            if (mfc.WaitForAuthenticationResponse(5000) != AuthorizedStatus.Authorized)
+            {
+                ServerLog.E("Could not autorize server!", LogType.Security);
+                Console.ReadLine();
+                return;
+            }
+            else
+                ServerLog.E("Authorized!", LogType.Security);
 
             gsm.StartServer();
             gsm.CreateNewGameInstance();

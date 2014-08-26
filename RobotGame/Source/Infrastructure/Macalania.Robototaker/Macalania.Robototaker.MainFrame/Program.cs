@@ -1,4 +1,5 @@
 ﻿using Macalania.Robototaker.GameServer;
+using Macalania.Robototaker.Log;
 using Macalania.Robototaker.MainFrame.Data.Mapping;
 using Macalania.Robototaker.MainFrame.Network.GameMainFrame;
 using Macalania.Robototaker.MainFrame.Network.ServerMainFrame;
@@ -17,7 +18,7 @@ namespace Macalania.Robototaker.MainFrame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Main Frame starting!");
+            ServerLog.E("Main Frame starting...", LogType.Information);
 
             GServer gserver = new GServer();
             gserver.Start(9998);

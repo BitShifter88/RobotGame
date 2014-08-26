@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Macalania.Robototaker.Log
@@ -17,13 +18,13 @@ namespace Macalania.Robototaker.Log
         ServerOverload = 6,
         GameActivity = 7,
         Debug = 8,
+        Lidgren = 9,
     }
 
     public static class ServerLog
     {
-        private static int _consoleWindowHeight = 0;
-        private static int _consoleWindowStart = 0;
         private static bool _disabled = false;
+        static Mutex _logMutex = new Mutex();
 
         public static void DisableConsole()
         {
@@ -35,57 +36,15 @@ namespace Macalania.Robototaker.Log
             _disabled = false;
         }
 
-        public static void CreateConsoleWindow(int height)
-        {
-            SetConsoleWindow(height);
-        }
 
-        private static void SetConsoleWindow(int height)
-        {
-#if !RASPBERRY
-            _consoleWindowHeight = height;
-            _consoleWindowStart = Console.CursorTop;
-            Console.SetCursorPosition(0, _consoleWindowStart + height);
-#endif
-        }
 
-        public static void ClearConsoleWindow()
-        {
-#if !RASPBERRY
-            if (_disabled)
-                return;
-            int top = Console.CursorTop;
-            int left = Console.CursorLeft;
-            for (int i = _consoleWindowStart; i < _consoleWindowStart + _consoleWindowHeight; i++)
-            {
-                Console.SetCursorPosition(0, i);
-                Console.Write("                                             ");
-            }
-            Console.SetCursorPosition(left, top);
-#endif
-        }
 
-        public static void WriteToConsoleWindow(string text, int row)
-        {
-            if (_disabled)
-                return;
-#if !RASPBERRY
-            int top = Console.CursorTop;
-            int left = Console.CursorLeft;
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(0, row + _consoleWindowStart);
-#endif
-            Console.WriteLine(text);
-#if !RASPBERRY
-            Console.SetCursorPosition(left, top);
-#endif
-        }
 
         public static void E(string message, LogType type)
         {
             if (_disabled)
                 return;
+            _logMutex.WaitOne();
             //Console.BackgroundColor = ConsoleColor.DarkGray;
             if (type == LogType.None)
             {
@@ -123,13 +82,12 @@ namespace Macalania.Robototaker.Log
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
             }
+            else if (type == LogType.Lidgren)
+                Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.WriteLine(DateTime.Now.ToString() + " ::\t" + message);
-
-#if !RASPBERRY
-            _consoleWindowStart = Console.CursorTop;
-            Console.SetCursorPosition(0, _consoleWindowStart + _consoleWindowHeight);
-#endif
+            Console.ForegroundColor = ConsoleColor.Gray;
+            _logMutex.ReleaseMutex();
         }
     }
 }
