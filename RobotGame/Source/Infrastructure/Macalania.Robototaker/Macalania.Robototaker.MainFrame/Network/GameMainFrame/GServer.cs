@@ -36,6 +36,11 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             ServerLog.E("GServer started on port " + port + "!", LogType.Information);
         }
 
+        public NetServer GetServer()
+        {
+            return _server;
+        }
+
         public void Stop()
         {
             _stop = true;

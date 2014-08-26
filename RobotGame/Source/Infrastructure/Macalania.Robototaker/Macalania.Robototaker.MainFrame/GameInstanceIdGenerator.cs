@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Macalania.Robototaker.MainFrame
 {
-    class SessionIdGenerator : IdGenerator
+    class GameInstanceIdGenerator : IdGenerator
     {
-
     }
 }

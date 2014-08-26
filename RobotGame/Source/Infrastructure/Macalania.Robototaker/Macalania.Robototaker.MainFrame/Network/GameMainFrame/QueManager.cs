@@ -28,11 +28,17 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             _queThread.Start();
         }
 
+        private void MatchMake()
+        {
+
+        }
+
         private void QueRun()
         {
             while (_stop == false)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
+                MatchMake();
             }
         }
 

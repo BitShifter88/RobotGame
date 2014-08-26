@@ -66,6 +66,10 @@
     <Compile Include="Data\Mapping\Account.cs" />
     <Compile Include="Data\NHibernateHelper.cs" />
     <Compile Include="Hash.cs" />
+    <Compile Include="IdGenerator.cs" />
+    <Compile Include="Network\GameMainFrame\GameInstance.cs" />
+    <Compile Include="Network\GameMainFrame\GameManager.cs" />
+    <Compile Include="Network\GameMainFrame\QueManager.cs" />
     <Compile Include="Network\GameMainFrame\SessionManager.cs" />
     <Compile Include="Network\GameMainFrame\GServer.cs" />
     <Compile Include="Network\GameMainFrame\PlayerSession.cs" />
