@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Data\Mapping\Account.cs" />
     <Compile Include="Data\NHibernateHelper.cs" />
+    <Compile Include="GameInstanceIdGenerator.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="IdGenerator.cs" />
     <Compile Include="Network\GameMainFrame\GameInstance.cs" />

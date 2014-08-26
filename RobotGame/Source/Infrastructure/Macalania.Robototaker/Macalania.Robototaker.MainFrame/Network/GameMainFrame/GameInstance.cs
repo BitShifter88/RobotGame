@@ -2,6 +2,7 @@
 using Macalania.Robototaker.Protocol;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -24,10 +25,11 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
         List<PlayerSession> _players = new List<PlayerSession>();
         List<PlayerSession> _readyPlayers = new List<PlayerSession>();
-        GServer _server;
+        NetServer _server;
         int _askIfReadyTimeout = 5000;
+        Stopwatch _timeout;
         
-        public GameInstance(GServer server)
+        public GameInstance(NetServer server)
         {
             GameId = GameInstanceIdGenerator.GetNextId();
             _server = server;
@@ -43,11 +45,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         {
             foreach (PlayerSession p in _players)
             {
-                NetOutgoingMessage m = _server.GetServer().CreateMessage();
+                NetOutgoingMessage m = _server.CreateMessage();
                 m.Write((byte)MainFrameProt.AskIfReadyForGame);
                 m.Write(GameId);
                 p.Connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
             }
+
+            _timeout = new Stopwatch();
+            _timeout.Start();
         }
 
         public void PlayerIsReady(PlayerSession player)

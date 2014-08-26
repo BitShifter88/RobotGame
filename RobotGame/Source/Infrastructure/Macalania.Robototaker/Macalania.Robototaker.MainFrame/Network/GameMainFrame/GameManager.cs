@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lidgren.Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
     class GameManager
     {
         Dictionary<int, GameInstance> _games = new Dictionary<int, GameInstance>();
-        GServer _server;
+        NetServer _server;
 
-        public GameManager(GServer server)
+        public GameManager(NetServer server)
         {
             _server = server;
         }
