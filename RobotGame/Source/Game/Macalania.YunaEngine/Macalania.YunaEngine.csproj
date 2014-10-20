@@ -65,9 +65,13 @@
     <Compile Include="Collision\PerPixelCollision.cs" />
     <Compile Include="GameLogic\GameObject.cs" />
     <Compile Include="GameLogic\GameObjectTemplate.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Camera.cs" />
     <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Gui\GuiComponent.cs" />
+    <Compile Include="Gui\GuiSystem.cs" />
+    <Compile Include="Gui\StockImage.cs" />
     <Compile Include="Input\KeyboardHook.cs" />
     <Compile Include="Input\KeyboardInput.cs" />
     <Compile Include="Input\MouseInput.cs" />

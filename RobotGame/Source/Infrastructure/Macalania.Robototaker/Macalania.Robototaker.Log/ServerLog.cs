@@ -19,6 +19,7 @@ namespace Macalania.Robototaker.Log
         GameActivity = 7,
         Debug = 8,
         Lidgren = 9,
+        Data = 10,
     }
 
     public static class ServerLog
@@ -35,10 +36,6 @@ namespace Macalania.Robototaker.Log
         {
             _disabled = false;
         }
-
-
-
-
 
         public static void E(string message, LogType type)
         {
@@ -81,6 +78,10 @@ namespace Macalania.Robototaker.Log
             else if (type == LogType.Debug)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (type == LogType.Data)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
             }
             else if (type == LogType.Lidgren)
                 Console.ForegroundColor = ConsoleColor.Gray;

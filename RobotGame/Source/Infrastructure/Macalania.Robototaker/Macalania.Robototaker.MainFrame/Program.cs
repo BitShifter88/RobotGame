@@ -35,11 +35,14 @@ namespace Macalania.Robototaker.MainFrame
 
         static void CreateDatabase()
         {
+            ServerLog.E("Creating database...", LogType.Data);
             var cfg = new Configuration();
             cfg.Configure();
             cfg.AddAssembly(typeof(Account).Assembly);
 
             new SchemaExport(cfg).Execute(false, true, false);
+
+            ServerLog.E("Database created!", LogType.Data);
         }
     }
 }

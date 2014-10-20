@@ -3,6 +3,7 @@ using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Gui;
 using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
@@ -19,10 +20,17 @@ namespace Macalania.Probototaker.Rooms
     {
         TankEditor _editor;
         MainFrameConnection _connection;
+        GuiSystem _gui;
 
         public override void Load(IServiceProvider serviceProvider)
         {
             base.Load(serviceProvider);
+
+            _gui = new GuiSystem(this);
+            _gui.AddGuiComponent(new StockImage(Content.LoadYunaTexture("Textures/Garage/menubackground"), new Vector2(0, 100)));
+            _gui.AddGuiComponent(new StockImage(Content.LoadYunaTexture("Textures/Garage/battle"), new Vector2(1920/2 -400 / 2, 0)));
+
+            AddGameObject(_gui);
 
             Camera = new Camera();
             _editor = new TankEditor(this);

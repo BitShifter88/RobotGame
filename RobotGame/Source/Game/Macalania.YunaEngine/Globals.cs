@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Macalania.Probototaker
+namespace Macalania.YunaEngine
 {
     public class Globals
     {

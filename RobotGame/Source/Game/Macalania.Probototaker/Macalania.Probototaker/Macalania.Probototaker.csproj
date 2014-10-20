@@ -83,7 +83,6 @@
     <Compile Include="Effects\Explosion.cs" />
     <Compile Include="Effects\SmallExplosion.cs" />
     <Compile Include="GarageLogic\TankEditor.cs" />
-    <Compile Include="Globals.cs" />
     <Compile Include="Items\StarterMine.cs" />
     <Compile Include="Map\GameMap.cs" />
     <Compile Include="Map\JungleStyle.cs" />
