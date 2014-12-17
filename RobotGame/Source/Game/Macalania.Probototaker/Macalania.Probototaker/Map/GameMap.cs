@@ -19,6 +19,11 @@ namespace Macalania.Probototaker.Map
         {
             LayerTiles = new byte[dimx, dimy];
         }
+
+        public void SetTile(int x, int y, byte value)
+        {
+            LayerTiles[x, y] = value;
+        }
     }
 
     public class GameMap : GameObject
@@ -28,7 +33,7 @@ namespace Macalania.Probototaker.Map
         public int DimY { get; set; }
         public TileStyle TileStyle { get; set; }
 
-        public static int TILE_DIM = 32;
+        public static int TILE_DIM = 64;
        
 
         public GameMap(int dimx, int dimy, Room room) : base(room)
@@ -42,8 +47,9 @@ namespace Macalania.Probototaker.Map
         }
         public void SetTile(int layer, int x, int y, byte value)
         {
-            _layers[layer].LayerTiles[x, y] = value;
+            _layers[layer].SetTile(x, y, value);
         }
+
 
         public override void Draw(IRender render, Camera camera)
         {

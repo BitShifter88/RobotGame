@@ -10,7 +10,10 @@ namespace Macalania.Probototaker.Map
 {
     public enum JungleTile
     {
-        Grass = 0,
+        Dirt1 = 0,
+        Dirt2 = 1,
+        Dirt3 = 2,
+        Dirt4 = 3,
     }
     public class JungleStyle : TileStyle
     {
@@ -23,8 +26,14 @@ namespace Macalania.Probototaker.Map
         {
             JungleTile tile = (JungleTile)tileType;
 
-            if (tile == JungleTile.Grass)
-                return new Rectangle(32 * 2, 32 * 2, 32, 32);
+            if (tile == JungleTile.Dirt1)
+                return new Rectangle(64 * 0, 64 * 0, 64, 64);
+            if (tile == JungleTile.Dirt2)
+                return new Rectangle(64 * 1, 64 * 0, 64, 64);
+            if (tile == JungleTile.Dirt3)
+                return new Rectangle(64 * 1, 64 * 1, 64, 64);
+            if (tile == JungleTile.Dirt4)
+                return new Rectangle(64 * 0, 64 * 1, 64, 64);
 
             throw new Exception("No tile found");
         }
