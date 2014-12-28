@@ -41,6 +41,15 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             _players.Add(player);
         }
 
+        public void UpdateStatus()
+        {
+            if (Status == GameInstanceStatus.PlayersNotReady)
+            {
+                if (_players.Count == _readyPlayers.Count)
+                    Status = GameInstanceStatus.PlayersReady;
+            }
+        }
+
         public void AskPlayersIfReady()
         {
             foreach (PlayerSession p in _players)
@@ -57,8 +66,10 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
         public void PlayerIsReady(PlayerSession player)
         {
-            if (_readyPlayers.Contains(player) == false)
+            if (_readyPlayers.Contains(player) == false && _players.Contains(player) == true)
                 _readyPlayers.Add(player);
+            else
+                throw new Exception("Player not invited to game, but said he was ready");
         }
     }
 }

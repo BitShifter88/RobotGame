@@ -24,6 +24,8 @@ namespace Macalania.Robototaker.Protocol
        CreatePlayer = 0,
         Login = 1,
         AskIfReadyForGame = 2,
+        JoinQue = 3,
+        LeaveQue = 4,
     }
     public enum InfrastructureProt : byte
     {

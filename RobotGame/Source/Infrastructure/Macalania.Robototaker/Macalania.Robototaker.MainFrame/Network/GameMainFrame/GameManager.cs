@@ -34,5 +34,13 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         {
             _games[gameId].PlayerIsReady(player);
         }
+
+        public void CheckGames()
+        {
+            foreach (KeyValuePair<int, GameInstance> g in _games)
+            {
+                g.Value.UpdateStatus();
+            }
+        }
     }
 }

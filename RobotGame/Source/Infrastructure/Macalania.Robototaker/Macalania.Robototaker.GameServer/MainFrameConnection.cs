@@ -45,7 +45,7 @@ namespace Macalania.Robototaker.GameServer
 
             _client.Connect("127.0.0.1", port);
 
-            if (WaitForAuthentication() == false)
+            if (WaitForAproval() == false)
             {
                 ServerLog.E("Could not connect to Main Frame!", LogType.ConnectionStatus);
 
@@ -69,10 +69,11 @@ namespace Macalania.Robototaker.GameServer
             message.Write((byte)InfrastructureProt.Authorize);
             message.Write(username);
             message.Write(password);
+            message.Write(5);
             _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
-        public AuthorizedStatus WaitForAuthenticationResponse(int timeout)
+        public AuthorizedStatus WaitForAuthorize(int timeout)
         {
             Stopwatch s = new Stopwatch();
             s.Start();
@@ -97,6 +98,11 @@ namespace Macalania.Robototaker.GameServer
                 AuthorizeStatus = AuthorizedStatus.AuthorizeFailed;
         }
 
+        private void OnStartGameInstance(NetIncomingMessage mr)
+        {
+            GameInstance gi = _gsm.CreateNewGameInstance();
+        }
+
         private void ReadMessages()
         {
             while (_stop == false)
@@ -113,7 +119,8 @@ namespace Macalania.Robototaker.GameServer
 
                                 if (header == InfrastructureProt.Authorize)
                                     OnAuthorizeResponse(mr);
-
+                                else if (header == InfrastructureProt.StartGameInstance)
+                                    OnStartGameInstance(mr);
                                 //if (header == MainFrameProt.CreatePlayer)
                                 //{
                                 //    _parser.OnCreatePlayerResponse(mr);
@@ -133,7 +140,7 @@ namespace Macalania.Robototaker.GameServer
             }
         }
 
-        private bool WaitForAuthentication()
+        private bool WaitForAproval()
         {
             bool authenticated = false;
             NetIncomingMessage inc;

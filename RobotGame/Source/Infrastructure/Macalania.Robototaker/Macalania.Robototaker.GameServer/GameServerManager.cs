@@ -15,14 +15,13 @@ namespace Macalania.Robototaker.GameServer
 {
     class GameServerManager : GameLoop
     {
-        Dictionary<long, GameInstance> _instances = new Dictionary<long, GameInstance>();
-        long _idCounter = 0;
+        Dictionary<byte, GameInstance> _instances = new Dictionary<byte, GameInstance>();
+        byte _idCounter = 0;
 
         ResourceManager _content;
 
         NetServer Server;
         NetPeerConfiguration Config;
-        private Thread _messageThread;
 
         private bool _stop = false;
 
@@ -90,7 +89,7 @@ namespace Macalania.Robototaker.GameServer
         {
             CheckForMessages();
 
-            foreach (KeyValuePair<long, GameInstance> instance in _instances)
+            foreach (KeyValuePair<byte, GameInstance> instance in _instances)
             {
                 instance.Value.Update(dt);
             }
@@ -107,14 +106,15 @@ namespace Macalania.Robototaker.GameServer
 
         public GameInstance CreateNewGameInstance()
         {
-            GameInstance gi = new GameInstance();
+            byte id = GetNextId();
+            GameInstance gi = new GameInstance(id);
             gi.StartGame(_content, Server);
-            _instances.Add(GetNextId(), gi);
+            _instances.Add(id, gi);
 
             return gi;
         }
 
-        private long GetNextId()
+        private byte GetNextId()
         {
             _idCounter++;
             return _idCounter;

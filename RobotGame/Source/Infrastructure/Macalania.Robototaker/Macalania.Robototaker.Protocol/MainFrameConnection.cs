@@ -21,7 +21,7 @@ namespace Macalania.Robototaker.Protocol
         public int SessionId { get; set; }
         public LoginStatus LoggedIn { get; set; }
         NetClient _client;
-        int _authenticationTimeout = 5000;
+        int _authenticationTimeout = 10000;
         MainFrameMessageParser _parser;
         bool _stop = false;
         Thread _messageThread;
@@ -67,7 +67,7 @@ namespace Macalania.Robototaker.Protocol
             _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
-        public LoginStatus WaitForLoginResponse(int timeout)
+        public LoginStatus WaitForLogin(int timeout)
         {
             Stopwatch s = new Stopwatch();
             s.Start();
@@ -89,6 +89,22 @@ namespace Macalania.Robototaker.Protocol
             message.Write(username);
             message.Write(inGameName);
             message.Write(password);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        public void JoinQue()
+        {
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)MainFrameProt.JoinQue);
+            message.Write(SessionId);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        public void LeaveQue()
+        {
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)MainFrameProt.LeaveQue);
+            message.Write(SessionId);
             _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
@@ -172,7 +188,7 @@ namespace Macalania.Robototaker.Protocol
                     Thread.Sleep(1);
             }
 
-            if (s.Elapsed.TotalMilliseconds >= 5000)
+            if (s.Elapsed.TotalMilliseconds >= _authenticationTimeout)
                 return false;
             return true;
         }

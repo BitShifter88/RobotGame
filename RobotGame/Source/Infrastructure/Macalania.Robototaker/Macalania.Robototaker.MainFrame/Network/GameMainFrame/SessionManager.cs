@@ -21,6 +21,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             _server = server;
         }
 
+        public PlayerSession GetSession(int id)
+        {
+            if (_playerSessions.ContainsKey(id))
+                return _playerSessions[id];
+            else
+                throw new Exception("No session with that id");
+        }
+
         public void LoginAttempt(NetConnection connection, string username, string password)
         {
             Account account = _as.IsValidLogin(username, password);

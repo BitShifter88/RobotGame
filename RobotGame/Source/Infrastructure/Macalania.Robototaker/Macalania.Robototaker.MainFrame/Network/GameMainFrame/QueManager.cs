@@ -10,10 +10,10 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
     class QueManager
     {
         Dictionary<int, PlayerSession> _playersInQue = new Dictionary<int, PlayerSession>();
-        bool _stop = false;
-        Thread _queThread;
+
         GameManager _gameManager;
         NetServer _server;
+        Mutex _queMutex = new Mutex();
 
         public QueManager(GameManager gameManager, NetServer server)
         {
@@ -23,37 +23,33 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
         public void AddPlayer(PlayerSession player)
         {
+            _queMutex.WaitOne();
             _playersInQue.Add(player.SessionId, player);
+            _queMutex.ReleaseMutex();
         }
 
         public void RemovePlayer(PlayerSession player)
         {
+            _queMutex.WaitOne();
             _playersInQue.Remove(player.SessionId);
+            _queMutex.ReleaseMutex();
         }
 
-        public void StartQue()
+        public void MatchMake()
         {
-            _queThread = new Thread(new ThreadStart(QueRun));
-            _queThread.Start();
-        }
+            _queMutex.WaitOne();
 
-        private void MatchMake()
-        {
-
-        }
-
-        private void QueRun()
-        {
-            while (_stop == false)
+            if (_playersInQue.Count > 0)
             {
-                Thread.Sleep(1000);
-                MatchMake();
-            }
-        }
+                List<PlayerSession> players;
+                players = _playersInQue.Values.ToList().Take(1).ToList();
+                _playersInQue.Remove(players[0].SessionId);
 
-        public void StopQue()
-        {
-            _stop = true;
+                _gameManager.CreateNewGame(players);
+            }
+
+
+            _queMutex.ReleaseMutex();
         }
     }
 }

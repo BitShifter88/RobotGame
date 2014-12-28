@@ -28,7 +28,7 @@ namespace Macalania.Robototaker.MainFrame
 
             
 
-            if (mfc.WaitForAuthenticationResponse(5000) != AuthorizedStatus.Authorized)
+            if (mfc.WaitForAuthorize(5000) != AuthorizedStatus.Authorized)
             {
                 ServerLog.E("Could not autorize server!", LogType.Security);
                 Console.ReadLine();
@@ -38,10 +38,10 @@ namespace Macalania.Robototaker.MainFrame
                 ServerLog.E("Authorized!", LogType.Security);
 
             gsm.StartServer();
-            gsm.CreateNewGameInstance();
-            Thread.Sleep(1000);
-            GC.Collect();
             gsm.StartGameLoop();
+
+            GC.Collect();
+            
         }
     }
 }

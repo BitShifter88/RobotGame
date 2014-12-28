@@ -19,6 +19,9 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         SessionManager _sessionManager;
         GameManager _gameManager;
         QueManager _queManager;
+
+        Thread _serverLoop;
+
         bool _stop;
 
         public void Start(int port)
@@ -39,6 +42,22 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
             StartReadingMessages();
             ServerLog.E("GServer started on port " + port + "!", LogType.Information);
+        }
+
+        private void StartServerLoop()
+        {
+            _serverLoop = new Thread(new ThreadStart(ServerLoop));
+            _serverLoop.Start();
+        }
+
+        private void ServerLoop()
+        {
+            while(_stop == false)
+            {
+                Thread.Sleep(500);
+                _queManager.MatchMake();
+                _gameManager.CheckGames();
+            }
         }
 
         public NetServer GetServer()
@@ -87,14 +106,28 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         private void OnAskIfReadyForgame(NetIncomingMessage mr)
         {
             bool ready = mr.ReadBoolean();
+        }
 
+        private void OnJoinQue(NetIncomingMessage mr)
+        {
+            int sessionId = mr.ReadInt32();
+            PlayerSession session = _sessionManager.GetSession(sessionId);
 
+            _queManager.AddPlayer(session);
+        }
+        private void OnLeaveQue(NetIncomingMessage mr)
+        {
+            int sessionId = mr.ReadInt32();
+            PlayerSession session = _sessionManager.GetSession(sessionId);
+
+            _queManager.RemovePlayer(session);
         }
 
         private void OnDisconnect(NetConnection connection)
         {
             _sessionManager.DisconnectedPlayer(connection);
         }
+
 
         private void ReadMessages()
         {
@@ -138,6 +171,14 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
                                 if (header == MainFrameProt.AskIfReadyForGame)
                                 {
                                     OnAskIfReadyForgame(inc);
+                                }
+                                if (header == MainFrameProt.JoinQue)
+                                {
+                                    OnJoinQue(inc);
+                                }
+                                if (header == MainFrameProt.LeaveQue)
+                                {
+                                    OnLeaveQue(inc);
                                 }
 
                                 //_instances.FirstOrDefault().Value.HandleData(inc);

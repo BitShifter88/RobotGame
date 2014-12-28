@@ -51,12 +51,13 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
         {
             string username = mr.ReadString();
             string password = mr.ReadString();
+            int capacity = mr.ReadInt32();
 
             bool success = false;
 
             if (password == "123456")
             {
-                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection, username);
+                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection, username, capacity);
                 _serverManager.AddServer(auths);
                 ServerLog.E("Server " + username + " authorized!", LogType.Security);
                 success = true;
