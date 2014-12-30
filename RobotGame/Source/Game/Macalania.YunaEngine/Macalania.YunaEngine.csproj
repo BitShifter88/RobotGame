@@ -71,11 +71,13 @@
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Gui\GuiComponent.cs" />
     <Compile Include="Gui\GuiSystem.cs" />
+    <Compile Include="Gui\Resolution.cs" />
     <Compile Include="Gui\StockImage.cs" />
     <Compile Include="Input\KeyboardHook.cs" />
     <Compile Include="Input\KeyboardInput.cs" />
     <Compile Include="Input\MouseInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\GuiRender.cs" />
     <Compile Include="Rendering\IRender.cs" />
     <Compile Include="Rendering\SimpleRender.cs" />
     <Compile Include="Resources\ResourceManager.cs" />

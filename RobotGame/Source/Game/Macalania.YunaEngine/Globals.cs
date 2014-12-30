@@ -10,5 +10,6 @@ namespace Macalania.YunaEngine
     {
         public static float PluginPixelWidth = 20;
         public static Viewport Viewport;
+        public static GraphicsDevice Device;
     }
 }

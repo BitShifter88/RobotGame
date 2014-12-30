@@ -24,10 +24,10 @@ namespace Macalania.Robototaker
 
             FindFilesInFolder(resourceFolder);
             
-            foreach (string file in foundFiles)
-            {
-                content.LoadYunaTexture(file);
-            }
+            //foreach (string file in foundFiles)
+            //{
+            //    content.LoadYunaTexture(file);
+            //}
             
             s.Stop();
            // ServerLog.E("Resources loaded in time: " + s.Elapsed.TotalMilliseconds + "ms", LogType.Information);

@@ -1,5 +1,6 @@
 ﻿using Macalania.YunaEngine.GameLogic;
 using Macalania.YunaEngine.Graphics;
+using Macalania.YunaEngine.Gui;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Resources;
 using Microsoft.Xna.Framework.Content;
@@ -18,11 +19,13 @@ namespace Macalania.YunaEngine.Rooms
         public ResourceManager Content { get; set; }
         public Camera Camera { get; set; }
         public bool IsRunning { get; set; }
+        public GuiSystem Gui { get; set; }
 
         Mutex _addingMutex = new Mutex();
 
         public Room()
         {
+            Gui = new GuiSystem();
             GameObjects = new List<GameObject>();
             ToBeAdded = new List<GameObject>();
             Camera = new Camera();
@@ -31,9 +34,7 @@ namespace Macalania.YunaEngine.Rooms
         public virtual void Inizialize()
         {
         }
-
-
-
+        
         public virtual void AddGameObject(GameObject obj)
         {
             _addingMutex.WaitOne();
@@ -45,8 +46,12 @@ namespace Macalania.YunaEngine.Rooms
         public virtual void RemoveGameObject(GameObject obj)
         {
             _addingMutex.WaitOne();
-            obj.Unload();
-            GameObjects.Remove(obj);
+
+            if (GameObjects.Contains(obj))
+            {
+                obj.Unload();
+                GameObjects.Remove(obj);
+            }
             _addingMutex.ReleaseMutex();
         }
 
@@ -103,6 +108,8 @@ namespace Macalania.YunaEngine.Rooms
             DestroyGameObjects();
 
             Camera.Update((float)dt);
+
+            Gui.Update();
         }
 
         private void UpdateGameObjects(double dt)
@@ -150,6 +157,13 @@ namespace Macalania.YunaEngine.Rooms
             }
             DrawOther(render, Camera);
             render.End();
+
+            DrawGui();
+        }
+
+        internal void DrawGui()
+        {
+            Gui.Draw();
         }
 
         protected virtual void DrawOther(IRender render, Camera camera)

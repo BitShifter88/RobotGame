@@ -1,4 +1,5 @@
-﻿using Macalania.YunaEngine.Input;
+﻿using Macalania.YunaEngine.Gui;
+using Macalania.YunaEngine.Input;
 using Macalania.YunaEngine.Rendering;
 using Macalania.YunaEngine.Rooms;
 using Microsoft.Xna.Framework;
@@ -28,21 +29,31 @@ namespace Macalania.YunaEngine
         public YunaGameEngine()
         {
             graphics = new GraphicsDeviceManager(this);
+            Resolution.Init(ref graphics);
             graphics.PreferMultiSampling = true;
             graphics.SynchronizeWithVerticalRetrace = true;
             this.IsFixedTimeStep = true;
             Content.RootDirectory = "Content";
             Instance = this;
 
-            graphics.PreferredBackBufferHeight = 900;
-            graphics.PreferredBackBufferWidth = 1300;
+            Resolution.SetVirtualResolution(1920, 1080);
+
+
+            //graphics.PreferredBackBufferWidth = 1280;
+            //graphics.PreferredBackBufferHeight = 720;
+
+            graphics.PreferredBackBufferWidth = 1680;
+            graphics.PreferredBackBufferHeight = 1050;
+
+            Resolution.SetResolution(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, false);
+            
             //graphics.PreferredBackBufferHeight = 1080;
             //graphics.PreferredBackBufferWidth = 1920;
-            //graphics.ToggleFullScreen();
+            graphics.ToggleFullScreen();
             this.IsMouseVisible = true;
         }
 
-        
+  
 
         public void SetActiveRoom(Room room, bool load)
         {
@@ -69,12 +80,14 @@ namespace Macalania.YunaEngine
 
         protected override void Initialize()
         {
+            Globals.Device = graphics.GraphicsDevice;
             EngineStarted();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            
             _render = new SimpleRender(graphics.GraphicsDevice);
         }
 

@@ -8,6 +8,10 @@ namespace Macalania.YunaEngine.Gui
 {
     public class GuiComponent
     {
+        public virtual void Update()
+        {
+
+        }
         public virtual void Draw(IRender render)
         {
 

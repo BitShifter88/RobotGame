@@ -8,13 +8,14 @@ using System.Text;
 
 namespace Macalania.YunaEngine.Gui
 {
-    public class GuiSystem : GameObject
+    public class GuiSystem
     {
         List<GuiComponent> _guiComponents = new List<GuiComponent>();
+        GuiRender _guiRender;
 
-        public GuiSystem(Room room) : base(room)
+        public GuiSystem()
         {
-
+            _guiRender = new GuiRender(Globals.Device);
         }
 
         public void AddGuiComponent(GuiComponent gc)
@@ -22,12 +23,30 @@ namespace Macalania.YunaEngine.Gui
             _guiComponents.Add(gc);
         }
 
-        public override void Draw(IRender render, Graphics.Camera camera)
+        public void RemoveGuiComponent(GuiComponent gc)
+        {
+            if (_guiComponents.Contains(gc))
+            {
+                _guiComponents.Remove(gc);
+            }
+        }
+
+        public void Update()
         {
             foreach (GuiComponent gc in _guiComponents)
             {
-                gc.Draw(render);
+                gc.Update();
             }
+        }
+
+        public void Draw()
+        {
+            _guiRender.Begin(null);
+            foreach (GuiComponent gc in _guiComponents)
+            {
+                gc.Draw(_guiRender);
+            }
+            _guiRender.End();
         }
     }
 }
