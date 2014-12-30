@@ -33,5 +33,10 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
         {
             _servers.RemoveAt(index);
         }
+
+        public List<AuthorizedServer> GetServers()
+        {
+            return _servers;
+        }
     }
 }

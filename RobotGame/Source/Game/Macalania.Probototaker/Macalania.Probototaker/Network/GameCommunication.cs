@@ -54,6 +54,7 @@ namespace Macalania.Probototaker.Network
         public void RequestFullWorldUpdate()
         {
             NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
+            message.Write(_gn.GameId);
             message.Write((byte)RobotProt.RequestFullWorldUpdate);
             _gn.GetClientUdp().SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
@@ -62,6 +63,7 @@ namespace Macalania.Probototaker.Network
         {
             NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
 
+            message.Write(_gn.GameId);
             message.Write((byte)RobotProt.PlayerMovement);
 
             byte firering = 0;
@@ -87,6 +89,7 @@ namespace Macalania.Probototaker.Network
         {
             NetOutgoingMessage message = _gn.GetClientUdp().CreateMessage();
 
+            message.Write(_gn.GameId);
             message.Write((byte)RobotProt.AbilityActivation);
             message.Write((byte)type);
 

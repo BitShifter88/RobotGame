@@ -19,6 +19,19 @@ namespace Macalania.Robototaker.Protocol
 
         }
 
+        public void AskIfReady(short gameId)
+        {
+            _connection.QuedGameId = gameId;
+            _connection.QueStatus = QueStatus.WaitingForOtherPlayers;
+
+            _connection.ReadyForGame();
+        }
+
+        public void GameHostSuccess(short gameId, string ip)
+        {
+            _connection.HostingSuccess(gameId, ip);
+        }
+
         public void HandleLoginResponse(bool success, int sessionId)
         {
             _connection.SessionId = sessionId;

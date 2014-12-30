@@ -29,15 +29,15 @@ namespace Macalania.Probototaker.Rooms
                 MessageBox.Show("Could not connect to Main Frame!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 YunaGameEngine.Instance.Exit();
             }
-                    
-            _connection.CreateAccount("steffan88", "MileyCyrus", "kodekode");
-            _connection.Login("steffan88", "kodekode");
-            LoginStatus ls= _connection.WaitForLoginResponse(10000);
+            string name = new Random().Next(0, 100000000).ToString();
+            _connection.CreateAccount(name, "MileyCyrus", "kodekode");
+            _connection.Login(name, "kodekode");
+            LoginStatus ls = _connection.WaitForLogin(10000);
             Console.WriteLine(ls);
 
             if (ls == LoginStatus.LoggedIn)
             {
-                Room room = new Garage();
+                Room room = new Garage(_connection);
                 YunaGameEngine.Instance.SetActiveRoom(room, true);
             }
 #endif

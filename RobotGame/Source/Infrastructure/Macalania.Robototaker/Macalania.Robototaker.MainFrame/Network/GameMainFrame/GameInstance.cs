@@ -12,6 +12,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
     {
         PlayersNotReady,
         PlayersReady,
+        CreatingGame,
         Running,
         SuccessFinished,
         Aborted, // The game was running, but then got aborted (i.e the server crashed)
@@ -20,8 +21,9 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
     class GameInstance
     {
-        public int GameId { get; set; }
+        public short GameId { get; set; }
         public GameInstanceStatus Status { get; set; }
+        public string ServerIp { get; set; }
 
         List<PlayerSession> _players = new List<PlayerSession>();
         List<PlayerSession> _readyPlayers = new List<PlayerSession>();
@@ -41,7 +43,34 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
             _players.Add(player);
         }
 
-        public void UpdateStatus()
+        public void Running(string serverIp)
+        {
+            Status = GameInstanceStatus.Running;
+            ServerIp = serverIp;
+
+            foreach (PlayerSession p in _players)
+            {
+                NetOutgoingMessage m = _server.CreateMessage();
+
+                m.Write((byte)MainFrameProt.GameHostSuccess);
+                m.Write(GameId);
+                m.Write(serverIp);
+
+                p.Connection.SendMessage(m, NetDeliveryMethod.ReliableUnordered, 0);
+            }
+        }
+
+        public void Creating()
+        {
+            Status = GameInstanceStatus.CreatingGame;
+        }
+
+        public void Update()
+        {
+            CheckIfPlayersReady();
+        }
+
+        private void CheckIfPlayersReady()
         {
             if (Status == GameInstanceStatus.PlayersNotReady)
             {

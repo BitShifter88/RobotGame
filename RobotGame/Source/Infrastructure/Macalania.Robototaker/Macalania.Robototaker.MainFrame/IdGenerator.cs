@@ -8,17 +8,17 @@ namespace Macalania.Robototaker.MainFrame
     class IdGenerator
     {
         static Random _ran = new Random();
-        static Dictionary<int, DateTime> _usedIds = new Dictionary<int, DateTime>();
+        static Dictionary<short, DateTime> _usedIds = new Dictionary<short, DateTime>();
 
-        public static int GetNextId()
+        public static short GetNextId()
         {
-            int ranId = _ran.Next(int.MinValue, int.MaxValue);
+            short ranId = (short)_ran.Next(short.MinValue, short.MaxValue);
 
             while (true)
             {
                 if (_usedIds.Keys.Contains(ranId))
                 {
-                    ranId = _ran.Next(int.MinValue, int.MaxValue);
+                    ranId = (short)_ran.Next(short.MinValue, short.MaxValue);
                 }
                 else
                     break;
@@ -29,7 +29,7 @@ namespace Macalania.Robototaker.MainFrame
             return ranId;
         }
 
-        public static void ReleaseId(int id)
+        public static void ReleaseId(short id)
         {
             _usedIds.Remove(id);
         }

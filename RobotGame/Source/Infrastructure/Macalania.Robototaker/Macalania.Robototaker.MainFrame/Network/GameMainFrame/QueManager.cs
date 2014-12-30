@@ -1,4 +1,5 @@
 ﻿using Lidgren.Network;
+using Macalania.Robototaker.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         GameManager _gameManager;
         NetServer _server;
         Mutex _queMutex = new Mutex();
+
+        int _playersInAGame = 1;
 
         public QueManager(GameManager gameManager, NetServer server)
         {
@@ -39,17 +42,22 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
         {
             _queMutex.WaitOne();
 
-            if (_playersInQue.Count > 0)
+            if (_playersInQue.Count > _playersInAGame-1)
             {
-                List<PlayerSession> players;
-                players = _playersInQue.Values.ToList().Take(1).ToList();
-                _playersInQue.Remove(players[0].SessionId);
-
-                _gameManager.CreateNewGame(players);
+                CreateGame();
             }
 
-
             _queMutex.ReleaseMutex();
+        }
+
+        private void CreateGame()
+        {
+            ServerLog.E("Game created", LogType.Information);
+            List<PlayerSession> players;
+            players = _playersInQue.Values.ToList().Take(_playersInAGame).ToList();
+            _playersInQue.Clear();
+
+            _gameManager.CreateNewGame(players);
         }
     }
 }

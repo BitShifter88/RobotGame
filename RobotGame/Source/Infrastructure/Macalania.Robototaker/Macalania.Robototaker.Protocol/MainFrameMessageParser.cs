@@ -21,6 +21,19 @@ namespace Macalania.Robototaker.Protocol
             _messageHandler.HandleCreateResponse(result);
         }
 
+        public void OnAskIfReady(NetIncomingMessage mr)
+        {
+            short gameId = mr.ReadInt16();
+            _messageHandler.AskIfReady(gameId);
+        }
+
+        public void OnGameHostSuccess(NetIncomingMessage mr)
+        {
+            short gameId = mr.ReadInt16();
+            string serverIp = mr.ReadString();
+            _messageHandler.GameHostSuccess(gameId, serverIp);
+        }
+
         public void OnLoginResponse(NetIncomingMessage mr)
         {
             bool success = mr.ReadBoolean();

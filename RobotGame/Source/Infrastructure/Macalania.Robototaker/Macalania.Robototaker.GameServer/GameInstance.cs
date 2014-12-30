@@ -28,11 +28,11 @@ namespace Macalania.Robototaker.GameServer
         ResourceManager _content;
 
         // The id used to identify the GameInstace. This is necessary for communication since a game server can have multiple gameinstances running
-        public byte Id { get; set; }
+        public short GameId { get; set; }
 
-        public GameInstance(byte id)
+        public GameInstance(short id)
         {
-            Id = id;
+            GameId = id;
         }
 
         public void StartGame(ResourceManager content, NetServer server)

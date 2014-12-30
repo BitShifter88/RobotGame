@@ -23,12 +23,14 @@ namespace Macalania.Probototaker.Network
 
         bool _stop = false;
         public bool Authenticated { get; set; }
+        public short GameId { get; set; }
         int _authenticationTimeout = 5000;
 
-        public bool Start(GameRoom gameRoom, TankPackage tp)
+        public bool Start(GameRoom gameRoom, TankPackage tp, string serverIp, short gameId)
         {
+            GameId = gameId;
             _gameRoom = gameRoom;
-            if (SetupServerConnection(tp))
+            if (SetupServerConnection(tp, serverIp))
             {
                 gameRoom.ReadyGameCommunication();
                 return true;
@@ -41,7 +43,7 @@ namespace Macalania.Probototaker.Network
             return _client;
         }
 
-        private bool SetupServerConnection(TankPackage tp)
+        private bool SetupServerConnection(TankPackage tp, string serverIp)
         {
 #if VERBOSE
             try
@@ -58,11 +60,12 @@ namespace Macalania.Probototaker.Network
             _client.Start();
 
             NetOutgoingMessage outmsg = _client.CreateMessage();
+            outmsg.Write(GameId);
             outmsg.Write("steffan88");
             outmsg.Write("session12345");
             tp.WriteToMessage(outmsg);
 
-            _client.Connect("127.0.0.1", 9999, outmsg);
+            _client.Connect(serverIp, 9999, outmsg);
 
             if (WaitForAuthentication() == false)
             {

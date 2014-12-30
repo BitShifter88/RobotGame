@@ -22,6 +22,11 @@ namespace Macalania.Probototaker.Rooms
         MainFrameConnection _connection;
         GuiSystem _gui;
 
+        public Garage(MainFrameConnection connection)
+        {
+            _connection = connection;
+        }
+
         public override void Load(IServiceProvider serviceProvider)
         {
             base.Load(serviceProvider);
@@ -49,8 +54,9 @@ namespace Macalania.Probototaker.Rooms
 
             if (KeyboardInput.IsKeyClicked(Keys.Enter))
             {
-                LoadGameRoom lgr = new LoadGameRoom(_editor.Tank.GetTankPackage());
-                YunaGameEngine.Instance.SetActiveRoom(lgr, true);
+                //LoadGameRoom lgr = new LoadGameRoom(_editor.Tank.GetTankPackage());
+                QueRoom qr = new QueRoom(_connection, _editor.Tank.GetTankPackage());
+                YunaGameEngine.Instance.SetActiveRoom(qr, true);
             }
 
             base.Update(dt);

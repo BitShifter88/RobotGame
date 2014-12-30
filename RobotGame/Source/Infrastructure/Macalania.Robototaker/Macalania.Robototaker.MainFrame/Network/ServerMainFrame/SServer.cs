@@ -16,8 +16,16 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
         public NetPeerConfiguration Config { get; set; }
         NetServer _server;
         Thread _messageThread;
+        Thread _serverLoop;
         bool _stop;
         ServerManager _serverManager;
+        WorkScheduler _workScheduler;
+
+        public SServer()
+        {
+            _serverManager = new ServerManager();
+            _workScheduler = new WorkScheduler(_serverManager);
+        }
 
         public void Start(int port)
         {
@@ -29,11 +37,26 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
             _server = new NetServer(Config);
             _server.Start();
-
-            _serverManager = new ServerManager();
-
+            
             StartReadingMessages();
+            StartServerLoop();
             ServerLog.E("Server Server started on port " + port + "!", LogType.Information);
+        }
+
+        private void StartServerLoop()
+        {
+            _serverLoop = new Thread(new ThreadStart(ServerLoop));
+            _serverLoop.Start();
+        }
+
+        private void ServerLoop()
+        {
+            while (_stop == false)
+            {
+                Thread.Sleep(100);
+                
+
+            }
         }
 
         public void Stop()
@@ -57,7 +80,7 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
             if (password == "123456")
             {
-                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection, username, capacity);
+                AuthorizedServer auths = new AuthorizedServer(mr.SenderConnection, _server, username, capacity);
                 _serverManager.AddServer(auths);
                 ServerLog.E("Server " + username + " authorized!", LogType.Security);
                 success = true;
@@ -69,6 +92,18 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
             RespondAuthorize(mr.SenderConnection, success);
         }
+
+        private void OnRespondRequestGameHosting(NetIncomingMessage mr)
+        {
+            short gameId = mr.ReadInt16();
+            bool success = mr.ReadBoolean();
+
+            if (success == true)
+            {
+                _workScheduler.ServerHosted(gameId, mr.SenderConnection.RemoteEndPoint.Address.ToString());
+            }
+        }
+
 
         private void OnServerDisconnect(NetConnection connection)
         {
@@ -85,6 +120,7 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
 
             connection.SendMessage(message, NetDeliveryMethod.ReliableUnordered, 0);
         }
+
 
         private void ReadMessages()
         {
@@ -119,9 +155,9 @@ namespace Macalania.Robototaker.MainFrame.Network.ServerMainFrame
                                 {
                                     OnAuthorize(inc);
                                 }
-                                else if (header == InfrastructureProt.StartGameInstance)
+                                else if (header == InfrastructureProt.RequestGameHosting)
                                 {
-
+                                    OnRespondRequestGameHosting(inc);
                                 }
 
                                 //_instances.FirstOrDefault().Value.HandleData(inc);

@@ -98,9 +98,21 @@ namespace Macalania.Robototaker.GameServer
                 AuthorizeStatus = AuthorizedStatus.AuthorizeFailed;
         }
 
-        private void OnStartGameInstance(NetIncomingMessage mr)
+        private void OnRequestGameHosting(NetIncomingMessage mr)
         {
-            GameInstance gi = _gsm.CreateNewGameInstance();
+            short gameId = mr.ReadInt16();
+            GameInstance gi = _gsm.CreateNewGameInstance(gameId);
+
+            RespondGameHosting(gameId);
+        }
+
+        private void RespondGameHosting(short gameId)
+        {
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)InfrastructureProt.RequestGameHosting);
+            message.Write(gameId);
+            message.Write(true);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered, 0);
         }
 
         private void ReadMessages()
@@ -119,8 +131,8 @@ namespace Macalania.Robototaker.GameServer
 
                                 if (header == InfrastructureProt.Authorize)
                                     OnAuthorizeResponse(mr);
-                                else if (header == InfrastructureProt.StartGameInstance)
-                                    OnStartGameInstance(mr);
+                                else if (header == InfrastructureProt.RequestGameHosting)
+                                    OnRequestGameHosting(mr);
                                 //if (header == MainFrameProt.CreatePlayer)
                                 //{
                                 //    _parser.OnCreatePlayerResponse(mr);

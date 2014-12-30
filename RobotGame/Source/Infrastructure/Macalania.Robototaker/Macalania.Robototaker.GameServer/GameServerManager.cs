@@ -15,7 +15,7 @@ namespace Macalania.Robototaker.GameServer
 {
     class GameServerManager : GameLoop
     {
-        Dictionary<byte, GameInstance> _instances = new Dictionary<byte, GameInstance>();
+        Dictionary<short, GameInstance> _instances = new Dictionary<short, GameInstance>();
         byte _idCounter = 0;
 
         ResourceManager _content;
@@ -89,7 +89,7 @@ namespace Macalania.Robototaker.GameServer
         {
             CheckForMessages();
 
-            foreach (KeyValuePair<byte, GameInstance> instance in _instances)
+            foreach (KeyValuePair<short, GameInstance> instance in _instances)
             {
                 instance.Value.Update(dt);
             }
@@ -104,12 +104,11 @@ namespace Macalania.Robototaker.GameServer
             base.SecondUpdate();
         }
 
-        public GameInstance CreateNewGameInstance()
+        public GameInstance CreateNewGameInstance(short gamId)
         {
-            byte id = GetNextId();
-            GameInstance gi = new GameInstance(id);
+            GameInstance gi = new GameInstance(gamId);
             gi.StartGame(_content, Server);
-            _instances.Add(id, gi);
+            _instances.Add(gamId, gi);
 
             return gi;
         }
@@ -148,25 +147,28 @@ namespace Macalania.Robototaker.GameServer
                     case NetIncomingMessageType.ConnectionApproval:
                         {
                             inc.SenderConnection.Approve();
+                            short gameId = inc.ReadInt16();
                             string username = inc.ReadString();
                             string sessionId = inc.ReadString();
                             TankPackage tp = TankPackage.ReadTankPackage(inc);
 
-                            _instances.FirstOrDefault().Value.OnPlayerIdentified(inc.SenderConnection, username, sessionId, tp);
+                            _instances[gameId].OnPlayerIdentified(inc.SenderConnection, username, sessionId, tp);
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
                         {
+                            short gameId = inc.ReadInt16();
                             NetConnectionStatus status = (NetConnectionStatus)inc.ReadByte();
                             if (status == NetConnectionStatus.Disconnected)
                             {
-                                _instances.FirstOrDefault().Value.OnConnectionClosed(inc.SenderConnection);
+                                _instances[gameId].OnConnectionClosed(inc.SenderConnection);
                             }
                         }
                         break;
                     case NetIncomingMessageType.Data:
                         {
-                            _instances.FirstOrDefault().Value.HandleData(inc);
+                            short gameId = inc.ReadInt16();
+                            _instances[gameId].HandleData(inc);
                         }
                         break;
                     case NetIncomingMessageType.WarningMessage:

@@ -1,6 +1,7 @@
 ﻿using Macalania.Probototaker.Network;
 using Macalania.Probototaker.Tanks;
 using Macalania.Robototaker;
+using Macalania.Robototaker.Protocol;
 using Macalania.YunaEngine;
 using Macalania.YunaEngine.Graphics;
 using Macalania.YunaEngine.Rendering;
@@ -25,12 +26,15 @@ namespace Macalania.Probototaker.Rooms
         GameNetwork _gameNetwork;
         TankPackage _tp;
 
+        MainFrameConnection _connection;
+
         private bool _loadingDone = false;
         private bool _connectingDone = false;
         private bool _connectionFailed = false;
 
-        public LoadGameRoom(TankPackage tp)
+        public LoadGameRoom(TankPackage tp, MainFrameConnection connection)
         {
+            _connection = connection;
             _tp = tp;
         }
 
@@ -55,7 +59,7 @@ namespace Macalania.Probototaker.Rooms
             PreLoader.PreLoad(_gameRoom.Content);
             _loadingDone = true;
 
-            if (_gameNetwork.Start(_gameRoom, _tp) == false)
+            if (_gameNetwork.Start(_gameRoom, _tp, _connection.GameServerIp, _connection.QuedGameId) == false)
             {
                 _connectionFailed = true;
                 _gameRoom.Unload();
@@ -70,7 +74,7 @@ namespace Macalania.Probototaker.Rooms
                 YunaGameEngine.Instance.SetActiveRoom(_gameRoom, false);
             if (_connectionFailed == true)
             {
-                Garage g = new Garage();
+                Garage g = new Garage(_connection);
                 YunaGameEngine.Instance.SetActiveRoom(g, true);
             }
 

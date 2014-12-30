@@ -41,6 +41,7 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
 
             StartReadingMessages();
+            StartServerLoop();
             ServerLog.E("GServer started on port " + port + "!", LogType.Information);
         }
 
@@ -105,7 +106,11 @@ namespace Macalania.Robototaker.MainFrame.Network.GameMainFrame
 
         private void OnAskIfReadyForgame(NetIncomingMessage mr)
         {
+            int sessionId = mr.ReadInt32();
+            short gameId = mr.ReadInt16();
             bool ready = mr.ReadBoolean();
+
+            _gameManager.PlayerIsReady(_sessionManager.GetSession(sessionId), gameId);
         }
 
         private void OnJoinQue(NetIncomingMessage mr)

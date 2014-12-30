@@ -26,10 +26,13 @@ namespace Macalania.Robototaker.Protocol
         AskIfReadyForGame = 2,
         JoinQue = 3,
         LeaveQue = 4,
+        GameHostSuccess = 5,
+        GameHostFailed = 6,
     }
     public enum InfrastructureProt : byte
     {
         Authorize = 200,
         StartGameInstance = 201,
+        RequestGameHosting = 202,
     }
 }

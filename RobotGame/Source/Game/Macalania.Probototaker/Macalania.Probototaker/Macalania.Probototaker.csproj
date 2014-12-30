@@ -108,6 +108,7 @@
     <Compile Include="Rooms\Garage.cs" />
     <Compile Include="Rooms\LoadGameRoom.cs" />
     <Compile Include="Rooms\LoginScreen.cs" />
+    <Compile Include="Rooms\QueRoom.cs" />
     <Compile Include="Rooms\SimulationRoom.cs" />
     <Compile Include="TankCamera.cs" />
     <Compile Include="TankGenerator.cs" />

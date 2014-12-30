@@ -16,18 +16,30 @@ namespace Macalania.Robototaker.Protocol
         LogginTimedOut,
     }
 
+    public enum QueStatus
+    {
+        Waiting,
+        WaitingForOtherPlayers,
+        InGame,
+    }
+
     public class MainFrameConnection
     {
-        public int SessionId { get; set; }
-        public LoginStatus LoggedIn { get; set; }
         NetClient _client;
         int _authenticationTimeout = 10000;
         MainFrameMessageParser _parser;
         bool _stop = false;
         Thread _messageThread;
 
+        public int SessionId { get; set; }
+        public LoginStatus LoggedIn { get; set; }
+        public QueStatus QueStatus { get; set; }
+        public short QuedGameId { get; set; }
+        public string GameServerIp { get; set; }
+
         public bool Connect(MainFrameMessageHandlerBase messageHandler)
         {
+            QueStatus = Protocol.QueStatus.Waiting;
             LoggedIn = LoginStatus.NotLoggedIn;
             _parser = new MainFrameMessageParser(messageHandler);
             Console.WriteLine("Connecting to server...");
@@ -40,7 +52,7 @@ namespace Macalania.Robototaker.Protocol
 
             _client.Connect("127.0.0.1", 9998);
 
-            if (WaitForAuthentication() == false)
+            if (WaitForApproval() == false)
             {
                 Console.WriteLine("Could not connect to Main Frame!");
 
@@ -55,6 +67,13 @@ namespace Macalania.Robototaker.Protocol
                 //_messageThread.Start();
             }
             return true;
+        }
+
+        public void HostingSuccess(short gameId, string ip)
+        {
+            QuedGameId = gameId;
+            GameServerIp = ip;
+            QueStatus = Protocol.QueStatus.InGame;
         }
 
         public void Login(string username, string password)
@@ -108,6 +127,16 @@ namespace Macalania.Robototaker.Protocol
             _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
         }
 
+        internal void ReadyForGame()
+        {
+            NetOutgoingMessage message = _client.CreateMessage();
+            message.Write((byte)MainFrameProt.AskIfReadyForGame);
+            message.Write(SessionId);
+            message.Write(QuedGameId);
+            message.Write(true);
+            _client.SendMessage(message, NetDeliveryMethod.ReliableUnordered);
+        }
+
         private void ReadMessages()
         {
             while (_stop == false)
@@ -130,6 +159,14 @@ namespace Macalania.Robototaker.Protocol
                                 {
                                     _parser.OnLoginResponse(mr);
                                 }
+                                else if (header == MainFrameProt.AskIfReadyForGame)
+                                {
+                                    _parser.OnAskIfReady(mr);
+                                }
+                                else if (header == MainFrameProt.GameHostSuccess)
+                                {
+                                    _parser.OnGameHostSuccess(mr);
+                                }
                             }
                             break;
                     }
@@ -141,9 +178,8 @@ namespace Macalania.Robototaker.Protocol
             }
         }
 
-        private bool WaitForAuthentication()
+        private bool WaitForApproval()
         {
-            bool authenticated = false;
             NetIncomingMessage inc;
             Stopwatch s = new Stopwatch();
             s.Start();
@@ -158,7 +194,6 @@ namespace Macalania.Robototaker.Protocol
                     {
                         case NetIncomingMessageType.Data:
                             {
-                                authenticated = true;
                                 Console.WriteLine("Recieved auth response");
                             }
                             break;
